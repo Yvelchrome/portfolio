@@ -33,7 +33,24 @@ const Home: NextPage = () => {
             Front-End Developer
           </p>
         </div>
+        <section className="min-h-screen pl-44">
+          <SectionTitle number="01" title="About me" />
+        </section>
+        <section className="min-h-screen pl-44">
+          <SectionTitle number="02" title="Works" />
+        </section>
+        <section className="min-h-screen pl-44">
+          <SectionTitle number="03" title="Skills" />
+        </section>
+        <section className="pl-44">
+          <SectionTitle number="04" title="Contact" />
+        </section>
       </main>
+      <footer className="pl-44">
+        <p className="font-roobert-400 text-base text-black">
+          © 2022 - Steven Godin
+        </p>
+      </footer>
     </>
   );
 };
