@@ -1,3 +1,5 @@
+## In progress...
+
 # Steven Godin - Portfolio
 
 - [About](#about)
@@ -14,10 +16,10 @@ This is my portfolio that will give some information about myself as well as ind
 
 ## Built with
 
-![](https://img.shields.io/badge/React-323330?style=for-the-badge&logo=react&logoColor=61DAFB)
-![](https://img.shields.io/badge/NextJS-323330?style=for-the-badge&logo=Next.js)
-![](https://img.shields.io/badge/TypeScript-323330?style=for-the-badge&logo=typescript&logoColor=007ACC)
-![](https://img.shields.io/badge/Tailwind_CSS-323330?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
+![React](https://img.shields.io/badge/React-323330?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Next.js](https://img.shields.io/badge/Next.js-323330?style=for-the-badge&logo=Next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-323330?style=for-the-badge&logo=typescript&logoColor=007ACC)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-323330?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
 
 ## Overview
 
