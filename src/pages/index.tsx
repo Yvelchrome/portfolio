@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
-import logo from "../assets/images/logo500x.svg";
+import HamburgerIcon from "../components/Hamburger/HamburgerIcon";
+import Logo from "../components/Logo";
+import SectionTitle from "../components/SectionTitle";
+import ThemeSwitch from "../components/ThemeSwitch";
 
 const Home: NextPage = () => {
   return (
@@ -19,11 +21,11 @@ const Home: NextPage = () => {
         <meta name="theme-color" content="#66CCFF" />
       </Head>
 
-      <main className="bg-black">
-        <div className="fixed top-12 left-12">
-          <Image src={logo} alt="" width={40} height={75} />
+      <main className="bg-white">
+        <Logo />
+        <HamburgerIcon />
+        <ThemeSwitch />
         </div>
-        <section className="mx-auto flex flex-col items-center justify-center min-h-screen"></section>
       </main>
     </>
   );
