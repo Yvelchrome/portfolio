@@ -25,6 +25,13 @@ const Home: NextPage = () => {
         <Logo />
         <HamburgerIcon />
         <ThemeSwitch />
+        <div className="flex min-h-screen flex-col items-center justify-center">
+          <h1 className="font-roxborough-600i text-[9.3rem] text-black">
+            Steven Godin
+          </h1>
+          <p className="font-roobert-400 text-5xl text-black">
+            Front-End Developer
+          </p>
         </div>
       </main>
     </>
