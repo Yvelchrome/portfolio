@@ -1,12 +1,13 @@
 import Image from "next/image";
-import logo from "../assets/images/logo.svg";
+import logo from "images/logo.svg";
+import Link from "next/link";
 
-function Logo() {
+export default function Logo() {
   return (
-    <div className="fixed top-12 left-12">
-      <Image src={logo} alt="" width={40} height={75} />
-    </div>
+    <Link href={"/"}>
+      <div className="fixed top-12 left-12">
+        <Image src={logo} alt="" width={40} height={75} />
+      </div>
+    </Link>
   );
 }
-
-export default Logo;

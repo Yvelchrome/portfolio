@@ -1,9 +1,5 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import HamburgerIcon from "../components/Hamburger/HamburgerIcon";
-import Logo from "../components/Logo";
-import SectionTitle from "../components/SectionTitle";
-import ThemeSwitch from "../components/ThemeSwitch";
+import { SectionTitle, Hero, Paragraph } from "components";
+import { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (

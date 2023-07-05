@@ -14,14 +14,21 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "noUncheckedIndexedAccess": true
+    "noUncheckedIndexedAccess": true,
+    "baseUrl": "./src",
+    "paths": {
+      "components/*": ["./components/*"],
+      "fonts/*": ["./assets/fonts/*"],
+      "images/*": ["./assets/images/*"]
+    }
   },
   "include": [
     "next-env.d.ts",
     "next-auth.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js"
-, "prettier.config.cjs"  ],
+    "**/*.js",
+    "prettier.config.cjs"
+  ],
   "exclude": ["node_modules"]
 }
