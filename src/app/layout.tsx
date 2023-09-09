@@ -1,7 +1,23 @@
-import './app.css';
-import localFont from 'next/font/local';
-import type { AppType } from 'next/dist/shared/lib/utils';
+import './globals.css';
+import React from 'react';
 import { Footer, Header } from 'components';
+import localFont from 'next/font/local';
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Steven Godin',
+  description:
+    'Portfolio of Steven Godin, a Front-End Developer currently working for Subskill and studying at HETIC.',
+  keywords: [
+    'Steven Godin',
+    'Front-End Developer',
+    'Subskill',
+    'HETIC',
+    'Portfolio',
+  ],
+  themeColor: '#ffffff',
+};
 
 const Roobert = localFont({
   src: [
@@ -44,16 +60,20 @@ const Roxborough = localFont({
   variable: '--font-roxborough',
 });
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <>
+    <html lang="en">
       <Header />
-      <main className={`${Roobert.variable} ${Roxborough.variable} bg-white`}>
-        <Component {...pageProps} />
-      </main>
+      <body>
+        <main className={`${Roobert.variable} ${Roxborough.variable} bg-white`}>
+          {children}
+        </main>
+      </body>
       <Footer />
-    </>
+    </html>
   );
-};
-
-export default MyApp;
+}
