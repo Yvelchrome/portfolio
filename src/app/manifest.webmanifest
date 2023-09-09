@@ -1,6 +1,7 @@
 {
   "short_name": "Portfolio",
   "name": "Steven Godin | Portfolio",
+  "description": "Steven Godin's Portfolio",
   "icons": [
     {
       "src": "/maskable_icon_x192.png",
@@ -15,7 +16,7 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "orientation": "portrait",
   "display": "standalone",
   "theme_color": "#66CCFF",
