@@ -1,4 +1,6 @@
-import Image from "next/legacy/image";
+'use client';
+
+import Image from 'next/legacy/image';
 import logo from 'images/logo.svg';
 import Link from 'next/link';
 

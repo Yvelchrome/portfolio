@@ -1,3 +1,5 @@
+'use client';
+
 export default function HamburgerIcon() {
   return (
     <div className="fixed top-12 right-12 flex h-7 w-auto flex-col justify-between">

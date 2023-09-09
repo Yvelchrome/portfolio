@@ -66,14 +66,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <Header />
+    <html
+      lang="en"
+      className={`${Roobert.variable} ${Roxborough.variable} bg-white`}
+    >
       <body>
-        <main className={`${Roobert.variable} ${Roxborough.variable} bg-white`}>
-          {children}
-        </main>
+        <Header />
+        <main>{children}</main>
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }

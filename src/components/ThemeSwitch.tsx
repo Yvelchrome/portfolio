@@ -1,4 +1,6 @@
-import Image from "next/legacy/image";
+'use client';
+
+import Image from 'next/legacy/image';
 import moon from 'images/theme_moon.svg';
 
 export default function ThemeSwitch() {

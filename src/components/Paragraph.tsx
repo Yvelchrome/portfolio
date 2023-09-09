@@ -1,3 +1,5 @@
+'use client';
+
 export default function SectionTitle() {
   return (
     <div className="my-12">

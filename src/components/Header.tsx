@@ -1,3 +1,5 @@
+'use client';
+
 import { Logo, HamburgerIcon, ThemeSwitch } from 'components';
 
 export default function Header() {
