@@ -1,10 +1,10 @@
-import Image from "next/image";
-import logo from "images/logo.svg";
-import Link from "next/link";
+import Image from 'next/image';
+import logo from 'images/logo.svg';
+import Link from 'next/link';
 
 export default function Logo() {
   return (
-    <Link href={"/"}>
+    <Link href={'/'}>
       <div className="fixed top-12 left-12">
         <Image src={logo} alt="" width={40} height={75} />
       </div>

@@ -1,5 +1,5 @@
-import { SectionTitle, Hero, Paragraph } from "components";
-import { NextPage } from "next";
+import { SectionTitle, Hero, Paragraph } from 'components';
+import { NextPage } from 'next';
 
 const Home: NextPage = () => {
   return (

@@ -1,5 +1,5 @@
-import Image from "next/image";
-import moon from "images/theme_moon.svg";
+import Image from 'next/image';
+import moon from 'images/theme_moon.svg';
 
 export default function ThemeSwitch() {
   return (

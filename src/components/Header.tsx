@@ -1,5 +1,5 @@
-import Head from "next/head";
-import { Logo, HamburgerIcon, ThemeSwitch } from "components";
+import Head from 'next/head';
+import { Logo, HamburgerIcon, ThemeSwitch } from 'components';
 
 export default function Header() {
   return (
