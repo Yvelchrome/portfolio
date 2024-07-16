@@ -8,12 +8,12 @@ import Header from './Header';
 import Paragraph from './Paragraph';
 
 export {
-  Logo,
-  HamburgerIcon,
-  ThemeSwitch,
-  SectionTitle,
-  Hero,
-  Footer,
-  Header,
-  Paragraph,
+    Logo,
+    HamburgerIcon,
+    ThemeSwitch,
+    SectionTitle,
+    Hero,
+    Footer,
+    Header,
+    Paragraph,
 };

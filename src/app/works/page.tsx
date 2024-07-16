@@ -1,11 +1,11 @@
 import { NextPage, Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Steven Godin - Works',
+    title: 'Steven Godin - Works',
 };
 
 const Works: NextPage = () => {
-  return <></>;
+    return <></>;
 };
 
 export default Works;
