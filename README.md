@@ -2,13 +2,13 @@
 
 # Steven Godin - Portfolio
 
--   [About](#about)
--   [Built with](#built-with)
--   [Overview](#overview)
-    -   [Links](#links)
-    -   [Screenshot](#screenshot)
--   [Getting started](#getting-started)
--   [Me](#me!)
+- [About](#about)
+- [Built with](#built-with)
+- [Overview](#overview)
+  - [Links](#links)
+  - [Screenshot](#screenshot)
+- [Getting started](#getting-started)
+- [Me](#me!)
 
 ## About
 
@@ -25,8 +25,8 @@ This is my portfolio that will give some information about myself as well as ind
 
 ### Links
 
--   Figma : https://www.figma.com/file/cgloznmcDvIZJY6LUHV5ac/Portfolio?node-id=0%3A1
--   Live Site URL :
+- Figma : https://www.figma.com/file/cgloznmcDvIZJY6LUHV5ac/Portfolio?node-id=0%3A1
+- Live Site URL :
 
 ### Screenshot
 
@@ -38,8 +38,8 @@ This is my portfolio that will give some information about myself as well as ind
 
 ## Me!
 
--   LinkedIn - [@Steven Godin](https://www.linkedin.com/in/steven-godin/)
+- LinkedIn - [@Steven Godin](https://www.linkedin.com/in/steven-godin/)
 
 Some more of my front-end development projects here :
 
--   Frontend Mentor - [@yvelchrome](https://www.frontendmentor.io/profile/yvelchrome)
+- Frontend Mentor - [@yvelchrome](https://www.frontendmentor.io/profile/yvelchrome)
