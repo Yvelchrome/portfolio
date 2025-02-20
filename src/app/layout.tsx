@@ -19,45 +19,13 @@ export const metadata: Metadata = {
     themeColor: '#ffffff',
 };
 
-const Roobert = localFont({
+const Satoshi = localFont({
     src: [
-        {
-            path: '../assets/fonts/Roobert_Regular.otf',
-            weight: '400',
-            style: 'normal',
-        },
-        {
-            path: '../assets/fonts/Roobert_Medium.otf',
-            weight: '500',
-            style: 'normal',
-        },
-        {
-            path: '../assets/fonts/Roobert_SemiBold.otf',
-            weight: '600',
-            style: 'normal',
-        },
-    ],
-    variable: '--font-roobert',
-});
-const Roxborough = localFont({
-    src: [
-        {
-            path: '../assets/fonts/RoxboroughCF_Regular.otf',
-            weight: '400',
-            style: 'normal',
-        },
-        {
-            path: '../assets/fonts/RoxboroughCF_SemiBold.otf',
-            weight: '600',
-            style: 'normal',
-        },
-        {
-            path: '../assets/fonts/RoxboroughCF_SemiBoldItalic.otf',
-            weight: '600',
-            style: 'italic',
-        },
-    ],
-    variable: '--font-roxborough',
+    { path: "../assets/fonts/Satoshi-Variable.woff2", style: "normal" },
+    { path: "../assets/fonts/Satoshi-VariableItalic.woff2", style: "italic" },
+  ],
+  display: "swap",
+  variable: "--font-satoshi",
 });
 
 export default function RootLayout({
@@ -66,9 +34,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html
-            lang="en"
-            className={`${Roobert.variable} ${Roxborough.variable} bg-white`}
+        className={`${Satoshi.variable} relative font-satoshi text-base font-normal transition-colors duration-300`}
         >
             <body>
                 <Header />

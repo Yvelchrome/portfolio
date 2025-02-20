@@ -2,7 +2,7 @@ import { type Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{ts,tsx}"],
   theme: {
     colors: {
       black: "#000000",
@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        roobert: ["var(--font-roobert)", ...fontFamily.sans],
-        roxborough: ["var(--font-roxborough)", ...fontFamily.serif],
+        satoshi: ["var(--font-satoshi)", ...fontFamily.sans],
+      },
       },
     },
   },
