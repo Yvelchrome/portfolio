@@ -1,15 +1,18 @@
-'use client';
+import Image from "next/image";
+import Link from "next/link";
 
-import Image from 'next/legacy/image';
-import logo from 'images/logo.svg';
-import Link from 'next/link';
+import logo from "assets/images/logo.svg";
 
 export default function Logo() {
-    return (
-        <Link href={'/'}>
-            <div className="fixed top-12 left-12">
-                <Image src={logo} alt="" width={40} height={75} />
-            </div>
-        </Link>
-    );
+  return (
+    <Link href={"/"} className="relative left-8 md:left-12">
+      <Image
+        src={logo as string}
+        alt=""
+        width={40}
+        height={75}
+        className="h-12 w-auto"
+      />
+    </Link>
+  );
 }
