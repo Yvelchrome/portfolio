@@ -3,6 +3,8 @@ import "./globals.css";
 import React from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -34,19 +36,24 @@ const Satoshi = localFont({
   variable: "--font-satoshi",
 });
 
-export default function RootLayout({
+export default async function LocaleLayout({
     children,
 }: {
     children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+  const messages = await getMessages();
     return (
+    <html lang={locale} suppressHydrationWarning>
+      <body
         className={`${Satoshi.variable} relative font-satoshi text-base font-normal transition-colors duration-300`}
         >
-            <body>
+        <NextIntlClientProvider messages={messages}>
                 <Header />
                 <main>{children}</main>
                 <Footer />
-            </body>
+        </NextIntlClientProvider>
+      </body>
         </html>
     );
 }

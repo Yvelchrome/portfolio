@@ -1,0 +1,29 @@
+{
+  "Homepage": {
+    "job_title": "Développeur Front-End",
+    "resume": "CV",
+    "resume_file_job_title": "developpeur_frontend",
+    "contact": "Contact",
+    "footer_construction": "Site en cours de création"
+  },
+  "Contact": {
+    "title": "Contactez-moi :)",
+    "honeypot": "Laissez ce champ vide",
+    "name": "Nom",
+    "form_field_name": "Jean Dupont",
+    "email": "Email",
+    "form_field_email": "votre@email.com",
+    "company_name": "Entreprise",
+    "form_field_company_name": "",
+    "message": "Message",
+    "form_field_message": "Comment puis-je vous aider ?",
+    "send": "Envoyer le message",
+    "send_pending": "Envoi en cours..."
+  },
+  "Toast": {
+    "contact_form_success_title": "Message envoyé avec succès !",
+    "contact_form_success_description": "Je répondrai sous 24 heures.",
+    "contact_form_error_title": "Erreur lors de l'envoi du message.",
+    "contact_form_error_description": "L'envoi du formulaire n'a pas fonctionné comme prévu, veuillez réessayer plus tard."
+  }
+}
