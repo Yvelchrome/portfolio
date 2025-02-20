@@ -1,25 +1,36 @@
-import { SectionTitle, Hero, Paragraph } from 'components';
-import { NextPage } from 'next';
+import * as motion from "motion/react-client";
+import { useTranslations } from "next-intl";
 
-const Home: NextPage = () => {
-    return (
-        <>
-            <Hero />
-            <section className="min-h-screen pl-44">
-                <SectionTitle number="01" title="About me" />
-                <Paragraph />
-            </section>
-            <section className="min-h-screen pl-44">
-                <SectionTitle number="02" title="Works" />
-            </section>
-            <section className="min-h-screen pl-44">
-                <SectionTitle number="03" title="Skills" />
-            </section>
-            <section className="pl-44">
-                <SectionTitle number="04" title="Contact" />
-            </section>
-        </>
-    );
+import { Socials, Hero, CustomLink, ResumeViewer } from "components";
+
+const LandingPage = () => {
+  const t = useTranslations("Homepage");
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      className="flex flex-col items-center gap-8"
+      variants={itemVariants}
+    >
+      <Hero />
+      <div className="flex gap-4">
+        <ResumeViewer />
+        <CustomLink href={"contact"} text={t("contact")} />
+      </div>
+      <Socials />
+    </motion.div>
+  );
 };
 
-export default Home;
+export default LandingPage;
