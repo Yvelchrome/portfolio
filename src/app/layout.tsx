@@ -10,6 +10,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
 import { Footer, Header } from "components";
+import { Toaster } from "components/shadcn/sonner";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -77,6 +78,7 @@ export default async function LocaleLayout({
               </main>
               <Footer />
             </div>
+            <Toaster position="bottom-center" />
           </ThemeProvider>
         </NextIntlClientProvider>
       </motion.body>
