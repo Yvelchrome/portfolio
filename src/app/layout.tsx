@@ -3,6 +3,7 @@ import "./globals.css";
 import React from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import * as motion from "motion/react-client";
 import { ThemeProvider } from "next-themes";
@@ -79,6 +80,7 @@ export default async function LocaleLayout({
               <Footer />
             </div>
             <Toaster position="bottom-center" />
+            <SpeedInsights />
           </ThemeProvider>
         </NextIntlClientProvider>
       </motion.body>
