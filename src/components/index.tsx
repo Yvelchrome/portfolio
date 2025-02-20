@@ -11,6 +11,7 @@ import SiteParameters from "./SiteParameters";
 import TimeWidget from "./TimeWidget";
 import CopyrightNotice from "./CopyrightNotice";
 import Header from "./Header";
+import ContactEmailTemplate from "./ContactEmailTemplate";
 
 export {
   Logo,
@@ -26,4 +27,5 @@ export {
   TimeWidget,
   CopyrightNotice,
   Header,
+  ContactEmailTemplate,
 };
