@@ -3,6 +3,8 @@ import "./globals.css";
 import React from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+
+import * as motion from "motion/react-client";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
@@ -43,17 +45,32 @@ export default async function LocaleLayout({
 }) {
   const locale = await getLocale();
   const messages = await getMessages();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
     return (
     <html lang={locale} suppressHydrationWarning>
-      <body
+      <motion.body
         className={`${Satoshi.variable} relative font-satoshi text-base font-normal transition-colors duration-300`}
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
         >
         <NextIntlClientProvider messages={messages}>
                 <Header />
                 <main>{children}</main>
                 <Footer />
         </NextIntlClientProvider>
-      </body>
+      </motion.body>
         </html>
     );
 }
