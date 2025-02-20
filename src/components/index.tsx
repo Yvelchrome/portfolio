@@ -13,6 +13,7 @@ import CopyrightNotice from "./CopyrightNotice";
 import Header from "./Header";
 import ContactForm from "./ContactForm";
 import ContactEmailTemplate from "./ContactEmailTemplate";
+import SmoothScrolling from "./SmoothScrolling";
 
 export {
   Logo,
@@ -30,4 +31,5 @@ export {
   Header,
   ContactForm,
   ContactEmailTemplate,
+  SmoothScrolling,
 };

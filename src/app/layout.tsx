@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import React from "react";
+import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -10,7 +10,7 @@ import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
-import { Footer, Header } from "components";
+import { Footer, Header, SmoothScrolling } from "components";
 import { Toaster } from "components/shadcn/sonner";
 
 export const viewport: Viewport = {
@@ -46,7 +46,7 @@ const Satoshi = localFont({
 export default async function LocaleLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const locale = await getLocale();
   const messages = await getMessages();
@@ -70,19 +70,21 @@ export default async function LocaleLayout({
         animate="visible"
         variants={containerVariants}
       >
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
-            <div className="container relative mx-auto min-h-screen">
-              <Header />
-              <main className="relative flex min-h-screen items-center justify-center pb-28 pt-32">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <Toaster position="bottom-center" />
-            <SpeedInsights />
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <SmoothScrolling>
+          <NextIntlClientProvider messages={messages}>
+            <ThemeProvider>
+              <div className="container relative mx-auto min-h-screen">
+                <Header />
+                <main className="relative flex min-h-screen items-center justify-center pb-28 pt-32">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+              <Toaster position="bottom-center" />
+              <SpeedInsights />
+            </ThemeProvider>
+          </NextIntlClientProvider>
+        </SmoothScrolling>
       </motion.body>
     </html>
   );
