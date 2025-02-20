@@ -6,8 +6,8 @@
 - [Built with](#built-with)
 - [Overview](#overview)
   - [Links](#links)
-  - [Screenshot](#screenshot)
 - [Getting started](#getting-started)
+  - [Email template testing](#email-template-testing)
 - [Me](#me!)
 
 ## About
@@ -25,16 +25,19 @@ This is my portfolio that will give some information about myself as well as ind
 
 ### Links
 
-- Figma : https://www.figma.com/file/cgloznmcDvIZJY6LUHV5ac/Portfolio?node-id=0%3A1
-- Live Site URL :
-
-### Screenshot
+- Live Site URL : [svgd.vercel.app](https://svgd.vercel.app)
 
 ## Getting started
 
 0. Clone the repository
-1. Install dependencies, run `npm install`
-2. Start the project on localhost:3000, run `npm run dev`
+1. Install dependencies, run `pnpm install`
+2. Start the project on localhost:3000, run `pnpm run dev`
+
+### Email template testing
+
+0. run `cd react-email` from root directory
+1. Install dependencies, run `pnpm install`
+2. Start the project on localhost:3000, run `pnpm run dev`
 
 ## Me!
 
