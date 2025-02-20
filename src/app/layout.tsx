@@ -20,20 +20,20 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Steven Godin",
-    description:
+  description:
     "Portfolio of Steven Godin, a Front-End Developer. Site maintenance in progress.",
-    keywords: [
+  keywords: [
     "Steven Godin",
     "Front-End Developer",
     "Subskill",
     "HETIC",
     "Portfolio",
-    ],
+  ],
   manifest: "./manifest.ts",
 };
 
 const Satoshi = localFont({
-    src: [
+  src: [
     { path: "../assets/fonts/Satoshi-Variable.woff2", style: "normal" },
     { path: "../assets/fonts/Satoshi-VariableItalic.woff2", style: "italic" },
   ],
@@ -42,9 +42,9 @@ const Satoshi = localFont({
 });
 
 export default async function LocaleLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
   const locale = await getLocale();
   const messages = await getMessages();
@@ -60,22 +60,26 @@ export default async function LocaleLayout({
     },
   };
 
-    return (
+  return (
     <html lang={locale} suppressHydrationWarning>
       <motion.body
         className={`${Satoshi.variable} relative font-satoshi text-base font-normal transition-colors duration-300`}
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        >
+      >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
-                <Header />
-                <main>{children}</main>
-                <Footer />
+            <div className="container relative mx-auto min-h-screen">
+              <Header />
+              <main className="relative flex min-h-screen items-center justify-center pb-28 pt-32">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </ThemeProvider>
         </NextIntlClientProvider>
       </motion.body>
-        </html>
-    );
+    </html>
+  );
 }
