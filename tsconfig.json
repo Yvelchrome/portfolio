@@ -26,9 +26,7 @@
     /* Path Aliases */
     "baseUrl": "./src",
     "paths": {
-      "components/*": ["./components/*"],
-      "fonts/*": ["./assets/fonts/*"],
-      "images/*": ["./assets/images/*"]
+      // "example/*": ["./example/*"]
     }
   },
   "include": [
