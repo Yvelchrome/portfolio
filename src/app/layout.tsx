@@ -1,22 +1,28 @@
-import './globals.css';
-import React from 'react';
-import { Footer, Header } from 'components';
-import localFont from 'next/font/local';
+import "./globals.css";
 
-import { Metadata } from 'next';
+import React from "react";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+  ],
+};
 
 export const metadata: Metadata = {
-    title: 'Steven Godin',
+  title: "Steven Godin",
     description:
-        'Portfolio of Steven Godin, a Front-End Developer currently working for Subskill and studying at HETIC.',
+    "Portfolio of Steven Godin, a Front-End Developer. Site maintenance in progress.",
     keywords: [
-        'Steven Godin',
-        'Front-End Developer',
-        'Subskill',
-        'HETIC',
-        'Portfolio',
+    "Steven Godin",
+    "Front-End Developer",
+    "Subskill",
+    "HETIC",
+    "Portfolio",
     ],
-    themeColor: '#ffffff',
+  manifest: "./manifest.ts",
 };
 
 const Satoshi = localFont({
