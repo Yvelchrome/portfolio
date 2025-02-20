@@ -5,8 +5,11 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 
 import * as motion from "motion/react-client";
+import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+
+import { Footer, Header } from "components";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -66,9 +69,11 @@ export default async function LocaleLayout({
         variants={containerVariants}
         >
         <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>
                 <Header />
                 <main>{children}</main>
                 <Footer />
+          </ThemeProvider>
         </NextIntlClientProvider>
       </motion.body>
         </html>

@@ -4,6 +4,7 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 import * as tailwindAnimate from "tailwindcss-animate";
 
 export default {
+  darkMode: ["selector", "[data-theme='dark']"],
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
