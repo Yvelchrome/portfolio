@@ -10,6 +10,7 @@ export default {
     extend: {
       fontFamily: {
         satoshi: ["var(--font-satoshi)", ...fontFamily.sans],
+        roboto_mono: ["var(--font-roboto_mono)", ...fontFamily.sans],
       },
       borderRadius: {
         lg: "var(--radius)",

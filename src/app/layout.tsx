@@ -3,6 +3,7 @@ import "./globals.css";
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Roboto_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import * as motion from "motion/react-client";
@@ -34,6 +35,10 @@ export const metadata: Metadata = {
   manifest: "./manifest.ts",
 };
 
+const RobotoMono = Roboto_Mono({
+  subsets: ["latin"],
+  variable: "--font-roboto_mono",
+});
 const Satoshi = localFont({
   src: [
     { path: "../assets/fonts/Satoshi-Variable.woff2", style: "normal" },
@@ -65,7 +70,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <motion.body
-        className={`${Satoshi.variable} relative font-satoshi text-base font-normal transition-colors duration-300`}
+        className={`${Satoshi.variable} ${RobotoMono.variable} relative font-satoshi text-base font-normal transition-colors duration-300`}
         initial="hidden"
         animate="visible"
         variants={containerVariants}
