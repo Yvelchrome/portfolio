@@ -13,7 +13,7 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value:
       "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com https://*.vercel-insights.com; " +
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com https://*.vercel-insights.com https://vercel.live; " +
       "style-src 'self' 'unsafe-inline' https://*.vercel.com; " +
       "img-src 'self' data: blob: https://*.vercel.com; " +
       "font-src 'self'; " +
