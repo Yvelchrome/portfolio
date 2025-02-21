@@ -7,6 +7,7 @@
     "footer_construction": "Site under construction"
   },
   "Contact": {
+    "go_back": "Go Back",
     "title": "Contact Me :)",
     "honeypot": "Leave this empty",
     "name": "Name",

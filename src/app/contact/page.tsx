@@ -30,7 +30,7 @@ const LandingPage = () => {
 
   return (
     <motion.div className="space-y-8" variants={itemVariants}>
-      <CustomLink href="/" text="Retour" arrowPosition="left" />
+      <CustomLink href="/" text={t("go_back")} arrowPosition="left" />
       <h1 className="text-4xl font-bold">{t("title")}</h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {contactInfoElement(

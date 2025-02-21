@@ -7,6 +7,7 @@
     "footer_construction": "Site en cours de création"
   },
   "Contact": {
+    "go_back": "Retour",
     "title": "Contactez-moi :)",
     "honeypot": "Laissez ce champ vide",
     "name": "Nom",
