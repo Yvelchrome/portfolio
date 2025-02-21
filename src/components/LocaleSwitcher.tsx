@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 
 import { useLocale } from "next-intl";
 import * as motion from "motion/react-client";
@@ -13,6 +13,23 @@ export default function LocaleSwitcher() {
   const locale = useLocale();
   const isMounted = useMounted();
   const [isPending, startTransition] = useTransition();
+  const [tailwindMd, setTailwindMd] = useState(false);
+
+  useEffect(() => {
+    const checkMediaQuery = () => {
+      setTailwindMd(
+        window.matchMedia("only screen and (min-width: 768px)").matches,
+      );
+    };
+
+    checkMediaQuery();
+
+    const tailwindMd = window.matchMedia("only screen and (min-width: 768px)");
+    tailwindMd.addEventListener("change", checkMediaQuery);
+
+    return () => tailwindMd.removeEventListener("change", checkMediaQuery);
+  }, []);
+
   if (!isMounted) return null;
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
@@ -49,14 +66,14 @@ export default function LocaleSwitcher() {
           <span
             className={`font-medium transition-colors ${labelColorClass("fr")}`}
           >
-            Français
+            {tailwindMd ? "Français" : "FR"}
           </span>
         </button>
         <button value={"en"} onClick={handleClick} className={"w-full py-1"}>
           <span
             className={`font-medium transition-colors ${labelColorClass("en")}`}
           >
-            English
+            {tailwindMd ? "English" : "EN"}
           </span>
         </button>
       </div>
