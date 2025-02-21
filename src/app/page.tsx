@@ -24,7 +24,7 @@ const LandingPage = () => {
       variants={itemVariants}
     >
       <Hero />
-      <div className="flex gap-2 sm:gap-3 md:gap-4">
+      <div className="flex gap-3 md:gap-4">
         <ResumeViewer />
         <CustomLink href={"contact"} text={t("contact")} />
       </div>

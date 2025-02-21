@@ -30,7 +30,7 @@ export default function Socials() {
   ];
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-3 md:gap-4">
       {socials.map(({ icon, darkModeClasses, href, label }: Social) => (
         <motion.a
           key={label}
