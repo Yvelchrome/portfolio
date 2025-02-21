@@ -6,7 +6,7 @@ export default function CopyrightNotice() {
 
   return (
     <motion.div
-      className="space-y-2"
+      className="space-y-2 text-center md:text-left"
       whileInView={{
         y: [0, -4, 0],
         transition: {
@@ -17,10 +17,8 @@ export default function CopyrightNotice() {
         },
       }}
     >
-      <p className="font-light">
-        <span>🚧</span> {t("footer_construction")}
-      </p>
-      <p className="font-light">© 2025 - Steven Godin</p>
+      <p>🚧 {t("footer_construction")}</p>
+      <p>© 2025 - Steven Godin</p>
     </motion.div>
   );
 }

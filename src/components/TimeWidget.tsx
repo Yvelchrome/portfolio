@@ -48,10 +48,8 @@ export default function TimeWidget() {
       }}
     >
       <p>🇫🇷</p>
-      <div className="flex gap-2 text-start font-light">
-        <p>{currentTime.toLocaleString(locale, Day)}</p>
-        <p className="w-24">{currentTime.toLocaleString(locale, Hour)}</p>
-      </div>
+      <p>{currentTime.toLocaleString(locale, Day)}</p>
+      <p>{currentTime.toLocaleString(locale, Hour)}</p>
     </motion.div>
   );
 }

@@ -20,11 +20,11 @@ const LandingPage = () => {
 
   return (
     <motion.div
-      className="flex flex-col items-center gap-8"
+      className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8"
       variants={itemVariants}
     >
       <Hero />
-      <div className="flex gap-4">
+      <div className="flex gap-2 sm:gap-3 md:gap-4">
         <ResumeViewer />
         <CustomLink href={"contact"} text={t("contact")} />
       </div>

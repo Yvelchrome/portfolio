@@ -21,8 +21,10 @@ export default function Header() {
       className="absolute left-0 right-0 top-8 z-50 mx-auto w-full max-w-[inherit]"
       // TODO: Set fixed for final website
     >
-      <Logo />
-      <SiteParameters />
+      <div className="absolute left-8 right-8 top-0 flex items-center justify-between md:left-12 md:right-12">
+        <Logo />
+        <SiteParameters />
+      </div>
     </motion.header>
   );
 }

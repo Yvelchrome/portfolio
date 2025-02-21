@@ -23,13 +23,19 @@ export default function LocaleSwitcher() {
     });
   }
 
+  const labelColorClass = (localeTrigger: string) => {
+    return locale === localeTrigger
+      ? "text-white dark:text-black"
+      : "text-black dark:text-white";
+  };
+
   return (
-    <div className="relative w-full rounded-full border border-black p-1 transition-colors dark:border-white">
+    <div className="relative w-full rounded-full border border-black p-1 transition-colors sm:text-wrap dark:border-white">
       <motion.div
-        className="absolute h-8 rounded-full bg-black transition-colors dark:bg-white"
+        className="absolute rounded-full bg-black p-4 transition-colors dark:bg-white"
         initial={false}
         animate={{
-          x: locale === "fr" ? "0%" : "95%",
+          x: locale === "fr" ? "0%" : "calc(100% - 8px)",
           width: "50%",
         }}
         transition={{
@@ -41,22 +47,14 @@ export default function LocaleSwitcher() {
       <div className="relative flex">
         <button value={"fr"} onClick={handleClick} className={"w-full py-1"}>
           <span
-            className={`font-medium transition-colors ${
-              locale === "fr"
-                ? "text-white dark:text-black"
-                : "text-black dark:text-white"
-            }`}
+            className={`font-medium transition-colors ${labelColorClass("fr")}`}
           >
             Français
           </span>
         </button>
         <button value={"en"} onClick={handleClick} className={"w-full py-1"}>
           <span
-            className={`font-medium transition-colors ${
-              locale === "en"
-                ? "text-white dark:text-black"
-                : "text-black dark:text-white"
-            }`}
+            className={`font-medium transition-colors ${labelColorClass("en")}`}
           >
             English
           </span>
