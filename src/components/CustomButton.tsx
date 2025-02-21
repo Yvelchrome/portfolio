@@ -5,17 +5,19 @@ const CustomButton = ({
   text,
   arrowRotationDegree,
   arrowPosition,
+  yAnimate,
 }: {
   href?: string;
   text: string;
   arrowRotationDegree?: number;
   arrowPosition?: "left" | "right";
+  yAnimate?: boolean;
 }) => {
   const arrowElement = () => {
     return (
       <motion.span
         initial={{ x: 0, y: 0, rotate: arrowRotationDegree }}
-        animate={{ x: arrowPosition === "left" ? -2 : 2, y: 0 }}
+        animate={{ x: arrowPosition === "left" ? -2 : 2, y: yAnimate ? -2 : 0 }}
         transition={{
           repeat: Infinity,
           repeatType: "reverse",

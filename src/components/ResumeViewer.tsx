@@ -20,7 +20,11 @@ const ResumeViewer = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <CustomButton text={t("resume")} arrowRotationDegree={-45} />
+        <CustomButton
+          text={t("resume")}
+          arrowRotationDegree={-45}
+          yAnimate={true}
+        />
       </DialogTrigger>
       <DialogContent className="flex h-5/6 max-w-screen-lg flex-col border-0">
         <DialogHeader>
