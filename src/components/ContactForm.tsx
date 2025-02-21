@@ -77,8 +77,6 @@ export default function ContactForm() {
       return;
     }
 
-    console.log(data);
-
     try {
       const response = await fetch("api/send-email", {
         method: "POST",
@@ -111,9 +109,7 @@ export default function ContactForm() {
     }
   }
 
-  if (!isMounted) {
-    return null;
-  }
+  if (!isMounted) return null;
 
   return (
     <Form {...form}>

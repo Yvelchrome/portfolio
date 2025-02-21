@@ -19,9 +19,7 @@ export default function TimeWidget() {
     return () => clearInterval(timer);
   }, []);
 
-  if (!isMounted) {
-    return null;
-  }
+  if (!isMounted) return null;
 
   const Day: Intl.DateTimeFormatOptions = {
     timeZone: "Europe/Paris",

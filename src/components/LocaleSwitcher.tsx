@@ -5,12 +5,15 @@ import { useTransition } from "react";
 import { useLocale } from "next-intl";
 import * as motion from "motion/react-client";
 
+import { useMounted } from "lib/hooks/useMounted";
 import { setUserLocale } from "services/locale";
 import type { Locale } from "i18n/config";
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
+  const isMounted = useMounted();
   const [isPending, startTransition] = useTransition();
+  if (!isMounted) return null;
 
   function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
     const value = event.currentTarget.value;

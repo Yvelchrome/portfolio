@@ -10,9 +10,7 @@ export default function ThemeToggle() {
   const isMounted = useMounted();
   const { theme, setTheme } = useTheme();
 
-  if (!isMounted) {
-    return null;
-  }
+  if (!isMounted) return null;
 
   return (
     <motion.button
