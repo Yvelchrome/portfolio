@@ -1,29 +1,24 @@
-import Image from "next/image";
-
-import github from "assets/images/github.svg";
-import linkedin from "assets/images/linkedin.svg";
+import type { ReactNode } from "react";
+import Github from "assets/images/github.svgr.svg";
+import Linkedin from "assets/images/linkedin.svgr.svg";
 
 import * as motion from "motion/react-client";
 
 interface Social {
-  icon: string;
-  darkModeClasses: string | null;
+  icon: ReactNode;
   href: string;
   label: string;
 }
 
 export default function Socials() {
-  const socials = [
+  const socials: Social[] = [
     {
-      icon: github as string,
-      darkModeClasses:
-        "dark:brightness-[104%] dark:contrast-[109%] dark:hue-rotate-[290deg] dark:invert-[100%] dark:saturate-[7500%] dark:sepia-[2%]",
+      icon: <Github className="text-4xl" />,
       href: "https://github.com/Yvelchrome",
       label: "GitHub Profile",
     },
     {
-      icon: linkedin as string,
-      darkModeClasses: null,
+      icon: <Linkedin className="text-4xl text-[#0A66C2]" />,
       href: "https://www.linkedin.com/in/steven-godin/",
       label: "LinkedIn Profile",
     },
@@ -31,7 +26,7 @@ export default function Socials() {
 
   return (
     <div className="flex gap-3 md:gap-4">
-      {socials.map(({ icon, darkModeClasses, href, label }: Social) => (
+      {socials.map(({ icon, href, label }) => (
         <motion.a
           key={label}
           href={href}
@@ -41,13 +36,7 @@ export default function Socials() {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
         >
-          <Image
-            src={icon}
-            alt=""
-            width={50}
-            height={50}
-            className={`h-8 w-auto ${darkModeClasses}`}
-          />
+          {icon}
         </motion.a>
       ))}
     </div>

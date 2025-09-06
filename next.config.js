@@ -31,6 +31,16 @@ const config = {
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },
+
+  turbopack: {
+    rules: {
+      // TODO: clean all "*.svgr.svg" when queryParam support is added in Turbopack to use default loader for "*.svg?url"
+      "*.svgr.svg": {
+        loaders: [{ loader: "@svgr/webpack", options: { icon: true } }],
+        as: "*.js",
+      },
+    },
+  },
 };
 
 export default withNextIntl(config);
