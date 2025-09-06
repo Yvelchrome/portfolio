@@ -80,7 +80,7 @@ export default async function LocaleLayout({
             <ThemeProvider>
               <div className="container relative mx-auto min-h-screen">
                 <Header />
-                <main className="relative flex min-h-screen items-center justify-center px-4 py-32">
+                <main className="relative flex min-h-screen items-center justify-center px-4 pb-32">
                   {children}
                 </main>
                 <Footer />

@@ -26,5 +26,20 @@
     "contact_form_success_description": "Je répondrai sous 24 heures.",
     "contact_form_error_title": "Erreur lors de l'envoi du message.",
     "contact_form_error_description": "L'envoi du formulaire n'a pas fonctionné comme prévu, veuillez réessayer plus tard."
+  },
+  "Section": {
+    "about": "À propos de moi",
+    "about_paragraph_1": "Salut, moi c'est Steven",
+    "about_paragraph_2": "Je suis un développeur Front-End basé en France, spécialisé dans la création d'expériences numériques exceptionnelles. Avec une solide maîtrise de HTML, CSS et JavaScript, je crée des sites web réactifs et conviviaux qui respectent les normes web modernes.",
+    "about_paragraph_3": "J'ai une passion pour l'apprentissage de nouvelles technologies et le maintien à jour avec les dernières tendances de l'industrie. Je m'épanouis dans des environnements collaboratifs et j'aime travailler en étroite collaboration avec les designers et les développeurs back-end pour donner vie aux idées.",
+    "skills": "Compétences",
+    "skills_category_1": "Technologies",
+    "skills_category_2": "Outils",
+    "projects": "Projets",
+    "experience": "Expérience",
+    "education": "Formation",
+    "contact": "Contact",
+    "contact_send_email": "Envoyez-moi un email",
+    "contact_resume": "Regardez mon CV"
   }
 }

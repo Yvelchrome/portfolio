@@ -14,6 +14,11 @@ import Header from "./Header";
 import ContactForm from "./ContactForm";
 import ContactEmailTemplate from "./ContactEmailTemplate";
 import SmoothScrolling from "./SmoothScrolling";
+import SectionHeader from "./SectionHeader";
+import SectionAbout from "./SectionAbout";
+import SectionSkills from "./SectionSkills";
+import SectionContact from "./SectionContact";
+import AddUnorderedList from "./AddUnorderedList";
 
 export {
   Logo,
@@ -32,4 +37,9 @@ export {
   ContactForm,
   ContactEmailTemplate,
   SmoothScrolling,
+  SectionHeader,
+  SectionAbout,
+  SectionSkills,
+  SectionContact,
+  AddUnorderedList,
 };

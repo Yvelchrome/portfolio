@@ -26,5 +26,23 @@
     "contact_form_success_description": "I'll respond within 24 hours.",
     "contact_form_error_title": "Error sending message.",
     "contact_form_error_description": "Form submit didn't work as expected, please try again later."
+  },
+  "Section": {
+    "about": "About me",
+    "about_paragraph_1": "Hi, I'm Steven",
+    "about_paragraph_2": "I'm a Front-End Developer based in France, specializing in building exceptional digital experiences. With a strong foundation in HTML, CSS, and JavaScript, I create responsive and user-friendly websites that meet modern web standards.",
+    "about_paragraph_3": "I have a passion for learning new technologies and staying up-to-date with the latest industry trends. I thrive in collaborative environments and enjoy working closely with designers and back-end developers to bring ideas to life.",
+    "skills": "Skills",
+    "skills_category_1": "Technologies",
+    "skills_category_2": "Tools",
+    "projects": "Projects",
+    "experience": "Experience",
+    "education": "Education",
+    "contact": "Contact",
+    "contact_socials": "Socials",
+    "contact_email": "Email",
+    "contact_phone": "Phone",
+    "contact_send_email": "Send me an email",
+    "contact_resume": "View my resume"
   }
 }
