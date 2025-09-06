@@ -18,7 +18,7 @@ const securityHeaders = [
       "img-src 'self' data: blob: https://*.vercel.com; " +
       "font-src 'self'; " +
       "object-src 'none'; " +
-      "frame-src 'self' data: https://steven-godin-resume.netlify.app; " +
+      "frame-src 'self' data: https://steven-godin-resume.netlify.app https://vercel.live; " +
       "frame-ancestors 'none'; " +
       "connect-src 'self' https://*.vercel.com https://resend.com; " +
       "base-uri 'self'; " +
