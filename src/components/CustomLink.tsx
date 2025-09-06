@@ -31,7 +31,7 @@ const CustomLink = ({
   const textClass = "font-medium text-xs md:text-base";
 
   return (
-    <Link href={href}>
+    <Link href={href} className="inline-block">
       <motion.div
         className="flex w-fit cursor-pointer items-center justify-center gap-2 rounded-full border border-black px-4 py-1 dark:border-white"
         whileHover={{ scale: 1.1 }}

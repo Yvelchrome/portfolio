@@ -39,6 +39,9 @@
     "experience": "Expérience",
     "education": "Formation",
     "contact": "Contact",
+    "contact_socials": "Réseaux",
+    "contact_email": "Email",
+    "contact_phone": "Téléphone",
     "contact_send_email": "Envoyez-moi un email",
     "contact_resume": "Regardez mon CV"
   }

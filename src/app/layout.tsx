@@ -70,7 +70,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <motion.body
-        className={`${Satoshi.variable} ${RobotoMono.variable} relative font-satoshi text-base font-normal transition-colors duration-300`}
+        className={`${Satoshi.variable} ${RobotoMono.variable} font-satoshi relative text-base font-normal transition-colors duration-300`}
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -78,7 +78,7 @@ export default async function LocaleLayout({
         <SmoothScrolling>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider>
-              <div className="container relative mx-auto min-h-screen">
+              <div className="relative container mx-auto min-h-screen">
                 <Header />
                 <main className="relative flex min-h-screen items-center justify-center px-4 pb-32">
                   {children}
