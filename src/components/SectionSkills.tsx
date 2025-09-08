@@ -1,10 +1,13 @@
+import * as motion from "motion/react-client";
+import { itemsVariant } from "lib/animationsVariants";
+
 import { AddUnorderedList, SectionHeader } from "components";
 
 export default function SectionSkills() {
   return (
-    <div>
+    <motion.div variants={itemsVariant}>
       <SectionHeader number={"02"} intlTitle={"skills"} />
-      <div className="flex gap-24 px-8 font-satoshi">
+      <div className="font-satoshi flex gap-24 px-8">
         {
           <AddUnorderedList
             intlTitle="skills_category_1"
@@ -29,6 +32,6 @@ export default function SectionSkills() {
           />
         }
       </div>
-    </div>
+    </motion.div>
   );
 }

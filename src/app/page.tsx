@@ -1,4 +1,5 @@
 import * as motion from "motion/react-client";
+import { itemsVariant } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
 
 import {
@@ -14,36 +15,21 @@ import {
 const LandingPage = () => {
   const t = useTranslations("Homepage");
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
-    <div>
-      <motion.div
-        className="flex min-h-screen flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8"
-        variants={itemVariants}
-      >
+    <motion.div>
+      <motion.div className="flex min-h-screen flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8">
         <Hero />
-        <div className="flex gap-3 md:gap-4">
+        <motion.div className="flex gap-3 md:gap-4" variants={itemsVariant}>
           <ResumeViewer />
           <CustomLink href={"contact"} text={t("contact")} />
-        </div>
+        </motion.div>
         <Socials />
       </motion.div>
 
       <SectionAbout />
       <SectionSkills />
       <SectionContact />
-    </div>
+    </motion.div>
   );
 };
 

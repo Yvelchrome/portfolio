@@ -1,4 +1,5 @@
 import * as motion from "motion/react-client";
+import { itemsVariant } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
 
 import { ContactForm, CustomLink } from "components";
@@ -6,18 +7,6 @@ import { Mail, Phone } from "lucide-react";
 
 const LandingPage = () => {
   const t = useTranslations("Contact");
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
 
   const contactInfoElement = (lucideIcon: React.ReactNode, text: string) => {
     return (
@@ -29,7 +18,7 @@ const LandingPage = () => {
   };
 
   return (
-    <motion.div className="space-y-8" variants={itemVariants}>
+    <motion.div className="space-y-8" variants={itemsVariant}>
       <CustomLink href="/" text={t("go_back")} arrowPosition="left" />
       <h1 className="text-4xl font-bold">{t("title")}</h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

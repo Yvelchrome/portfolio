@@ -2,6 +2,9 @@ import Github from "assets/images/github.svgr.svg";
 import Linkedin from "assets/images/linkedin.svgr.svg";
 import Discord from "assets/images/discord.svgr.svg";
 
+import * as motion from "motion/react-client";
+import { itemsVariant } from "lib/animationsVariants";
+
 import { AddUnorderedList, SectionHeader } from "components";
 import { useTranslations } from "next-intl";
 
@@ -9,10 +12,10 @@ export default function SectionContact() {
   const t = useTranslations("Section");
 
   return (
-    <div>
+    <motion.div variants={itemsVariant}>
       <SectionHeader number={"03"} intlTitle={"contact"} />
       <h3 className="pb-12 text-center text-7xl">{t("contact_send_email")}</h3>
-      <div className="flex gap-24 px-8 font-satoshi">
+      <div className="font-satoshi flex gap-24 px-8">
         <AddUnorderedList
           intlTitle="contact_socials"
           items={[
@@ -47,6 +50,6 @@ export default function SectionContact() {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

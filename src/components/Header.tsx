@@ -1,27 +1,15 @@
 import * as motion from "motion/react-client";
+import { itemsVariant } from "lib/animationsVariants";
 
 import { Logo, SiteParameters } from "components";
 
 export default function Header() {
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
     <motion.header
-      variants={itemVariants}
-      className="fixed left-0 right-0 top-8 z-50 mx-auto w-full max-w-[inherit]"
-      // TODO: Set fixed for final website
+      variants={itemsVariant}
+      className="fixed top-8 right-0 left-0 z-50 mx-auto w-full max-w-[inherit]"
     >
-      <div className="absolute left-8 right-8 top-0 flex items-center justify-between md:left-12 md:right-12">
+      <div className="absolute top-0 right-8 left-8 flex items-center justify-between md:right-12 md:left-12">
         <Logo />
         <SiteParameters />
       </div>

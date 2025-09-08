@@ -3,6 +3,7 @@ import Github from "assets/images/github.svgr.svg";
 import Linkedin from "assets/images/linkedin.svgr.svg";
 
 import * as motion from "motion/react-client";
+import { itemsVariant } from "lib/animationsVariants";
 
 interface Social {
   icon: ReactNode;
@@ -25,7 +26,7 @@ export default function Socials() {
   ];
 
   return (
-    <div className="flex gap-3 md:gap-4">
+    <motion.div className="flex gap-3 md:gap-4" variants={itemsVariant}>
       {socials.map(({ icon, href, label }) => (
         <motion.a
           key={label}
@@ -39,6 +40,6 @@ export default function Socials() {
           {icon}
         </motion.a>
       ))}
-    </div>
+    </motion.div>
   );
 }
