@@ -26,7 +26,7 @@ const ResumeViewer = () => {
           yAnimate={true}
         />
       </DialogTrigger>
-      <DialogContent className="flex h-5/6 max-w-(--breakpoint-lg) flex-col border-0">
+      <DialogContent className="flex h-5/6 flex-col border-0 sm:max-w-(--breakpoint-lg)">
         <DialogHeader>
           <DialogTitle className="font-bold">{t("resume")}</DialogTitle>
           <DialogDescription className="sr-only">
