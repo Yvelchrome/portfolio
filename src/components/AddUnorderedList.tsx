@@ -58,7 +58,7 @@ export default function AddUnorderedList({
 
   return (
     <div key={intlTitle} className="space-y-6">
-      <h3 className="font-satoshi text-base font-medium text-light-grey dark:text-white">
+      <h3 className="font-satoshi text-light-grey text-base font-medium dark:text-white">
         {t(intlTitle)}
       </h3>
       <ul className={listClassName}>

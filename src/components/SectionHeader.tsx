@@ -13,7 +13,7 @@ export default function SectionHeader({
     <div className="mt-12">
       <div className="h-px w-full bg-black dark:bg-white"></div>
 
-      <div className="my-12 px-8 font-satoshi">
+      <div className="font-satoshi my-12 px-8">
         <p className="text-sm font-semibold">{number}</p>
         <h2 className="text-base font-medium">{t(intlTitle)}</h2>
       </div>
