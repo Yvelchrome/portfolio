@@ -1,9 +1,11 @@
 import { useTranslations } from "next-intl";
 import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
+import { ConditionalWrapper } from "utils/ConditionalWrapper";
 
 interface ListItem {
   text: string;
+  href?: string;
   icon?: string | StaticImageData | ReactNode;
   iconAlt?: string;
   iconSize?: number;
@@ -67,8 +69,29 @@ export default function AddUnorderedList({
             className="flex items-center gap-4"
             key={`${intlTitle}-${index}-${item.text}`}
           >
-            {renderIcon(item)}
-            <span>{item.text}</span>
+            <ConditionalWrapper
+              condition={!!item.href}
+              wrapper={(children) => (
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4"
+                >
+                  {children}
+                </a>
+              )}
+            >
+              {renderIcon(item)}
+              <span
+                className={
+                  item.href &&
+                  "relative after:absolute after:top-full after:right-0 after:h-0.5 after:w-full after:origin-center after:scale-0 after:bg-white after:transition-transform after:duration-400 group-hover:after:scale-100"
+                }
+              >
+                {item.text}
+              </span>
+            </ConditionalWrapper>
           </li>
         ))}
       </ul>

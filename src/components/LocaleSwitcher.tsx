@@ -61,15 +61,15 @@ export default function LocaleSwitcher() {
         }}
       />
 
-      <div className="relative flex">
-        <button value={"fr"} onClick={handleClick} className={"w-full py-1"}>
+      <div className="relative flex *:w-full *:cursor-pointer *:py-1">
+        <button value={"fr"} onClick={handleClick}>
           <span
             className={`font-medium transition-colors ${labelColorClass("fr")}`}
           >
             {tailwindMd ? "Français" : "FR"}
           </span>
         </button>
-        <button value={"en"} onClick={handleClick} className={"w-full py-1"}>
+        <button value={"en"} onClick={handleClick}>
           <span
             className={`font-medium transition-colors ${labelColorClass("en")}`}
           >

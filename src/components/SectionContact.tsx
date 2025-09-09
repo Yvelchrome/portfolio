@@ -23,11 +23,13 @@ export default function SectionContact() {
               text: "Yvelchrome",
               icon: <Github />,
               iconAlt: "GitHub : ",
+              href: "https://github.com/Yvelchrome",
             },
             {
               text: "Steven Godin",
               icon: <Linkedin />,
               iconAlt: "LinkedIn : ",
+              href: "https://www.linkedin.com/in/steven-godin/",
             },
             {
               text: "@yvelchrome",
