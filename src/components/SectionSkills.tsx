@@ -1,11 +1,11 @@
 import * as motion from "motion/react-client";
-import { itemsVariant } from "lib/animationsVariants";
+import { fadeInFromTop } from "lib/animationsVariants";
 
 import { AddUnorderedList, SectionHeader } from "components";
 
 export default function SectionSkills() {
   return (
-    <motion.div variants={itemsVariant}>
+    <motion.div variants={fadeInFromTop}>
       <SectionHeader number={"02"} intlTitle={"skills"} />
       <div className="font-satoshi flex gap-24 px-8">
         {

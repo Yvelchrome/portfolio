@@ -7,7 +7,6 @@ import { Roboto_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import * as motion from "motion/react-client";
-import { containerVariant } from "lib/animationsVariants";
 import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
@@ -61,9 +60,6 @@ export default async function LocaleLayout({
     <html lang={locale} suppressHydrationWarning>
       <motion.body
         className={`${Satoshi.variable} ${RobotoMono.variable} font-satoshi relative text-base font-normal transition-colors duration-300`}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariant}
       >
         <SmoothScrolling>
           <NextIntlClientProvider messages={messages}>

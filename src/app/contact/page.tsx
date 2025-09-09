@@ -1,5 +1,5 @@
 import * as motion from "motion/react-client";
-import { itemsVariant } from "lib/animationsVariants";
+import { fadeInFromTop } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
 
 import { ContactForm, CustomLink } from "components";
@@ -18,7 +18,7 @@ const LandingPage = () => {
   };
 
   return (
-    <motion.div className="space-y-8" variants={itemsVariant}>
+    <motion.div className="space-y-8" variants={fadeInFromTop}>
       <CustomLink href="/" text={t("go_back")} arrowPosition="left" />
       <h1 className="text-4xl font-bold">{t("title")}</h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

@@ -1,5 +1,5 @@
 import * as motion from "motion/react-client";
-import { itemsVariant } from "lib/animationsVariants";
+import { fadeInFromTop } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
 
 import {
@@ -16,10 +16,17 @@ const LandingPage = () => {
   const t = useTranslations("Homepage");
 
   return (
-    <motion.div>
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      transition={{
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      }}
+    >
       <motion.div className="flex min-h-screen flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8">
         <Hero />
-        <motion.div className="flex gap-3 md:gap-4" variants={itemsVariant}>
+        <motion.div className="flex gap-3 md:gap-4" variants={fadeInFromTop}>
           <ResumeViewer />
           <CustomLink href={"contact"} text={t("contact")} />
         </motion.div>
