@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 import { fadeInFromTop } from "lib/animationsVariants";
 
 import Link from "next/link";
-import { AddUnorderedList, SectionHeader } from "components";
+import { AddUnorderedList, ResumeViewer, SectionHeader } from "components";
 import { useTranslations } from "next-intl";
 
 export default function SectionContact() {
@@ -65,6 +65,9 @@ export default function SectionContact() {
             listClassName="text-3xl"
           />
         </div>
+      </div>
+      <div className="mt-12 px-8">
+        <ResumeViewer />
       </div>
     </motion.div>
   );
