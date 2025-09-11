@@ -19,6 +19,8 @@ import SectionAbout from "./SectionAbout";
 import SectionSkills from "./SectionSkills";
 import SectionContact from "./SectionContact";
 import AddUnorderedList from "./AddUnorderedList";
+import CarouselSlide from "./CarouselSlide";
+import SectionWorks from "./SectionWorks";
 
 export {
   Logo,
@@ -41,5 +43,7 @@ export {
   SectionAbout,
   SectionSkills,
   SectionContact,
+  SectionWorks,
+  CarouselSlide,
   AddUnorderedList,
 };

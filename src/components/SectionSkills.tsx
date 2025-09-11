@@ -6,7 +6,7 @@ import { AddUnorderedList, SectionHeader } from "components";
 export default function SectionSkills() {
   return (
     <motion.div variants={fadeInFromTop}>
-      <SectionHeader number={"02"} intlTitle={"skills"} />
+      <SectionHeader number={"03"} intlTitle={"skills"} />
       <div className="font-satoshi flex gap-24 px-8">
         {
           <AddUnorderedList

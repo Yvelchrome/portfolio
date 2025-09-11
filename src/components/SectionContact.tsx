@@ -14,7 +14,7 @@ export default function SectionContact() {
 
   return (
     <motion.div variants={fadeInFromTop}>
-      <SectionHeader number={"03"} intlTitle={"contact"} />
+      <SectionHeader number={"04"} intlTitle={"contact"} />
 
       <Link
         href="/contact"

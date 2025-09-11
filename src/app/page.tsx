@@ -10,6 +10,7 @@ import {
   SectionAbout,
   SectionSkills,
   SectionContact,
+  SectionWorks,
 } from "components";
 
 const LandingPage = () => {
@@ -34,6 +35,7 @@ const LandingPage = () => {
       </motion.div>
 
       <SectionAbout />
+      <SectionWorks />
       <SectionSkills />
       <SectionContact />
     </motion.div>
