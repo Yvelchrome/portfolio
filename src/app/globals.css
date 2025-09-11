@@ -6,7 +6,7 @@
 @theme {
   /* Font Families */
   --font-satoshi: var(--font-satoshi);
-  --font-roboto-mono: var(--font-roboto_mono), ui-monospace, monospace;
+  --font-roboto-mono: var(--font-roboto-mono), var(--font-mono);
 
   /* Border Radius */
   --radius-lg: var(--radius);
