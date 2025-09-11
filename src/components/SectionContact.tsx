@@ -5,6 +5,7 @@ import Discord from "assets/images/discord.svgr.svg";
 import * as motion from "motion/react-client";
 import { fadeInFromTop } from "lib/animationsVariants";
 
+import Link from "next/link";
 import { AddUnorderedList, SectionHeader } from "components";
 import { useTranslations } from "next-intl";
 
@@ -14,7 +15,19 @@ export default function SectionContact() {
   return (
     <motion.div variants={fadeInFromTop}>
       <SectionHeader number={"03"} intlTitle={"contact"} />
-      <h3 className="pb-12 text-center text-7xl">{t("contact_send_email")}</h3>
+
+      <Link
+        href="/contact"
+        className="group mb-12 block text-center text-8xl font-bold uppercase"
+      >
+        {t("contact_send_email")}{" "}
+        <div className="text-dark-blue relative top-0 inline-grid overflow-hidden *:transition-all *:duration-400">
+          <p className="relative top-0 group-hover:-top-full">email</p>
+          <span className="absolute top-[110%] left-0 group-hover:-top-0">
+            email
+          </span>
+        </div>
+      </Link>
       <div className="font-satoshi flex gap-24 px-8">
         <AddUnorderedList
           intlTitle="contact_socials"
@@ -35,6 +48,7 @@ export default function SectionContact() {
               text: "@yvelchrome",
               icon: <Discord />,
               iconAlt: "Discord : ",
+              href: "https://discordapp.com/users/507676625681514501",
             },
           ]}
           listClassName="text-3xl space-y-7"
