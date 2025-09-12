@@ -35,7 +35,7 @@
     "skills": "Compétences",
     "skills_category_1": "Technologies",
     "skills_category_2": "Outils",
-    "projects": "Projets",
+    "works": "Projets",
     "experience": "Expérience",
     "education": "Formation",
     "contact": "Contact",
@@ -50,10 +50,21 @@
     "client": "Client",
     "year": "Année",
     "adeupa": {
-      "subtitle": "Preuve de concept • PWA",
+      "subtitle": "Preuve de Concept • PWA",
       "role": "Développeur Front-End • Designer UI",
       "description": "Développé pour aider les entreprises locales parisiennes à gagner en visibilité.",
       "imageAlt": "Project One Image"
+    }
+  },
+  "Works": {
+    "client": "Client",
+    "year": "Année",
+    "linkToWebsite": "Visiter le site",
+    "linkToRepository": "GitHub",
+    "adeupa": {
+      "title": "Adeupa",
+      "subtitle": "Preuve de Concept • PWA",
+      "role": "Développeur Front-End<br></br>Designer UI"
     }
   }
 }

@@ -35,7 +35,7 @@
     "skills": "Skills",
     "skills_category_1": "Technologies",
     "skills_category_2": "Tools",
-    "projects": "Projects",
+    "works": "Works",
     "experience": "Experience",
     "education": "Education",
     "contact": "Contact",
@@ -54,6 +54,17 @@
       "role": "Front-End Developer • UI Designer",
       "description": "Developed to help local businesses from Paris to get more visibility.",
       "imageAlt": "Project One Image"
+    }
+  },
+  "Works": {
+    "client": "Client",
+    "year": "Year",
+    "linkToWebsite": "Visit Site",
+    "linkToRepository": "GitHub",
+    "adeupa": {
+      "title": "Adeupa",
+      "subtitle": "Proof of Concept • PWA",
+      "role": "Front-End Developer<br></br>UI Designer"
     }
   }
 }

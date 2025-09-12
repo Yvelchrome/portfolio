@@ -21,6 +21,7 @@ import SectionContact from "./SectionContact";
 import AddUnorderedList from "./AddUnorderedList";
 import CarouselSlide from "./CarouselSlide";
 import SectionWorks from "./SectionWorks";
+import WorksHero from "./WorksHero";
 
 export {
   Logo,
@@ -46,4 +47,5 @@ export {
   SectionWorks,
   CarouselSlide,
   AddUnorderedList,
+  WorksHero,
 };

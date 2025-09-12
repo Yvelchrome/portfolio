@@ -125,7 +125,7 @@ export default function SectionWorks() {
         className="sticky top-0 min-h-screen overflow-hidden"
         variants={fadeInFromTop}
       >
-        <SectionHeader number={"02"} intlTitle={"projects"} />
+        <SectionHeader number={"02"} intlTitle={"works"} />
 
         <motion.div
           ref={trackRef}
