@@ -44,5 +44,16 @@
     "contact_phone": "Phone",
     "contact_send_email": "Send me an",
     "contact_resume": "View my resume"
+  },
+  "Carousel": {
+    "linkToProject": "Know more.",
+    "client": "Client",
+    "year": "Year",
+    "adeupa": {
+      "subtitle": "Proof of Concept • PWA",
+      "role": "Front-End Developer • UI Designer",
+      "description": "Developed to help local businesses from Paris to get more visibility.",
+      "imageAlt": "Project One Image"
+    }
   }
 }

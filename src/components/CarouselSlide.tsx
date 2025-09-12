@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 interface CarouselSlideProps {
@@ -21,6 +22,8 @@ export default function CarouselSlide({
   year,
   imageAlt = "Placeholder image",
 }: CarouselSlideProps) {
+  const t = useTranslations("Carousel");
+
   return (
     <div className="relative flex justify-between px-8">
       <div className="flex w-7/16 flex-col justify-between">
@@ -32,13 +35,17 @@ export default function CarouselSlide({
           <p className="text-grey text-4xl font-medium">{role}</p>
           <p className="text-4xl">{description}</p>
           <Link href={linkHref} className="text-2xl underline">
-            Know more.
+            {t("linkToProject")}
           </Link>
         </div>
 
         <div className="pt-24 *:text-base *:text-gray-600">
-          <p>Client : {client}</p>
-          <p>Year : {year}</p>
+          <p>
+            {t("client")} : {client}
+          </p>
+          <p>
+            {t("year")} : {year}
+          </p>
         </div>
       </div>
       <div className="flex w-6/16 items-center justify-center bg-gray-100">
