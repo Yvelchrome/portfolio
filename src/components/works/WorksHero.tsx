@@ -1,6 +1,7 @@
 import * as motion from "motion/react-client";
 import { fadeInFromTop } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
+import { Badge } from "components/shadcn/badge";
 
 interface WorksHeroProps {
   title: string;
@@ -12,6 +13,7 @@ interface WorksHeroProps {
   role: string;
   linkToWebsite?: string;
   linkToRepository?: string;
+  isArchivedProject?: boolean;
 }
 
 export default function WorksHero({
@@ -24,6 +26,7 @@ export default function WorksHero({
   role,
   linkToWebsite,
   linkToRepository,
+  isArchivedProject,
 }: WorksHeroProps) {
   const t = useTranslations("Works");
 
@@ -49,11 +52,11 @@ export default function WorksHero({
         staggerChildren: 0.2,
         delayChildren: 0.3,
       }}
-      // Prévoir tag encadré pour notifier statut (deprecated / online...)
     >
       <motion.div variants={fadeInFromTop}>
+        {isArchivedProject && <Badge variant="default">Archived</Badge>}
         <h3 className="text-8xl font-semibold">{title}</h3>
-        <p className="text-4xl font-medium" /* Prévoir '*' */>{subtitle}</p>
+        <p className="text-4xl font-medium">{subtitle}</p>
       </motion.div>
       <div>
         <div className="space-y-4">

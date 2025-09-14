@@ -15,6 +15,7 @@ const LandingPage = () => {
     client: "JCEP",
     year: "2022",
     linkToRepository: "https://github.com/arthur-fontaine/adeupa",
+    isArchivedProject: true,
   };
 
   return <WorksHero {...WorksHeroProps} />;
