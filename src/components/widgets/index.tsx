@@ -5,6 +5,7 @@ import TimeWidget from "./TimeWidget";
 import CopyrightNotice from "./CopyrightNotice";
 import SmoothScrolling from "./SmoothScrolling";
 import ThemeToggle from "./ThemeToggle/ThemeToggle";
+import { HorizontalScrollWrapper } from "./HorizontalScrollWrapper";
 
 export {
   ThemeToggle,
@@ -14,4 +15,5 @@ export {
   TimeWidget,
   CopyrightNotice,
   SmoothScrolling,
+  HorizontalScrollWrapper,
 };

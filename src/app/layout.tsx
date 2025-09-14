@@ -66,9 +66,7 @@ export default async function LocaleLayout({
             <ThemeProvider>
               <div className="relative container mx-auto min-h-screen">
                 <Header />
-                <main className="relative flex min-h-screen px-4">
-                  {children}
-                </main>
+                <main className="relative mx-4">{children}</main>
                 <Footer />
               </div>
               <Toaster position="bottom-center" />
