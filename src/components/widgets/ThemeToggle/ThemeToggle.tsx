@@ -1,6 +1,6 @@
 "use client";
 
-import "components/ThemeToggle/ThemeToggle.scss";
+import "./ThemeToggle.scss";
 
 import * as motion from "motion/react-client";
 import { useTheme } from "next-themes";

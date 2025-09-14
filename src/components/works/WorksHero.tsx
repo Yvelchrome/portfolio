@@ -5,8 +5,8 @@ import { useTranslations } from "next-intl";
 interface WorksHeroProps {
   title: string;
   subtitle: string;
-  frontStack: Array<string>;
-  backStack: Array<string>;
+  frontStack?: Array<string>;
+  backStack?: Array<string>;
   client?: string;
   year?: string;
   role: string;
@@ -60,33 +60,41 @@ export default function WorksHero({
           <motion.div className="space-y-2" variants={fadeInFromTop}>
             <p className="text-light-grey">Technologies</p>
             <div className="*:flex">
-              <div>
-                <p className="text-light-grey w-16">Front:</p>
-                <div className="flex gap-6">
-                  {frontStack.map((technology, index) => (
-                    <p key={index}>{technology}</p>
-                  ))}
+              {frontStack && (
+                <div>
+                  <p className="text-light-grey w-16">Front:</p>
+                  <div className="flex gap-6">
+                    {frontStack.map((technology, index) => (
+                      <p key={index}>{technology}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <div>
-                <p className="text-light-grey w-16">Back:</p>
-                <div className="flex gap-6">
-                  {backStack.map((technology, index) => (
-                    <p key={index}>{technology}</p>
-                  ))}
+              )}
+              {backStack && (
+                <div>
+                  <p className="text-light-grey w-16">Back:</p>
+                  <div className="flex gap-6">
+                    {backStack.map((technology, index) => (
+                      <p key={index}>{technology}</p>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </motion.div>
           <motion.div variants={fadeInFromTop} className="*:flex">
-            <div>
-              <p className="text-light-grey w-16">{t("client")}:</p>
-              <p>{client}</p>
-            </div>
-            <div>
-              <p className="text-light-grey w-16">{t("year")}:</p>
-              <p>{year}</p>
-            </div>
+            {client && (
+              <div>
+                <p className="text-light-grey w-16">{t("client")}:</p>
+                <p>{client}</p>
+              </div>
+            )}
+            {year && (
+              <div>
+                <p className="text-light-grey w-16">{t("year")}:</p>
+                <p>{year}</p>
+              </div>
+            )}
           </motion.div>
           <motion.div className="flex" variants={fadeInFromTop}>
             <p className="text-light-grey w-16">Role:</p>
