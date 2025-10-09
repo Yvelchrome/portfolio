@@ -10,6 +10,7 @@
 @theme {
   /* Font Families */
   --font-satoshi: var(--font-satoshi);
+  --font-roxboroughcf: var(--font-roxboroughcf);
   --font-roboto-mono: var(--font-roboto-mono), var(--font-mono);
 
   /* Border Radius */

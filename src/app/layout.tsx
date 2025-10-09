@@ -47,6 +47,17 @@ const Satoshi = localFont({
   display: "swap",
   variable: "--font-satoshi",
 });
+const RoxboroughCF = localFont({
+  src: [
+    { path: "../assets/fonts/RoxboroughCF-Regular.woff2", style: "normal" },
+    {
+      path: "../assets/fonts/RoxboroughCF-RegularItalic.woff2",
+      style: "italic",
+    },
+  ],
+  display: "swap",
+  variable: "--font-roxboroughcf",
+});
 
 export default async function LocaleLayout({
   children,
@@ -59,7 +70,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <motion.body
-        className={`${Satoshi.variable} ${RobotoMono.variable} font-satoshi relative text-base font-normal transition-colors duration-300`}
+        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi relative text-base font-normal transition-colors duration-300`}
       >
         <SmoothScrolling>
           <NextIntlClientProvider messages={messages}>
