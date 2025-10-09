@@ -45,7 +45,7 @@ export default function WorksHero({
 
   return (
     <motion.div
-      className="flex flex-col justify-between pt-48 pb-32"
+      className="flex min-w-full flex-col justify-between pt-48 pb-32"
       initial="hidden"
       animate="visible"
       transition={{
@@ -54,7 +54,7 @@ export default function WorksHero({
       }}
     >
       <motion.div variants={fadeInFromTop}>
-        {isArchivedProject && <Badge variant="default">Archived</Badge>}
+        {isArchivedProject && <Badge variant="default">{t("archived")}</Badge>}
         <h3 className="text-8xl font-semibold">{title}</h3>
         <p className="text-4xl font-medium">{subtitle}</p>
       </motion.div>

@@ -61,10 +61,15 @@
     "year": "Year",
     "linkToWebsite": "Visit Site",
     "linkToRepository": "GitHub",
+    "archived": "Archived",
+    "about_title": "About the project",
     "adeupa": {
       "title": "Adeupa",
       "subtitle": "Proof of Concept • PWA",
-      "role": "Front-End Developer<br></br>UI Designer"
+      "role": "Front-End Developer<br></br>UI Designer",
+      "about_paragraph_1": "This project was created as part of a end-of-year assignment. We were tasked with developing a proof of concept for JCEP, an association committed to supporting local shops and businesses.",
+      "about_paragraph_2": "To tackle the visibility challenges these shops face in Paris, my team and I designed a Progressive Web App (PWA) focused on improving their online presence and accessibility.",
+      "about_paragraph_3": "It was an ambitious project with a clear goal — to convince our clients to present our solution to the Paris City Council and secure the resources needed to bring it to life."
     }
   },
   "UI": {
