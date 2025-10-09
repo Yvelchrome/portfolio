@@ -66,5 +66,8 @@
       "subtitle": "Proof of Concept • PWA",
       "role": "Front-End Developer<br></br>UI Designer"
     }
+  },
+  "UI": {
+    "ScrollIndication": { "scroll": "Scroll", "discover": "Discover" }
   }
 }

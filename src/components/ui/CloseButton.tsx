@@ -1,0 +1,17 @@
+import Link from "next/link";
+import * as motion from "motion/react-client";
+import { XIcon } from "lucide-react";
+
+export default function CloseButton() {
+  return (
+    <Link href={"/"}>
+      <motion.div
+        className="fixed bottom-12 left-1/2 -translate-x-1/2 cursor-pointer rounded-full bg-[#D9D9D9] p-4 text-black"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+      >
+        <XIcon />
+      </motion.div>
+    </Link>
+  );
+}
