@@ -7,6 +7,62 @@
   @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
 }
 
+@utility transition-colors-300 {
+  transition-property:
+    color, background-color, border-color, outline-color, text-decoration-color,
+    fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+  transition-timing-function: var(
+    --tw-ease,
+    var(--default-transition-timing-function)
+  );
+  transition-duration: 300ms;
+}
+
+@utility text-fluid-title {
+  font-size: clamp(38px, 0.4803rem + 10.7237vw, 128px);
+  line-height: clamp(38px, 0.5283rem + 11.7961vw, 128px);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+@utility text-fluid-8xl {
+  font-size: clamp(1px, 0.7763rem + 10.8553vw, 96px);
+  line-height: clamp(1px, 0.9316rem + 13.0263vw, 96px);
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+@utility text-fluid-5xl {
+  font-size: clamp(20px, 0.7763rem + 3.6184vw, 48px);
+  line-height: clamp(24px, 1.0336rem + 4.8125vw, 57.6px);
+  letter-spacing: -0.01em;
+  font-weight: 300;
+}
+
+@utility text-fluid-4xl {
+  /* TODO: 84px */
+  /* font-size: clamp(1px, 0.7763rem + 3.6184vw, 84px);
+  line-height: clamp(1px, 0.7763rem + 3.6184vw, 84px); */
+  font-size: clamp(16px, 0.5526rem + 2.2368vw, 36px);
+  line-height: clamp(19.2px, 0.8842rem + 3.5789vw, 43.2px);
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+
+@utility text-fluid-2xl {
+  font-size: clamp(16px, 0.8947rem + 1.3158vw, 24px);
+  line-height: clamp(19.2px, 1.0737rem + 1.5789vw, 28.8px);
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+
+@utility text-fluid-base {
+  font-size: clamp(14px, 0.8158rem + 0.9868vw, 16px);
+  line-height: clamp(16.8px, 0.9789rem + 1.1842vw, 19.2px);
+  letter-spacing: 0em;
+  font-weight: 400;
+}
+
 @utility animate-ring {
   @apply animate-[ring_1.5s_ease-in-out_infinite];
 }
