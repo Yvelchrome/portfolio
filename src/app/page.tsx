@@ -43,7 +43,6 @@ const LandingPage = () => {
       <SectionAbout />
       <SectionWorks />
       <SectionSkills />
-      <SectionContact />
     </motion.div>
   );
 };
