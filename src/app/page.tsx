@@ -1,5 +1,13 @@
+"use client";
+
+import { useRef } from "react";
+
 import * as motion from "motion/react-client";
+import { useScroll, useTransform } from "motion/react";
+
 import { fadeInFromTop } from "lib/animationsVariants";
+import { getHeaderHeight } from "utils";
+
 import { useTranslations } from "next-intl";
 
 import {
@@ -9,10 +17,44 @@ import {
   ResumeViewer,
   SectionAbout,
   SectionSkills,
-  SectionContact,
   SectionWorks,
   ScrollIndication,
 } from "components";
+
+const StickySectionAnimation = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  const headerHeight = getHeaderHeight();
+
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: [`start ${headerHeight}px`, "end start"],
+  });
+
+  const opacity = useTransform(scrollYProgress, [0, 0.9, 0.91], [1, 0.6, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
+  return (
+    <>
+      <motion.section
+        ref={ref}
+        style={{
+          opacity,
+          scale,
+          y,
+          willChange: "opacity, transform",
+        }}
+      >
+        {children}
+      </motion.section>
+    </>
+  );
+};
 
 const LandingPage = () => {
   const t = useTranslations("Homepage");
@@ -40,8 +82,14 @@ const LandingPage = () => {
         />
       </motion.div>
 
-      <SectionAbout />
-      <SectionWorks />
+      <StickySectionAnimation>
+        <SectionAbout />
+      </StickySectionAnimation>
+
+      <StickySectionAnimation>
+        <SectionWorks />
+      </StickySectionAnimation>
+
       <SectionSkills />
     </motion.div>
   );
