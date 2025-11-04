@@ -1,13 +1,16 @@
 import * as motion from "motion/react-client";
-import { fadeInFromTop } from "lib/animationsVariants";
+import { fadeInFromBottom } from "lib/animationsVariants";
 
 import { AddUnorderedList, SectionHeader } from "components";
 
 export default function SectionSkills() {
   return (
-    <motion.div variants={fadeInFromTop}>
+    <motion.section
+      variants={fadeInFromBottom}
+      className="bg-background relative pb-12"
+    >
       <SectionHeader number={"03"} intlTitle={"skills"} />
-      <div className="font-satoshi flex gap-24 px-8">
+      <div className="flex flex-wrap gap-x-24 gap-y-12 px-8">
         {
           <AddUnorderedList
             intlTitle="skills_category_1"
@@ -21,17 +24,17 @@ export default function SectionSkills() {
               "PhP",
               "SQL",
             ]}
-            listClassName="text-4xl leading-tight"
+            listClassName="text-fluid-4xl "
           />
         }
         {
           <AddUnorderedList
             intlTitle="skills_category_2"
             items={["Git", "Visual Studio Code", "Figma", "Adobe Photoshop"]}
-            listClassName="text-4xl leading-tight"
+            listClassName="text-fluid-4xl"
           />
         }
       </div>
-    </motion.div>
+    </motion.section>
   );
 }

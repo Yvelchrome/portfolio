@@ -14,7 +14,7 @@ export default function ThemeToggle() {
 
   return (
     <motion.button
-      className={`theme-toggle rounded-full p-2`}
+      className={`theme-toggle cursor-pointer rounded-full p-2`}
       onClick={() => setTheme(theme == "light" ? "dark" : "light")}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}

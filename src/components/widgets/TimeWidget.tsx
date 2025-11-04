@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 
-import * as motion from "motion/react-client";
 import { useLocale } from "next-intl";
 import { useMounted } from "lib/hooks/useMounted";
 
@@ -35,21 +34,10 @@ export default function TimeWidget() {
   };
 
   return (
-    <motion.div
-      className="flex items-center gap-2"
-      whileInView={{
-        y: [0, -4, 0],
-        transition: {
-          delay: 0.6,
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        },
-      }}
-    >
+    <div className="flex items-center gap-2">
       <p>🇫🇷</p>
       <p>{currentTime.toLocaleString(locale, Day)}</p>
       <p>{currentTime.toLocaleString(locale, Hour)}</p>
-    </motion.div>
+    </div>
   );
 }

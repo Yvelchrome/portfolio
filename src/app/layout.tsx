@@ -70,7 +70,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <motion.body
-        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi relative text-base font-normal transition-colors duration-300`}
+        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi bg-background transition-colors-300 **:transition-colors-300 text-fluid-base relative font-normal text-black dark:text-white`}
       >
         <SmoothScrolling>
           <NextIntlClientProvider messages={messages}>

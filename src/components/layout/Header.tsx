@@ -9,9 +9,9 @@ export default function Header() {
       initial="hidden"
       animate="visible"
       variants={fadeInFromTop}
-      className="fixed top-8 right-0 left-0 z-50 mx-auto w-full max-w-[inherit]"
+      className="bg-background fixed top-0 right-0 left-0 z-50 mr-[var(--removed-body-scroll-bar-size)] border-b py-4"
     >
-      <div className="absolute top-0 right-8 left-8 flex items-center justify-between md:right-12 md:left-12">
+      <div className="container mx-auto flex items-center justify-between px-8">
         <Logo />
         <SiteParameters />
       </div>

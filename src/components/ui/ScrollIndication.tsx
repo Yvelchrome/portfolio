@@ -1,8 +1,10 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import * as motion from "motion/react-client";
 import { useScroll, useTransform } from "motion/react";
+import { fadeInFromTop } from "lib/animationsVariants";
+
+import { useTranslations } from "next-intl";
 
 interface ScrollIndicationProps {
   arrowPosition: "down" | "right";
@@ -33,11 +35,12 @@ export default function ScrollIndication({
   const { flexDirection, rotate, svgDimensions } = map[arrowPosition];
 
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
   return (
     <motion.div
       className={`absolute flex ${flexDirection} ${positionClassName} items-center justify-center`}
+      variants={fadeInFromTop}
       style={{ opacity }}
     >
       <p className="font-roxboroughcf text-sm uppercase">{t(intlTitle)}</p>

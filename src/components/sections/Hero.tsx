@@ -10,12 +10,8 @@ export default function Hero() {
       className="space-y-1 text-center md:space-y-2"
       variants={fadeInFromTop}
     >
-      <h1 className="text-5xl font-bold sm:text-7xl md:text-8xl lg:text-9xl">
-        Steven Godin
-      </h1>
-      <p className="text-2xl font-light sm:text-3xl md:text-4xl lg:text-5xl">
-        {t("job_title")}
-      </p>
+      <h1 className="text-fluid-title">Steven Godin</h1>
+      <p className="text-fluid-5xl">{t("job_title")}</p>
     </motion.div>
   );
 }

@@ -68,7 +68,7 @@ const LandingPage = () => {
         delayChildren: 0.3,
       }}
     >
-      <motion.div className="relative flex min-h-screen flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8">
+      <section className="relative flex min-h-screen flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8">
         <Hero />
         <motion.div className="flex gap-3 md:gap-4" variants={fadeInFromTop}>
           <ResumeViewer />
@@ -80,7 +80,7 @@ const LandingPage = () => {
           intlTitle="discover"
           positionClassName="bottom-12 left-1/2 -translate-x-1/2"
         />
-      </motion.div>
+      </section>
 
       <StickySectionAnimation>
         <SectionAbout />

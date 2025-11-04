@@ -47,9 +47,9 @@ export default function LocaleSwitcher() {
   };
 
   return (
-    <div className="relative w-full rounded-full border border-black p-1 transition-colors sm:text-wrap dark:border-white">
+    <div className="relative w-full rounded-full border border-black p-1 sm:text-wrap dark:border-white">
       <motion.div
-        className="absolute rounded-full bg-black p-4 transition-colors dark:bg-white"
+        className="absolute rounded-full bg-black p-4 dark:bg-white"
         initial={false}
         animate={{
           x: locale === "fr" ? "0%" : "calc(100% - 8px)",
@@ -61,18 +61,14 @@ export default function LocaleSwitcher() {
         }}
       />
 
-      <div className="relative flex *:w-full *:cursor-pointer *:py-1">
+      <div className="relative flex text-base *:w-full *:cursor-pointer *:py-1">
         <button value={"fr"} onClick={handleClick}>
-          <span
-            className={`font-medium transition-colors ${labelColorClass("fr")}`}
-          >
+          <span className={`font-medium ${labelColorClass("fr")}`}>
             {tailwindMd ? "Français" : "FR"}
           </span>
         </button>
         <button value={"en"} onClick={handleClick}>
-          <span
-            className={`font-medium transition-colors ${labelColorClass("en")}`}
-          >
+          <span className={`font-medium ${labelColorClass("en")}`}>
             {tailwindMd ? "English" : "EN"}
           </span>
         </button>

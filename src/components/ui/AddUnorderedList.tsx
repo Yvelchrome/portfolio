@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
-import { ConditionalWrapper } from "utils/ConditionalWrapper";
+import { ConditionalWrapper } from "utils";
 
 interface ListItem {
   text: string;
@@ -60,13 +60,13 @@ export default function AddUnorderedList({
 
   return (
     <div key={intlTitle} className="space-y-6">
-      <h3 className="font-satoshi text-light-grey text-base font-medium dark:text-white">
+      <h3 className="text-light-grey text-base font-medium dark:text-white">
         {t(intlTitle)}
       </h3>
       <ul className={listClassName}>
         {normalizedItems.map((item, index) => (
           <li
-            className="flex items-center gap-4"
+            className="flex items-center gap-3 sm:gap-4"
             key={`${intlTitle}-${index}-${item.text}`}
           >
             <ConditionalWrapper
@@ -76,7 +76,7 @@ export default function AddUnorderedList({
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4"
+                  className="group flex items-center gap-3 sm:gap-4"
                 >
                   {children}
                 </a>
