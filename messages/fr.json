@@ -29,9 +29,9 @@
   },
   "Section": {
     "about": "À propos de moi",
-    "about_paragraph_1": "Salut, moi c'est Steven",
-    "about_paragraph_2": "Je suis un développeur Front-End basé en France, spécialisé dans la création d'expériences numériques exceptionnelles. Avec une solide maîtrise de HTML, CSS et JavaScript, je crée des sites web réactifs et conviviaux qui respectent les normes web modernes.",
-    "about_paragraph_3": "J'ai une passion pour l'apprentissage de nouvelles technologies et le maintien à jour avec les dernières tendances de l'industrie. Je m'épanouis dans des environnements collaboratifs et j'aime travailler en étroite collaboration avec les designers et les développeurs back-end pour donner vie aux idées.",
+    "about_paragraph_1": "Développeur Front-End, je conçois des interfaces à la fois esthétiques et performantes.",
+    "about_paragraph_2": "J’aime transformer des idées complexes en expériences fluides, grâce à une approche créative et orientée utilisateur.",
+    "about_paragraph_3": "Ce qui me motive, c’est de donner vie à des projets ayant un impact concret. Allier rigueur technique et sens du design, c’est là que je trouve mon équilibre.",
     "skills": "Compétences",
     "skills_category_1": "Technologies",
     "skills_category_2": "Outils",
