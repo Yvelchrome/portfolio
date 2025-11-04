@@ -22,6 +22,9 @@
 }
 
 @theme {
+  /* Header Height */
+  --spacing-header-height: var(--header-height);
+
   /* Font Families */
   --font-satoshi: var(--font-satoshi);
   --font-roxboroughcf: var(--font-roxboroughcf);

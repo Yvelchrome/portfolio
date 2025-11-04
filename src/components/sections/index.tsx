@@ -4,6 +4,7 @@ import SectionAbout from "./SectionAbout";
 import SectionSkills from "./SectionSkills";
 import SectionContact from "./SectionContact";
 import SectionWorks from "./SectionWorks";
+import SectionWorksItem from "./SectionWorksItem";
 
 export {
   Hero,
@@ -12,4 +13,5 @@ export {
   SectionSkills,
   SectionContact,
   SectionWorks,
+  SectionWorksItem,
 };
