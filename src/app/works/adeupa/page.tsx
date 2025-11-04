@@ -51,8 +51,8 @@ const LandingPage = () => {
           <AdeupaLogo className="animate-ring origin-center *:fill-transparent *:stroke-[#F77676] *:stroke-[1]" />
         </span>
 
-        <WorksHero {...WorksHeroProps} />
-        <About {...WorksAboutProps} />
+        {/* <WorksHero {...WorksHeroProps} />
+        <About {...WorksAboutProps} /> */}
       </HorizontalScrollWrapper>
       <CloseButton />
     </>
