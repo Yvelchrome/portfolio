@@ -1,4 +1,5 @@
-import { useLocale, useTranslations } from "next-intl";
+"use client";
+
 import {
   Dialog,
   DialogContent,
@@ -7,8 +8,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "components/shadcn/dialog";
-
 import { CustomButton } from "components";
+
+import { LenisControl } from "utils";
+import { useLocale, useTranslations } from "next-intl";
 
 const ResumeViewer = () => {
   const locale = useLocale();
@@ -18,8 +21,13 @@ const ResumeViewer = () => {
   const resumePath = `${websiteDomain}/steven_godin_${t("resume_file_job_title")}_cv_${locale}.pdf`;
 
   return (
-    <Dialog>
-      <DialogTrigger>
+    <Dialog
+      onOpenChange={(val) => {
+        if (val) LenisControl.stop();
+        else LenisControl.start();
+      }}
+    >
+      <DialogTrigger className="w-fit">
         <CustomButton
           text={t("resume")}
           arrowRotationDegree={-45}
