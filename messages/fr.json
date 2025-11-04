@@ -36,6 +36,25 @@
     "skills_category_1": "Technologies",
     "skills_category_2": "Outils",
     "works": "Projets",
+    "WorksItem": {
+      "linkToProject": "En savoir plus.",
+      "client": "Client",
+      "year": "Année",
+      "role": {
+        "frontend_developer": "Développeur Front-End",
+        "ui_designer": "Designer UI"
+      },
+      "adeupa": {
+        "subtitle": "Preuve de Concept • PWA",
+        "description": "Développé pour aider les entreprises locales parisiennes à gagner en visibilité.",
+        "brandLogoAlt": "Project One Image"
+      },
+      "negatifplus": {
+        "subtitle": "Site E-commerce",
+        "description": "Boutique spécialisée dans le matériel et les accessoires de photographie.",
+        "brandLogoAlt": "Négatif+ logo"
+      }
+    },
     "experience": "Expérience",
     "education": "Formation",
     "contact": "Contact",
@@ -44,17 +63,6 @@
     "contact_phone": "Téléphone",
     "contact_send_email": "Envoyez-moi un",
     "contact_resume": "Regardez mon CV"
-  },
-  "Carousel": {
-    "linkToProject": "En savoir plus.",
-    "client": "Client",
-    "year": "Année",
-    "adeupa": {
-      "subtitle": "Preuve de Concept • PWA",
-      "role": "Développeur Front-End • Designer UI",
-      "description": "Développé pour aider les entreprises locales parisiennes à gagner en visibilité.",
-      "imageAlt": "Project One Image"
-    }
   },
   "Works": {
     "client": "Client",
@@ -67,9 +75,16 @@
       "title": "Adeupa",
       "subtitle": "Preuve de Concept • PWA",
       "role": "Développeur Front-End<br></br>Designer UI",
-      "about_paragraph_1": "Ce projet a été réalisé dans le cadre d'un projet de fin d’année. Nous devions concevoir une preuve de concept pour l’association JCEP, engagée dans le soutien aux commerces de proximité.",
+      "about_paragraph_1": "Ce projet a été réalisé dans le cadre d'un projet de fin d'année. Nous devions concevoir une preuve de concept pour l’association JCEP, engagée dans le soutien aux commerces de proximité.",
       "about_paragraph_2": "Pour répondre aux problèmes de visibilité rencontrés par ces commerces à Paris, mon équipe et moi avons conçu une Progressive Web App (PWA) visant à renforcer leur présence en ligne et à faciliter l’accès à leurs services.",
       "about_paragraph_3": "C’était un projet ambitieux, dont l’objectif était de convaincre nos clients de présenter notre solution au Conseil de Paris afin d’obtenir les ressources nécessaires à son développement."
+    },
+    "negatifplus": {
+      "title": "Négatif+",
+      "subtitle": "Plateforme E-commerce",
+      "role": "Front-End Developer",
+      "about_paragraph_1": "Négatif+ est un site E-commerce spécialisée dans le matériel et les accessoires photographiques.",
+      "about_paragraph_2": "Le site a été développée afin d'offrir une expérience d'achat fluide aux amateurs et aux professionnels de la photographie."
     }
   },
   "UI": {

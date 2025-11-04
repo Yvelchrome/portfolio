@@ -36,6 +36,25 @@
     "skills_category_1": "Technologies",
     "skills_category_2": "Tools",
     "works": "Works",
+    "WorksItem": {
+      "linkToProject": "Know more.",
+      "client": "Client",
+      "year": "Year",
+      "role": {
+        "frontend_developer": "Front-End Developer",
+        "ui_designer": "UI Designer"
+      },
+      "adeupa": {
+        "subtitle": "Proof of Concept • PWA",
+        "description": "Developed to help local businesses from Paris to get more visibility.",
+        "brandLogoAlt": "Adeupa logo"
+      },
+      "negatifplus": {
+        "subtitle": "E-commerce Website",
+        "description": "An e-commerce platform specializing in photography equipment and accessories.",
+        "brandLogoAlt": "Négatif+ logo"
+      }
+    },
     "experience": "Experience",
     "education": "Education",
     "contact": "Contact",
@@ -44,17 +63,6 @@
     "contact_phone": "Phone",
     "contact_send_email": "Send me an",
     "contact_resume": "View my resume"
-  },
-  "Carousel": {
-    "linkToProject": "Know more.",
-    "client": "Client",
-    "year": "Year",
-    "adeupa": {
-      "subtitle": "Proof of Concept • PWA",
-      "role": "Front-End Developer • UI Designer",
-      "description": "Developed to help local businesses from Paris to get more visibility.",
-      "imageAlt": "Project One Image"
-    }
   },
   "Works": {
     "client": "Client",
@@ -70,6 +78,13 @@
       "about_paragraph_1": "This project was created as part of a end-of-year assignment. We were tasked with developing a proof of concept for JCEP, an association committed to supporting local shops and businesses.",
       "about_paragraph_2": "To tackle the visibility challenges these shops face in Paris, my team and I designed a Progressive Web App (PWA) focused on improving their online presence and accessibility.",
       "about_paragraph_3": "It was an ambitious project with a clear goal — to convince our clients to present our solution to the Paris City Council and secure the resources needed to bring it to life."
+    },
+    "negatifplus": {
+      "title": "Négatif+",
+      "subtitle": "E-commerce Platform",
+      "role": "Front-End Developer",
+      "about_paragraph_1": "Négatif+ is an E-commerce website specializing in photography equipment and accessories.",
+      "about_paragraph_2": "The website was developed to provide a seamless shopping experience for photography enthusiasts and professionals alike."
     }
   },
   "UI": {

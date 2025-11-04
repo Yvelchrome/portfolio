@@ -1,44 +1,50 @@
-import { CarouselSlide, SectionHeader } from "components";
+import { SectionWorksItem, SectionHeader } from "components";
+import AdeupaLogo from "assets/images/works/adeupa/AdeupaLogo.svgr.svg";
+import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svgr.svg";
 
 import * as motion from "motion/react-client";
+import { fadeInFromBottom } from "lib/animationsVariants";
 
 import { useTranslations } from "next-intl";
 
-import { fadeInFromTop } from "lib/animationsVariants";
-
 export default function SectionWorks() {
-  const t = useTranslations("Carousel");
+  const t = useTranslations("Section.WorksItem");
 
-  const slidesData = [
+  const itemData = [
     {
       id: 1,
-      title: "Adeupa",
-      subtitle: t("adeupa.subtitle"),
-      role: t("adeupa.role"),
-      description: t("adeupa.description"),
-      linkHref: "/works/adeupa",
-      client: "JCEP",
-      year: "2022",
-      imageAlt: t("adeupa.imageAlt"),
+      title: "Négatif+",
+      subtitle: t("negatifplus.subtitle"),
+      role: t("role.frontend_developer"),
+      description: t("negatifplus.description"),
+      linkHref: "/works/negatifplus",
+      client: "Négatif+",
+      year: "2024",
+      brandLogo: <NegatifplusLogo />,
+      brandLogoAlt: t("negatifplus.brandLogoAlt"),
     },
     // {
     //   id: 2,
-    //   title: "Project Two",
-    //   subtitle: "E-commerce Platform",
-    //   role: "Full-Stack Developer",
-    //   description:
-    //     "Built a comprehensive e-commerce solution with modern technologies and seamless user experience.",
-    //   linkHref: "http://example.com",
-    //   client: "TechCorp",
-    //   year: "2023",
+    //   title: "Adeupa",
+    //   subtitle: t("adeupa.subtitle"),
+    //   role: `${t("role.frontend_developer")} • ${t("role.ui_designer")}`,
+    //   description: t("adeupa.description"),
+    //   linkHref: "/works/adeupa",
+    //   client: "JCEP",
+    //   year: "2022",
+    //   brandLogo: <AdeupaLogo />,
+    //   brandLogoAlt: t("adeupa.brandLogoAlt"),
     // },
   ];
 
   return (
-    <motion.div variants={fadeInFromTop}>
+    <motion.div variants={fadeInFromBottom} className="bg-background pb-12">
       <SectionHeader number={"02"} intlTitle={"works"} />
 
-      <CarouselSlide {...slidesData[0]} />
+      <div className="grid grid-cols-1 gap-4 px-4 xl:grid-cols-2">
+        {itemData.length > 0 &&
+          itemData.map((item) => <SectionWorksItem key={item.id} {...item} />)}
+      </div>
     </motion.div>
   );
 }
