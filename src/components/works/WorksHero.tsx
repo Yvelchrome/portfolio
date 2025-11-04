@@ -1,9 +1,15 @@
+import type { ReactElement } from "react";
+
 import * as motion from "motion/react-client";
 import { fadeInFromTop } from "lib/animationsVariants";
+
 import { useTranslations } from "next-intl";
+
+import { ScrollIndication } from "components";
 import { Badge } from "components/shadcn/badge";
 
 interface WorksHeroProps {
+  WorkLogo: ReactElement;
   title: string;
   subtitle: string;
   frontStack?: Array<string>;
@@ -17,6 +23,7 @@ interface WorksHeroProps {
 }
 
 export default function WorksHero({
+  WorkLogo,
   title,
   subtitle,
   frontStack,
@@ -34,7 +41,7 @@ export default function WorksHero({
     return (
       <a
         href={href}
-        className="text-2xl underline"
+        className="text-fluid-2xl underline"
         rel="noopener noreferrer"
         target="_blank"
       >
@@ -44,25 +51,31 @@ export default function WorksHero({
   }
 
   return (
-    <motion.div
-      className="flex min-w-full flex-col justify-between pt-48 pb-32"
-      initial="hidden"
-      animate="visible"
-      transition={{
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      }}
-    >
+    <section className="relative flex min-w-full flex-col justify-between space-y-20 pt-48 pb-32 sm:h-screen">
+      <motion.span
+        variants={fadeInFromTop}
+        role="img"
+        aria-label="Negatifplus logo"
+        className="absolute top-1/2 left-1/2 flex -translate-1/2 items-center justify-center *:absolute *:h-full *:w-auto lg:h-1/2"
+      >
+        {WorkLogo}
+      </motion.span>
+      <ScrollIndication
+        arrowPosition="down"
+        intlTitle="scroll"
+        positionClassName="hidden lg:flex lg:bottom-36 left-1/2 -translate-x-1/2"
+      />
+
       <motion.div variants={fadeInFromTop}>
         {isArchivedProject && <Badge variant="default">{t("archived")}</Badge>}
-        <h3 className="text-8xl font-semibold">{title}</h3>
-        <p className="text-4xl font-medium">{subtitle}</p>
+        <h3 className="text-fluid-8xl font-semibold">{title}</h3>
+        <p className="text-fluid-4xl font-medium">{subtitle}</p>
       </motion.div>
       <div>
-        <div className="space-y-4">
-          <motion.div className="space-y-2" variants={fadeInFromTop}>
+        <div className="space-y-4 leading-normal">
+          <motion.div className="sm:space-y-2" variants={fadeInFromTop}>
             <p className="text-light-grey">Technologies</p>
-            <div className="*:flex">
+            <div className="space-y-2 *:flex *:flex-col sm:*:flex-row">
               {frontStack && (
                 <div>
                   <p className="text-light-grey w-16">Front:</p>
@@ -85,7 +98,10 @@ export default function WorksHero({
               )}
             </div>
           </motion.div>
-          <motion.div variants={fadeInFromTop} className="*:flex">
+          <motion.div
+            variants={fadeInFromTop}
+            className="*:flex *:flex-col sm:space-y-2 sm:*:flex-row"
+          >
             {client && (
               <div>
                 <p className="text-light-grey w-16">{t("client")}:</p>
@@ -99,7 +115,10 @@ export default function WorksHero({
               </div>
             )}
           </motion.div>
-          <motion.div className="flex" variants={fadeInFromTop}>
+          <motion.div
+            className="flex flex-col sm:flex-row"
+            variants={fadeInFromTop}
+          >
             <p className="text-light-grey w-16">Role:</p>
             <p>{role}</p>
           </motion.div>
@@ -109,6 +128,6 @@ export default function WorksHero({
           {linkToRepository && anchorTag(linkToRepository, "linkToRepository")}
         </motion.div>
       </div>
-    </motion.div>
+    </section>
   );
 }
