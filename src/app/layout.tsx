@@ -11,7 +11,7 @@ import { ThemeProvider } from "next-themes";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 
-import { Footer, Header, SmoothScrolling } from "components";
+import { CustomCursor, Footer, Header, SmoothScrolling } from "components";
 import { Toaster } from "components/shadcn/sonner";
 
 export const viewport: Viewport = {
@@ -75,11 +75,10 @@ export default async function LocaleLayout({
         <SmoothScrolling>
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider>
-              <div className="relative container mx-auto min-h-screen">
-                <Header />
-                <main className="relative mx-4">{children}</main>
-                <Footer />
-              </div>
+              <Header />
+              <main className="relative container mx-auto">{children}</main>
+              <Footer />
+              <CustomCursor />
               <Toaster position="bottom-center" />
               <SpeedInsights />
             </ThemeProvider>
