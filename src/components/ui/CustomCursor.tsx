@@ -5,6 +5,9 @@ import { useMotionValue, useTransform, useSpring, animate } from "motion/react";
 
 import { useEffect } from "react";
 
+import { useMediaQuery } from "lib/hooks/useMediaQuery";
+import { useMounted } from "lib/hooks/useMounted";
+
 export default function CustomCursor() {
   const cursorSize = 15;
   const hoveringClickable = useMotionValue(0);
@@ -61,6 +64,10 @@ export default function CustomCursor() {
       window.removeEventListener("mouseout", handleMouseOut);
     };
   }, []);
+
+  const isMounted = useMounted();
+  const hasFinePointer = useMediaQuery("(pointer: fine)");
+  if (!isMounted || !hasFinePointer) return;
 
   return (
     <motion.div
