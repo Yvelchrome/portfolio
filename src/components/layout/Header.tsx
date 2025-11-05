@@ -11,7 +11,7 @@ export default function Header() {
       variants={fadeInFromTop}
       className="bg-background fixed top-0 right-0 left-0 z-50 mr-[var(--removed-body-scroll-bar-size)] border-b py-4"
     >
-      <div className="container mx-auto flex items-center justify-between px-8">
+      <div className="container mx-auto flex items-center justify-between px-4 sm:px-8">
         <Logo />
         <SiteParameters />
       </div>

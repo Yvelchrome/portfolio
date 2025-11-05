@@ -39,7 +39,7 @@ const LandingPage = () => {
         staggerChildren: 0.2,
         delayChildren: 0.3,
       }}
-      className="px-8"
+      className="px-4 sm:px-8"
     >
       <WorksHero {...WorksHeroProps} />
       <About {...WorksAboutProps} />

@@ -51,7 +51,7 @@ export default function WorksHero({
   }
 
   return (
-    <section className="relative flex min-w-full flex-col justify-between space-y-20 pt-48 pb-32 sm:h-screen">
+    <section className="relative flex min-w-full flex-col justify-between space-y-20 pt-32 pb-32 sm:h-screen sm:pt-48">
       <motion.span
         variants={fadeInFromTop}
         role="img"

@@ -32,7 +32,7 @@ export default function Footer() {
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
       <div className="fixed right-0 bottom-0 left-0 mr-[var(--removed-body-scroll-bar-size)] h-screen sm:h-[700px]">
-        <div className="container mx-auto flex h-full flex-col justify-end space-y-12 px-8 pb-8">
+        <div className="container mx-auto flex h-full flex-col justify-end space-y-12 px-4 pb-8 sm:px-8">
           <a
             href="mailto:stevengodin78@gmail.com"
             className="group text-fluid-8xl relative left-1/2 w-fit -translate-x-1/2 uppercase"

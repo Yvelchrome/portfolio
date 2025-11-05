@@ -75,7 +75,7 @@ export const HorizontalScrollWrapper = ({
   return (
     <div ref={targetRef} style={{ height: sizes.height }}>
       <motion.div
-        className="sticky top-0 flex h-screen px-8 will-change-transform"
+        className="sticky top-0 flex h-screen px-4 will-change-transform sm:px-8"
         ref={contentRef}
         style={{ x }}
       >
