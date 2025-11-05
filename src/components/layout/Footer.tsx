@@ -28,11 +28,11 @@ export default function Footer() {
 
   return (
     <footer
-      className="bg-light-grey relative h-screen sm:h-[700px]"
+      className="bg-light-grey relative lg:h-[700px]"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <div className="fixed right-0 bottom-0 left-0 mr-[var(--removed-body-scroll-bar-size)] h-screen sm:h-[700px]">
-        <div className="container mx-auto flex h-full flex-col justify-end space-y-12 px-4 pb-8 sm:px-8">
+      <div className="right-0 bottom-0 left-0 mr-[var(--removed-body-scroll-bar-size)] lg:fixed lg:h-[700px]">
+        <div className="container mx-auto flex h-full flex-col justify-end space-y-12 px-4 pt-8 pb-8 sm:px-8 lg:pt-0">
           <a
             href="mailto:stevengodin78@gmail.com"
             className="group text-fluid-8xl relative left-1/2 w-fit -translate-x-1/2 uppercase"
@@ -83,12 +83,12 @@ export default function Footer() {
               />
             </div>
           </div>
-          <div className="flex gap-3 md:gap-4">
+          <div className="flex gap-3 sm:gap-4">
             <ResumeViewer />
             <CustomLink href={"contact"} text={t("contact")} />
           </div>
 
-          <div className="font-roboto-mono md:text-md flex w-full flex-col items-center justify-center space-y-2 text-sm font-light md:flex-row md:justify-between md:space-y-0">
+          <div className="font-roboto-mono flex w-full flex-col items-center justify-center space-y-2 text-sm font-light sm:flex-row sm:justify-between sm:space-y-0">
             <CopyrightNotice />
             <TimeWidget />
           </div>
