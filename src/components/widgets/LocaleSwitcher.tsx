@@ -1,53 +1,35 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
+import { useTransition } from "react";
 
-import { useLocale } from "next-intl";
 import * as motion from "motion/react-client";
 
 import { useMounted } from "lib/hooks/useMounted";
+
+import { useLocale } from "next-intl";
 import { setUserLocale } from "services/locale";
 import type { Locale } from "i18n/config";
+
+const LOCALES = [
+  { code: "fr" as const, short: "FR", long: "Français" },
+  { code: "en" as const, short: "EN", long: "English" },
+];
 
 export default function LocaleSwitcher() {
   const locale = useLocale();
   const isMounted = useMounted();
   const [isPending, startTransition] = useTransition();
-  const [tailwindMd, setTailwindMd] = useState(false);
-
-  useEffect(() => {
-    const checkMediaQuery = () => {
-      setTailwindMd(
-        window.matchMedia("only screen and (min-width: 768px)").matches,
-      );
-    };
-
-    checkMediaQuery();
-
-    const tailwindMd = window.matchMedia("only screen and (min-width: 768px)");
-    tailwindMd.addEventListener("change", checkMediaQuery);
-
-    return () => tailwindMd.removeEventListener("change", checkMediaQuery);
-  }, []);
 
   if (!isMounted) return null;
 
-  function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    const value = event.currentTarget.value;
-    const locale = value as Locale;
+  function handleLocaleChange(newLocale: Locale) {
     startTransition(async () => {
-      await setUserLocale(locale);
+      await setUserLocale(newLocale);
     });
   }
 
-  const labelColorClass = (localeTrigger: string) => {
-    return locale === localeTrigger
-      ? "text-white dark:text-black"
-      : "text-black dark:text-white";
-  };
-
   return (
-    <div className="relative w-full rounded-full border border-black p-1 sm:text-wrap dark:border-white">
+    <div className="relative w-full rounded-full border border-black p-1 dark:border-white">
       <motion.div
         className="absolute rounded-full bg-black p-4 dark:bg-white"
         initial={false}
@@ -61,17 +43,26 @@ export default function LocaleSwitcher() {
         }}
       />
 
-      <div className="relative flex text-base *:w-full *:cursor-pointer *:py-1">
-        <button value={"fr"} onClick={handleClick}>
-          <span className={`font-medium ${labelColorClass("fr")}`}>
-            {tailwindMd ? "Français" : "FR"}
-          </span>
-        </button>
-        <button value={"en"} onClick={handleClick}>
-          <span className={`font-medium ${labelColorClass("en")}`}>
-            {tailwindMd ? "English" : "EN"}
-          </span>
-        </button>
+      <div className="relative flex">
+        {LOCALES.map(({ code, short, long }) => {
+          const isActive = locale === code;
+
+          return (
+            <button
+              key={code}
+              onClick={() => handleLocaleChange(code)}
+              className={`w-full cursor-pointer py-1 text-base font-medium ${
+                isActive
+                  ? "text-white dark:text-black"
+                  : "text-black dark:text-white"
+              }`}
+              aria-pressed={isActive}
+            >
+              <span className="hidden md:block">{long}</span>
+              <span className="block md:hidden">{short}</span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
