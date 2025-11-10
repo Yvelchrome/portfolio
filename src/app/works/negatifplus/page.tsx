@@ -27,7 +27,7 @@ const LandingPage = () => {
     linkToWebsite: "https://www.negatifplus.com/",
   };
   const WorksAboutProps = {
-    paragraphs: t("about_paragraph_1"),
+    paragraph: t("about_paragraph_1"),
     images: [img1, img2, img3, img4, img5, img6, img7],
   };
 
