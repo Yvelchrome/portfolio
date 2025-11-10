@@ -10,7 +10,7 @@ export default function SectionSkills() {
       className="bg-background relative pb-12"
     >
       <SectionHeader number={"03"} intlTitle={"skills"} />
-      <div className="flex flex-wrap gap-x-24 gap-y-12 px-4 sm:px-8">
+      <div className="flex flex-wrap gap-x-24 gap-y-6 px-4 sm:gap-y-12 sm:px-8">
         {
           <AddUnorderedList
             intlTitle="skills_category_1"

@@ -6,14 +6,7 @@ import logo from "assets/images/logo.svg";
 export default function Logo() {
   return (
     <Link href={"/"}>
-      <Image
-        src={logo}
-        alt=""
-        width={40}
-        height={75}
-        className="h-12 w-auto"
-        priority
-      />
+      <Image src={logo} alt="" className="h-12 w-auto" priority />
     </Link>
   );
 }

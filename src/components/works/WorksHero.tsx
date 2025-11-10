@@ -51,26 +51,30 @@ export default function WorksHero({
   }
 
   return (
-    <section className="relative flex min-w-full flex-col justify-between space-y-20 pt-32 pb-32 sm:h-screen sm:pt-48">
-      <motion.span
-        variants={fadeInFromTop}
-        role="img"
-        aria-label="Negatifplus logo"
-        className="absolute top-1/2 left-1/2 flex -translate-1/2 items-center justify-center *:absolute *:h-full *:w-auto lg:h-1/2"
-      >
-        {WorkLogo}
-      </motion.span>
+    <section className="relative flex min-w-full flex-col justify-between space-y-10 pt-24 pb-24 sm:space-y-20 sm:pt-36 sm:pb-32 lg:min-h-dvh lg:pt-48">
       <ScrollIndication
         arrowPosition="down"
         intlTitle="scroll"
-        positionClassName="hidden lg:flex lg:bottom-36 left-1/2 -translate-x-1/2"
+        positionClassName="bottom-1/12 left-1/2 -translate-x-1/2"
       />
 
-      <motion.div variants={fadeInFromTop}>
-        {isArchivedProject && <Badge variant="default">{t("archived")}</Badge>}
-        <h3 className="text-fluid-8xl font-semibold">{title}</h3>
-        <p className="text-fluid-4xl font-medium">{subtitle}</p>
-      </motion.div>
+      <div>
+        <motion.span
+          variants={fadeInFromTop}
+          role="img"
+          aria-label="Negatifplus logo"
+          className="block h-22 *:h-full *:w-auto sm:h-32 lg:absolute lg:top-1/2 lg:left-1/2 lg:h-1/2 lg:-translate-1/2"
+        >
+          {WorkLogo}
+        </motion.span>
+        <motion.div variants={fadeInFromTop}>
+          {isArchivedProject && (
+            <Badge variant="default">{t("archived")}</Badge>
+          )}
+          <h3 className="text-fluid-8xl font-semibold">{title}</h3>
+          <p className="text-fluid-4xl font-medium">{subtitle}</p>
+        </motion.div>
+      </div>
       <div>
         <div className="space-y-4 leading-normal">
           <motion.div className="sm:space-y-2" variants={fadeInFromTop}>

@@ -26,7 +26,7 @@ export default function Socials() {
   ];
 
   return (
-    <motion.div className="flex gap-3 md:gap-4" variants={fadeInFromTop}>
+    <motion.div className="flex gap-4" variants={fadeInFromTop}>
       {socials.map(({ icon, href, label }) => (
         <motion.a
           key={label}

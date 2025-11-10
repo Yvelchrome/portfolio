@@ -68,9 +68,9 @@ const LandingPage = () => {
         delayChildren: 0.3,
       }}
     >
-      <section className="relative flex min-h-screen flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8">
+      <section className="relative flex min-h-dvh flex-col items-center justify-center gap-4 py-24 sm:gap-6 md:gap-8">
         <Hero />
-        <motion.div className="flex gap-3 md:gap-4" variants={fadeInFromTop}>
+        <motion.div className="flex gap-4" variants={fadeInFromTop}>
           <ResumeViewer />
           <CustomLink href={"contact"} text={t("contact")} />
         </motion.div>
@@ -78,7 +78,7 @@ const LandingPage = () => {
         <ScrollIndication
           arrowPosition="down"
           intlTitle="discover"
-          positionClassName="bottom-12 left-1/2 -translate-x-1/2"
+          positionClassName="bottom-1/16 left-1/2 -translate-x-1/2"
         />
       </section>
 

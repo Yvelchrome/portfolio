@@ -59,14 +59,12 @@ export default function AddUnorderedList({
   );
 
   return (
-    <div key={intlTitle} className="space-y-6">
-      <h3 className="text-light-grey text-base font-medium dark:text-white">
-        {t(intlTitle)}
-      </h3>
+    <div key={intlTitle} className="space-y-2 lg:space-y-6">
+      <h3 className="text-base font-medium">{t(intlTitle)}</h3>
       <ul className={listClassName}>
         {normalizedItems.map((item, index) => (
           <li
-            className="flex items-center gap-3 sm:gap-4"
+            className="flex items-center lg:gap-4"
             key={`${intlTitle}-${index}-${item.text}`}
           >
             <ConditionalWrapper
@@ -76,7 +74,7 @@ export default function AddUnorderedList({
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 sm:gap-4"
+                  className="group flex items-center gap-2 sm:gap-4"
                 >
                   {children}
                 </a>
