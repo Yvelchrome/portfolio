@@ -30,8 +30,8 @@
   "Section": {
     "about": "À propos de moi",
     "about_paragraph_1": "Développeur Front-End, je conçois des interfaces à la fois esthétiques et performantes.",
-    "about_paragraph_2": "J’aime transformer des idées complexes en expériences fluides, grâce à une approche créative et orientée utilisateur.",
-    "about_paragraph_3": "Ce qui me motive, c’est de donner vie à des projets ayant un impact concret. Allier rigueur technique et sens du design, c’est là que je trouve mon équilibre.",
+    "about_paragraph_2": "J’aime transformer des idées complexes en expériences fluides, grâce à une approche créative.",
+    "about_paragraph_3": "Ce qui me motive, c’est de donner vie à des projets ayant un impact concret. Allier rigueur technique et sens du design.",
     "skills": "Compétences",
     "skills_category_1": "Technologies",
     "skills_category_2": "Outils",
@@ -81,10 +81,9 @@
     },
     "negatifplus": {
       "title": "Négatif+",
-      "subtitle": "Plateforme E-commerce",
+      "subtitle": "Site E-commerce",
       "role": "Front-End Developer",
-      "about_paragraph_1": "Négatif+ est un site E-commerce spécialisée dans le matériel et les accessoires photographiques.",
-      "about_paragraph_2": "Le site a été développée afin d'offrir une expérience d'achat fluide aux amateurs et aux professionnels de la photographie."
+      "about_paragraph_1": "Négatif+ est un site e-commerce dédié au matériel, accessoires et services photographique, destinés aussi bien aux amateurs qu'aux professionnels."
     }
   },
   "UI": {
