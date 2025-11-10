@@ -84,15 +84,6 @@ export function getCurrentHeightBreakpoint(): BreakpointKey | null {
  * Hook for React: Listen to breakpoint changes
  */
 export function useBreakpoint() {
-  if (typeof window === "undefined") {
-    return {
-      width: null,
-      height: null,
-      matchesWidth: () => false,
-      matchesHeight: () => false,
-    };
-  }
-
   const [state, setState] = useState({
     width: getCurrentWidthBreakpoint(),
     height: getCurrentHeightBreakpoint(),
@@ -117,6 +108,15 @@ export function useBreakpoint() {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  if (typeof window === "undefined") {
+    return {
+      width: null,
+      height: null,
+      matchesWidth: () => false,
+      matchesHeight: () => false,
+    };
+  }
 
   return {
     width: state.width,
