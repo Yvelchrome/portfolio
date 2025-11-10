@@ -1,7 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Dark Theme */
 @custom-variant dark (&:where([data-theme= "dark"], [data-theme= "dark"] *));
+
+/* Height Breakpoints */
+@custom-variant h-xs (@media (min-height: 480px));
+@custom-variant h-sm (@media (min-height: 640px));
+@custom-variant h-md (@media (min-height: 768px));
+@custom-variant h-lg (@media (min-height: 900px));
+@custom-variant h-xl (@media (min-height: 1024px));
 
 @utility no-scrollbar {
   @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
