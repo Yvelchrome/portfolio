@@ -46,8 +46,13 @@
       },
       "negatifplus": {
         "subtitle": "E-commerce Website",
-        "description": "An e-commerce website specializing in photography equipment and accessories.",
+        "description": "Store specializing in photographic equipment, accessories, and services.",
         "brandLogoAlt": "Négatif+ logo"
+      },
+      "blockfire": {
+        "subtitle": "E-commerce Website",
+        "description": "Block'Fire is a company selling a compact, automatic fire-extinguishing ball.",
+        "brandLogoAlt": "Block'Fire logo"
       }
     },
     "experience": "Experience",
@@ -71,6 +76,12 @@
       "subtitle": "E-commerce Website",
       "role": "Front-End Developer",
       "about_paragraph_1": "Négatif+ is an e-commerce website dedicated to photography equipment, accessories and services for both enthusiasts and professionals."
+    },
+    "blockfire": {
+      "title": "Block'Fire",
+      "subtitle": "E-commerce Website",
+      "role": "Front-End Developer",
+      "about_paragraph_1": "Block'Fire is a company that offers an innovative fire safety product: an automatic fire-extinguishing ball that activates on impact or upon contact with fire, providing easy and effective protection for homes, vehicles, and businesses."
     }
   },
   "UI": {

@@ -45,9 +45,14 @@
         "ui_designer": "Designer UI"
       },
       "negatifplus": {
-        "subtitle": "Site E-commerce",
-        "description": "Boutique spécialisée dans le matériel et les accessoires de photographie.",
+        "subtitle": "Site e-commerce",
+        "description": "Boutique spécialisée dans le matériel, les accessoires et services de photographie.",
         "brandLogoAlt": "Négatif+ logo"
+      },
+      "blockfire": {
+        "subtitle": "Site e-commerce",
+        "description": "Entreprise qui commercialise une boule compacte et automatique d'extinction d'incendie.",
+        "brandLogoAlt": "Block'Fire logo"
       }
     },
     "experience": "Expérience",
@@ -68,9 +73,15 @@
     "about_title": "À propos du projet",
     "negatifplus": {
       "title": "Négatif+",
-      "subtitle": "Site E-commerce",
-      "role": "Front-End Developer",
+      "subtitle": "Site e-commerce",
+      "role": "Développeur Front-End",
       "about_paragraph_1": "Négatif+ est un site e-commerce dédié au matériel, accessoires et services photographique, destinés aussi bien aux amateurs qu'aux professionnels."
+    },
+    "blockfire": {
+      "title": "Block'Fire",
+      "subtitle": "Site e-commerce",
+      "role": "Développeur Front-End",
+      "about_paragraph_1": "Block'Fire est une entreprise qui propose un produit innovant en matière de sécurité incendie : une boule extinctrice automatique qui s'active en cas de choc ou au contact du feu, offrant une protection simple et efficace pour les maisons, les véhicules et les entreprises."
     }
   },
   "UI": {
