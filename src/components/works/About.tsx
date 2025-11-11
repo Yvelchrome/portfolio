@@ -18,18 +18,16 @@ export const About = ({ paragraph, mainColor, images }: WorksAboutProps) => {
   const t = useTranslations("Works");
 
   return (
-    <section className="relative flex min-w-full flex-col justify-between py-4 *:py-4 lg:flex-row">
+    <section className="md:h-xs:flex-row md:h-xs:space-x-8 relative flex min-w-full flex-col justify-between py-4 *:py-4">
       <motion.div
         variants={fadeInFromTop}
-        className="bg-background sticky h-full w-full items-center space-y-2 sm:space-y-4 lg:w-3/8 lg:space-y-6"
+        className="bg-background h-xs:sticky md:h-xs:w-4/8 xl:h-xs:w-3/8 relative h-full w-full items-center space-y-2 sm:space-y-4 md:space-y-6"
         style={{ top: headerHeight }}
       >
-        <h4 className="text-fluid-5xl font-semibold">{t("about_title")}</h4>
-        <div className="text-fluid-4xl space-y-6 leading-tight">
-          <p>{paragraph}</p>
-        </div>
+        <h4 className="text-fluid-4xl font-semibold">{t("about_title")}</h4>
+        <p className="text-fluid-2xl">{paragraph}</p>
       </motion.div>
-      <div className="w-full space-y-6 lg:w-4/8">
+      <div className="md:h-xs:w-4/8 w-full space-y-6">
         {images.map((image, index) => (
           <motion.div
             variants={fadeInFromTop}
