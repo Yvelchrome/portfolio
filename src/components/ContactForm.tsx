@@ -52,7 +52,7 @@ const formSchema = z.object({
     .max(5000, "Message must be 5000 characters or less"),
 });
 
-export default function ContactForm() {
+export const ContactForm = () => {
   const t = useTranslations("Contact");
   const tT = useTranslations("Toast");
   const isMounted = useMounted();
@@ -236,4 +236,4 @@ export default function ContactForm() {
       </form>
     </Form>
   );
-}
+};

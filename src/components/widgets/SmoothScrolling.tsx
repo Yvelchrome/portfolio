@@ -10,7 +10,7 @@ export function getLenis() {
   return globalLenis;
 }
 
-function SmoothScrolling({ children }: { children: ReactNode }) {
+export const SmoothScrolling = ({ children }: { children: ReactNode }) => {
   const lenisRef = useRef<LenisRef>(null);
   const pathname = usePathname();
 
@@ -46,6 +46,4 @@ function SmoothScrolling({ children }: { children: ReactNode }) {
       {children}
     </ReactLenis>
   );
-}
-
-export default SmoothScrolling;
+};

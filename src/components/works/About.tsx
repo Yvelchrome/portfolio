@@ -11,7 +11,7 @@ interface WorksAboutProps {
   images: Array<StaticImageData>;
 }
 
-export default function About({ paragraph, images }: WorksAboutProps) {
+export const About = ({ paragraph, images }: WorksAboutProps) => {
   const headerHeight = getHeaderHeight();
 
   const t = useTranslations("Works");
@@ -37,4 +37,4 @@ export default function About({ paragraph, images }: WorksAboutProps) {
       </div>
     </section>
   );
-}
+};

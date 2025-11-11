@@ -1,12 +1,12 @@
 import { useTranslations } from "next-intl";
 
-export default function SectionHeader({
+export const SectionHeader = ({
   number,
   intlTitle,
 }: {
   number: string;
   intlTitle: string;
-}) {
+}) => {
   const t = useTranslations("Section");
 
   return (
@@ -19,4 +19,4 @@ export default function SectionHeader({
       </div>
     </>
   );
-}
+};

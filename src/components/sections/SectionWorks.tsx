@@ -7,7 +7,7 @@ import { fadeInFromBottom } from "lib/animationsVariants";
 
 import { useTranslations } from "next-intl";
 
-export default function SectionWorks() {
+export const SectionWorks = () => {
   const t = useTranslations("Section.WorksItem");
 
   const itemData = [
@@ -35,4 +35,4 @@ export default function SectionWorks() {
       </div>
     </motion.div>
   );
-}
+};

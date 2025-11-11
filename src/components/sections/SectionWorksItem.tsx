@@ -17,7 +17,7 @@ interface SectionWorksItemProps {
   brandLogoAlt?: string;
 }
 
-export default function SectionWorksItem({
+export const SectionWorksItem = ({
   id,
   title,
   subtitle,
@@ -28,7 +28,7 @@ export default function SectionWorksItem({
   year,
   brandLogo,
   brandLogoAlt,
-}: SectionWorksItemProps) {
+}: SectionWorksItemProps) => {
   const t = useTranslations("Section.WorksItem");
 
   return (
@@ -76,4 +76,4 @@ export default function SectionWorksItem({
       </div>
     </Link>
   );
-}
+};

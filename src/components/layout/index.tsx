@@ -1,6 +1,4 @@
-import Footer from "./Footer";
-import Header from "./Header";
-import Logo from "./Logo";
-import Socials from "./Socials";
-
-export { Footer, Header, Logo, Socials };
+export { Footer } from "./Footer";
+export { Header } from "./Header";
+export { Logo } from "./Logo";
+export { Socials } from "./Socials";

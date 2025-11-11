@@ -22,7 +22,7 @@ interface WorksHeroProps {
   isArchivedProject?: boolean;
 }
 
-export default function WorksHero({
+export const WorksHero = ({
   WorkLogo,
   title,
   subtitle,
@@ -34,7 +34,7 @@ export default function WorksHero({
   linkToWebsite,
   linkToRepository,
   isArchivedProject,
-}: WorksHeroProps) {
+}: WorksHeroProps) => {
   const t = useTranslations("Works");
 
   function anchorTag(href: string, intlTitle: string) {
@@ -134,4 +134,4 @@ export default function WorksHero({
       </div>
     </section>
   );
-}
+};

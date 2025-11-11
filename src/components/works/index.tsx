@@ -1,4 +1,2 @@
-import WorksHero from "./WorksHero";
-import About from "./About";
-
-export { WorksHero, About };
+export { WorksHero } from "./WorksHero";
+export { About } from "./About";

@@ -2,7 +2,7 @@ import Link from "next/link";
 import * as motion from "motion/react-client";
 import { XIcon } from "lucide-react";
 
-export default function CloseButton() {
+export const CloseButton = () => {
   return (
     <Link href={"/"}>
       <motion.div
@@ -14,4 +14,4 @@ export default function CloseButton() {
       </motion.div>
     </Link>
   );
-}
+};

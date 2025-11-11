@@ -2,7 +2,7 @@ import * as motion from "motion/react-client";
 import { fadeInFromTop } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
 
-export default function Hero() {
+export const Hero = () => {
   const t = useTranslations("Homepage");
 
   return (
@@ -14,4 +14,4 @@ export default function Hero() {
       <p className="text-fluid-5xl">{t("job_title")}</p>
     </motion.div>
   );
-}
+};

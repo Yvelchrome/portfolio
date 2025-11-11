@@ -13,7 +13,7 @@ import { CustomButton } from "components";
 import { LenisControl } from "utils";
 import { useLocale, useTranslations } from "next-intl";
 
-const ResumeViewer = () => {
+export const ResumeViewer = () => {
   const locale = useLocale();
   const t = useTranslations("Homepage");
 
@@ -46,5 +46,3 @@ const ResumeViewer = () => {
     </Dialog>
   );
 };
-
-export default ResumeViewer;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import * as motion from "motion/react-client";
 
-const CustomLink = ({
+export const CustomLink = ({
   href,
   text,
   arrowRotationDegree,
@@ -50,5 +50,3 @@ const CustomLink = ({
     </Link>
   );
 };
-
-export default CustomLink;

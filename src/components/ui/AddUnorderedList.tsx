@@ -17,11 +17,11 @@ interface AddUnorderedListProps {
   listClassName?: string;
 }
 
-export default function AddUnorderedList({
+export const AddUnorderedList = ({
   intlTitle,
   items,
   listClassName,
-}: AddUnorderedListProps) {
+}: AddUnorderedListProps) => {
   const t = useTranslations("Section");
 
   const renderIcon = (item: ListItem) => {
@@ -95,4 +95,4 @@ export default function AddUnorderedList({
       </ul>
     </div>
   );
-}
+};

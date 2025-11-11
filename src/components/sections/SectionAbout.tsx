@@ -4,7 +4,7 @@ import { fadeInFromBottom } from "lib/animationsVariants";
 import { SectionHeader } from "components";
 import { useTranslations } from "next-intl";
 
-export default function SectionAbout() {
+export const SectionAbout = () => {
   const t = useTranslations("Section");
 
   return (
@@ -17,4 +17,4 @@ export default function SectionAbout() {
       </div>
     </motion.div>
   );
-}
+};

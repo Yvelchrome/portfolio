@@ -1,6 +1,6 @@
 import * as motion from "motion/react-client";
 
-const CustomButton = ({
+export const CustomButton = ({
   href,
   text,
   arrowRotationDegree,
@@ -51,5 +51,3 @@ const CustomButton = ({
     </motion.a>
   );
 };
-
-export default CustomButton;

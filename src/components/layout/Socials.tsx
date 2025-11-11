@@ -11,7 +11,7 @@ interface Social {
   label: string;
 }
 
-export default function Socials() {
+export const Socials = () => {
   const socials: Social[] = [
     {
       icon: <Github className="text-4xl" />,
@@ -42,4 +42,4 @@ export default function Socials() {
       ))}
     </motion.div>
   );
-}
+};

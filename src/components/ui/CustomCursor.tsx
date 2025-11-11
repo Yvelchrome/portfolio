@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import { useMediaQuery } from "lib/hooks/useMediaQuery";
 import { useMounted } from "lib/hooks/useMounted";
 
-export default function CustomCursor() {
+export const CustomCursor = () => {
   const cursorSize = 15;
   const hoveringClickable = useMotionValue(0);
 
@@ -88,4 +88,4 @@ export default function CustomCursor() {
       )}
     </motion.div>
   );
-}
+};

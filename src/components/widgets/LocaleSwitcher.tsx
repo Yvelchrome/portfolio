@@ -15,7 +15,7 @@ const LOCALES = [
   { code: "en" as const, short: "EN", long: "English" },
 ];
 
-export default function LocaleSwitcher() {
+export const LocaleSwitcher = () => {
   const locale = useLocale();
   const isMounted = useMounted();
   const [isPending, startTransition] = useTransition();
@@ -66,4 +66,4 @@ export default function LocaleSwitcher() {
       </div>
     </div>
   );
-}
+};

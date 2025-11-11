@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useLocale } from "next-intl";
 import { useMounted } from "lib/hooks/useMounted";
 
-export default function TimeWidget() {
+export const TimeWidget = () => {
   const isMounted = useMounted();
   const locale = useLocale();
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -40,4 +40,4 @@ export default function TimeWidget() {
       <p>{currentTime.toLocaleString(locale, Hour)}</p>
     </div>
   );
-}
+};

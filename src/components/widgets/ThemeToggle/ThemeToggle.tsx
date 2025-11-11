@@ -6,7 +6,7 @@ import * as motion from "motion/react-client";
 import { useTheme } from "next-themes";
 import { useMounted } from "lib/hooks/useMounted";
 
-export default function ThemeToggle() {
+export const ThemeToggle = () => {
   const isMounted = useMounted();
   const { theme, setTheme } = useTheme();
 
@@ -48,4 +48,4 @@ export default function ThemeToggle() {
       </svg>
     </motion.button>
   );
-}
+};

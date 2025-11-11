@@ -3,7 +3,7 @@ import { fadeInFromBottom } from "lib/animationsVariants";
 
 import { AddUnorderedList, SectionHeader } from "components";
 
-export default function SectionSkills() {
+export const SectionSkills = () => {
   return (
     <motion.section
       variants={fadeInFromBottom}
@@ -37,4 +37,4 @@ export default function SectionSkills() {
       </div>
     </motion.section>
   );
-}
+};

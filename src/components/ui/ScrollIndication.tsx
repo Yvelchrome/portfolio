@@ -12,11 +12,11 @@ interface ScrollIndicationProps {
   positionClassName?: string;
 }
 
-export default function ScrollIndication({
+export const ScrollIndication = ({
   arrowPosition,
   intlTitle,
   positionClassName,
-}: ScrollIndicationProps) {
+}: ScrollIndicationProps) => {
   const t = useTranslations("UI.ScrollIndication");
 
   const map = {
@@ -73,4 +73,4 @@ export default function ScrollIndication({
       </div>
     </motion.div>
   );
-}
+};
