@@ -6,7 +6,8 @@ import * as motion from "motion/react-client";
 import { useScroll, useTransform } from "motion/react";
 
 import { fadeInFromTop } from "lib/animationsVariants";
-import { getHeaderHeight } from "utils";
+import { useMounted } from "lib/hooks/useMounted";
+import { getHeaderHeight, useBreakpoint } from "utils";
 
 import { useTranslations } from "next-intl";
 
@@ -26,8 +27,12 @@ const StickySectionAnimation = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const isMounted = useMounted();
+  const { matchesWidth, matchesHeight } = useBreakpoint();
+  const shouldAnimate =
+    isMounted && matchesWidth("xl") && matchesHeight("h-xl");
 
+  const ref = useRef<HTMLDivElement | null>(null);
   const headerHeight = getHeaderHeight();
 
   const { scrollYProgress } = useScroll({
@@ -40,19 +45,25 @@ const StickySectionAnimation = ({
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <>
-      <motion.section
-        ref={ref}
-        style={{
-          opacity,
-          scale,
-          y,
-          willChange: "opacity, transform",
-        }}
-      >
-        {children}
-      </motion.section>
-    </>
+    <motion.section
+      ref={ref}
+      style={
+        shouldAnimate
+          ? {
+              opacity,
+              scale,
+              y,
+              willChange: "opacity, transform",
+            }
+          : {
+              opacity: 1,
+              scale: 1,
+              y: 0,
+            }
+      }
+    >
+      {children}
+    </motion.section>
   );
 };
 
