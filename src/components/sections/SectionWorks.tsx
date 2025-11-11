@@ -1,5 +1,5 @@
 import { SectionWorksItem, SectionHeader } from "components";
-import AdeupaLogo from "assets/images/works/adeupa/AdeupaLogo.svgr.svg";
+
 import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svgr.svg";
 
 import * as motion from "motion/react-client";
@@ -23,18 +23,6 @@ export default function SectionWorks() {
       brandLogo: <NegatifplusLogo />,
       brandLogoAlt: t("negatifplus.brandLogoAlt"),
     },
-    // {
-    //   id: 2,
-    //   title: "Adeupa",
-    //   subtitle: t("adeupa.subtitle"),
-    //   role: `${t("role.frontend_developer")} • ${t("role.ui_designer")}`,
-    //   description: t("adeupa.description"),
-    //   linkHref: "/works/adeupa",
-    //   client: "JCEP",
-    //   year: "2022",
-    //   brandLogo: <AdeupaLogo />,
-    //   brandLogoAlt: t("adeupa.brandLogoAlt"),
-    // },
   ];
 
   return (
