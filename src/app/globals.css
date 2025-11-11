@@ -26,7 +26,7 @@
   transition-duration: 300ms;
 }
 
-@utility text-fluid-title {
+@utility text-fluid-9xl {
   font-size: clamp(38px, 0.4803rem + 10.7237vw, 128px);
   line-height: clamp(38px, 0.5283rem + 11.7961vw, 128px);
   letter-spacing: -0.02em;
@@ -34,8 +34,8 @@
 }
 
 @utility text-fluid-8xl {
-  font-size: clamp(1px, 0.7763rem + 10.8553vw, 96px);
-  line-height: clamp(1px, 0.9316rem + 13.0263vw, 96px);
+  font-size: clamp(28px, 0.9211rem + 8.8816vw, 96px);
+  line-height: clamp(28px, 0.9211rem + 8.8816vw, 96px);
   letter-spacing: -0.02em;
   font-weight: 700;
 }
