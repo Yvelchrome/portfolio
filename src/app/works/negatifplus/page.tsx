@@ -28,6 +28,7 @@ const LandingPage = () => {
   };
   const WorksAboutProps = {
     paragraph: t("about_paragraph_1"),
+    mainColor: "#7C2900",
     images: [img1, img2, img3, img4, img5, img6, img7],
   };
 

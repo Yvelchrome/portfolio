@@ -8,10 +8,11 @@ import { getHeaderHeight } from "utils";
 
 interface WorksAboutProps {
   paragraph: string;
+  mainColor: string;
   images: Array<StaticImageData>;
 }
 
-export const About = ({ paragraph, images }: WorksAboutProps) => {
+export const About = ({ paragraph, mainColor, images }: WorksAboutProps) => {
   const headerHeight = getHeaderHeight();
 
   const t = useTranslations("Works");
@@ -28,10 +29,19 @@ export const About = ({ paragraph, images }: WorksAboutProps) => {
           <p>{paragraph}</p>
         </div>
       </motion.div>
-      <div className="w-full space-y-6 *:bg-[#7C2900] *:px-4 *:py-2 sm:*:px-12 sm:*:py-6 lg:w-4/8 lg:*:px-16 lg:*:py-8 [&_img]:aspect-16/10 [&_img]:object-cover">
+      <div className="w-full space-y-6 lg:w-4/8">
         {images.map((image, index) => (
-          <motion.div variants={fadeInFromTop} key={index}>
-            <Image src={image} alt={`negatifplus image ${index + 1}`} />
+          <motion.div
+            variants={fadeInFromTop}
+            key={index}
+            style={{ backgroundColor: mainColor }}
+            className="px-4 py-2 sm:px-12 sm:py-6 lg:px-16 lg:py-8"
+          >
+            <Image
+              src={image}
+              alt={`negatifplus image ${index + 1}`}
+              className="aspect-16/10 object-cover"
+            />
           </motion.div>
         ))}
       </div>
