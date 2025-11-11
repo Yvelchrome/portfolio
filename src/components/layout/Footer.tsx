@@ -27,24 +27,21 @@ export const Footer = () => {
 
   return (
     <footer
-      className="bg-light-grey relative lg:h-[700px]"
+      className="bg-light-grey md:h-sm:h-[700px] relative **:border-white **:text-white"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <div className="right-0 bottom-0 left-0 mr-[var(--removed-body-scroll-bar-size)] lg:fixed lg:h-[700px]">
-        <div className="container mx-auto flex h-full flex-col justify-end space-y-12 px-4 pt-8 pb-8 sm:px-8 lg:pt-0">
+      <div className="md:h-sm:h-[700px] md:h-sm:fixed right-0 bottom-0 left-0 mr-[var(--removed-body-scroll-bar-size)]">
+        <div className="md:h-sm:pt-0 container mx-auto flex h-full flex-col justify-end space-y-6 px-4 py-8 sm:px-8 lg:space-y-12">
           <a
             href="mailto:stevengodin78@gmail.com"
-            className="group text-fluid-8xl relative left-1/2 w-fit -translate-x-1/2 uppercase"
+            className="group text-fluid-8xl relative self-center overflow-hidden text-white uppercase"
           >
             {t("contact_send_email")}{" "}
-            <div className="text-dark-blue font-roxboroughcf relative top-0 inline-grid overflow-hidden *:!transition-[top] *:duration-400">
-              <p className="relative top-0 group-hover:-top-full">email</p>
-              <span className="absolute top-[110%] left-0 group-hover:-top-0">
-                email
-              </span>
-            </div>
+            <p className="!text-dark-blue font-roxboroughcf relative top-0 inline-block !transition-[top] duration-400 after:absolute after:top-full after:right-0 after:content-['email'] lg:group-hover:-top-full">
+              email
+            </p>
           </a>
-          <div className="flex w-fit flex-wrap gap-x-24 gap-y-12">
+          <div className="flex w-fit flex-wrap gap-x-24 gap-y-6 lg:gap-y-12">
             <AddUnorderedList
               intlTitle="contact_socials"
               items={[
@@ -67,9 +64,9 @@ export const Footer = () => {
                   href: "https://discordapp.com/users/507676625681514501",
                 },
               ]}
-              listClassName="text-fluid-4xl space-y-7"
+              listClassName="text-fluid-4xl lg:space-y-6 space-y-3"
             />
-            <div className="space-y-12">
+            <div className="space-y-6 lg:space-y-12">
               <AddUnorderedList
                 intlTitle="contact_email"
                 items={["stevengodin78@gmail.com"]}
@@ -82,7 +79,7 @@ export const Footer = () => {
               />
             </div>
           </div>
-          <div className="flex gap-3 sm:gap-4">
+          <div className="flex gap-4">
             <ResumeViewer />
             <CustomLink href={"contact"} text={t("contact")} />
           </div>
