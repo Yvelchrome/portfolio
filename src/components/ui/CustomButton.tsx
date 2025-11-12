@@ -13,40 +13,36 @@ export const CustomButton = ({
   arrowPosition?: "left" | "right";
   yAnimate?: boolean;
 }) => {
-  const arrowElement = () => {
-    return (
-      <motion.span
-        initial={{ x: 0, y: 0, rotate: arrowRotationDegree }}
-        animate={{ x: arrowPosition === "left" ? -2 : 2, y: yAnimate ? -2 : 0 }}
-        transition={{
-          repeat: Infinity,
-          repeatType: "reverse",
-          duration: 0.5,
-        }}
-      >
-        {arrowPosition === "left" ? "←" : "→"}
-      </motion.span>
-    );
-  };
+  const isLeft = arrowPosition === "left";
+  const x = isLeft ? -2 : 2;
+  const y = yAnimate ? -2 : 0;
+
+  const Arrow = (
+    <motion.span
+      initial={{ x: 0, y: 0, rotate: arrowRotationDegree }}
+      animate={{ x, y }}
+      transition={{
+        repeat: Infinity,
+        repeatType: "reverse",
+        duration: 0.5,
+      }}
+      className="no-locale-animation"
+    >
+      {isLeft ? "←" : "→"}
+    </motion.span>
+  );
 
   return (
-    <motion.a href={href}>
+    <motion.a href={href} className="no-locale-animation">
       <motion.div
-        className="flex w-fit cursor-pointer items-center justify-center gap-2 rounded-full border border-black px-4 py-1 *:text-xs *:font-medium *:md:text-base dark:border-white"
+        className={`flex w-fit cursor-pointer items-center justify-center gap-2 rounded-full border border-black px-4 py-1 *:text-xs *:font-medium *:md:text-base dark:border-white ${
+          isLeft ? "flex-row-reverse" : ""
+        }`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        {arrowPosition === "left" ? (
-          <>
-            {arrowElement()}
-            <span>{text}</span>
-          </>
-        ) : (
-          <>
-            <span>{text}</span>
-            {arrowElement()}
-          </>
-        )}
+        <span>{text}</span>
+        {Arrow}
       </motion.div>
     </motion.a>
   );
