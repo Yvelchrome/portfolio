@@ -3,8 +3,7 @@
     "job_title": "Front-End Developer",
     "resume": "Resume",
     "resume_file_job_title": "frontend_developer",
-    "contact": "Contact",
-    "footer_construction": "Site under construction"
+    "contact": "Contact"
   },
   "Contact": {
     "go_back": "Go Back",
@@ -37,7 +36,6 @@
     "skills_category_2": "Tools",
     "works": "Works",
     "WorksItem": {
-      "linkToProject": "Know more.",
       "client": "Client",
       "year": "Year",
       "role": {
@@ -55,14 +53,11 @@
         "brandLogoAlt": "Block'Fire logo"
       }
     },
-    "experience": "Experience",
-    "education": "Education",
     "contact": "Contact",
     "contact_socials": "Socials",
     "contact_email": "Email",
     "contact_phone": "Phone",
-    "contact_send_email": "Send me an",
-    "contact_resume": "View my resume"
+    "contact_send_email": "Send me an"
   },
   "Works": {
     "client": "Client",
