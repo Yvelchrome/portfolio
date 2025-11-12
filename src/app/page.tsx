@@ -75,8 +75,8 @@ const LandingPage = () => {
       initial="hidden"
       animate="visible"
       transition={{
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       }}
     >
       <section className="relative flex min-h-dvh flex-col items-center justify-center gap-4 py-24 sm:gap-6 md:gap-8">

@@ -15,10 +15,6 @@ const LandingPage = () => {
         variants={fadeInFromTop}
         initial="hidden"
         animate="visible"
-        transition={{
-          staggerChildren: 0.2,
-          delayChildren: 0.3,
-        }}
       >
         <CustomLink href="/" text={t("go_back")} arrowPosition="left" />
         <h1 className="text-4xl font-bold">{t("title")}</h1>

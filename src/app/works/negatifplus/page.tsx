@@ -37,8 +37,8 @@ const LandingPage = () => {
       initial="hidden"
       animate="visible"
       transition={{
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
       }}
       className="px-4 sm:px-8"
     >
