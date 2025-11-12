@@ -34,7 +34,7 @@ export const SectionWorksItem = ({
   return (
     <Link
       href={linkHref}
-      className="bg-light-black group relative flex w-full cursor-pointer flex-col justify-between rounded-2xl p-8 text-white"
+      className="bg-light-black group no-locale-animation relative flex w-full cursor-pointer flex-col justify-between rounded-2xl p-8 text-white"
     >
       <GlowingEffect
         blur={0}
@@ -49,7 +49,9 @@ export const SectionWorksItem = ({
       />
       <div className="space-y-6">
         <div>
-          <h3 className="text-fluid-5xl font-semibold">{title}</h3>
+          <h3 className="text-fluid-5xl no-locale-animation font-semibold">
+            {title}
+          </h3>
           <p className="text-fluid-2xl font-medium text-gray-400">{subtitle}</p>
         </div>
         <p className="text-fluid-4xl font-medium text-gray-400">{role}</p>
@@ -69,7 +71,7 @@ export const SectionWorksItem = ({
         <span
           role="img"
           aria-label={brandLogoAlt}
-          className="absolute -top-1/8 -right-1/8 h-1/2 w-auto !transition-[top,right] duration-500 *:h-full *:w-auto group-hover:-top-1/16 group-hover:-right-1/16"
+          className="no-locale-animation absolute -top-1/8 -right-1/8 h-1/2 w-auto !transition-[top,right] duration-500 *:h-full *:w-auto group-hover:-top-1/16 group-hover:-right-1/16"
         >
           {brandLogo}
         </span>

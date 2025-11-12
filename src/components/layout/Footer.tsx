@@ -85,7 +85,7 @@ export const Footer = () => {
           </div>
 
           <div className="font-roboto-mono flex w-full flex-row flex-wrap items-start justify-between gap-4 text-sm font-light">
-            <div className="space-y-2 text-center md:text-left">
+            <div className="no-locale-animation space-y-2 text-center md:text-left">
               <p>© 2025 - Steven Godin</p>
             </div>
             <TimeWidget />

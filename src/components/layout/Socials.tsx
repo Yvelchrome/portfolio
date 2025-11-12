@@ -36,6 +36,7 @@ export const Socials = () => {
           aria-label={label}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
+          className="no-locale-animation"
         >
           {icon}
         </motion.a>

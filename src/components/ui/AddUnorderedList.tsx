@@ -64,7 +64,7 @@ export const AddUnorderedList = ({
       <ul className={listClassName}>
         {normalizedItems.map((item, index) => (
           <li
-            className="flex items-center lg:gap-4"
+            className="no-locale-animation **:no-locale-animation flex items-center lg:gap-4"
             key={`${intlTitle}-${index}-${item.text}`}
           >
             <ConditionalWrapper

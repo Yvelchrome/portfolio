@@ -85,6 +85,43 @@
   }
 }
 
+/* intl text opacity animation */
+body {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  a,
+  label,
+  li {
+    opacity: 1;
+    transition: opacity 250ms ease-out;
+  }
+
+  &[data-locale-changing="true"] {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    a,
+    label,
+    li {
+      opacity: 0;
+    }
+  }
+}
+@utility no-locale-animation {
+  opacity: 1 !important;
+}
+
 @theme {
   /* Header Height */
   --spacing-header-height: var(--header-height);

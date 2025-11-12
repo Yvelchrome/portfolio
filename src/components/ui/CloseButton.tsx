@@ -4,7 +4,7 @@ import { XIcon } from "lucide-react";
 
 export const CloseButton = () => {
   return (
-    <Link href={"/"}>
+    <Link href={"/"} className="no-locale-animation">
       <motion.div
         className="fixed bottom-12 left-1/2 -translate-x-1/2 cursor-pointer rounded-full bg-[#D9D9D9] p-4 text-black"
         whileHover={{ scale: 1.1 }}

@@ -21,11 +21,11 @@ const LandingPage = () => {
         <div className="grid grid-cols-1 gap-6 *:flex *:items-center *:gap-2 md:grid-cols-2">
           <div>
             <Mail className="size-4" />
-            <p>stevengodin78@gmail.com</p>
+            <p className="no-locale-animation">stevengodin78@gmail.com</p>
           </div>
           <div>
             <Phone className="size-4" />
-            <p>+33 7 83 11 06 75</p>
+            <p className="no-locale-animation">+33 7 83 11 06 75</p>
           </div>
         </div>
         <ContactForm />

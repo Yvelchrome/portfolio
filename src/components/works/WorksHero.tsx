@@ -63,7 +63,7 @@ export const WorksHero = ({
           variants={fadeInFromTop}
           role="img"
           aria-label="Negatifplus logo"
-          className="block h-22 *:h-full *:w-auto sm:h-32 lg:absolute lg:top-1/2 lg:left-1/2 lg:h-1/3 lg:-translate-1/2"
+          className="no-locale-animation block h-22 *:h-full *:w-auto sm:h-32 lg:absolute lg:top-1/2 lg:left-1/2 lg:h-1/3 lg:-translate-1/2"
         >
           {WorkLogo}
         </motion.span>
@@ -71,7 +71,9 @@ export const WorksHero = ({
           {isArchivedProject && (
             <Badge variant="default">{t("archived")}</Badge>
           )}
-          <h3 className="text-fluid-8xl font-semibold">{title}</h3>
+          <h3 className="text-fluid-8xl no-locale-animation font-semibold">
+            {title}
+          </h3>
           <p className="text-fluid-4xl font-medium">{subtitle}</p>
         </motion.div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useEffect, useRef, useTransition } from "react";
 
 import * as motion from "motion/react-client";
 
@@ -19,13 +19,35 @@ export const LocaleSwitcher = () => {
   const locale = useLocale();
   const isMounted = useMounted();
   const [isPending, startTransition] = useTransition();
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+        document.body.dataset.localeChanging = "false";
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.dataset.localeChanging = "false";
+  }, [locale]);
 
   if (!isMounted) return null;
 
   function handleLocaleChange(newLocale: Locale) {
-    startTransition(async () => {
-      await setUserLocale(newLocale);
-    });
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    document.body.dataset.localeChanging = "true";
+
+    timeoutRef.current = setTimeout(() => {
+      startTransition(() => {
+        setUserLocale(newLocale);
+      });
+    }, 250);
   }
 
   return (
@@ -51,12 +73,13 @@ export const LocaleSwitcher = () => {
             <button
               key={code}
               onClick={() => handleLocaleChange(code)}
-              className={`w-full cursor-pointer py-1 text-base font-medium ${
+              className={`*:no-locale-animation w-full cursor-pointer py-1 text-base font-medium ${
                 isActive
                   ? "text-white dark:text-black"
                   : "text-black dark:text-white"
               }`}
               aria-pressed={isActive}
+              disabled={isPending || isActive}
             >
               <span className="hidden md:block">{long}</span>
               <span className="block md:hidden">{short}</span>
