@@ -23,15 +23,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "Steven Godin",
-  description:
-    "Portfolio of Steven Godin, a Front-End Developer. Site maintenance in progress.",
-  keywords: [
-    "Steven Godin",
-    "Front-End Developer",
-    "Subskill",
-    "HETIC",
-    "Portfolio",
-  ],
+  description: "Portfolio of Steven Godin, Front-End Developer.",
   manifest: "./manifest.ts",
 };
 
