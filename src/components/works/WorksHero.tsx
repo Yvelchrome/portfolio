@@ -125,7 +125,7 @@ export const WorksHero = ({
             className="flex flex-col sm:flex-row"
             variants={fadeInFromTop}
           >
-            <p className="text-light-grey w-16">Role:</p>
+            <p className="text-light-grey w-16">{t("role")}:</p>
             <p>{role}</p>
           </motion.div>
         </div>

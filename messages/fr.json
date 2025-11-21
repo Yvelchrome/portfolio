@@ -62,6 +62,7 @@
   "Works": {
     "client": "Client",
     "year": "Année",
+    "role": "Rôle",
     "linkToWebsite": "Visiter le site",
     "linkToRepository": "GitHub",
     "archived": "Archivé",
@@ -70,7 +71,7 @@
       "title": "Négatif+",
       "subtitle": "Site e-commerce",
       "role": "Développeur Front-End",
-      "about_paragraph_1": "Négatif+ est un site e-commerce dédié au matériel, accessoires et services photographique, destinés aussi bien aux amateurs qu'aux professionnels."
+      "about_paragraph_1": "Négatif+ est un site e-commerce dédié au matériel, accessoires et services photographiques, destinés aussi bien aux amateurs qu'aux professionnels."
     },
     "blockfire": {
       "title": "Block'Fire",

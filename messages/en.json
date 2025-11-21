@@ -62,6 +62,7 @@
   "Works": {
     "client": "Client",
     "year": "Year",
+    "role": "Role",
     "linkToWebsite": "Visit Site",
     "linkToRepository": "GitHub",
     "archived": "Archived",
