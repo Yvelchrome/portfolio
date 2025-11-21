@@ -37,7 +37,7 @@ export const Footer = () => {
             className="group text-fluid-8xl relative self-center overflow-hidden text-white uppercase"
           >
             {t("contact_send_email")}{" "}
-            <p className="!text-dark-blue font-roxboroughcf relative top-0 inline-block !transition-[top] duration-400 after:absolute after:top-full after:right-0 after:content-['email'] lg:group-hover:-top-full">
+            <p className="!text-dark-blue relative top-0 inline-block !transition-[top] duration-400 after:absolute after:top-full after:right-0 after:content-['email'] lg:group-hover:-top-full">
               email
             </p>
           </a>
