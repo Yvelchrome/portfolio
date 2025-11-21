@@ -9,7 +9,7 @@ const LandingPage = () => {
   const t = useTranslations("Contact");
 
   return (
-    <div className="flex min-h-dvh w-full items-center justify-center">
+    <div className="flex min-h-dvh w-full items-center justify-center pt-28 pb-8">
       <motion.div
         className="space-y-8"
         variants={fadeInFromTop}
