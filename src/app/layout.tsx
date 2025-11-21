@@ -16,8 +16,8 @@ import { Toaster } from "components/shadcn/sonner";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" },
+    { media: "(prefers-color-scheme: light)", color: "#edf4fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0d0d0f" },
   ],
 };
 
