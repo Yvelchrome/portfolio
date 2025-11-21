@@ -27,7 +27,7 @@ export const ResumeViewer = () => {
         else LenisControl.start();
       }}
     >
-      <DialogTrigger className="w-fit">
+      <DialogTrigger>
         <CustomButton
           text={t("resume")}
           arrowRotationDegree={-45}
