@@ -22,7 +22,7 @@ const LandingPage = () => {
     title: t("title"),
     subtitle: t("subtitle"),
     role: t("role"),
-    frontStack: ["JavaScript", "SCSS"],
+    frontStack: ["JavaScript", "SCSS", "GSAP"],
     backStack: ["WordPress", "PHP", "MySQL"],
     client: "Block'Fire",
     year: "2023",
