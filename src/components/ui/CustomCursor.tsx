@@ -81,7 +81,7 @@ export const CustomCursor = () => {
       {hoveringClickable && (
         <motion.span
           style={{ opacity: hoveringClickable }}
-          className="absolute top-full left-full text-xs text-white mix-blend-difference"
+          className="text-primary-text-dark absolute top-full left-full text-xs mix-blend-difference"
         >
           Click
         </motion.span>

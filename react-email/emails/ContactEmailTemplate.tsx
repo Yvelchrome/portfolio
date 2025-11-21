@@ -45,7 +45,7 @@ export const ContactEmailTemplate = ({
                 className="mx-auto my-0"
               />
             </Section>
-            <Heading className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
+            <Heading className="text-primary-text-light mx-0 my-[30px] p-0 text-center text-[24px] font-normal">
               <strong>Email: {email}</strong>
               {name && (
                 <>
@@ -60,7 +60,9 @@ export const ContactEmailTemplate = ({
                 </>
               )}
             </Heading>
-            <Text className="text-base leading-6 text-black">{message}</Text>
+            <Text className="text-primary-text-light text-base leading-6">
+              {message}
+            </Text>
           </Container>
         </Body>
       </Tailwind>

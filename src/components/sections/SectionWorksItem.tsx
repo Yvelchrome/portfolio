@@ -34,7 +34,7 @@ export const SectionWorksItem = ({
   return (
     <Link
       href={linkHref}
-      className="bg-light-black group no-locale-animation relative flex w-full cursor-pointer flex-col justify-between rounded-2xl p-8 text-white"
+      className="bg-light-black group no-locale-animation text-primary-text-dark relative flex w-full cursor-pointer flex-col justify-between rounded-2xl p-8"
     >
       <GlowingEffect
         blur={0}

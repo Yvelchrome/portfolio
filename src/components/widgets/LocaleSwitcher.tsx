@@ -75,8 +75,8 @@ export const LocaleSwitcher = () => {
               onClick={() => handleLocaleChange(code)}
               className={`*:no-locale-animation w-full cursor-pointer py-1 text-base font-medium ${
                 isActive
-                  ? "text-white dark:text-black"
-                  : "text-black dark:text-white"
+                  ? "text-primary-text-dark dark:text-primary-text-light"
+                  : "text-primary-text-light dark:text-primary-text-dark"
               }`}
               aria-pressed={isActive}
               disabled={isPending || isActive}
