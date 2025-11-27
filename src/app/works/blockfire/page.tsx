@@ -29,7 +29,7 @@ const LandingPage = () => {
     linkToWebsite: "https://www.blockfire.fr/",
   };
   const WorksAboutProps = {
-    paragraph: t("about_paragraph_1"),
+    paragraph: t("about_paragraph"),
     mainColor: "#9A1918",
     images: [img1, img2, img3, img4, img5, img6, img7, img8, img9],
   };

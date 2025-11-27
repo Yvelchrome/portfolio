@@ -2,6 +2,7 @@ import { SectionWorksItem, SectionHeader } from "components";
 
 import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svgr.svg";
 import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svgr.svg";
+import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svgr.svg";
 
 import * as motion from "motion/react-client";
 import { fadeInFromBottom } from "lib/animationsVariants";
@@ -26,6 +27,18 @@ export const SectionWorks = () => {
     },
     {
       id: 2,
+      title: "Zefirent",
+      subtitle: t("zefirent.subtitle"),
+      role: t("role.frontend_developer"),
+      description: t("zefirent.description"),
+      linkHref: "/works/zefirent",
+      client: "Petit Forestier - Zefirent",
+      year: "2024",
+      brandLogo: <ZefirentLogo />,
+      brandLogoAlt: t("zefirent.brandLogoAlt"),
+    },
+    {
+      id: 3,
       title: "Block'Fire",
       subtitle: t("blockfire.subtitle"),
       role: t("role.frontend_developer"),

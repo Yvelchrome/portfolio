@@ -43,12 +43,17 @@
         "ui_designer": "UI Designer"
       },
       "negatifplus": {
-        "subtitle": "E-commerce Website",
+        "subtitle": "E-commerce",
         "description": "Store specializing in photographic equipment, accessories, and services.",
         "brandLogoAlt": "Négatif+ logo"
       },
+      "zefirent": {
+        "subtitle": "Vehicle Rental",
+        "description": "Rental of commercial and heavy goods vehicles tailored to business needs.",
+        "brandLogoAlt": "Zefirent logo"
+      },
       "blockfire": {
-        "subtitle": "E-commerce Website",
+        "subtitle": "E-commerce",
         "description": "Block'Fire is a company selling a compact, automatic fire-extinguishing ball.",
         "brandLogoAlt": "Block'Fire logo"
       }
@@ -69,15 +74,21 @@
     "about_title": "About the project",
     "negatifplus": {
       "title": "Négatif+",
-      "subtitle": "E-commerce Website",
+      "subtitle": "E-commerce",
       "role": "Front-End Developer",
-      "about_paragraph_1": "Négatif+ is an e-commerce website dedicated to photography equipment, accessories and services for both enthusiasts and professionals."
+      "about_paragraph": "Négatif+ is an e-commerce website dedicated to photography equipment, accessories and services for both enthusiasts and professionals."
+    },
+    "zefirent": {
+      "title": "Zefirent",
+      "subtitle": "Vehicle Rental",
+      "role": "Front-End Developer",
+      "about_paragraph": "Zefirent offers commercial and heavy vehicle rentals for businesses, with flexible terms, maintenance, and fleet support to simplify professional transport."
     },
     "blockfire": {
       "title": "Block'Fire",
-      "subtitle": "E-commerce Website",
+      "subtitle": "E-commerce",
       "role": "Front-End Developer",
-      "about_paragraph_1": "Block'Fire is a company that offers an innovative fire safety product: an automatic fire-extinguishing ball that activates on impact or upon contact with fire, providing easy and effective protection for homes, vehicles, and businesses."
+      "about_paragraph": "Block'Fire is a company that offers an innovative fire safety product: an automatic fire-extinguishing ball that activates on impact or upon contact with fire, providing easy and effective protection for homes, vehicles, and businesses."
     }
   },
   "UI": {

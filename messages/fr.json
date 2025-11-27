@@ -43,12 +43,17 @@
         "ui_designer": "Designer UI"
       },
       "negatifplus": {
-        "subtitle": "Site e-commerce",
+        "subtitle": "E-commerce",
         "description": "Boutique spécialisée dans le matériel, les accessoires et services de photographie.",
         "brandLogoAlt": "Négatif+ logo"
       },
+      "zefirent": {
+        "subtitle": "Location de véhicules",
+        "description": "Location de véhicules utilitaires et poids lourds adaptés aux besoins des entreprises.",
+        "brandLogoAlt": "Zefirent logo"
+      },
       "blockfire": {
-        "subtitle": "Site e-commerce",
+        "subtitle": "E-commerce",
         "description": "Entreprise qui commercialise une boule compacte et automatique d'extinction d'incendie.",
         "brandLogoAlt": "Block'Fire logo"
       }
@@ -69,15 +74,21 @@
     "about_title": "À propos du projet",
     "negatifplus": {
       "title": "Négatif+",
-      "subtitle": "Site e-commerce",
+      "subtitle": "E-commerce",
       "role": "Développeur Front-End",
-      "about_paragraph_1": "Négatif+ est un site e-commerce dédié au matériel, accessoires et services photographiques, destinés aussi bien aux amateurs qu'aux professionnels."
+      "about_paragraph": "Négatif+ est un site e-commerce dédié au matériel, accessoires et services photographiques, destinés aussi bien aux amateurs qu'aux professionnels."
+    },
+    "zefirent": {
+      "title": "Zefirent",
+      "subtitle": "Location de véhicules",
+      "role": "Développeur Front-End",
+      "about_paragraph": "Zefirent propose la location de véhicules utilitaires et poids lourds pour les entreprises, avec des conditions flexibles, la maintenance et l'assistance pour la flotte afin de simplifier le transport professionnel."
     },
     "blockfire": {
       "title": "Block'Fire",
-      "subtitle": "Site e-commerce",
+      "subtitle": "E-commerce",
       "role": "Développeur Front-End",
-      "about_paragraph_1": "Block'Fire est une entreprise qui propose un produit innovant en matière de sécurité incendie : une boule extinctrice automatique qui s'active en cas de choc ou au contact du feu, offrant une protection simple et efficace pour les maisons, les véhicules et les entreprises."
+      "about_paragraph": "Block'Fire est une entreprise qui propose un produit innovant en matière de sécurité incendie : une boule extinctrice automatique qui s'active en cas de choc ou au contact du feu, offrant une protection simple et efficace pour les maisons, les véhicules et les entreprises."
     }
   },
   "UI": {
