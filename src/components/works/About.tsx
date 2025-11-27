@@ -27,7 +27,7 @@ export const About = ({ paragraph, mainColor, images }: WorksAboutProps) => {
         <h4 className="text-fluid-4xl font-semibold">{t("about_title")}</h4>
         <p className="text-fluid-2xl">{paragraph}</p>
       </motion.div>
-      <div className="md:h-xs:w-4/8 w-full space-y-6">
+      <div className="md:h-xs:w-4/8 xl:h-xs:w-5/8 w-full space-y-6">
         {images.map((image, index) => (
           <motion.div
             variants={fadeInFromTop}
