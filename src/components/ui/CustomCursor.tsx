@@ -23,7 +23,13 @@ export const CustomCursor = () => {
     y: useSpring(mouse.y, smoothOptions),
   };
 
-  const scale = useTransform(hoveringClickable, [0, 1], [1, 2.5]);
+  const circleSize = useTransform(hoveringClickable, [0, 1], [16, 40]);
+  const transformTranslate = useTransform(
+    hoveringClickable,
+    [0, 1],
+    ["0%", "-25%"],
+  );
+  const fontSize = useTransform(hoveringClickable, [0, 1], ["12px", "30px"]);
 
   const manageMouseMove = (e: MouseEvent) => {
     const { clientX, clientY } = e;
@@ -74,18 +80,19 @@ export const CustomCursor = () => {
       style={{
         left: smoothMouse.x,
         top: smoothMouse.y,
-        scale,
+        translateX: transformTranslate,
+        translateY: transformTranslate,
+        width: circleSize,
+        height: circleSize,
       }}
-      className="pointer-events-none fixed z-50 h-4 w-4 items-center justify-center rounded-full bg-white mix-blend-difference will-change-transform"
+      className="pointer-events-none fixed z-50 transform-gpu items-center justify-center rounded-full bg-white mix-blend-difference will-change-transform"
     >
-      {hoveringClickable && (
-        <motion.span
-          style={{ opacity: hoveringClickable }}
-          className="text-primary-text-dark absolute top-full left-full text-xs mix-blend-difference"
-        >
-          Click
-        </motion.span>
-      )}
+      <motion.span
+        style={{ opacity: hoveringClickable, fontSize }}
+        className="text-primary-text-dark absolute top-full left-full mix-blend-difference"
+      >
+        Click
+      </motion.span>
     </motion.div>
   );
 };
