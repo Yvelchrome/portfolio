@@ -15,16 +15,15 @@ export const SectionSkills = () => {
           <AddUnorderedList
             intlTitle="skills_category_1"
             items={[
-              "SCSS",
-              "TailwindCSS",
               "TypeScript",
-              "Next.js",
               "React",
-              "React Native",
-              "PhP",
+              "Next.js",
+              "TailwindCSS",
+              "SCSS",
+              "PHP",
               "SQL",
             ]}
-            listClassName="text-fluid-4xl "
+            listClassName="text-fluid-4xl"
           />
         }
         {
