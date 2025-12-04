@@ -1,1 +1,6 @@
-export const projects = [{ slug: "negatifplus" }, { slug: "blockfire" }];
+export const projects = [
+  { slug: "negatifplus" },
+  { slug: "zefirent" },
+  { slug: "blockfire" },
+  { slug: "stentor" },
+];
