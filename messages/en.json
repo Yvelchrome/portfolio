@@ -42,20 +42,16 @@
         "frontend_developer": "Front-End Developer",
         "ui_designer": "UI Designer"
       },
-      "negatifplus": {
-        "subtitle": "E-commerce",
-        "description": "Store specializing in photographic equipment, accessories, and services.",
-        "brandLogoAlt": "Négatif+ logo"
+      "subtitle": {
+        "e-commerce": "E-commerce",
+        "vehicle_rental": "Vehicle Rental",
+        "services": "Services"
       },
-      "zefirent": {
-        "subtitle": "Vehicle Rental",
-        "description": "Rental of commercial and heavy goods vehicles tailored to business needs.",
-        "brandLogoAlt": "Zefirent logo"
-      },
-      "blockfire": {
-        "subtitle": "E-commerce",
-        "description": "Block'Fire is a company selling a compact, automatic fire-extinguishing ball.",
-        "brandLogoAlt": "Block'Fire logo"
+      "description": {
+        "negatifplus": "Store specializing in photographic equipment, accessories, and services.",
+        "zefirent": "Rental of commercial and heavy goods vehicles tailored to business needs.",
+        "blockfire": "Block'Fire is a company selling a compact, automatic fire-extinguishing ball.",
+        "stentor": "Group providing services in accounting, wealth management, and social protection."
       }
     },
     "contact": "Contact",

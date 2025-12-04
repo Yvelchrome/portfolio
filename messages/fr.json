@@ -42,20 +42,16 @@
         "frontend_developer": "Développeur Front-End",
         "ui_designer": "Designer UI"
       },
-      "negatifplus": {
-        "subtitle": "E-commerce",
-        "description": "Boutique spécialisée dans le matériel, les accessoires et services de photographie.",
-        "brandLogoAlt": "Négatif+ logo"
+      "subtitle": {
+        "e-commerce": "E-commerce",
+        "vehicle_rental": "Location de véhicules",
+        "services": "Services"
       },
-      "zefirent": {
-        "subtitle": "Location de véhicules",
-        "description": "Location de véhicules utilitaires et poids lourds adaptés aux besoins des entreprises.",
-        "brandLogoAlt": "Zefirent logo"
-      },
-      "blockfire": {
-        "subtitle": "E-commerce",
-        "description": "Entreprise qui commercialise une boule compacte et automatique d'extinction d'incendie.",
-        "brandLogoAlt": "Block'Fire logo"
+      "description": {
+        "negatifplus": "Boutique spécialisée dans le matériel, les accessoires et services de photographie.",
+        "zefirent": "Location de véhicules utilitaires et poids lourds adaptés aux besoins des entreprises.",
+        "blockfire": "Entreprise qui commercialise une boule compacte et automatique d'extinction d'incendie.",
+        "stentor": "Groupe de services en expertise comptable, gestion de patrimoine et protection sociale."
       }
     },
     "contact": "Contact",
