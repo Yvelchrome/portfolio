@@ -85,6 +85,12 @@
       "subtitle": "E-commerce",
       "role": "Développeur Front-End",
       "about_paragraph": "Block'Fire est une entreprise qui propose un produit innovant en matière de sécurité incendie : une boule extinctrice automatique qui s'active en cas de choc ou au contact du feu, offrant une protection simple et efficace pour les maisons, les véhicules et les entreprises."
+    },
+    "stentor": {
+      "title": "Groupe Stentor",
+      "subtitle": "Services",
+      "role": "Développeur Front-End",
+      "about_paragraph": "Groupe Stentor accompagne particuliers, indépendants et entreprises en expertise comptable, gestion de patrimoine et prévoyance, pour sécuriser et structurer leur avenir financier à long terme."
     }
   },
   "UI": {

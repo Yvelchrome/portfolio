@@ -3,6 +3,7 @@ import { SectionWorksItem, SectionHeader } from "components";
 import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svgr.svg";
 import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svgr.svg";
 import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svgr.svg";
+import StentorLogo from "assets/images/works/stentor/StentorLogo.svgr.svg";
 
 import * as motion from "motion/react-client";
 import { fadeInFromBottom } from "lib/animationsVariants";
@@ -48,6 +49,18 @@ export const SectionWorks = () => {
       year: "2023",
       brandLogo: <BlockfireLogo />,
       brandLogoAlt: "Block'Fire logo",
+    },
+    {
+      id: 4,
+      title: "Groupe Stentor",
+      subtitle: t("subtitle.services"),
+      role: t("role.frontend_developer"),
+      description: t("description.stentor"),
+      linkHref: "/works/stentor",
+      client: "Groupe Stentor",
+      year: "2022",
+      brandLogo: <StentorLogo />,
+      brandLogoAlt: "Groupe Stentor logo",
     },
   ];
 

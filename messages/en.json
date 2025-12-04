@@ -85,6 +85,12 @@
       "subtitle": "E-commerce",
       "role": "Front-End Developer",
       "about_paragraph": "Block'Fire is a company that offers an innovative fire safety product: an automatic fire-extinguishing ball that activates on impact or upon contact with fire, providing easy and effective protection for homes, vehicles, and businesses."
+    },
+    "stentor": {
+      "title": "Groupe Stentor",
+      "subtitle": "Services",
+      "role": "Front-End Developer",
+      "about_paragraph": "Groupe Stentor supports individuals, self-employed professionals, and businesses with accounting, wealth management, and retirement planning services to secure and structure their long-term financial future."
     }
   },
   "UI": {
