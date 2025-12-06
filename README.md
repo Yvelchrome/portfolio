@@ -1,5 +1,3 @@
-## In progress...
-
 # Steven Godin - Portfolio
 
 - [About](#about)
@@ -12,7 +10,7 @@
 
 ## About
 
-This is my portfolio that will give some information about myself as well as index all my projects.
+This is my portfolio that will give some information about myself as well as index some projects I did/participated in.
 
 ## Built with
 
