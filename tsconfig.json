@@ -1,43 +1,49 @@
 {
   "compilerOptions": {
-    /* Base Options: */
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "target": "es2022",
-    "allowJs": true,
-    "resolveJsonModule": true,
+    /* Base */
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "moduleDetection": "force",
-    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": false,
 
-    /* Strictness */
+    /* Strict Mode - TOUS activés */
     "strict": true,
     "noUncheckedIndexedAccess": true,
-    "checkJs": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "noPropertyAccessFromIndexSignature": true,
 
-    /* Bundled projects */
-    "lib": ["dom", "dom.iterable", "ES2022"],
+    /* Interop & Safety */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+
+    /* Build Behavior */
     "noEmit": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "jsx": "preserve",
-    "plugins": [{ "name": "next" }],
     "incremental": true,
 
-    /* Path Aliases */
-    "baseUrl": "./src",
+    /* Paths */
+    "baseUrl": "src",
     "paths": {
-      // "example/*": ["./example/*"]
-    }
+      // "@/*": ["./src/*"]
+    },
+
+    /* Next.js */
+    "plugins": [{ "name": "next" }]
   },
-  "include": [
-    "src/types/**/*.d.ts",
-    "eslint.config.mjs",
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.cjs",
-    "**/*.js",
-    ".next/types/**/*.ts"
-  ],
+  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
