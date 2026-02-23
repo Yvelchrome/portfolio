@@ -44,6 +44,7 @@
     "@eslint/eslintrc": "^3.3.3",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.1.17",
+    "@total-typescript/ts-reset": "^0.6.1",
     "@types/eslint": "^9.6.1",
     "@types/node": "^20.19.25",
     "@types/react": "^18.3.27",
@@ -63,6 +64,5 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.38.1"
-  },
-  "packageManager": "pnpm@10.24.0"
+  }
 }
