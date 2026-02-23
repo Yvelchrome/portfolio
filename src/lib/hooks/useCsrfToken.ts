@@ -7,23 +7,26 @@ interface CSRFResponse {
 }
 
 export function useCsrfToken() {
-  const [csrfToken, setCsrfToken] = useState<string | undefined>("");
+  const [csrfToken, setCsrfToken] = useState<string | undefined>(undefined);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/csrf-token")
-      .then((res) => res.json())
-      .then((data: CSRFResponse) => {
+    const fetchToken = async () => {
+      try {
+        const res = await fetch("/api/csrf-token");
+        const data = (await res.json()) as CSRFResponse;
         setCsrfToken(data.token);
-      })
-      .catch((error: Error) => {
+      } catch (err) {
+        const error = err instanceof Error ? err : new Error(String(err));
         console.error("Failed to fetch CSRF token:", error);
         setError(error);
-      })
-      .finally(() => {
+      } finally {
         setLoading(false);
-      });
+      }
+    };
+
+    fetchToken();
   }, []);
 
   return { csrfToken, error, loading };

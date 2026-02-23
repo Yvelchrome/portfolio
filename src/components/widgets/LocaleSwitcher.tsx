@@ -25,13 +25,13 @@ export const LocaleSwitcher = () => {
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
-        document.body.dataset.localeChanging = "false";
+        document.body.dataset["localeChanging"] = "false";
       }
     };
   }, []);
 
   useEffect(() => {
-    document.body.dataset.localeChanging = "false";
+    document.body.dataset["localeChanging"] = "false";
   }, [locale]);
 
   if (!isMounted) return null;
@@ -41,7 +41,7 @@ export const LocaleSwitcher = () => {
       clearTimeout(timeoutRef.current);
     }
 
-    document.body.dataset.localeChanging = "true";
+    document.body.dataset["localeChanging"] = "true";
 
     timeoutRef.current = setTimeout(() => {
       startTransition(() => {

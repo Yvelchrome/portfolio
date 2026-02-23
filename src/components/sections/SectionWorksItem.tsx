@@ -5,7 +5,6 @@ import Link from "next/link";
 import { GlowingEffect } from "components";
 
 interface SectionWorksItemProps {
-  id: number;
   title: string;
   subtitle: string;
   role: string;
@@ -18,7 +17,6 @@ interface SectionWorksItemProps {
 }
 
 export const SectionWorksItem = ({
-  id,
   title,
   subtitle,
   role,

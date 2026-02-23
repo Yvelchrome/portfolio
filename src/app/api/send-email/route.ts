@@ -6,7 +6,7 @@ import { Resend } from "resend";
 
 import { ContactEmailTemplate } from "components";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env["RESEND_API_KEY"]);
 
 interface ContactFormData {
   honeypot?: string;
@@ -37,7 +37,7 @@ const createErrorResponse = (
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const csrfToken = request.headers.get("x-csrf-token");
-  if (!csrfToken || csrfToken !== process.env.CSRF_SECRET) {
+  if (!csrfToken || csrfToken !== process.env["CSRF_SECRET"]) {
     return createErrorResponse("Invalid CSRF token", 403);
   }
 

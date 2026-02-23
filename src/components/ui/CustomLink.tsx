@@ -4,8 +4,8 @@ import * as motion from "motion/react-client";
 export const CustomLink = ({
   href,
   text,
-  arrowRotationDegree,
-  arrowPosition,
+  arrowRotationDegree = 0,
+  arrowPosition = "right",
 }: {
   href: string;
   text: string;

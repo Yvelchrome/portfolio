@@ -3,9 +3,9 @@ import * as motion from "motion/react-client";
 export const CustomButton = ({
   href,
   text,
-  arrowRotationDegree,
-  arrowPosition,
-  yAnimate,
+  arrowRotationDegree = 0,
+  arrowPosition = "right",
+  yAnimate = false,
 }: {
   href?: string;
   text: string;

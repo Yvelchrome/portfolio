@@ -29,7 +29,7 @@ export const HorizontalScrollWrapper = ({
       let contentWidth = 0;
       Array.from(contentRef.current.children).forEach((children) => {
         if (children instanceof HTMLElement) {
-          if (children.dataset.xScroll === undefined) return;
+          if (children.dataset["xScroll"] === undefined) return;
 
           const rect = children.getBoundingClientRect();
           contentWidth += rect.width;

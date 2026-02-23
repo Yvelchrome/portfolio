@@ -14,8 +14,8 @@ import {
 } from "@react-email/components";
 
 interface EmailProps {
-  name?: string;
-  company_name?: string;
+  name?: string | undefined;
+  company_name?: string | undefined;
   email: string;
   message: string;
 }
@@ -26,9 +26,8 @@ export const ContactEmailTemplate = ({
   email,
   message,
 }: EmailProps) => {
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "";
+  const vercelUrl = process.env["VERCEL_URL"];
+  const baseUrl = vercelUrl ? `https://${vercelUrl}` : "";
 
   return (
     <Html>

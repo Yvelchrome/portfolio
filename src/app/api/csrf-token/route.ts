@@ -6,6 +6,6 @@ export async function GET(): Promise<
   NextResponse<{ token: string | undefined }>
 > {
   return NextResponse.json({
-    token: process.env.CSRF_SECRET,
+    token: process.env["CSRF_SECRET"],
   });
 }
