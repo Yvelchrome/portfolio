@@ -94,7 +94,10 @@ export const ContactForm = () => {
   return (
     <Form {...form}>
       <form
-        onSubmit={void form.handleSubmit(onSubmit)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          void form.handleSubmit(onSubmit)();
+        }}
         className="max-w-2xl space-y-6"
         aria-label="Contact form"
       >
