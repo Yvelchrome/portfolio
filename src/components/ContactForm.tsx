@@ -4,9 +4,16 @@ import { useMounted } from "lib/hooks/useMounted";
 import { useCsrfToken } from "lib/hooks/useCsrfToken";
 
 import { useTranslations } from "next-intl";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+
+import {
+  ContactFormSchema,
+  type ContactFormData,
+  parseJsonWithZod,
+  ApiResponseSchema,
+  type ApiResponse,
+} from "lib/schemas";
 
 import { toast } from "sonner";
 import { Button } from "components/shadcn/button";
@@ -21,45 +28,14 @@ import {
   FormMessage,
 } from "components/shadcn/form";
 
-type FormData = z.infer<typeof formSchema>;
-type ApiResponse = {
-  success?: boolean;
-  error?: string;
-};
-
-const formSchema = z.object({
-  honeypot: z.string().max(0, "Bot detected").optional(),
-  name: z
-    .string()
-    .trim()
-    .max(100, "Name must be 100 characters or less")
-    .optional(),
-  company_name: z
-    .string()
-    .trim()
-    .max(100, "Company name must be 100 characters or less")
-    .optional(),
-  email: z
-    .string()
-    .trim()
-    .email("Please enter a valid email address")
-    .min(5, "Email must be at least 5 characters")
-    .max(254, "Email must be 254 characters or less"),
-  message: z
-    .string()
-    .trim()
-    .min(10, "Message must be at least 10 characters")
-    .max(5000, "Message must be 5000 characters or less"),
-});
-
 export const ContactForm = () => {
   const t = useTranslations("Contact");
   const tT = useTranslations("Toast");
   const isMounted = useMounted();
   const { csrfToken } = useCsrfToken();
 
-  const form = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(ContactFormSchema),
     defaultValues: {
       honeypot: "",
       name: "",
@@ -71,7 +47,7 @@ export const ContactForm = () => {
 
   const isSubmitting = form.formState.isSubmitting;
 
-  async function onSubmit(data: FormData) {
+  async function onSubmit(data: ContactFormData) {
     if (data.honeypot) {
       form.reset();
       return;
@@ -87,12 +63,16 @@ export const ContactForm = () => {
         body: JSON.stringify(data),
       });
 
-      const result = (await response.json()) as ApiResponse;
+      let result: ApiResponse;
+      try {
+        result = await parseJsonWithZod(response, ApiResponseSchema);
+      } catch (parseError) {
+        console.error("Failed to parse API response:", parseError);
+        throw new Error("Invalid response from server");
+      }
 
-      if (!response.ok) {
-        throw new Error(
-          result.error ?? `HTTP error! status: ${response.status}`,
-        );
+      if (result.error) {
+        throw new Error(result.error);
       }
 
       toast(tT("contact_form_success_title"), {
