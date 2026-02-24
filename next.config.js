@@ -34,8 +34,8 @@ const config = {
 
   turbopack: {
     rules: {
-      // TODO: clean all "*.svgr.svg" when queryParam support is added in Turbopack to use default loader for "*.svg?url"
-      "*.svgr.svg": {
+      "*.svg": {
+        condition: { not: { query: "?url" } },
         loaders: [{ loader: "@svgr/webpack", options: { icon: true } }],
         as: "*.js",
       },

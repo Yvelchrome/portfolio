@@ -1,6 +1,6 @@
 import { WorksHero, CloseButton, About } from "components";
 
-import WorkLogo from "assets/images/works/negatifplus/NegatifplusLogo.svgr.svg";
+import WorkLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
 import img1 from "assets/images/works/negatifplus/configurator_2.png";
 import img2 from "assets/images/works/negatifplus/configurator_1.png";
 import img3 from "assets/images/works/negatifplus/account.png";

@@ -1,6 +1,6 @@
 import { WorksHero, CloseButton, About } from "components";
 
-import WorkLogo from "assets/images/works/stentor/StentorLogo.svgr.svg";
+import WorkLogo from "assets/images/works/stentor/StentorLogo.svg";
 import img1 from "assets/images/works/stentor/hero.png";
 import img2 from "assets/images/works/stentor/block_1.png";
 import img3 from "assets/images/works/stentor/block_2.png";

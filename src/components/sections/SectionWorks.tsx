@@ -1,9 +1,9 @@
 import { SectionWorksItem, SectionHeader } from "components";
 
-import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svgr.svg";
-import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svgr.svg";
-import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svgr.svg";
-import StentorLogo from "assets/images/works/stentor/StentorLogo.svgr.svg";
+import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
+import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
+import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svg";
+import StentorLogo from "assets/images/works/stentor/StentorLogo.svg";
 
 import * as motion from "motion/react-client";
 import { fadeInFromBottom } from "lib/animationsVariants";

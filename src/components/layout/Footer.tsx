@@ -6,9 +6,9 @@ import {
   ResumeViewer,
   CustomLink,
 } from "components";
-import Github from "assets/images/github.svgr.svg";
-import Linkedin from "assets/images/linkedin.svgr.svg";
-import Discord from "assets/images/discord.svgr.svg";
+import Github from "assets/images/github.svg";
+import Linkedin from "assets/images/linkedin.svg";
+import Discord from "assets/images/discord.svg";
 
 import { usePathname } from "next/navigation";
 
@@ -27,17 +27,17 @@ export const Footer = () => {
 
   return (
     <footer
-      className="md:h-sm:h-[700px] bg-deep-blue **:text-primary-text-dark relative **:border-white"
+      className="md:h-sm:h-175 bg-deep-blue **:text-primary-text-dark relative **:border-white"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <div className="md:h-sm:h-[700px] md:h-sm:fixed right-0 bottom-0 left-0 mr-[var(--removed-body-scroll-bar-size)]">
+      <div className="md:h-sm:h-175 md:h-sm:fixed right-0 bottom-0 left-0 mr-(--removed-body-scroll-bar-size)">
         <div className="md:h-sm:pt-0 container mx-auto flex h-full flex-col justify-end space-y-6 px-4 py-8 sm:px-8 lg:space-y-12">
           <a
             href="mailto:stevengodin78@gmail.com"
             className="group text-fluid-8xl relative self-center overflow-hidden uppercase"
           >
             {t("contact_send_email")}{" "}
-            <p className="!text-dark-blue relative top-0 inline-block !transition-[top] duration-400 after:absolute after:top-full after:right-0 after:content-['email'] lg:group-hover:-top-full">
+            <p className="text-dark-blue! relative top-0 inline-block transition-[top]! duration-400 after:absolute after:top-full after:right-0 after:content-['email'] lg:group-hover:-top-full">
               email
             </p>
           </a>

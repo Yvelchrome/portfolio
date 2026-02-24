@@ -1,6 +1,6 @@
 import { WorksHero, CloseButton, About } from "components";
 
-import WorkLogo from "assets/images/works/blockfire/BlockfireLogo.svgr.svg";
+import WorkLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
 import img1 from "assets/images/works/blockfire/hero.png";
 import img2 from "assets/images/works/blockfire/carousel.png";
 import img3 from "assets/images/works/blockfire/product.png";

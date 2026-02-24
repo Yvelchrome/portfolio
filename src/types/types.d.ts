@@ -5,3 +5,8 @@ declare module "react" {
     [key: `--${string}`]: string | number | undefined;
   }
 }
+
+declare module "*.svg?url" {
+  const content: string;
+  export default content;
+}

@@ -1,6 +1,6 @@
 import { WorksHero, CloseButton, About } from "components";
 
-import WorkLogo from "assets/images/works/zefirent/ZefirentLogo.svgr.svg";
+import WorkLogo from "assets/images/works/zefirent/ZefirentLogo.svg";
 import img1 from "assets/images/works/zefirent/cards.png";
 import img2 from "assets/images/works/zefirent/group.png";
 import img3 from "assets/images/works/zefirent/map_1.png";
