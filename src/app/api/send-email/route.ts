@@ -10,6 +10,7 @@ import { ContactEmailTemplate } from "components";
 const resend = new Resend(process.env["RESEND_API_KEY"]);
 
 interface ErrorResponse {
+  success: false;
   error: string;
   details?: Record<string, unknown>;
 }
@@ -21,6 +22,7 @@ const createErrorResponse = (
 ): NextResponse<ErrorResponse> => {
   return NextResponse.json(
     {
+      success: false,
       error: message,
       ...(details && { details }),
     },
@@ -49,12 +51,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const { honeypot, name, company_name, email, message } = validation.data;
 
   if (honeypot) {
-    // Return success to avoid giving feedback to bots
-    return NextResponse.json({ success: true });
-  }
-
-  if (!message || !email) {
-    createErrorResponse("Missing required fields", 400);
+    console.warn("Bot detected via honeypot");
+    return NextResponse.json({ success: true }, { status: 200 });
   }
 
   try {
@@ -66,11 +64,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     });
 
     if (error) {
-      return createErrorResponse("Failed to send email", 500, { error });
+      console.error("Resend API error:", error);
+
+      const errorDetails =
+        error instanceof Error
+          ? { message: error.message, name: error.name }
+          : { error };
+
+      return createErrorResponse("Failed to send email.", 500, errorDetails);
     }
 
-    return NextResponse.json(data);
+    console.info("Email sent", { data, email });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Email sent successfully!",
+      },
+      { status: 200 },
+    );
   } catch (error) {
-    return createErrorResponse("Failed to send email", 500, { error });
+    console.error("Unexpected error:", error);
+
+    const errorDetails =
+      error instanceof Error
+        ? { message: error.message, name: error.name }
+        : { error };
+
+    return createErrorResponse("Failed to send email.", 500, errorDetails);
   }
 }

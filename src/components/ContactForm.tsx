@@ -85,7 +85,7 @@ export const ContactForm = () => {
         description: tT("contact_form_error_description"),
       });
 
-      throw new Error(`${error instanceof Error && error.message}`);
+      console.error("Form submission error:", error);
     }
   }
 

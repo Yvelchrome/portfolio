@@ -4,27 +4,31 @@ import { useState, useEffect } from "react";
 import { parseJsonWithZod, CSRFResponseSchema } from "lib/schemas";
 
 export function useCsrfToken() {
-  const [csrfToken, setCsrfToken] = useState<string | undefined>(undefined);
-  const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [csrfToken, setCsrfToken] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchToken = async () => {
       try {
+        setIsLoading(true);
+        setError(null);
+
         const res = await fetch("/api/csrf-token");
         const data = await parseJsonWithZod(res, CSRFResponseSchema);
         setCsrfToken(data.csrfToken);
       } catch (err) {
-        const error = err instanceof Error ? err : new Error(String(err));
-        console.error("Failed to fetch CSRF token:", error);
-        setError(error);
+        const errorMessage =
+          err instanceof Error ? err.message : "Failed to fetch CSRF token";
+        console.error("Failed to fetch CSRF token:", errorMessage);
+        setError(errorMessage);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
     fetchToken();
   }, []);
 
-  return { csrfToken, error, loading };
+  return { csrfToken, error, isLoading };
 }
