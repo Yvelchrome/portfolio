@@ -1,20 +1,13 @@
 "use server";
 
 import { type NextRequest, NextResponse } from "next/server";
+import { ContactFormSchema, formatZodErrors } from "lib/schemas";
 
 import { Resend } from "resend";
 
 import { ContactEmailTemplate } from "components";
 
 const resend = new Resend(process.env["RESEND_API_KEY"]);
-
-interface ContactFormData {
-  honeypot?: string;
-  name?: string;
-  company_name?: string;
-  email: string;
-  message: string;
-}
 
 interface ErrorResponse {
   error: string;
@@ -41,8 +34,19 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return createErrorResponse("Invalid CSRF token", 403);
   }
 
-  const body = (await request.json()) as ContactFormData;
-  const { honeypot, name, company_name, email, message } = body;
+  const body: unknown = await request.json();
+  const validation = ContactFormSchema.safeParse(body);
+
+  if (!validation.success) {
+    console.error("Validation errors:", formatZodErrors(validation.error));
+    return createErrorResponse(
+      "Invalid request data. Please check all required fields.",
+      400,
+      formatZodErrors(validation.error),
+    );
+  }
+
+  const { honeypot, name, company_name, email, message } = validation.data;
 
   if (honeypot) {
     // Return success to avoid giving feedback to bots
