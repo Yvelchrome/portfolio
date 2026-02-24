@@ -146,10 +146,10 @@ export function createBreakpointListener(
 
   callback(mediaQuery.matches);
 
-  const handler = (e: MediaQueryListEvent) => callback(e.matches);
+  const handler = (e: MediaQueryListEvent) => { callback(e.matches); };
   mediaQuery.addEventListener("change", handler);
 
-  return () => mediaQuery.removeEventListener("change", handler);
+  return () => { mediaQuery.removeEventListener("change", handler); };
 }
 
 /**

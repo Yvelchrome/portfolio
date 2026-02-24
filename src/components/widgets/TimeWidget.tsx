@@ -15,7 +15,7 @@ export const TimeWidget = () => {
       setCurrentTime(new Date());
     }, 1000);
 
-    return () => clearInterval(timer);
+    return () => { clearInterval(timer); };
   }, []);
 
   if (!isMounted) return null;

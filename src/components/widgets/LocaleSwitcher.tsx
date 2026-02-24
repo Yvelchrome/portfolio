@@ -72,7 +72,7 @@ export const LocaleSwitcher = () => {
           return (
             <button
               key={code}
-              onClick={() => handleLocaleChange(code)}
+              onClick={() => { handleLocaleChange(code); }}
               className={`*:no-locale-animation w-full cursor-pointer py-1 text-base font-medium ${
                 isActive
                   ? "text-primary-text-dark dark:text-primary-text-light"
