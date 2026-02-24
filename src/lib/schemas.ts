@@ -17,9 +17,10 @@ export const ContactFormSchema = z.object({
   email: z
     .string()
     .trim()
-    .email("Please enter a valid email address")
     .min(5, "Email must be at least 5 characters")
-    .max(254, "Email must be 254 characters or less"),
+    .max(254, "Email must be 254 characters or less")
+    .check(z.email("Please enter a valid email address"))
+    .toLowerCase(),
   message: z
     .string()
     .trim()
@@ -54,12 +55,14 @@ export type CSRFResponse = z.infer<typeof CSRFResponseSchema>;
  *
  * @throws Error if validation fails
  */
-export async function parseJsonWithZod<T extends z.ZodTypeAny>(
+export async function parseJsonWithZod<T extends z.ZodType>(
   response: Response,
   schema: T,
 ): Promise<z.infer<T>> {
   if (!response.ok) {
-    throw new Error(`HTTP Error: ${response.status} ${response.statusText}`);
+    throw new Error(
+      `HTTP Error: ${String(response.status)} ${response.statusText}`,
+    );
   }
 
   const data: unknown = await response.json();
@@ -67,7 +70,7 @@ export async function parseJsonWithZod<T extends z.ZodTypeAny>(
   const result = schema.safeParse(data);
 
   if (!result.success) {
-    console.error("Zod validation errors:", result.error.format());
+    console.error("Zod validation errors:", z.treeifyError(result.error));
     throw new Error("Response validation failed");
   }
 
@@ -80,7 +83,7 @@ export async function parseJsonWithZod<T extends z.ZodTypeAny>(
 export function formatZodErrors(error: z.ZodError): Record<string, string> {
   const formatted: Record<string, string> = {};
 
-  error.errors.forEach((err) => {
+  error.issues.forEach((err) => {
     const path = err.path.join(".");
     formatted[path] = err.message;
   });
