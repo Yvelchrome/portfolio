@@ -27,7 +27,7 @@ export function useCsrfToken() {
       }
     };
 
-    fetchToken();
+    void fetchToken();
   }, []);
 
   return { csrfToken, error, isLoading };

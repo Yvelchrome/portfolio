@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 
 import * as motion from "motion/react-client";
 
@@ -19,20 +19,21 @@ export const LocaleSwitcher = () => {
   const locale = useLocale();
   const isMounted = useMounted();
   const [isPending, startTransition] = useTransition();
+  const [changingLocale, setChangingLocale] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    document.body.dataset["localeChanging"] = changingLocale ? "true" : "false";
+  }, [changingLocale]);
 
   useEffect(() => {
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
-        document.body.dataset["localeChanging"] = "false";
       }
+      setChangingLocale(false);
     };
   }, []);
-
-  useEffect(() => {
-    document.body.dataset["localeChanging"] = "false";
-  }, [locale]);
 
   if (!isMounted) return null;
 
@@ -41,11 +42,12 @@ export const LocaleSwitcher = () => {
       clearTimeout(timeoutRef.current);
     }
 
-    document.body.dataset["localeChanging"] = "true";
+    setChangingLocale(true);
 
     timeoutRef.current = setTimeout(() => {
-      startTransition(() => {
-        setUserLocale(newLocale);
+      startTransition(async () => {
+        await setUserLocale(newLocale);
+        setChangingLocale(false);
       });
     }, 250);
   }
@@ -72,7 +74,9 @@ export const LocaleSwitcher = () => {
           return (
             <button
               key={code}
-              onClick={() => { handleLocaleChange(code); }}
+              onClick={() => {
+                handleLocaleChange(code);
+              }}
               className={`*:no-locale-animation w-full cursor-pointer py-1 text-base font-medium ${
                 isActive
                   ? "text-primary-text-dark dark:text-primary-text-light"

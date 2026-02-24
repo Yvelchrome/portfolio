@@ -37,6 +37,7 @@ const StickySectionAnimation = ({
 
   const { scrollYProgress } = useScroll({
     target: ref,
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     offset: [`start ${headerHeight}px`, "end start"],
   });
 

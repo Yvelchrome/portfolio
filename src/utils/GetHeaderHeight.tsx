@@ -1,4 +1,4 @@
-export function getHeaderHeight(defaultHeight = 80) {
+export function getHeaderHeight(defaultHeight = 80): number {
   if (typeof window === "undefined") return defaultHeight;
 
   const header = document.querySelector("header");

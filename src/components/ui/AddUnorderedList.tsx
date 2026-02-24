@@ -38,7 +38,7 @@ export const AddUnorderedList = ({
     // If icon is StaticImageData
     if (
       typeof icon === "string" ||
-      (typeof icon === "object" && icon !== null && "src" in icon)
+      (typeof icon === "object" && "src" in icon)
     ) {
       return (
         <Image src={icon} alt={iconAlt} width={iconSize} height={iconSize} />
@@ -65,7 +65,7 @@ export const AddUnorderedList = ({
         {normalizedItems.map((item, index) => (
           <li
             className="no-locale-animation **:no-locale-animation flex items-center lg:gap-4"
-            key={`${intlTitle}-${index}-${item.text}`}
+            key={`${intlTitle}-${String(index)}-${item.text}`}
           >
             <ConditionalWrapper
               condition={!!item.href}

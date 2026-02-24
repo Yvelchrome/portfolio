@@ -55,9 +55,7 @@ export const HorizontalScrollWrapper = ({
     updateSizes();
 
     const resizeObserver = new ResizeObserver(updateSizes);
-    if (contentRef.current) {
-      resizeObserver.observe(contentRef.current);
-    }
+    resizeObserver.observe(contentRef.current);
     window.addEventListener("resize", updateSizes);
 
     return () => {

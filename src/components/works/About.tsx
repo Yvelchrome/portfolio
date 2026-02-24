@@ -37,7 +37,7 @@ export const About = ({ paragraph, mainColor, images }: WorksAboutProps) => {
           >
             <Image
               src={image}
-              alt={`negatifplus image ${index + 1}`}
+              alt={`project image ${String(index + 1)}`}
               className="aspect-16/10 object-cover"
             />
           </motion.div>

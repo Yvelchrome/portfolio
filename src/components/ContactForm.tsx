@@ -94,7 +94,7 @@ export const ContactForm = () => {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={void form.handleSubmit(onSubmit)}
         className="max-w-2xl space-y-6"
         aria-label="Contact form"
       >
@@ -195,7 +195,7 @@ export const ContactForm = () => {
                 <Textarea
                   {...field}
                   placeholder={t("form_field_message")}
-                  className="max-h-[480px] min-h-[120px]"
+                  className="max-h-120 min-h-30"
                   required
                   maxLength={5000}
                 />

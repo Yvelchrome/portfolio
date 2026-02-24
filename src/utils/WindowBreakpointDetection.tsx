@@ -139,17 +139,21 @@ export function createBreakpointListener(
   const value = BREAKPOINTS[breakpoint];
   const query =
     dimension === "width"
-      ? `(min-width: ${value}px)`
-      : `(min-height: ${value}px)`;
+      ? `(min-width: ${String(value)}px)`
+      : `(min-height: ${String(value)}px)`;
 
   const mediaQuery = window.matchMedia(query);
 
   callback(mediaQuery.matches);
 
-  const handler = (e: MediaQueryListEvent) => { callback(e.matches); };
+  const handler = (e: MediaQueryListEvent) => {
+    callback(e.matches);
+  };
   mediaQuery.addEventListener("change", handler);
 
-  return () => { mediaQuery.removeEventListener("change", handler); };
+  return () => {
+    mediaQuery.removeEventListener("change", handler);
+  };
 }
 
 /**

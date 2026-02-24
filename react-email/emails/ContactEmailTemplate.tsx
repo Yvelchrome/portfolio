@@ -1,5 +1,3 @@
-import * as React from "react";
-
 import {
   Body,
   Container,
@@ -44,18 +42,18 @@ export const ContactEmailTemplate = ({
                 className="mx-auto my-0"
               />
             </Section>
-            <Heading className="text-primary-text-light mx-0 my-[30px] p-0 text-center text-[24px] font-normal">
+            <Heading className="text-primary-text-light mx-0 my-7.5 p-0 text-center text-[24px] font-normal">
               <strong>Email: {email}</strong>
               {name && (
                 <>
                   <br />
-                  <strong>Name: {name ?? "Anonymous"}</strong>
+                  <strong>Name: {name}</strong>
                 </>
               )}
               {company_name && (
                 <>
                   <br />
-                  <strong>Company name: {company_name ?? "Anonymous"}</strong>
+                  <strong>Company name: {company_name}</strong>
                 </>
               )}
             </Heading>

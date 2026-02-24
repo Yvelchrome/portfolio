@@ -124,11 +124,11 @@ const GlowingEffect = memo(
     }, [handleMove, disabled]);
 
     const glowStyle: React.CSSProperties = {
-      "--blur": `${blur}px`,
+      "--blur": `${String(blur)}px`,
       "--spread": spread,
       "--start": "0",
       "--active": "0",
-      "--glowingeffect-border-width": `${borderWidth}px`,
+      "--glowingeffect-border-width": `${String(borderWidth)}px`,
       "--repeating-conic-gradient-times": "5",
       "--gradient":
         variant === "white"

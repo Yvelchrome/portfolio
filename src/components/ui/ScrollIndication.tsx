@@ -39,7 +39,7 @@ export const ScrollIndication = ({
 
   return (
     <motion.div
-      className={`absolute ${flexDirection} ${positionClassName} lg:h-md:flex hidden items-center justify-center`}
+      className={`absolute ${flexDirection} ${String(positionClassName)} lg:h-md:flex hidden items-center justify-center`}
       variants={fadeInFromTop}
       style={{ opacity }}
     >

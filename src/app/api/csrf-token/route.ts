@@ -6,6 +6,8 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const token = process.env["CSRF_SECRET"] ?? null;
 
+  await Promise.resolve();
+
   const data = CSRFResponseSchema.parse({ csrfToken: token });
 
   return NextResponse.json(data);
