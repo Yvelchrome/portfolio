@@ -17,8 +17,19 @@ export const BREAKPOINTS = {
   "h-lg": 900,
   "h-xl": 1024,
 } as const;
-
 export type BreakpointKey = keyof typeof BREAKPOINTS;
+
+const isBreakpointKey = (key: string): key is BreakpointKey => {
+  return key in BREAKPOINTS;
+};
+
+const SORTED_WIDTH_BREAKPOINTS = Object.entries(BREAKPOINTS)
+  .filter(([key]) => !key.startsWith("h-"))
+  .sort(([, a], [, b]) => b - a);
+
+const SORTED_HEIGHT_BREAKPOINTS = Object.entries(BREAKPOINTS)
+  .filter(([key]) => key.startsWith("h-"))
+  .sort(([, a], [, b]) => b - a);
 
 /**
  * Check if current viewport matches a width breakpoint
@@ -47,14 +58,11 @@ export function getCurrentWidthBreakpoint(): BreakpointKey | null {
   if (typeof window === "undefined") return null;
 
   const width = window.innerWidth;
-  const widthBreakpoints = Object.entries(BREAKPOINTS)
-    .filter(([key]) => !key.startsWith("h-"))
-    .sort(([, a], [, b]) => b - a);
 
-  for (const [key, value] of widthBreakpoints) {
-    if (width >= value) {
-      return key as BreakpointKey;
-    }
+  for (const [key, value] of SORTED_WIDTH_BREAKPOINTS) {
+    if (!isBreakpointKey(key)) continue;
+
+    if (width >= value) return key;
   }
 
   return null;
@@ -67,14 +75,11 @@ export function getCurrentHeightBreakpoint(): BreakpointKey | null {
   if (typeof window === "undefined") return null;
 
   const height = window.innerHeight;
-  const heightBreakpoints = Object.entries(BREAKPOINTS)
-    .filter(([key]) => key.startsWith("h-"))
-    .sort(([, a], [, b]) => b - a);
 
-  for (const [key, value] of heightBreakpoints) {
-    if (height >= value) {
-      return key as BreakpointKey;
-    }
+  for (const [key, value] of SORTED_HEIGHT_BREAKPOINTS) {
+    if (!isBreakpointKey(key)) continue;
+
+    if (height >= value) return key;
   }
 
   return null;
