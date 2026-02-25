@@ -15,14 +15,21 @@ export const ThemeToggle = () => {
   return (
     <motion.button
       className={`theme-toggle cursor-pointer rounded-full p-2`}
-      onClick={() => { setTheme(theme == "light" ? "dark" : "light"); }}
+      onClick={() => {
+        setTheme(theme == "light" ? "dark" : "light");
+      }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       aria-label={
         theme === "light" ? "Switch to dark mode" : "Switch to light mode"
       }
     >
-      <svg className="sun-and-moon" width="26" height="26" viewBox="0 0 24 24">
+      <svg
+        className="sun-and-moon pointer-events-none"
+        width="26"
+        height="26"
+        viewBox="0 0 24 24"
+      >
         <mask className="moon" id="moon-mask">
           <rect x="0" y="0" width="100%" height="100%" fill="white" />
           <circle cx="24" cy="10" r="6" fill="black" />

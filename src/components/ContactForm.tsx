@@ -210,7 +210,7 @@ export const ContactForm = () => {
 
         <Button
           type="submit"
-          className="w-full md:w-auto"
+          className="w-full cursor-pointer md:w-auto"
           disabled={isSubmitting}
           aria-busy={isSubmitting}
         >

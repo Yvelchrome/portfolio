@@ -74,7 +74,7 @@ export const AddUnorderedList = ({
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-2 sm:gap-4"
+                  className="group flex items-center gap-2 *:pointer-events-none sm:gap-4"
                 >
                   {children}
                 </a>

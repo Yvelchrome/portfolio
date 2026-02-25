@@ -14,12 +14,12 @@ interface Social {
 export const Socials = () => {
   const socials: Social[] = [
     {
-      icon: <Github className="text-4xl" />,
+      icon: <Github />,
       href: "https://github.com/Yvelchrome",
       label: "GitHub Profile",
     },
     {
-      icon: <Linkedin className="text-4xl text-[#0A66C2]" />,
+      icon: <Linkedin className="text-[#0A66C2]" />,
       href: "https://www.linkedin.com/in/steven-godin/",
       label: "LinkedIn Profile",
     },
@@ -36,7 +36,7 @@ export const Socials = () => {
           aria-label={label}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="no-locale-animation"
+          className="no-locale-animation *:pointer-events-none *:text-4xl"
         >
           {icon}
         </motion.a>

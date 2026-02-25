@@ -10,7 +10,7 @@ export const CloseButton = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        <XIcon />
+        <XIcon className="pointer-events-none" />
       </motion.div>
     </Link>
   );
