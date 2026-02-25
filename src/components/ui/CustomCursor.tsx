@@ -8,6 +8,10 @@ import { useEffect } from "react";
 import { useMediaQuery } from "lib/hooks/useMediaQuery";
 import { useMounted } from "lib/hooks/useMounted";
 
+function isHTMLElement(target: EventTarget | null): target is HTMLElement {
+  return target instanceof HTMLElement;
+}
+
 export const CustomCursor = () => {
   const cursorSize = 15;
   const hoveringClickable = useMotionValue(0);
@@ -31,35 +35,41 @@ export const CustomCursor = () => {
   );
   const fontSize = useTransform(hoveringClickable, [0, 1], ["12px", "30px"]);
 
-  const manageMouseMove = (e: MouseEvent) => {
-    const { clientX, clientY } = e;
-    mouse.x.set(clientX - cursorSize / 2);
-    mouse.y.set(clientY - cursorSize / 2);
-  };
-
-  const handleMouseOver = (e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (target.closest("button, a")) {
-      animate(hoveringClickable, 1, {
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-      });
-    }
-  };
-
-  const handleMouseOut = (e: MouseEvent) => {
-    const target = e.target as HTMLElement;
-    if (target.closest("button, a")) {
-      animate(hoveringClickable, 0, {
-        type: "spring",
-        stiffness: 300,
-        damping: 20,
-      });
-    }
-  };
-
   useEffect(() => {
+    const manageMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      mouse.x.set(clientX - cursorSize / 2);
+      mouse.y.set(clientY - cursorSize / 2);
+    };
+
+    const handleMouseOver = (e: MouseEvent) => {
+      const target = e.target;
+      if (!isHTMLElement(target)) return;
+
+      if (target.closest("button, a")) {
+        console.log(target.closest("button, a"));
+
+        animate(hoveringClickable, 1, {
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+        });
+      }
+    };
+
+    const handleMouseOut = (e: MouseEvent) => {
+      const target = e.target;
+      if (!isHTMLElement(target)) return;
+
+      if (target.closest("button, a")) {
+        animate(hoveringClickable, 0, {
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+        });
+      }
+    };
+
     window.addEventListener("mousemove", manageMouseMove);
     window.addEventListener("mouseover", handleMouseOver);
     window.addEventListener("mouseout", handleMouseOut);
@@ -69,7 +79,7 @@ export const CustomCursor = () => {
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mouseout", handleMouseOut);
     };
-  }, []);
+  }, [hoveringClickable, mouse.x, mouse.y, cursorSize]);
 
   const isMounted = useMounted();
   const hasFinePointer = useMediaQuery("(pointer: fine)");
