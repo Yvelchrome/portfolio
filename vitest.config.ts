@@ -7,6 +7,7 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./tests/setup.ts"],
+    typecheck: { enabled: true },
     globals: true,
     coverage: {
       provider: "v8",
@@ -26,6 +27,7 @@ export default defineConfig({
   resolve: {
     alias: {
       components: path.resolve(__dirname, "src/components"),
+      lib: path.resolve(__dirname, "src/lib"),
     },
   },
 });

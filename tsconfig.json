@@ -42,7 +42,10 @@
     },
 
     /* Next.js */
-    "plugins": [{ "name": "next" }]
+    "plugins": [{ "name": "next" }],
+
+    /* Vitest */
+    "types": ["vitest/globals"]
   },
   "include": [
     "src/types/**/*.d.ts",
