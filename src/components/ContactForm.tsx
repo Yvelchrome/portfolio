@@ -36,6 +36,8 @@ export const ContactForm = () => {
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(ContactFormSchema),
+    mode: "onBlur",
+    reValidateMode: "onChange",
     defaultValues: {
       honeypot: "",
       name: "",
@@ -100,6 +102,7 @@ export const ContactForm = () => {
         }}
         className="max-w-2xl space-y-6"
         aria-label="Contact form"
+        noValidate
       >
         {/* Honeypot Field - Hidden from users */}
         <div className="sr-only" aria-hidden="true">
@@ -166,7 +169,7 @@ export const ContactForm = () => {
         <FormField
           control={form.control}
           name="email"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
               <FormLabel>
                 {t("email")} <span className="text-red-600">*</span>
@@ -179,6 +182,7 @@ export const ContactForm = () => {
                   required
                   autoComplete="email"
                   maxLength={254}
+                  aria-invalid={fieldState.invalid}
                 />
               </FormControl>
               <FormMessage />
@@ -189,7 +193,7 @@ export const ContactForm = () => {
         <FormField
           control={form.control}
           name="message"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
               <FormLabel>
                 {t("message")} <span className="text-red-600">*</span>
@@ -201,6 +205,7 @@ export const ContactForm = () => {
                   className="max-h-120 min-h-30"
                   required
                   maxLength={5000}
+                  aria-invalid={fieldState.invalid}
                 />
               </FormControl>
               <FormMessage />
