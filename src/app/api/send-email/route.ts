@@ -5,9 +5,7 @@ import { ContactFormSchema, formatZodErrors } from "lib/schemas";
 
 import { Resend } from "resend";
 
-import { ContactEmailTemplate } from "components";
-
-const resend = new Resend(process.env["RESEND_API_KEY"]);
+import ContactEmailTemplate from "emails/ContactEmailTemplate";
 
 interface ErrorResponse {
   success: false;
