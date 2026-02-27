@@ -73,8 +73,8 @@ export const ContactForm = () => {
         throw new Error("Invalid response from server");
       }
 
-      if (result.error) {
-        throw new Error(result.error);
+      if (!result.success) {
+        throw new Error(result.error ?? "Unknown error");
       }
 
       toast(tT("contact_form_success_title"), {
