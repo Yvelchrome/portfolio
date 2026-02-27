@@ -80,12 +80,15 @@ export async function parseJsonWithZod<T extends z.ZodType>(
 /**
  * Format Zod errors for user-friendly display
  */
-export function formatZodErrors(error: z.ZodError): Record<string, string> {
-  const formatted: Record<string, string> = {};
+export function formatZodErrors(error: z.ZodError): Record<string, string[]> {
+  const formatted: Record<string, string[]> = {};
 
   error.issues.forEach((err) => {
     const path = err.path.join(".");
-    formatted[path] = err.message;
+    if (!formatted[path]) {
+      formatted[path] = [];
+    }
+    formatted[path].push(err.message);
   });
 
   return formatted;
