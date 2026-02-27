@@ -7,6 +7,20 @@ import { Resend } from "resend";
 
 import ContactEmailTemplate from "emails/ContactEmailTemplate";
 
+let resend: Resend | undefined = undefined;
+export async function getResendInstance(): Promise<Resend> {
+  await Promise.resolve();
+
+  if (!resend) {
+    if (!process.env["RESEND_API_KEY"]) {
+      throw new Error("RESEND_API_KEY is not set");
+    }
+
+    resend = new Resend(process.env["RESEND_API_KEY"]);
+  }
+  return resend;
+}
+
 interface ErrorResponse {
   success: false;
   error: string;
@@ -29,6 +43,8 @@ const createErrorResponse = (
 };
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  const resend = await getResendInstance();
+
   const csrfToken = request.headers.get("x-csrf-token");
   if (!csrfToken || csrfToken !== process.env["CSRF_SECRET"]) {
     return createErrorResponse("Invalid CSRF token", 403);
