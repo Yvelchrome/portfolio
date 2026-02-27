@@ -33,7 +33,7 @@ export type ContactFormData = z.infer<typeof ContactFormSchema>;
 /* ==================== API RESPONSES ==================== */
 
 export const ApiResponseSchema = z.object({
-  success: z.boolean().optional(),
+  success: z.boolean(),
   message: z.string().optional(),
   error: z.string().optional(),
 });
