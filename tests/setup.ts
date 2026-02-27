@@ -1,15 +1,12 @@
 import "@testing-library/jest-dom";
 import { cleanup } from "@testing-library/react";
-import { beforeEach, afterEach, vi } from "vitest";
+import { beforeEach, vi } from "vitest";
 
 beforeEach(() => {
-  global.fetch = vi.fn();
-});
-
-afterEach(() => {
   cleanup();
   vi.restoreAllMocks();
   vi.clearAllMocks();
+  global.fetch = vi.fn();
 });
 
 Object.defineProperty(window, "matchMedia", {
