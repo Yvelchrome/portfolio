@@ -54,8 +54,6 @@ export const CustomCursor = () => {
       if (!isHTMLElement(target)) return;
 
       if (target.closest("button, a")) {
-        console.log(target.closest("button, a"));
-
         animate(hoveringClickable, 1, {
           type: "spring",
           stiffness: 300,
