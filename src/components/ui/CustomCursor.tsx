@@ -12,8 +12,11 @@ function isHTMLElement(target: EventTarget | null): target is HTMLElement {
   return target instanceof HTMLElement;
 }
 
+export const BASE_CURSOR_SIZE = 16 as number;
+export const MAX_CURSOR_SIZE = 40 as number;
+
+
 export const CustomCursor = () => {
-  const cursorSize = 15;
   const hoveringClickable = useMotionValue(0);
 
   const mouse = {
@@ -27,7 +30,11 @@ export const CustomCursor = () => {
     y: useSpring(mouse.y, smoothOptions),
   };
 
-  const circleSize = useTransform(hoveringClickable, [0, 1], [16, 40]);
+  const circleSize = useTransform(
+    hoveringClickable,
+    [0, 1],
+    [BASE_CURSOR_SIZE, MAX_CURSOR_SIZE],
+  );
   const transformTranslate = useTransform(
     hoveringClickable,
     [0, 1],
@@ -38,8 +45,8 @@ export const CustomCursor = () => {
   useEffect(() => {
     const manageMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
-      mouse.x.set(clientX - cursorSize / 2);
-      mouse.y.set(clientY - cursorSize / 2);
+      mouse.x.set(clientX - BASE_CURSOR_SIZE / 2);
+      mouse.y.set(clientY - BASE_CURSOR_SIZE / 2);
     };
 
     const handleMouseOver = (e: MouseEvent) => {
@@ -79,7 +86,7 @@ export const CustomCursor = () => {
       window.removeEventListener("mouseover", handleMouseOver);
       window.removeEventListener("mouseout", handleMouseOut);
     };
-  }, [hoveringClickable, mouse.x, mouse.y, cursorSize]);
+  }, [hoveringClickable, mouse.x, mouse.y]);
 
   const isMounted = useMounted();
   const hasFinePointer = useMediaQuery("(pointer: fine)");
