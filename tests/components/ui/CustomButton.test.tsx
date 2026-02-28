@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { CustomButton } from "components/ui/CustomButton";
 
 describe("CustomButton Component", () => {
@@ -29,5 +29,25 @@ describe("CustomButton Component", () => {
 
     const arrow = screen.getByText("→");
     expect(arrow).toHaveStyle({ transform: "rotate(90deg)" });
+  });
+
+  it("does not apply vertical offset when yAnimate is false (default)", async () => {
+    render(<CustomButton text="Test" yAnimate={false} />);
+
+    const arrow = screen.getByText("→");
+    await waitFor(() => {
+      const transform = arrow.style.transform;
+      expect(transform).not.toMatch(/translateY/i);
+    });
+  });
+
+  it("applies vertical offset when yAnimate is true", async () => {
+    render(<CustomButton text="Test" yAnimate />);
+
+    const arrow = screen.getByText("→");
+    await waitFor(() => {
+      const transform = arrow.style.transform;
+      expect(transform).toMatch(/translateY/i);
+    });
   });
 });
