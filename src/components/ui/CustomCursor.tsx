@@ -101,6 +101,7 @@ export const CustomCursor = () => {
         height: circleSize,
       }}
       className="pointer-events-none fixed z-50 transform-gpu items-center justify-center rounded-full bg-white mix-blend-difference will-change-transform"
+      data-testid="custom-cursor"
     >
       <motion.span
         style={{ opacity: hoveringClickable, fontSize }}
