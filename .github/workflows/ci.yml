@@ -8,19 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  pr-info:
-    name: PR Information
-    runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && contains(fromJSON('["opened", "reopened"]'), github.event.action)
-    steps:
-      - name: PR Info
-        run: |
-          echo "PR #${{ github.event.pull_request.number }}"
-          echo "Branch: ${{ github.head_ref }}"
-          echo "Author: ${{ github.actor }}"
-          echo "Title: ${{ github.event.pull_request.title }}"
-          echo "Labels: ${{ github.event.pull_request.labels.*.name }}"
-
   quality:
     name: Lint & TypeCheck & Test
     runs-on: ubuntu-latest
