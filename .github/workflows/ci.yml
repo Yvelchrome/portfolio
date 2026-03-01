@@ -1,0 +1,83 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+
+jobs:
+  quality:
+    name: Lint & TypeCheck & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node-pnpm
+
+      - run: pnpm run lint
+      - run: pnpm run typecheck
+      - run: pnpm run test:coverage
+
+      - name: Comment PR with coverage
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = 'coverage/coverage-summary.json';
+
+            if (!fs.existsSync(path)) {
+              core.warning('Coverage summary not found');
+              return;
+            }
+
+            const coverage = JSON.parse(fs.readFileSync(path, 'utf8'));
+
+            const comment = `## Test Coverage
+
+            | Metric | Coverage |
+            |--------|----------|
+            | Statements | ${coverage.total.statements.pct}% |
+            | Branches | ${coverage.total.branches.pct}% |
+            | Functions | ${coverage.total.functions.pct}% |
+            | Lines | ${coverage.total.lines.pct}% |
+            `;
+
+            const allCurrentComments = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = allCurrentComments.data.find(
+              c => c.user.type === "Bot" && c.body.startsWith("## Test Coverage")
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: comment
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: comment
+              });
+            }
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: quality
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-node-pnpm
+
+      - run: pnpm run build

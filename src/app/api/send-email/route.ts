@@ -12,13 +12,28 @@ export async function getResendInstance(): Promise<Resend> {
   await Promise.resolve();
 
   if (!resend) {
-    if (!process.env["RESEND_API_KEY"]) {
+    const envResend = process.env["RESEND_API_KEY"];
+    if (!envResend) {
       throw new Error("RESEND_API_KEY is not set");
     }
 
-    resend = new Resend(process.env["RESEND_API_KEY"]);
+    resend = new Resend(envResend);
   }
   return resend;
+}
+
+let targetEmail: string | undefined = undefined;
+export async function getTargetEmail(): Promise<string> {
+  await Promise.resolve();
+
+  if (!targetEmail) {
+    const envTargetEmail = process.env["TARGET_EMAIL"];
+    if (!envTargetEmail) throw new Error("TARGET_EMAIL is not set");
+
+    targetEmail = envTargetEmail;
+  }
+
+  return targetEmail;
 }
 
 interface ErrorResponse {
@@ -44,6 +59,7 @@ const createErrorResponse = (
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const resend = await getResendInstance();
+  const targetEmail = await getTargetEmail();
 
   const csrfToken = request.headers.get("x-csrf-token");
   if (!csrfToken || csrfToken !== process.env["CSRF_SECRET"]) {
@@ -72,7 +88,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
     const { data, error } = await resend.emails.send({
       from: "Portfolio Contact Form <onboarding@resend.dev>",
-      to: "stevengodin78@gmail.com",
+      to: targetEmail,
       subject: `New message from: ${email}`,
       react: ContactEmailTemplate({ name, company_name, email, message }),
     });
