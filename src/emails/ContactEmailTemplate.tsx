@@ -18,14 +18,14 @@ interface EmailProps {
   message: string;
 }
 
-export const ContactEmailTemplate = ({
+const ContactEmailTemplate = ({
   name,
   company_name,
   email,
   message,
 }: EmailProps) => {
   const vercelUrl = process.env["VERCEL_URL"];
-  const baseUrl = vercelUrl ? `https://${vercelUrl}` : "";
+  const baseUrl = vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000";
 
   return (
     <Html>
