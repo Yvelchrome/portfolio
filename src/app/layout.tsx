@@ -13,6 +13,7 @@ import { getLocale, getMessages } from "next-intl/server";
 
 import { CustomCursor, Footer, Header, SmoothScrolling } from "components";
 import { Toaster } from "components/shadcn/sonner";
+import { getContactInfo } from "utils";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -59,6 +60,8 @@ export default async function LocaleLayout({
   const locale = await getLocale();
   const messages = await getMessages();
 
+  const contactInfo = getContactInfo();
+
   return (
     <html lang={locale} suppressHydrationWarning>
       <motion.body
@@ -69,7 +72,7 @@ export default async function LocaleLayout({
             <ThemeProvider>
               <Header />
               <main className="relative container mx-auto">{children}</main>
-              <Footer />
+              <Footer {...contactInfo} />
               <CustomCursor />
               <Toaster position="bottom-center" />
               <SpeedInsights />
