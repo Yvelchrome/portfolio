@@ -5,6 +5,7 @@ import { ApiResponseSchema } from "lib/schemas";
 
 process.env["CSRF_SECRET"] = "test-csrf-secret";
 process.env["RESEND_API_KEY"] = "test-resend-key";
+process.env["TARGET_EMAIL"] = "myemail@test.com";
 
 const resendSendMock = vi
   .fn()
@@ -118,7 +119,7 @@ describe("POST /api/send-email", () => {
     };
 
     expect(typeof callArg.from).toBe("string");
-    expect(callArg.to).toContain("stevengodin78@gmail.com");
+    expect(callArg.to).toContain(process.env["TARGET_EMAIL"]);
     expect(callArg.subject).toContain("test@example.com");
   });
 });
@@ -132,6 +133,16 @@ describe("Resend failures", () => {
     await expect(getResendInstance()).rejects.toThrow(
       "RESEND_API_KEY is not set",
     );
+
+    vi.unstubAllEnvs();
+  });
+
+  it("handles error if TARGET_EMAIL environment variable is not set", async () => {
+    vi.resetModules();
+    vi.stubEnv("TARGET_EMAIL", undefined);
+
+    const { getTargetEmail } = await import("app/api/send-email/route");
+    await expect(getTargetEmail()).rejects.toThrow("TARGET_EMAIL is not set");
 
     vi.unstubAllEnvs();
   });

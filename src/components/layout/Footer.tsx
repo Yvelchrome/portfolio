@@ -14,7 +14,12 @@ import { usePathname } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
-export const Footer = () => {
+interface FooterProps {
+  email: string | undefined;
+  phone: string | undefined;
+}
+
+export const Footer = ({ email, phone }: FooterProps) => {
   const t = useTranslations("Section");
 
   const pathname = usePathname();
@@ -33,7 +38,7 @@ export const Footer = () => {
       <div className="md:h-sm:h-175 md:h-sm:fixed right-0 bottom-0 left-0 mr-(--removed-body-scroll-bar-size)">
         <div className="md:h-sm:pt-0 container mx-auto flex h-full flex-col justify-end space-y-6 px-4 py-8 sm:px-8 lg:space-y-12">
           <a
-            href="mailto:stevengodin78@gmail.com"
+            href={email ? `mailto:${email}` : "/contact"}
             className="group text-fluid-8xl relative self-center overflow-hidden uppercase"
           >
             {t("contact_send_email")}{" "}
@@ -66,18 +71,25 @@ export const Footer = () => {
               ]}
               listClassName="text-fluid-4xl lg:space-y-6 space-y-3"
             />
-            <div className="space-y-6 lg:space-y-12">
-              <AddUnorderedList
-                intlTitle="contact_email"
-                items={["stevengodin78@gmail.com"]}
-                listClassName="text-fluid-4xl"
-              />
-              <AddUnorderedList
-                intlTitle="contact_phone"
-                items={["+33 7 83 11 06 75"]}
-                listClassName="text-fluid-4xl"
-              />
-            </div>
+            {(email || phone) && (
+              <div className="space-y-6 lg:space-y-12">
+                {email && (
+                  <AddUnorderedList
+                    intlTitle="contact_email"
+                    items={[email]}
+                    listClassName="text-fluid-4xl"
+                  />
+                )}
+
+                {phone && (
+                  <AddUnorderedList
+                    intlTitle="contact_phone"
+                    items={[phone]}
+                    listClassName="text-fluid-4xl"
+                  />
+                )}
+              </div>
+            )}
           </div>
           <div className="flex gap-4">
             <ResumeViewer />
