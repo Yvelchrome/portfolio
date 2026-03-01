@@ -11,7 +11,7 @@ jobs:
   pr-info:
     name: PR Information
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && contains(['opened', 'reopened'], github.event.action)
+    if: github.event_name == 'pull_request' && contains(fromJSON(['opened', 'reopened']), github.event.action)
     steps:
       - name: PR Info
         run: |
