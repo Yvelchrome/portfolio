@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act } from "@testing-library/react";
 import { useMediaQuery } from "lib/hooks/useMediaQuery";
+import * as WindowEnv from "utils/windowEnv";
 
 describe("useMediaQuery", () => {
   let originalMatchMedia: typeof window.matchMedia;
@@ -11,7 +12,6 @@ describe("useMediaQuery", () => {
 
   afterEach(() => {
     window.matchMedia = originalMatchMedia;
-    vi.restoreAllMocks();
   });
 
   const mockMatchMedia = (initialMatches: boolean) => {
@@ -86,5 +86,14 @@ describe("useMediaQuery", () => {
     unmount();
 
     expect(removeEventListener).toHaveBeenCalled();
+  });
+
+  describe("SSR checks | Mock window = undefined", () => {
+    it("useMediaQuery hook returns false", () => {
+      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
+
+      const { result } = renderHook(() => useMediaQuery("(min-width: 768px)"));
+      expect(result.current).toBe(false);
+    });
   });
 });
