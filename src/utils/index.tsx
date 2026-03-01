@@ -7,6 +7,4 @@ export {
   getCurrentWidthBreakpoint,
   getCurrentHeightBreakpoint,
   useBreakpoint,
-  createBreakpointListener,
-  getBreakpointState,
 } from "./WindowBreakpointDetection";

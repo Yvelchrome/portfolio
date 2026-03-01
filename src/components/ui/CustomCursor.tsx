@@ -1,34 +1,55 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { useMotionValue, useTransform, useSpring, animate } from "motion/react";
+import {
+  type MotionValue,
+  useMotionValue,
+  useTransform,
+  useSpring,
+  animate,
+  SpringOptions,
+} from "motion/react";
 
 import { useEffect } from "react";
 
 import { useMediaQuery } from "lib/hooks/useMediaQuery";
 import { useMounted } from "lib/hooks/useMounted";
 
-function isHTMLElement(target: EventTarget | null): target is HTMLElement {
-  return target instanceof HTMLElement;
-}
+const smoothOptions: SpringOptions = {
+  damping: 20,
+  stiffness: 300,
+  mass: 0.5,
+};
+export const BASE_CURSOR_SIZE = 16;
+export const MAX_CURSOR_SIZE = 40;
+
+export const isHoveringClickable = (target: EventTarget | null): boolean => {
+  return target instanceof HTMLElement && !!target.closest("button, a");
+};
+
+const handleHoveringClickable = (
+  target: EventTarget | null,
+  hoveringClickable: MotionValue<number>,
+  hoveringClickableValue: 0 | 1,
+) => {
+  if (!isHoveringClickable(target)) return;
+
+  animate(hoveringClickable, hoveringClickableValue, smoothOptions);
+};
 
 export const CustomCursor = () => {
-  const cursorSize = 15;
   const hoveringClickable = useMotionValue(0);
+  const mouse = { x: useMotionValue(0), y: useMotionValue(0) };
 
-  const mouse = {
-    x: useMotionValue(0),
-    y: useMotionValue(0),
-  };
+  const smoothMouseX = useSpring(mouse.x, smoothOptions);
+  const smoothMouseY = useSpring(mouse.y, smoothOptions);
 
-  const smoothOptions = { damping: 20, stiffness: 300, mass: 0.5 };
-  const smoothMouse = {
-    x: useSpring(mouse.x, smoothOptions),
-    y: useSpring(mouse.y, smoothOptions),
-  };
-
-  const circleSize = useTransform(hoveringClickable, [0, 1], [16, 40]);
-  const transformTranslate = useTransform(
+  const cursorSize = useTransform(
+    hoveringClickable,
+    [0, 1],
+    [BASE_CURSOR_SIZE, MAX_CURSOR_SIZE],
+  );
+  const cursorTranslate = useTransform(
     hoveringClickable,
     [0, 1],
     ["0%", "-25%"],
@@ -36,66 +57,46 @@ export const CustomCursor = () => {
   const fontSize = useTransform(hoveringClickable, [0, 1], ["12px", "30px"]);
 
   useEffect(() => {
-    const manageMouseMove = (e: MouseEvent) => {
+    const onMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
-      mouse.x.set(clientX - cursorSize / 2);
-      mouse.y.set(clientY - cursorSize / 2);
+      mouse.x.set(clientX - BASE_CURSOR_SIZE / 2);
+      mouse.y.set(clientY - BASE_CURSOR_SIZE / 2);
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target;
-      if (!isHTMLElement(target)) return;
-
-      if (target.closest("button, a")) {
-        console.log(target.closest("button, a"));
-
-        animate(hoveringClickable, 1, {
-          type: "spring",
-          stiffness: 300,
-          damping: 20,
-        });
-      }
+    const onMouseOver = (e: MouseEvent) => {
+      handleHoveringClickable(e.target, hoveringClickable, 1);
+    };
+    const onMouseOut = (e: MouseEvent) => {
+      handleHoveringClickable(e.target, hoveringClickable, 0);
     };
 
-    const handleMouseOut = (e: MouseEvent) => {
-      const target = e.target;
-      if (!isHTMLElement(target)) return;
-
-      if (target.closest("button, a")) {
-        animate(hoveringClickable, 0, {
-          type: "spring",
-          stiffness: 300,
-          damping: 20,
-        });
-      }
-    };
-
-    window.addEventListener("mousemove", manageMouseMove);
-    window.addEventListener("mouseover", handleMouseOver);
-    window.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseover", onMouseOver);
+    window.addEventListener("mouseout", onMouseOut);
 
     return () => {
-      window.removeEventListener("mousemove", manageMouseMove);
-      window.removeEventListener("mouseover", handleMouseOver);
-      window.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseover", onMouseOver);
+      window.removeEventListener("mouseout", onMouseOut);
     };
-  }, [hoveringClickable, mouse.x, mouse.y, cursorSize]);
+  }, [hoveringClickable, mouse.x, mouse.y]);
 
   const isMounted = useMounted();
   const hasFinePointer = useMediaQuery("(pointer: fine)");
-  if (!isMounted || !hasFinePointer) return;
+  if (!isMounted || !hasFinePointer) return null;
 
   return (
     <motion.div
       style={{
-        left: smoothMouse.x,
-        top: smoothMouse.y,
-        translateX: transformTranslate,
-        translateY: transformTranslate,
-        width: circleSize,
-        height: circleSize,
+        left: smoothMouseX,
+        top: smoothMouseY,
+        width: cursorSize,
+        height: cursorSize,
+        translateX: cursorTranslate,
+        translateY: cursorTranslate,
       }}
       className="pointer-events-none fixed z-50 transform-gpu items-center justify-center rounded-full bg-white mix-blend-difference will-change-transform"
+      data-testid="custom-cursor"
     >
       <motion.span
         style={{ opacity: hoveringClickable, fontSize }}

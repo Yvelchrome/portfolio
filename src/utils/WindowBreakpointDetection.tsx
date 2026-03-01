@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { hasWindow } from "./windowEnv";
 
 export const BREAKPOINTS = {
   // Width breakpoints (standard Tailwind)
@@ -19,23 +20,19 @@ export const BREAKPOINTS = {
 } as const;
 export type BreakpointKey = keyof typeof BREAKPOINTS;
 
-const isBreakpointKey = (key: string): key is BreakpointKey => {
-  return key in BREAKPOINTS;
-};
-
 const SORTED_WIDTH_BREAKPOINTS = Object.entries(BREAKPOINTS)
   .filter(([key]) => !key.startsWith("h-"))
-  .sort(([, a], [, b]) => b - a);
+  .sort(([, a], [, b]) => b - a) as [BreakpointKey, number][];
 
 const SORTED_HEIGHT_BREAKPOINTS = Object.entries(BREAKPOINTS)
   .filter(([key]) => key.startsWith("h-"))
-  .sort(([, a], [, b]) => b - a);
+  .sort(([, a], [, b]) => b - a) as [BreakpointKey, number][];
 
 /**
  * Check if current viewport matches a width breakpoint
  */
 export function matchesWidth(breakpoint: BreakpointKey): boolean {
-  if (typeof window === "undefined") return false;
+  if (!hasWindow()) return false;
 
   const value = BREAKPOINTS[breakpoint];
   return window.innerWidth >= value;
@@ -45,7 +42,7 @@ export function matchesWidth(breakpoint: BreakpointKey): boolean {
  * Check if current viewport matches a height breakpoint
  */
 export function matchesHeight(breakpoint: BreakpointKey): boolean {
-  if (typeof window === "undefined") return false;
+  if (!hasWindow()) return false;
 
   const value = BREAKPOINTS[breakpoint];
   return window.innerHeight >= value;
@@ -55,13 +52,11 @@ export function matchesHeight(breakpoint: BreakpointKey): boolean {
  * Get current active width breakpoint
  */
 export function getCurrentWidthBreakpoint(): BreakpointKey | null {
-  if (typeof window === "undefined") return null;
+  if (!hasWindow()) return null;
 
   const width = window.innerWidth;
 
   for (const [key, value] of SORTED_WIDTH_BREAKPOINTS) {
-    if (!isBreakpointKey(key)) continue;
-
     if (width >= value) return key;
   }
 
@@ -72,13 +67,11 @@ export function getCurrentWidthBreakpoint(): BreakpointKey | null {
  * Get current active height breakpoint
  */
 export function getCurrentHeightBreakpoint(): BreakpointKey | null {
-  if (typeof window === "undefined") return null;
+  if (!hasWindow()) return null;
 
   const height = window.innerHeight;
 
   for (const [key, value] of SORTED_HEIGHT_BREAKPOINTS) {
-    if (!isBreakpointKey(key)) continue;
-
     if (height >= value) return key;
   }
 
@@ -114,7 +107,7 @@ export function useBreakpoint() {
     };
   }, []);
 
-  if (typeof window === "undefined") {
+  if (!hasWindow()) {
     return {
       width: null,
       height: null,
@@ -128,70 +121,6 @@ export function useBreakpoint() {
     height: state.height,
     matchesWidth,
     matchesHeight,
-  };
-}
-
-/**
- * Create a media query listener for specific breakpoint
- */
-export function createBreakpointListener(
-  breakpoint: BreakpointKey,
-  dimension: "width" | "height",
-  callback: (matches: boolean) => void,
-): () => void {
-  if (typeof window === "undefined") return () => {};
-
-  const value = BREAKPOINTS[breakpoint];
-  const query =
-    dimension === "width"
-      ? `(min-width: ${String(value)}px)`
-      : `(min-height: ${String(value)}px)`;
-
-  const mediaQuery = window.matchMedia(query);
-
-  callback(mediaQuery.matches);
-
-  const handler = (e: MediaQueryListEvent) => {
-    callback(e.matches);
-  };
-  mediaQuery.addEventListener("change", handler);
-
-  return () => {
-    mediaQuery.removeEventListener("change", handler);
-  };
-}
-
-/**
- * Vanilla JS utility: Check multiple breakpoints at once
- */
-export function getBreakpointState() {
-  if (typeof window === "undefined") {
-    return {
-      width: { current: null, matches: {} },
-      height: { current: null, matches: {} },
-    };
-  }
-
-  const widthMatches: Record<string, boolean> = {};
-  const heightMatches: Record<string, boolean> = {};
-
-  Object.entries(BREAKPOINTS).forEach(([key, value]) => {
-    if (key.startsWith("h-")) {
-      heightMatches[key] = window.innerHeight >= value;
-    } else {
-      widthMatches[key] = window.innerWidth >= value;
-    }
-  });
-
-  return {
-    width: {
-      current: getCurrentWidthBreakpoint(),
-      matches: widthMatches,
-    },
-    height: {
-      current: getCurrentHeightBreakpoint(),
-      matches: heightMatches,
-    },
   };
 }
 
@@ -218,14 +147,3 @@ export function getBreakpointState() {
 //     </div>
 //   );
 // }
-
-// 4. Listener pattern
-// const cleanup = createBreakpointListener('lg', 'width', (matches) => {
-//   console.log('Large width:', matches);
-// });
-// cleanup(); // Remove listener when done
-
-// 5. Get all breakpoint states
-// const state = getBreakpointState();
-// console.log(state.width.matches.md); // true/false
-// console.log(state.height.matches['h-lg']); // true/false
