@@ -7,20 +7,8 @@ import {
   getCurrentWidthBreakpoint,
   getCurrentHeightBreakpoint,
   useBreakpoint,
-  createBreakpointListener,
-  getBreakpointState,
 } from "utils/WindowBreakpointDetection";
-
-type PartialMediaQueryList = Partial<MediaQueryList> & {
-  addEventListener?: (
-    event: string,
-    listener: (e: MediaQueryListEvent) => void,
-  ) => void;
-  removeEventListener?: (
-    event: string,
-    listener: (e: MediaQueryListEvent) => void,
-  ) => void;
-};
+import * as WindowEnv from "utils/windowEnv";
 
 describe("WindowBreakpointDetection", () => {
   let originalInnerWidth: number;
@@ -127,110 +115,30 @@ describe("WindowBreakpointDetection", () => {
     });
   });
 
-  describe("createBreakpointListener", () => {
-    it("calls callback with initial state and sets up media query listener", () => {
-      const callback = vi.fn();
-      const removeListener = vi.fn();
-      const mockMQ: PartialMediaQueryList = {
-        matches: true,
-        addEventListener: vi.fn(),
-        removeEventListener: removeListener,
-      };
-      window.matchMedia = vi.fn().mockReturnValue(mockMQ as MediaQueryList);
+  describe("SSR checks | Mock window = undefined", () => {
+    it("matchesWidth / matchesHeight returns false", () => {
+      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
 
-      const cleanup = createBreakpointListener("lg", "width", callback);
-
-      expect(callback).toHaveBeenCalledWith(true);
-      expect(window.matchMedia).toHaveBeenCalledWith("(min-width: 1024px)");
-
-      cleanup();
-      expect(removeListener).toHaveBeenCalled();
+      expect(matchesWidth("lg")).toBe(false);
+      expect(matchesHeight("h-lg")).toBe(false);
     });
 
-    it("calls callback when media query change event fires", () => {
-      const callback = vi.fn();
-      const removeListener = vi.fn();
-      let changeListener: ((e: MediaQueryListEvent) => void) | undefined;
-      const mockMQ: PartialMediaQueryList = {
-        matches: false,
-        addEventListener: vi.fn((event, listener) => {
-          if (event === "change") {
-            changeListener = listener as (e: MediaQueryListEvent) => void;
-          }
-        }),
-        removeEventListener: removeListener,
-      };
-      window.matchMedia = vi.fn().mockReturnValue(mockMQ as MediaQueryList);
+    it("getCurrentWidthBreakpoint / getCurrentHeightBreakpoint returns false", () => {
+      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
 
-      createBreakpointListener("lg", "width", callback);
-
-      expect(callback).toHaveBeenCalledWith(false);
-
-      changeListener?.({
-        matches: true,
-      } as MediaQueryListEvent);
-
-      expect(callback).toHaveBeenLastCalledWith(true);
+      expect(getCurrentWidthBreakpoint()).toBeNull();
+      expect(getCurrentHeightBreakpoint()).toBeNull();
     });
 
-    it("creates correct media query for width", () => {
-      const callback = vi.fn();
+    it("useBreakpoint hook returns safe defaults", () => {
+      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
 
-      const mockMatchMedia = vi.fn().mockReturnValue({
-        matches: false,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      });
+      const { result } = renderHook(() => useBreakpoint());
 
-      window.matchMedia = mockMatchMedia;
-
-      createBreakpointListener("lg", "width", callback);
-
-      expect(mockMatchMedia).toHaveBeenCalledWith("(min-width: 1024px)");
-    });
-
-    it("creates correct media query for height", () => {
-      const callback = vi.fn();
-
-      const mockMatchMedia = vi.fn().mockReturnValue({
-        matches: false,
-        addEventListener: vi.fn(),
-        removeEventListener: vi.fn(),
-      });
-
-      window.matchMedia = mockMatchMedia;
-
-      createBreakpointListener("h-md", "height", callback);
-
-      expect(mockMatchMedia).toHaveBeenCalledWith("(min-height: 768px)");
-    });
-  });
-
-  describe("getBreakpointState", () => {
-    it("returns correct state and matches objects", () => {
-      window.innerWidth = 1024;
-      window.innerHeight = 768;
-
-      const state = getBreakpointState();
-
-      expect(state.width.current).toBe("lg");
-      expect(state.height.current).toBe("h-md");
-
-      expect(state.width.matches).toEqual({
-        sm: true,
-        md: true,
-        lg: true,
-        xl: false,
-        "2xl": false,
-      });
-
-      expect(state.height.matches).toEqual({
-        "h-xs": true,
-        "h-sm": true,
-        "h-md": true,
-        "h-lg": false,
-        "h-xl": false,
-      });
+      expect(result.current.width).toBeNull();
+      expect(result.current.height).toBeNull();
+      expect(result.current.matchesWidth("lg")).toBe(false);
+      expect(result.current.matchesHeight("h-lg")).toBe(false);
     });
   });
 });
