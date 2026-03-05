@@ -1,18 +1,29 @@
-import { WorksHero, CloseButton, About } from "components";
-
-import WorkLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
-import img1 from "assets/images/works/blockfire/hero.png";
-import img2 from "assets/images/works/blockfire/carousel.png";
-import img3 from "assets/images/works/blockfire/product.png";
-import img4 from "assets/images/works/blockfire/contact.png";
-import img5 from "assets/images/works/blockfire/testimonial.png";
-import img6 from "assets/images/works/blockfire/tabs.png";
-import img7 from "assets/images/works/blockfire/articles.png";
-import img8 from "assets/images/works/blockfire/faq_1.png";
-import img9 from "assets/images/works/blockfire/faq_2.png";
-
 import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
+
+import { About, CloseButton, WorksHero } from "components";
+
+import WorkLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
+import Articles from "assets/images/works/blockfire/articles.png";
+import Carousel from "assets/images/works/blockfire/carousel.png";
+import Contact from "assets/images/works/blockfire/contact.png";
+import FaQ_1 from "assets/images/works/blockfire/faq_1.png";
+import FaQ_2 from "assets/images/works/blockfire/faq_2.png";
+import Hero from "assets/images/works/blockfire/hero.png";
+import Product from "assets/images/works/blockfire/product.png";
+import Tabs from "assets/images/works/blockfire/tabs.png";
+import Testimonial from "assets/images/works/blockfire/testimonial.png";
+const worksAboutImagesOrdered = [
+  Hero,
+  Carousel,
+  Product,
+  Contact,
+  Testimonial,
+  Tabs,
+  Articles,
+  FaQ_1,
+  FaQ_2,
+];
 
 const LandingPage = () => {
   const t = useTranslations("Works.blockfire");
@@ -31,7 +42,7 @@ const LandingPage = () => {
   const WorksAboutProps = {
     paragraph: t("about_paragraph"),
     mainColor: "#9A1918",
-    images: [img1, img2, img3, img4, img5, img6, img7, img8, img9],
+    images: worksAboutImagesOrdered,
   };
 
   return (
