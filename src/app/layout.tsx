@@ -64,7 +64,7 @@ export default async function LocaleLayout({
   const contactInfo = getContactInfo();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning className="relative">
       <motion.body
         className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi bg-background transition-colors-300 **:transition-colors-300 text-fluid-base text-primary-text relative font-normal`}
       >
