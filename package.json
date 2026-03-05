@@ -22,8 +22,8 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "pnpm run lint:fix",
-      "pnpm run format:write"
+      "pnpm run format:write",
+      "pnpm run lint:fix"
     ]
   },
   "dependencies": {
