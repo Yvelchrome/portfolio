@@ -1,6 +1,9 @@
-import { useTranslations } from "next-intl";
-import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
+
+import Image, { type StaticImageData } from "next/image";
+
+import { useTranslations } from "next-intl";
+
 import { ConditionalWrapper } from "utils";
 
 interface ListItem {

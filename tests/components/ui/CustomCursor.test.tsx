@@ -1,14 +1,16 @@
-import { describe, it, expect, vi } from "vitest";
+import { type ReactElement } from "react";
+
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { useMounted } from "lib/hooks/useMounted";
-import { useMediaQuery } from "lib/hooks/useMediaQuery";
+import { describe, expect, it, vi } from "vitest";
+
 import {
-  CustomCursor,
   BASE_CURSOR_SIZE,
+  CustomCursor,
   MAX_CURSOR_SIZE,
   isHoveringClickable,
 } from "components/ui/CustomCursor";
-import { type ReactElement } from "react";
+import { useMediaQuery } from "lib/hooks/useMediaQuery";
+import { useMounted } from "lib/hooks/useMounted";
 
 vi.mock("lib/hooks/useMounted", () => ({ useMounted: vi.fn(() => true) }));
 vi.mock("lib/hooks/useMediaQuery", () => ({

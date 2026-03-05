@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+
+import { CustomButton } from "components";
 import {
   Dialog,
   DialogContent,
@@ -8,10 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "components/shadcn/dialog";
-import { CustomButton } from "components";
-
 import { LenisControl } from "utils";
-import { useLocale, useTranslations } from "next-intl";
 
 export const ResumeViewer = () => {
   const locale = useLocale();

@@ -1,12 +1,11 @@
 import type { ReactElement } from "react";
 
 import * as motion from "motion/react-client";
-import { fadeInFromTop } from "lib/animationsVariants";
-
 import { useTranslations } from "next-intl";
 
 import { ScrollIndication } from "components";
 import { Badge } from "components/shadcn/badge";
+import { fadeInFromTop } from "lib/animationsVariants";
 
 interface WorksHeroProps {
   WorkLogo: ReactElement;

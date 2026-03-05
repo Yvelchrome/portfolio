@@ -15,6 +15,7 @@ import Map1 from "assets/images/works/zefirent/map_1.png";
 import Map2 from "assets/images/works/zefirent/map_2.png";
 import Tabs from "assets/images/works/zefirent/tabs.png";
 import Video from "assets/images/works/zefirent/video.png";
+
 const worksAboutImagesOrdered = [
   Cards,
   Group,

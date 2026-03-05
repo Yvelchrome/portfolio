@@ -1,6 +1,8 @@
-import { describe, it, expect, vi } from "vitest";
-import { POST } from "app/api/send-email/route";
 import { NextRequest } from "next/server";
+
+import { describe, expect, it, vi } from "vitest";
+
+import { POST } from "app/api/send-email/route";
 import { ApiResponseSchema } from "lib/schemas";
 
 process.env["CSRF_SECRET"] = "test-csrf-secret";

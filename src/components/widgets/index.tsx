@@ -1,6 +1,6 @@
-export { ResumeViewer } from "./ResumeViewer";
+export { HorizontalScrollWrapper } from "./HorizontalScrollWrapper";
 export { LocaleSwitcher } from "./LocaleSwitcher";
-export { TimeWidget } from "./TimeWidget";
+export { ResumeViewer } from "./ResumeViewer";
 export { SmoothScrolling } from "./SmoothScrolling";
 export { ThemeToggle } from "./ThemeToggle/ThemeToggle";
-export { HorizontalScrollWrapper } from "./HorizontalScrollWrapper";
+export { TimeWidget } from "./TimeWidget";

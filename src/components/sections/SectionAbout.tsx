@@ -1,8 +1,8 @@
 import * as motion from "motion/react-client";
-import { fadeInFromBottom } from "lib/animationsVariants";
+import { useTranslations } from "next-intl";
 
 import { SectionHeader } from "components";
-import { useTranslations } from "next-intl";
+import { fadeInFromBottom } from "lib/animationsVariants";
 
 export const SectionAbout = () => {
   const t = useTranslations("Section");

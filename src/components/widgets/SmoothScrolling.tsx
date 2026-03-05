@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
-import { ReactLenis, type LenisRef } from "lenis/react";
-import { cancelFrame, frame } from "motion";
+import { type ReactNode, useEffect, useRef } from "react";
+
 import { usePathname } from "next/navigation";
+
+import { type LenisRef, ReactLenis } from "lenis/react";
+import { cancelFrame, frame } from "motion";
 
 let globalLenis: LenisRef["lenis"] | null = null;
 export function getLenis() {

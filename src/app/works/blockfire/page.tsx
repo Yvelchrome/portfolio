@@ -13,6 +13,7 @@ import Hero from "assets/images/works/blockfire/hero.png";
 import Product from "assets/images/works/blockfire/product.png";
 import Tabs from "assets/images/works/blockfire/tabs.png";
 import Testimonial from "assets/images/works/blockfire/testimonial.png";
+
 const worksAboutImagesOrdered = [
   Hero,
   Carousel,

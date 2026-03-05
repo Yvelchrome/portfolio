@@ -1,10 +1,11 @@
 "use client";
 
-import "./ThemeToggle.scss";
-
 import * as motion from "motion/react-client";
 import { useTheme } from "next-themes";
+
 import { useMounted } from "lib/hooks/useMounted";
+
+import "./ThemeToggle.scss";
 
 export const ThemeToggle = () => {
   const isMounted = useMounted();

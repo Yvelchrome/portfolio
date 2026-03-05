@@ -3,12 +3,11 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 
 import * as motion from "motion/react-client";
-
-import { useMounted } from "lib/hooks/useMounted";
-
 import { useLocale } from "next-intl";
-import { setUserLocale } from "services/locale";
+
 import type { Locale } from "i18n/config";
+import { useMounted } from "lib/hooks/useMounted";
+import { setUserLocale } from "services/locale";
 
 const LOCALES = [
   { code: "fr" as const, short: "FR", long: "Français" },

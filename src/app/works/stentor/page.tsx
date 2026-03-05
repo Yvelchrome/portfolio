@@ -12,6 +12,7 @@ import Block5 from "assets/images/works/stentor/block_5.png";
 import Hero from "assets/images/works/stentor/hero.png";
 import News from "assets/images/works/stentor/news.png";
 import Testimonial from "assets/images/works/stentor/testimonial.png";
+
 const worksAboutImagesOrdered = [
   Hero,
   Block1,

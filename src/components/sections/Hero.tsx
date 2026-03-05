@@ -1,6 +1,7 @@
 import * as motion from "motion/react-client";
-import { fadeInFromTop } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
+
+import { fadeInFromTop } from "lib/animationsVariants";
 
 export const Hero = () => {
   const t = useTranslations("Homepage");

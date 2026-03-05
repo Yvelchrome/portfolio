@@ -1,7 +1,7 @@
 import * as motion from "motion/react-client";
-import { fadeInFromBottom } from "lib/animationsVariants";
 
 import { AddUnorderedList, SectionHeader } from "components";
+import { fadeInFromBottom } from "lib/animationsVariants";
 
 export const SectionSkills = () => {
   return (

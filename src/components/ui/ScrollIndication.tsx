@@ -1,10 +1,10 @@
 "use client";
 
-import * as motion from "motion/react-client";
 import { useScroll, useTransform } from "motion/react";
-import { fadeInFromTop } from "lib/animationsVariants";
-
+import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
+
+import { fadeInFromTop } from "lib/animationsVariants";
 
 interface ScrollIndicationProps {
   arrowPosition: "down" | "right";

@@ -1,9 +1,9 @@
 import Image, { type StaticImageData } from "next/image";
 
 import * as motion from "motion/react-client";
-import { fadeInFromTop } from "lib/animationsVariants";
-
 import { useTranslations } from "next-intl";
+
+import { fadeInFromTop } from "lib/animationsVariants";
 import { getHeaderHeight } from "utils";
 
 interface WorksAboutProps {

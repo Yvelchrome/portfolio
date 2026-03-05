@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function useMounted(): boolean {
   const [isMounted, setIsMounted] = useState<boolean>(false);

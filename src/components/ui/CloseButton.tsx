@@ -1,6 +1,7 @@
 import Link from "next/link";
-import * as motion from "motion/react-client";
+
 import { XIcon } from "lucide-react";
+import * as motion from "motion/react-client";
 
 export const CloseButton = () => {
   return (

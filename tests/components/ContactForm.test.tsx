@@ -1,10 +1,11 @@
-import { describe, it, expect, vi, Mock } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { toast } from "sonner";
+import { Mock, describe, expect, it, vi } from "vitest";
+
 import { ContactForm } from "components/ContactForm";
-import * as mountedHook from "lib/hooks/useMounted";
 import * as csrfHook from "lib/hooks/useCsrfToken";
+import * as mountedHook from "lib/hooks/useMounted";
 
 vi.mock("next-intl", () => ({
   useTranslations: () => (key: string) => key,

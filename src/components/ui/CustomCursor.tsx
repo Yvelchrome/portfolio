@@ -1,16 +1,16 @@
 "use client";
 
-import * as motion from "motion/react-client";
+import { useEffect } from "react";
+
 import {
   type MotionValue,
-  useMotionValue,
-  useTransform,
-  useSpring,
-  animate,
   SpringOptions,
+  animate,
+  useMotionValue,
+  useSpring,
+  useTransform,
 } from "motion/react";
-
-import { useEffect } from "react";
+import * as motion from "motion/react-client";
 
 import { useMediaQuery } from "lib/hooks/useMediaQuery";
 import { useMounted } from "lib/hooks/useMounted";

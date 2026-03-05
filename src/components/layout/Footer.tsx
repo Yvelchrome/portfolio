@@ -1,18 +1,19 @@
 "use client";
 
-import {
-  TimeWidget,
-  AddUnorderedList,
-  ResumeViewer,
-  CustomLink,
-} from "components";
-import Github from "assets/images/github.svg";
-import Linkedin from "assets/images/linkedin.svg";
-import Discord from "assets/images/discord.svg";
-
 import { usePathname } from "next/navigation";
 
 import { useTranslations } from "next-intl";
+
+import {
+  AddUnorderedList,
+  CustomLink,
+  ResumeViewer,
+  TimeWidget,
+} from "components";
+
+import Discord from "assets/images/discord.svg";
+import Github from "assets/images/github.svg";
+import Linkedin from "assets/images/linkedin.svg";
 
 interface FooterProps {
   email: string | undefined;

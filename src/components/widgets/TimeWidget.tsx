@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useLocale } from "next-intl";
+
 import { useMounted } from "lib/hooks/useMounted";
 
 export const TimeWidget = () => {
@@ -15,7 +16,9 @@ export const TimeWidget = () => {
       setCurrentTime(new Date());
     }, 1000);
 
-    return () => { clearInterval(timer); };
+    return () => {
+      clearInterval(timer);
+    };
   }, []);
 
   if (!isMounted) return null;

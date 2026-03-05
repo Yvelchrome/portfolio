@@ -2,25 +2,23 @@
 
 import { useRef } from "react";
 
-import * as motion from "motion/react-client";
 import { useScroll, useTransform } from "motion/react";
-
-import { fadeInFromTop } from "lib/animationsVariants";
-import { useMounted } from "lib/hooks/useMounted";
-import { getHeaderHeight, useBreakpoint } from "utils";
-
+import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 
 import {
-  Socials,
-  Hero,
   CustomLink,
+  Hero,
   ResumeViewer,
+  ScrollIndication,
   SectionAbout,
   SectionSkills,
   SectionWorks,
-  ScrollIndication,
+  Socials,
 } from "components";
+import { fadeInFromTop } from "lib/animationsVariants";
+import { useMounted } from "lib/hooks/useMounted";
+import { getHeaderHeight, useBreakpoint } from "utils";
 
 const StickySectionAnimation = ({
   children,

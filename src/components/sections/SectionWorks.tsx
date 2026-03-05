@@ -1,14 +1,13 @@
-import { SectionWorksItem, SectionHeader } from "components";
-
-import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
-import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
-import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svg";
-import StentorLogo from "assets/images/works/stentor/StentorLogo.svg";
-
 import * as motion from "motion/react-client";
+import { useTranslations } from "next-intl";
+
+import { SectionHeader, SectionWorksItem } from "components";
 import { fadeInFromBottom } from "lib/animationsVariants";
 
-import { useTranslations } from "next-intl";
+import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
+import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
+import StentorLogo from "assets/images/works/stentor/StentorLogo.svg";
+import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svg";
 
 export const SectionWorks = () => {
   const t = useTranslations("Section.WorksItem");

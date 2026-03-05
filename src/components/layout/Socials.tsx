@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
-import Github from "assets/images/github.svg";
-import Linkedin from "assets/images/linkedin.svg";
 
 import * as motion from "motion/react-client";
+
 import { fadeInFromTop } from "lib/animationsVariants";
+
+import Github from "assets/images/github.svg";
+import Linkedin from "assets/images/linkedin.svg";
 
 interface Social {
   icon: ReactNode;

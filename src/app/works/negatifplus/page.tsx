@@ -11,6 +11,7 @@ import Configurator_1 from "assets/images/works/negatifplus/configurator_1.png";
 import Configurator_2 from "assets/images/works/negatifplus/configurator_2.png";
 import Hero from "assets/images/works/negatifplus/hero.png";
 import Images from "assets/images/works/negatifplus/images.png";
+
 const worksAboutImagesOrdered = [
   Configurator_1,
   Configurator_2,

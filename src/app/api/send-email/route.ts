@@ -1,11 +1,11 @@
 "use server";
 
 import { type NextRequest, NextResponse } from "next/server";
-import { ContactFormSchema, formatZodErrors } from "lib/schemas";
 
 import { Resend } from "resend";
 
 import ContactEmailTemplate from "emails/ContactEmailTemplate";
+import { ContactFormSchema, formatZodErrors } from "lib/schemas";
 
 let resend: Resend | undefined = undefined;
 export async function getResendInstance(): Promise<Resend> {

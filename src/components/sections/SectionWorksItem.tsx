@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 
-import { useTranslations } from "next-intl";
 import Link from "next/link";
+
+import { useTranslations } from "next-intl";
+
 import { GlowingEffect } from "components";
 
 interface SectionWorksItemProps {

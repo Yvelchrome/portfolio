@@ -1,7 +1,7 @@
 import * as motion from "motion/react-client";
-import { fadeInFromTop } from "lib/animationsVariants";
 
 import { LocaleSwitcher, Logo, ThemeToggle } from "components";
+import { fadeInFromTop } from "lib/animationsVariants";
 
 export const Header = () => {
   return (
