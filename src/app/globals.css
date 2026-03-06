@@ -11,10 +11,6 @@
 @custom-variant h-lg (@media (min-height: 900px));
 @custom-variant h-xl (@media (min-height: 1024px));
 
-@utility no-scrollbar {
-  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
-}
-
 @utility transition-colors-300 {
   transition-property:
     color, background-color, border-color, outline-color, text-decoration-color,
@@ -69,20 +65,6 @@
   line-height: clamp(16.8px, 0.9789rem + 1.1842vw, 19.2px);
   letter-spacing: 0em;
   font-weight: 400;
-}
-
-@utility animate-ring {
-  @apply animate-[ring_1.5s_ease-in-out_infinite];
-}
-@keyframes ring {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1.25);
-    opacity: 0;
-  }
 }
 
 /* intl text opacity animation */
