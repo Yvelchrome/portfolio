@@ -18,7 +18,16 @@
     "message": "Message",
     "form_field_message": "Comment puis-je vous aider ?",
     "send": "Envoyer le message",
-    "send_pending": "Envoi en cours..."
+    "send_pending": "Envoi en cours...",
+    "errors": {
+      "nameMax": "Le nom doit contenir au maximum 100 caractères.",
+      "companyMax": "Le nom de l'entreprise doit contenir au maximum 100 caractères.",
+      "emailMin": "L'email doit contenir au moins 5 caractères.",
+      "emailMax": "L'email doit contenir au maximum 254 caractères.",
+      "emailInvalid": "Veuillez entrer une adresse email valide.",
+      "messageMin": "Le message doit contenir au moins 10 caractères.",
+      "messageMax": "Le message doit contenir au maximum 5000 caractères."
+    }
   },
   "Toast": {
     "contact_form_success_title": "Message envoyé avec succès !",

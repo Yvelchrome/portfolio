@@ -18,7 +18,16 @@
     "message": "Message",
     "form_field_message": "How can I help you ?",
     "send": "Send Message",
-    "send_pending": "Sending..."
+    "send_pending": "Sending...",
+    "errors": {
+      "nameMax": "Name must be 100 characters or less.",
+      "companyMax": "Company name must be 100 characters or less.",
+      "emailMin": "Email must be at least 5 characters.",
+      "emailMax": "Email must be 254 characters or less.",
+      "emailInvalid": "Please enter a valid email address.",
+      "messageMin": "Message must be at least 10 characters.",
+      "messageMax": "Message must be 5000 characters or less."
+    }
   },
   "Toast": {
     "contact_form_success_title": "Message sent successfully!",
