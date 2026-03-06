@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useMemo } from "react";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -32,8 +34,9 @@ export const ContactForm = () => {
   const isMounted = useMounted();
   const { csrfToken } = useCsrfToken();
 
+  const zodSchema = useMemo(() => ContactFormSchema(t), [t]);
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(ContactFormSchema),
+    resolver: zodResolver(zodSchema),
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {
@@ -45,7 +48,17 @@ export const ContactForm = () => {
     },
   });
 
-  const isSubmitting = form.formState.isSubmitting;
+  const {
+    trigger,
+    formState: { errors, isSubmitting },
+  } = form;
+
+  useEffect(() => {
+    const errorFields = Object.keys(errors);
+    if (errorFields.length > 0) {
+      void trigger(errorFields as (keyof ContactFormData)[]);
+    }
+  }, [zodSchema, trigger, errors]);
 
   async function onSubmit(data: ContactFormData) {
     if (data.honeypot) {

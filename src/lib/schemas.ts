@@ -1,34 +1,31 @@
+import { type _Translator } from "next-intl";
 import { z } from "zod";
+
+type Messages = typeof import("../../messages/en.json");
+type ContactMessages = Messages["Contact"];
 
 /* ==================== CONTACT FORM ==================== */
 
-export const ContactFormSchema = z.object({
-  honeypot: z.string().optional(),
-  name: z
-    .string()
-    .trim()
-    .max(100, "Name must be 100 characters or less")
-    .optional(),
-  company_name: z
-    .string()
-    .trim()
-    .max(100, "Company name must be 100 characters or less")
-    .optional(),
-  email: z
-    .string()
-    .trim()
-    .min(5, "Email must be at least 5 characters")
-    .max(254, "Email must be 254 characters or less")
-    .check(z.email("Please enter a valid email address"))
-    .toLowerCase(),
-  message: z
-    .string()
-    .trim()
-    .min(10, "Message must be at least 10 characters")
-    .max(5000, "Message must be 5000 characters or less"),
-});
+export const ContactFormSchema = (t: _Translator<ContactMessages>) =>
+  z.object({
+    honeypot: z.string().optional(),
+    name: z.string().trim().max(100, t("errors.nameMax")).optional(),
+    company_name: z.string().trim().max(100, t("errors.companyMax")).optional(),
+    email: z
+      .string()
+      .trim()
+      .min(5, t("errors.emailMin"))
+      .max(254, t("errors.emailMax"))
+      .check(z.email(t("errors.emailInvalid")))
+      .toLowerCase(),
+    message: z
+      .string()
+      .trim()
+      .min(10, t("errors.messageMin"))
+      .max(5000, t("errors.messageMax")),
+  });
 
-export type ContactFormData = z.infer<typeof ContactFormSchema>;
+export type ContactFormData = z.infer<ReturnType<typeof ContactFormSchema>>;
 
 /* ==================== API RESPONSES ==================== */
 

@@ -6,6 +6,7 @@ import { Resend } from "resend";
 
 import ContactEmailTemplate from "emails/ContactEmailTemplate";
 import { ContactFormSchema, formatZodErrors } from "lib/schemas";
+import { getContactTranslator } from "utils/GetMessagesJson";
 
 let resend: Resend | undefined = undefined;
 export async function getResendInstance(): Promise<Resend> {
@@ -58,16 +59,17 @@ const createErrorResponse = (
 };
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const resend = await getResendInstance();
-  const targetEmail = await getTargetEmail();
-
   const csrfToken = request.headers.get("x-csrf-token");
   if (!csrfToken || csrfToken !== process.env["CSRF_SECRET"]) {
     return createErrorResponse("Invalid CSRF token", 403);
   }
 
+  const tContact = await getContactTranslator();
+  const resend = await getResendInstance();
+  const targetEmail = await getTargetEmail();
+
   const body: unknown = await request.json();
-  const validation = ContactFormSchema.safeParse(body);
+  const validation = ContactFormSchema(tContact).safeParse(body);
 
   if (!validation.success) {
     console.error("Validation errors:", formatZodErrors(validation.error));
