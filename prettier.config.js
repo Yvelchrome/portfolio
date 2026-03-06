@@ -2,6 +2,7 @@
 const config = {
   importOrder: [
     "<BUILTIN_MODULES>",
+    "(testing-library|vitest)(?:/.*)?$",
     "^react$",
     "^next(?:/.*)?$",
     "<THIRD_PARTY_MODULES>",
