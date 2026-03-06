@@ -25,6 +25,7 @@ export default defineConfig({
         "**/*.config.*",
         "**/mockData",
         "src/types",
+        "messages/*.json",
       ],
     },
     testTimeout: 5000,
