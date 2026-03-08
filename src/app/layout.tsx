@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 
 const RobotoMono = Roboto_Mono({
   subsets: ["latin"],
+  weight: ["300"],
   variable: "--font-roboto-mono",
 });
 const Satoshi = localFont({
