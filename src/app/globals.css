@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@utility scrollbar-gutter {
+  scrollbar-gutter: stable;
+}
+
 /* Dark Theme */
 @custom-variant dark (&:where([data-theme= "dark"], [data-theme= "dark"] *));
 
@@ -127,8 +131,9 @@ body {
 }
 
 @theme {
-  /* Header Height */
-  --spacing-header-height: var(--header-height);
+  /* shadcn :
+    should be defined when modal opened : var(--removed-body-scroll-bar-size)
+  */
 
   /* Font Families */
   --font-satoshi: var(--font-satoshi);
