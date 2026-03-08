@@ -11,7 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "components/shadcn/dialog";
-import { LenisControl } from "utils";
 
 export const ResumeViewer = () => {
   const locale = useLocale();
@@ -22,9 +21,8 @@ export const ResumeViewer = () => {
 
   return (
     <Dialog
-      onOpenChange={(val) => {
-        if (val) LenisControl.stop();
-        else LenisControl.start();
+      onOpenChange={(open) => {
+        document.documentElement.classList.toggle("overflow-clip", open);
       }}
     >
       <DialogTrigger>
