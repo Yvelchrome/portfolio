@@ -4,13 +4,11 @@ import type { Metadata, Viewport } from "next";
 import { Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 
-import { CustomCursor, Footer, Header, SmoothScrolling } from "components";
-import { Toaster } from "components/shadcn/sonner";
+import { LayoutClientImports } from "components";
 import { getContactInfo } from "utils";
 
 import "./globals.css";
@@ -68,19 +66,13 @@ export default async function LocaleLayout({
       <body
         className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi bg-background transition-colors-300 **:transition-colors-300 text-fluid-base text-primary-text relative font-normal`}
       >
-        <SmoothScrolling>
-          <NextIntlClientProvider messages={messages}>
-            <ThemeProvider>
-              <Header />
-              <main className="relative container mx-auto">{children}</main>
-              <Footer {...contactInfo} />
-              <CustomCursor />
-              <Toaster position="bottom-center" />
-              <SpeedInsights />
-            </ThemeProvider>
-          </NextIntlClientProvider>
-        </SmoothScrolling>
-      </motion.body>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>
+            <main className="relative container mx-auto">{children}</main>
+            <LayoutClientImports contactInfo={contactInfo} />
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }
