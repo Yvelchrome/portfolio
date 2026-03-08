@@ -101,7 +101,39 @@ body {
   }
 }
 @utility no-locale-animation {
-  opacity: 1 !important;
+  @apply opacity-100!;
+}
+
+/* ThemeToggle animation */
+.sun-and-moon {
+  .moon circle {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .sun {
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .sun-beams {
+    transition:
+      transform 0.5s cubic-bezier(0.5, 1.6, 0.4, 0.8),
+      opacity 0.5s cubic-bezier(0.3, 0, 0.7, 1);
+  }
+}
+[data-theme="dark"] .sun-and-moon {
+  .moon circle {
+    @apply delay-250 duration-500;
+    transform: translateX(-7px);
+  }
+
+  .sun {
+    @apply scale-175 duration-250;
+    transition-timing-function: cubic-bezier(0.3, 0, 0.7, 1);
+  }
+
+  .sun-beams {
+    @apply -rotate-z-25 opacity-0 duration-150;
+  }
 }
 
 @theme {
