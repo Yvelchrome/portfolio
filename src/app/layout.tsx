@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Steven Godin",
   description: "Portfolio of Steven Godin, Front-End Developer.",
-  manifest: "./manifest.ts",
+  manifest: "/manifest.webmanifest",
 };
 
 const RobotoMono = Roboto_Mono({
