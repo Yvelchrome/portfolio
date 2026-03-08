@@ -8,6 +8,7 @@
     "build": "next build",
     "preview": "next build && next start",
     "start": "next start",
+    "analyse": "next experimental-analyze",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "typecheck": "tsc --noEmit",
