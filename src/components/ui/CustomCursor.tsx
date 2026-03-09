@@ -12,8 +12,8 @@ import {
 } from "motion/react";
 import * as motion from "motion/react-client";
 
-import { useMediaQuery } from "lib/hooks/useMediaQuery";
-import { useMounted } from "lib/hooks/useMounted";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { useMounted } from "hooks/useMounted";
 
 const smoothOptions: SpringOptions = {
   damping: 20,

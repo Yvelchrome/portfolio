@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
-import { useMounted } from "lib/hooks/useMounted";
+import { useMounted } from "hooks/useMounted";
 
 describe("useMounted", () => {
   it("returns false initially", () => {

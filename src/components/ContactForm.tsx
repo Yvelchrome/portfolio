@@ -18,8 +18,8 @@ import {
 } from "components/shadcn/form";
 import { Input } from "components/shadcn/input";
 import { Textarea } from "components/shadcn/textarea";
-import { useCsrfToken } from "lib/hooks/useCsrfToken";
-import { useMounted } from "lib/hooks/useMounted";
+import { useCsrfToken } from "hooks/useCsrfToken";
+import { useMounted } from "hooks/useMounted";
 import {
   type ApiResponse,
   ApiResponseSchema,

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { useLocale } from "next-intl";
 
-import { useMounted } from "lib/hooks/useMounted";
+import { useMounted } from "hooks/useMounted";
 
 export const TimeWidget = () => {
   const isMounted = useMounted();

@@ -16,8 +16,8 @@ import {
   SectionWorks,
   Socials,
 } from "components";
+import { useMounted } from "hooks/useMounted";
 import { fadeInFromTop } from "lib/animationsVariants";
-import { useMounted } from "lib/hooks/useMounted";
 import { getHeaderHeight, useBreakpoint } from "utils";
 
 const StickySectionAnimation = ({
