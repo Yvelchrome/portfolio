@@ -1,17 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { type ReactNode, useEffect } from "react";
 
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 
-const Header = dynamic(() =>
-  import("components/layout/Header").then((m) => m.Header),
-);
-
-const Footer = dynamic(() =>
-  import("components/layout/Footer").then((m) => m.Footer),
-);
+import { useHideOnRoute } from "hooks/useHideOnRoute";
 
 const CustomCursor = dynamic(
   () => import("components/ui/CustomCursor").then((m) => m.CustomCursor),
@@ -33,14 +27,9 @@ const Toaster = dynamic(
   { ssr: false },
 );
 
-export const LayoutClientImports = ({
-  contactInfo,
-}: {
-  contactInfo: {
-    email: string | undefined;
-    phone: string | undefined;
-  };
-}) => {
+export const LayoutClientImports = ({ footer }: { footer: ReactNode }) => {
+  const shouldHideComponent = useHideOnRoute(["/works", "/contact"]);
+
   const pathname = usePathname();
   useEffect(() => {
     const html = document.documentElement;
@@ -51,9 +40,7 @@ export const LayoutClientImports = ({
 
   return (
     <>
-      <Header />
-      <Footer {...contactInfo} />
-
+      {!shouldHideComponent && footer}
       <SmoothScrolling />
       <SpeedInsights />
       <CustomCursor />

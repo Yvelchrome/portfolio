@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 
 import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
 import { Roboto_Mono } from "next/font/google";
 import localFont from "next/font/local";
 
@@ -9,9 +10,16 @@ import { getLocale, getMessages } from "next-intl/server";
 import { ThemeProvider } from "next-themes";
 
 import { LayoutClientImports } from "components";
-import { getContactInfo } from "utils";
 
 import "./globals.css";
+
+const Header = dynamic(() =>
+  import("components/layout/Header").then((m) => m.Header),
+);
+
+const Footer = dynamic(() =>
+  import("components/layout/Footer").then((m) => m.Footer),
+);
 
 export const viewport: Viewport = {
   themeColor: [
@@ -59,8 +67,6 @@ export default async function LocaleLayout({
   const locale = await getLocale();
   const messages = await getMessages();
 
-  const contactInfo = getContactInfo();
-
   return (
     <html lang={locale} suppressHydrationWarning className="relative">
       <body
@@ -68,8 +74,9 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>
+            <Header />
             <main className="relative container mx-auto">{children}</main>
-            <LayoutClientImports contactInfo={contactInfo} />
+            <LayoutClientImports footer={<Footer />} />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
