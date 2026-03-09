@@ -71,7 +71,7 @@ export const SectionWorksItem = ({
         <span
           role="img"
           aria-label={brandLogoAlt}
-          className="no-locale-animation absolute -top-1/8 -right-1/8 h-auto w-1/3 max-w-50 transition-[top,right]! duration-500 *:h-auto *:w-full group-hover:-top-1/16 group-hover:-right-1/16"
+          className="no-locale-animation absolute top-4 -right-1/8 aspect-square h-auto w-1/3 max-w-40 transition-[right]! duration-500! *:aspect-square *:h-full *:w-full group-hover:right-4"
         >
           {brandLogo}
         </span>

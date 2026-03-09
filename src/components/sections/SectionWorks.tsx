@@ -3,11 +3,12 @@ import { useTranslations } from "next-intl";
 
 import { SectionHeader, SectionWorksItem } from "components";
 import { fadeInFromBottom } from "lib/animationsVariants";
-
-import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
-import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
-import StentorLogo from "assets/images/works/stentor/StentorLogo.svg";
-import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svg";
+import {
+  Blockfire,
+  Negatifplus,
+  Stentor,
+  Zefirent,
+} from "utils/DynamicImageImport";
 
 export const SectionWorks = () => {
   const t = useTranslations("Section.WorksItem");
@@ -22,7 +23,7 @@ export const SectionWorks = () => {
       linkHref: "/works/negatifplus",
       client: "Négatif+",
       year: "2024",
-      brandLogo: <NegatifplusLogo />,
+      brandLogo: <Negatifplus />,
       brandLogoAlt: "Négatif+ logo",
     },
     {
@@ -34,7 +35,7 @@ export const SectionWorks = () => {
       linkHref: "/works/zefirent",
       client: "Petit Forestier - Zefirent",
       year: "2024",
-      brandLogo: <ZefirentLogo />,
+      brandLogo: <Zefirent />,
       brandLogoAlt: "Zefirent logo",
     },
     {
@@ -46,7 +47,7 @@ export const SectionWorks = () => {
       linkHref: "/works/blockfire",
       client: "Block'Fire",
       year: "2023",
-      brandLogo: <BlockfireLogo />,
+      brandLogo: <Blockfire />,
       brandLogoAlt: "Block'Fire logo",
     },
     {
@@ -58,7 +59,7 @@ export const SectionWorks = () => {
       linkHref: "/works/stentor",
       client: "Groupe Stentor",
       year: "2022",
-      brandLogo: <StentorLogo />,
+      brandLogo: <Stentor />,
       brandLogoAlt: "Groupe Stentor logo",
     },
   ];

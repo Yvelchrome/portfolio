@@ -31,7 +31,7 @@ export const AddUnorderedList = ({
     if (!item.icon) return null;
 
     const defaultIconAlt = "";
-    const defaultIconSize = 36;
+    const defaultIconSize = 40;
 
     const icon = item.icon;
     const iconAlt = item.iconAlt ?? defaultIconAlt;
@@ -44,13 +44,23 @@ export const AddUnorderedList = ({
       (typeof icon === "object" && "src" in icon)
     ) {
       return (
-        <Image src={icon} alt={iconAlt} width={iconSize} height={iconSize} />
+        <Image
+          src={icon}
+          alt={iconAlt}
+          className="*:h-auto *:w-10"
+          width={iconSize}
+          height={iconSize}
+        />
       );
     }
 
     // If icon is a React component
     return (
-      <span role="img" aria-label={iconAlt}>
+      <span
+        className="*:h-auto *:w-10 *:drop-shadow-sm"
+        role="img"
+        aria-label={iconAlt}
+      >
         {icon}
       </span>
     );

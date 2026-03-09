@@ -2,8 +2,8 @@ import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 
 import { About, CloseButton, WorksHero } from "components";
+import { Blockfire } from "utils/DynamicImageImport";
 
-import WorkLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
 import Articles from "assets/images/works/blockfire/articles.png";
 import Carousel from "assets/images/works/blockfire/carousel.png";
 import Contact from "assets/images/works/blockfire/contact.png";
@@ -30,7 +30,7 @@ const LandingPage = () => {
   const t = useTranslations("Works.blockfire");
 
   const WorksHeroProps = {
-    WorkLogo: <WorkLogo />,
+    WorkLogo: <Blockfire />,
     title: t("title"),
     subtitle: t("subtitle"),
     role: t("role"),

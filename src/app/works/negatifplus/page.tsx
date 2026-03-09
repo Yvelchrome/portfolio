@@ -2,8 +2,8 @@ import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 
 import { About, CloseButton, WorksHero } from "components";
+import { Negatifplus } from "utils/DynamicImageImport";
 
-import WorkLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
 import Account from "assets/images/works/negatifplus/account.png";
 import Block1 from "assets/images/works/negatifplus/block_1.png";
 import Block2 from "assets/images/works/negatifplus/block_2.png";
@@ -26,7 +26,7 @@ const LandingPage = () => {
   const t = useTranslations("Works.negatifplus");
 
   const WorksHeroProps = {
-    WorkLogo: <WorkLogo />,
+    WorkLogo: <Negatifplus />,
     title: t("title"),
     subtitle: t("subtitle"),
     role: t("role"),

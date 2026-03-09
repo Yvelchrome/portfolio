@@ -62,7 +62,7 @@ export const WorksHero = ({
           variants={fadeInFromTop}
           role="img"
           aria-label="Negatifplus logo"
-          className="no-locale-animation block h-22 *:h-full *:w-auto sm:h-32 lg:absolute lg:top-1/2 lg:left-1/2 lg:h-1/3 lg:-translate-1/2"
+          className="no-locale-animation block aspect-square h-22 w-auto *:aspect-square *:h-full *:w-full *:drop-shadow-sm sm:h-32 lg:absolute lg:top-1/2 lg:left-1/2 lg:h-1/3 lg:-translate-1/2"
         >
           {WorkLogo}
         </motion.span>

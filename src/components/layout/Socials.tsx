@@ -3,25 +3,23 @@ import type { ReactNode } from "react";
 import * as motion from "motion/react-client";
 
 import { fadeInFromTop } from "lib/animationsVariants";
-
-import Github from "assets/images/github.svg";
-import Linkedin from "assets/images/linkedin.svg";
-
-interface Social {
-  icon: ReactNode;
-  href: string;
-  label: string;
-}
+import { GitHub, LinkedIn } from "utils/DynamicImageImport";
 
 export const Socials = () => {
+  interface Social {
+    icon: ReactNode;
+    href: string;
+    label: string;
+  }
+
   const socials: Social[] = [
     {
-      icon: <Github />,
+      icon: <GitHub />,
       href: "https://github.com/Yvelchrome",
       label: "GitHub Profile",
     },
     {
-      icon: <Linkedin className="text-[#0A66C2]" />,
+      icon: <LinkedIn className="text-[#0A66C2]" />,
       href: "https://www.linkedin.com/in/steven-godin/",
       label: "LinkedIn Profile",
     },
@@ -38,7 +36,7 @@ export const Socials = () => {
           aria-label={label}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          className="no-locale-animation *:pointer-events-none *:text-4xl"
+          className="no-locale-animation *:pointer-events-none *:h-auto *:w-10 *:drop-shadow-sm"
         >
           {icon}
         </motion.a>

@@ -37,7 +37,23 @@ const config = {
     rules: {
       "*.svg": {
         condition: { not: { query: "?url" } },
-        loaders: [{ loader: "@svgr/webpack", options: { icon: true } }],
+        loaders: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              icon: false,
+              svgo: true,
+              svgoConfig: {
+                multipass: true,
+                plugins: [
+                  "preset-default",
+                  { name: "removeTitle" },
+                  { name: "removeDimensions" },
+                ],
+              },
+            },
+          },
+        ],
         as: "*.js",
       },
     },

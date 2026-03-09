@@ -2,8 +2,8 @@ import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 
 import { About, CloseButton, WorksHero } from "components";
+import { Zefirent } from "utils/DynamicImageImport";
 
-import WorkLogo from "assets/images/works/zefirent/ZefirentLogo.svg";
 import Block1 from "assets/images/works/zefirent/block_1.png";
 import Block2 from "assets/images/works/zefirent/block_2.png";
 import Blog from "assets/images/works/zefirent/blog.png";
@@ -34,7 +34,7 @@ const LandingPage = () => {
   const t = useTranslations("Works.zefirent");
 
   const WorksHeroProps = {
-    WorkLogo: <WorkLogo />,
+    WorkLogo: <Zefirent />,
     title: t("title"),
     subtitle: t("subtitle"),
     role: t("role"),

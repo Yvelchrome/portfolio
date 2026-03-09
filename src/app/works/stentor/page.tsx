@@ -2,8 +2,8 @@ import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 
 import { About, CloseButton, WorksHero } from "components";
+import { Stentor } from "utils/DynamicImageImport";
 
-import WorkLogo from "assets/images/works/stentor/StentorLogo.svg";
 import Block1 from "assets/images/works/stentor/block_1.png";
 import Block2 from "assets/images/works/stentor/block_2.png";
 import Block3 from "assets/images/works/stentor/block_3.png";
@@ -28,7 +28,7 @@ const LandingPage = () => {
   const t = useTranslations("Works.stentor");
 
   const WorksHeroProps = {
-    WorkLogo: <WorkLogo />,
+    WorkLogo: <Stentor />,
     title: t("title"),
     subtitle: t("subtitle"),
     role: t("role"),
