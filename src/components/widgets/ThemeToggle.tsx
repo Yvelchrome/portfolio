@@ -40,7 +40,7 @@ export const ThemeToggle = () => {
           r="6"
           mask="url(#moon-mask)"
         />
-        <g className="sun-beams origin-center stroke-2 stroke-current dark:opacity-0">
+        <g className="sun-beams origin-center stroke-current stroke-2 dark:opacity-0">
           <line x1="12" y1="1" x2="12" y2="3" />
           <line x1="12" y1="21" x2="12" y2="23" />
           <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />

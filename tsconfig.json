@@ -11,7 +11,7 @@
     "allowJs": true,
     "checkJs": false,
 
-    /* Strict Mode - TOUS activés */
+    /* Strict Mode */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitReturns": true,
