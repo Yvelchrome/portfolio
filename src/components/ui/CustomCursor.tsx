@@ -2,6 +2,8 @@
 
 import { useEffect } from "react";
 
+import { usePathname } from "next/navigation";
+
 import {
   type MotionValue,
   SpringOptions,
@@ -80,6 +82,11 @@ export const CustomCursor = () => {
       window.removeEventListener("mouseout", onMouseOut);
     };
   }, [hoveringClickable, mouse.x, mouse.y]);
+
+  const pathname = usePathname();
+  useEffect(() => {
+    animate(hoveringClickable, 0, smoothOptions);
+  }, [pathname]);
 
   const isMounted = useMounted();
   const hasFinePointer = useMediaQuery("(pointer: fine)");
