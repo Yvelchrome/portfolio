@@ -38,6 +38,16 @@ export const LayoutClientImports = ({ footer }: { footer: ReactNode }) => {
     html.classList.toggle("scrollbar-gutter", !hasScrollbar);
   }, [pathname]);
 
+  // Set transition-colors on load to avoid flickering
+  useEffect(() => {
+    document.body.classList.add(
+      "transition-colors",
+      "duration-500",
+      "**:transition-colors",
+      "**:duration-500",
+    );
+  }, []);
+
   return (
     <>
       {!shouldHideComponent && footer}

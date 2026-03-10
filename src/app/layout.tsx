@@ -70,7 +70,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning className="relative">
       <body
-        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi bg-background transition-colors-300 **:transition-colors-300 text-fluid-base text-primary-text relative font-normal`}
+        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi text-fluid-base text-primary-text bg-background relative font-normal`}
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider>

@@ -2,12 +2,12 @@
 @import "tw-animate-css";
 
 /* Lenis */
-html.lenis {
+html.lenis,
+html.lenis body {
   @apply h-auto;
-  body {
-    @apply h-auto;
-  }
+}
 
+.lenis {
   [data-lenis-prevent],
   [data-lenis-prevent-wheel],
   [data-lenis-prevent-touch],
@@ -42,17 +42,6 @@ html.lenis {
 @custom-variant h-md (@media (min-height: 768px));
 @custom-variant h-lg (@media (min-height: 900px));
 @custom-variant h-xl (@media (min-height: 1024px));
-
-@utility transition-colors-300 {
-  transition-property:
-    color, background-color, border-color, outline-color, text-decoration-color,
-    fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
-  transition-timing-function: var(
-    --tw-ease,
-    var(--default-transition-timing-function)
-  );
-  @apply duration-300;
-}
 
 @utility text-fluid-9xl {
   font-size: clamp(38px, 0.4803rem + 10.7237vw, 128px);
