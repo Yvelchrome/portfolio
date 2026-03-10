@@ -9,7 +9,7 @@ import { getHeaderHeight } from "utils";
 interface WorksAboutProps {
   paragraph: string;
   mainColor: string;
-  images: Array<StaticImageData>;
+  images: { src: StaticImageData; id: string }[];
 }
 
 export const About = ({ paragraph, mainColor, images }: WorksAboutProps) => {
@@ -31,12 +31,12 @@ export const About = ({ paragraph, mainColor, images }: WorksAboutProps) => {
         {images.map((image, index) => (
           <motion.div
             variants={fadeInFromTop}
-            key={index}
+            key={image.id}
             style={{ backgroundColor: mainColor }}
             className="px-4 py-2 sm:px-12 sm:py-6 lg:px-16 lg:py-8"
           >
             <Image
-              src={image}
+              src={image.src}
               alt={`project image ${String(index + 1)}`}
               className="aspect-16/10 object-cover"
             />

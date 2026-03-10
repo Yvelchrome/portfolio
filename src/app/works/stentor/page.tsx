@@ -14,14 +14,14 @@ import News from "assets/images/works/stentor/news.png";
 import Testimonial from "assets/images/works/stentor/testimonial.png";
 
 const worksAboutImagesOrdered = [
-  Hero,
-  Block1,
-  Block2,
-  Testimonial,
-  Block4,
-  News,
-  Block3,
-  Block5,
+  { src: Hero, id: "hero" },
+  { src: Block1, id: "block1" },
+  { src: Block2, id: "block2" },
+  { src: Testimonial, id: "testimonial" },
+  { src: Block4, id: "block4" },
+  { src: News, id: "news" },
+  { src: Block3, id: "block3" },
+  { src: Block5, id: "block5" },
 ];
 
 const LandingPage = () => {

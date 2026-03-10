@@ -15,15 +15,15 @@ import Tabs from "assets/images/works/blockfire/tabs.png";
 import Testimonial from "assets/images/works/blockfire/testimonial.png";
 
 const worksAboutImagesOrdered = [
-  Hero,
-  Carousel,
-  Product,
-  Contact,
-  Testimonial,
-  Tabs,
-  Articles,
-  FaQ_1,
-  FaQ_2,
+  { src: Hero, id: "hero" },
+  { src: Carousel, id: "carousel" },
+  { src: Product, id: "product" },
+  { src: Contact, id: "contact" },
+  { src: Testimonial, id: "testimonial" },
+  { src: Tabs, id: "tabs" },
+  { src: Articles, id: "articles" },
+  { src: FaQ_1, id: "faq-1" },
+  { src: FaQ_2, id: "faq-2" },
 ];
 
 const LandingPage = () => {

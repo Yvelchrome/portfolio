@@ -85,8 +85,8 @@ export const WorksHero = ({
                 <div>
                   <p className="text-light-grey w-16">Front:</p>
                   <div className="flex gap-6">
-                    {frontStack.map((technology, index) => (
-                      <p key={index}>{technology}</p>
+                    {frontStack.map((technology) => (
+                      <p key={technology}>{technology}</p>
                     ))}
                   </div>
                 </div>
@@ -95,8 +95,8 @@ export const WorksHero = ({
                 <div>
                   <p className="text-light-grey w-16">Back:</p>
                   <div className="flex gap-6">
-                    {backStack.map((technology, index) => (
-                      <p key={index}>{technology}</p>
+                    {backStack.map((technology) => (
+                      <p key={technology}>{technology}</p>
                     ))}
                   </div>
                 </div>

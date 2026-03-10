@@ -13,13 +13,13 @@ import Hero from "assets/images/works/negatifplus/hero.png";
 import Images from "assets/images/works/negatifplus/images.png";
 
 const worksAboutImagesOrdered = [
-  Configurator_1,
-  Configurator_2,
-  Account,
-  Hero,
-  Images,
-  Block1,
-  Block2,
+  { src: Configurator_1, id: "configurator-1" },
+  { src: Configurator_2, id: "configurator-2" },
+  { src: Account, id: "account" },
+  { src: Hero, id: "hero" },
+  { src: Images, id: "images" },
+  { src: Block1, id: "block1" },
+  { src: Block2, id: "block2" },
 ];
 
 const LandingPage = () => {

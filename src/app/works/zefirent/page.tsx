@@ -17,17 +17,17 @@ import Tabs from "assets/images/works/zefirent/tabs.png";
 import Video from "assets/images/works/zefirent/video.png";
 
 const worksAboutImagesOrdered = [
-  Cards,
-  Group,
-  Map1,
-  Map2,
-  Tabs,
-  Video,
-  Block1,
-  Block2,
-  FaQ,
-  Contact,
-  Blog,
+  { src: Cards, id: "cards" },
+  { src: Group, id: "group" },
+  { src: Map1, id: "map1" },
+  { src: Map2, id: "map2" },
+  { src: Tabs, id: "tabs" },
+  { src: Video, id: "video" },
+  { src: Block1, id: "block1" },
+  { src: Block2, id: "block2" },
+  { src: FaQ, id: "faq" },
+  { src: Contact, id: "contact" },
+  { src: Blog, id: "blog" },
 ];
 
 const LandingPage = () => {

@@ -1,3 +1,5 @@
+"use client";
+
 import { useScroll, useSpring, useTransform } from "motion/react";
 import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
