@@ -4,8 +4,6 @@ import Link from "next/link";
 
 import { useTranslations } from "next-intl";
 
-import { GlowingEffect } from "components";
-
 interface SectionWorksItemProps {
   title: string;
   subtitle: string;
@@ -36,17 +34,6 @@ export const SectionWorksItem = ({
       href={linkHref}
       className="bg-light-black group no-locale-animation text-primary-text-dark relative flex w-full cursor-pointer flex-col justify-between rounded-2xl p-8"
     >
-      <GlowingEffect
-        blur={0}
-        borderWidth={3}
-        spread={60}
-        glow={true}
-        disabled={false}
-        proximity={100}
-        inactiveZone={0}
-        variant="blue"
-        className="*:after:duration-500"
-      />
       <div className="space-y-6">
         <div>
           <h3 className="text-fluid-5xl no-locale-animation font-semibold">

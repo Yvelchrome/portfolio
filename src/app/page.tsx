@@ -62,6 +62,7 @@ const LandingPage = () => {
       <motion.section
         initial="hidden"
         whileInView="visible"
+        viewport={{ once: true }}
         transition={{
           staggerChildren: 0.1,
           delayChildren: 0.2,
@@ -84,6 +85,7 @@ const LandingPage = () => {
       <motion.section
         initial="hidden"
         whileInView="visible"
+        viewport={{ once: true }}
         transition={{
           staggerChildren: 0.2,
           delayChildren: 0.3,
