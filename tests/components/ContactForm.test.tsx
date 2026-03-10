@@ -2,12 +2,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Mock, describe, expect, it, vi } from "vitest";
 
-import * as csrfHook from "hooks/useCsrfToken";
-import * as mountedHook from "hooks/useMounted";
 import type * as nextIntl from "next-intl";
 import { toast } from "sonner";
 
 import { ContactForm } from "components/ContactForm";
+import * as csrfHook from "hooks/useCsrfToken";
+import * as mountedHook from "hooks/useMounted";
 import { getContactTranslator } from "utils/GetMessagesJson";
 
 const tContact = await getContactTranslator();

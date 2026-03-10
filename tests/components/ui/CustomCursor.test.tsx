@@ -3,15 +3,14 @@ import { describe, expect, it, vi } from "vitest";
 
 import { type ReactElement } from "react";
 
-import { useMediaQuery } from "hooks/useMediaQuery";
-import { useMounted } from "hooks/useMounted";
-
 import {
   BASE_CURSOR_SIZE,
   CustomCursor,
   MAX_CURSOR_SIZE,
   isHoveringClickable,
 } from "components/ui/CustomCursor";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { useMounted } from "hooks/useMounted";
 
 vi.mock("hooks/useMounted", () => ({ useMounted: vi.fn(() => true) }));
 vi.mock("hooks/useMediaQuery", () => ({
