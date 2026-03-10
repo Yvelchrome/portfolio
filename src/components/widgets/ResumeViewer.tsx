@@ -39,7 +39,7 @@ export const ResumeViewer = () => {
             Find my resume here : <a href={resumePath}>View Resume</a>
           </DialogDescription>
         </DialogHeader>
-        <iframe className="h-full w-auto" src={resumePath} />
+        <iframe title="CV" className="h-full w-auto" src={resumePath} />
       </DialogContent>
     </Dialog>
   );
