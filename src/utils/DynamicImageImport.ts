@@ -27,13 +27,13 @@ export const Zefirent = dynamic(
 ) satisfies SVGComponent;
 
 export const Discord = dynamic(() => import("assets/images/discord.svg"), {
-  ssr: false,
+  ssr: true,
 }) satisfies SVGComponent;
 
 export const GitHub = dynamic(() => import("assets/images/github.svg"), {
-  ssr: false,
+  ssr: true,
 }) satisfies SVGComponent;
 
 export const LinkedIn = dynamic(() => import("assets/images/linkedin.svg"), {
-  ssr: false,
+  ssr: true,
 }) satisfies SVGComponent;
