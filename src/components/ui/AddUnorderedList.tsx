@@ -73,11 +73,13 @@ export const AddUnorderedList = ({
 
   return (
     <div key={intlTitle} className="space-y-2 lg:space-y-6">
-      <h3 className="text-base font-medium">{t(intlTitle)}</h3>
+      <h3 className="text-primary-text text-base font-medium">
+        {t(intlTitle)}
+      </h3>
       <ul className={listClassName}>
         {normalizedItems.map((item, index) => (
           <li
-            className="no-locale-animation **:no-locale-animation flex items-center lg:gap-4"
+            className="no-locale-animation **:no-locale-animation text-primary-text flex items-center lg:gap-4"
             key={`${intlTitle}-${String(index)}-${item.text}`}
           >
             <ConditionalWrapper

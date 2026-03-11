@@ -40,12 +40,7 @@ export const LayoutClientImports = ({ footer }: { footer: ReactNode }) => {
 
   // Set transition-colors on load to avoid flickering
   useEffect(() => {
-    document.body.classList.add(
-      "transition-colors",
-      "duration-500",
-      "**:transition-colors",
-      "**:duration-500",
-    );
+    document.body.classList.add("transition-colors", "duration-500");
   }, []);
 
   return (

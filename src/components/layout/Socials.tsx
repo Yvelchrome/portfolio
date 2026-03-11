@@ -14,7 +14,7 @@ export const Socials = () => {
 
   const socials: Social[] = [
     {
-      icon: <GitHub />,
+      icon: <GitHub className="text-primary-text" />,
       href: "https://github.com/Yvelchrome",
       label: "GitHub Profile",
     },

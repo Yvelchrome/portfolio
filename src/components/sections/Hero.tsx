@@ -8,7 +8,7 @@ export const Hero = () => {
 
   return (
     <motion.div
-      className="space-y-1 text-center md:space-y-2"
+      className="text-primary-text space-y-1 text-center md:space-y-2"
       variants={fadeInFromTop}
     >
       <h1 className="text-fluid-9xl no-locale-animation">Steven Godin</h1>

@@ -73,10 +73,12 @@ export const WorksHero = ({
           {isArchivedProject && (
             <Badge variant="default">{t("archived")}</Badge>
           )}
-          <h3 className="text-fluid-8xl no-locale-animation font-semibold">
+          <h3 className="text-fluid-8xl text-primary-text no-locale-animation font-semibold">
             {title}
           </h3>
-          <p className="text-fluid-4xl font-medium">{subtitle}</p>
+          <p className="text-fluid-4xl text-primary-text font-medium">
+            {subtitle}
+          </p>
         </motion.div>
       </div>
       <div>
@@ -87,7 +89,7 @@ export const WorksHero = ({
               {frontStack && (
                 <div>
                   <p className="text-light-grey w-16">Front:</p>
-                  <div className="flex gap-6">
+                  <div className="text-primary-text flex gap-6">
                     {frontStack.map((technology) => (
                       <p key={technology}>{technology}</p>
                     ))}
@@ -97,7 +99,7 @@ export const WorksHero = ({
               {backStack && (
                 <div>
                   <p className="text-light-grey w-16">Back:</p>
-                  <div className="flex gap-6">
+                  <div className="text-primary-text flex gap-6">
                     {backStack.map((technology) => (
                       <p key={technology}>{technology}</p>
                     ))}
@@ -113,13 +115,13 @@ export const WorksHero = ({
             {client && (
               <div>
                 <p className="text-light-grey w-16">{t("client")}:</p>
-                <p>{client}</p>
+                <p className="text-primary-text">{client}</p>
               </div>
             )}
             {year && (
               <div>
                 <p className="text-light-grey w-16">{t("year")}:</p>
-                <p>{year}</p>
+                <p className="text-primary-text">{year}</p>
               </div>
             )}
           </motion.div>
@@ -128,10 +130,13 @@ export const WorksHero = ({
             variants={fadeInFromTop}
           >
             <p className="text-light-grey w-16">{t("role")}:</p>
-            <p>{role}</p>
+            <p className="text-primary-text">{role}</p>
           </motion.div>
         </div>
-        <motion.div className="space-x-12 pt-8" variants={fadeInFromTop}>
+        <motion.div
+          className="text-primary-text space-x-12 pt-8"
+          variants={fadeInFromTop}
+        >
           {linkToWebsite && anchorTag(linkToWebsite, "linkToWebsite")}
           {linkToRepository && anchorTag(linkToRepository, "linkToRepository")}
         </motion.div>

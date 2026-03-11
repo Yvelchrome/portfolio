@@ -24,7 +24,7 @@ export const ThemeToggle = () => {
       }
     >
       <svg
-        className="sun-and-moon pointer-events-none"
+        className="sun-and-moon text-primary-text pointer-events-none"
         width="26"
         height="26"
         viewBox="0 0 24 24"

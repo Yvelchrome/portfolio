@@ -43,6 +43,7 @@ html.lenis body {
 @custom-variant h-lg (@media (min-height: 900px));
 @custom-variant h-xl (@media (min-height: 1024px));
 
+/* Responsive Typography */
 @utility text-fluid-9xl {
   font-size: clamp(38px, 0.4803rem + 10.7237vw, 128px);
   line-height: clamp(38px, 0.5283rem + 11.7961vw, 128px);
@@ -77,6 +78,34 @@ html.lenis body {
   font-size: clamp(14px, 0.8158rem + 0.9868vw, 16px);
   line-height: clamp(16.8px, 0.9789rem + 1.1842vw, 19.2px);
   @apply font-normal tracking-normal;
+}
+
+/* Set Transitions */
+header,
+section,
+div,
+button,
+input,
+textarea {
+  transition:
+    background-color 500ms,
+    border-color 500ms;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+a,
+label,
+li,
+svg {
+  transition:
+    opacity 250ms ease-out,
+    color 500ms,
+    stroke 500ms;
 }
 
 /* intl text opacity animation */
@@ -186,6 +215,7 @@ body {
   }
 }
 
+/* Defaults */
 @theme {
   /* shadcn :
     should be defined when modal opened : var(--removed-body-scroll-bar-size)
