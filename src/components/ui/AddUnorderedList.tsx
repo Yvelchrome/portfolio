@@ -47,7 +47,7 @@ export const AddUnorderedList = ({
         <Image
           src={icon}
           alt={iconAlt}
-          className="*:h-auto *:w-10"
+          className="h-[1em] w-[1em]"
           width={iconSize}
           height={iconSize}
         />
@@ -57,7 +57,7 @@ export const AddUnorderedList = ({
     // If icon is a React component
     return (
       <span
-        className="*:h-auto *:w-10 *:drop-shadow-sm"
+        className="h-[1em] w-[1em] *:h-full *:w-full *:drop-shadow-sm"
         role="img"
         aria-label={iconAlt}
       >
