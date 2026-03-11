@@ -85,14 +85,14 @@ body {
   h2,
   h3,
   h4,
-  h5,
-  h6,
   p,
   span,
   a,
   label,
   li {
-    @apply opacity-100 transition-opacity duration-250 ease-out;
+    &:not(.no-locale-animation) {
+      @apply opacity-100;
+    }
   }
 
   &[data-locale-changing="true"] {
@@ -100,19 +100,16 @@ body {
     h2,
     h3,
     h4,
-    h5,
-    h6,
     p,
     span,
     a,
     label,
     li {
-      @apply opacity-0;
+      &:not(.no-locale-animation) {
+        @apply opacity-0;
+      }
     }
   }
-}
-@utility no-locale-animation {
-  @apply opacity-100!;
 }
 
 /* ThemeToggle animation */
