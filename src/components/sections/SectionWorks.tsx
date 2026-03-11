@@ -2,6 +2,7 @@ import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 
 import { SectionHeader, SectionWorksItem } from "components";
+import { useCardGlow } from "hooks/useCardGlow";
 import { fadeInFromBottom } from "lib/animationsVariants";
 import {
   Blockfire,
@@ -12,6 +13,8 @@ import {
 
 export const SectionWorks = () => {
   const t = useTranslations("Section.WorksItem");
+
+  const containerRef = useCardGlow();
 
   const itemData = [
     {
@@ -68,7 +71,10 @@ export const SectionWorks = () => {
     <motion.div variants={fadeInFromBottom} className="bg-background pb-12">
       <SectionHeader number={"02"} intlTitle={"works"} />
 
-      <div className="grid grid-cols-1 gap-4 px-4 xl:grid-cols-2">
+      <div
+        ref={containerRef}
+        className="cards-glow grid grid-cols-1 gap-4 px-4 xl:grid-cols-2"
+      >
         {itemData.length > 0 &&
           itemData.map((item) => <SectionWorksItem key={item.id} {...item} />)}
       </div>

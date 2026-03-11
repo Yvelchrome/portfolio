@@ -147,6 +147,48 @@ body {
   }
 }
 
+/* useCardGlow animation */
+@utility cards-glow {
+  /*
+  elements order : .cards-glow > .card > .card-content
+  ::before = glow on card
+  ::after = fake border
+  */
+  .card::before,
+  .card::after {
+    @apply absolute top-0 left-0 size-full opacity-0 transition-opacity duration-500;
+    border-radius: inherit;
+    content: "";
+  }
+
+  .card::before {
+    @apply z-3;
+    background: radial-gradient(
+      800px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    );
+  }
+
+  .card::after {
+    @apply z-1;
+    background: radial-gradient(
+      700px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.6),
+      transparent 60%
+    );
+  }
+
+  &:hover .card::after,
+  .card:hover::before {
+    @apply opacity-100;
+  }
+
+  .card-content {
+    @apply relative z-2 m-px size-[calc(100%-2px)];
+  }
+}
+
 @theme {
   /* shadcn :
     should be defined when modal opened : var(--removed-body-scroll-bar-size)
