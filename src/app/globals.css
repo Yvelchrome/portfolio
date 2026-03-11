@@ -90,6 +90,10 @@ textarea {
   transition:
     background-color 500ms,
     border-color 500ms;
+  transition-timing-function: var(
+    --tw-ease,
+    var(--default-transition-timing-function)
+  );
 }
 
 h1,
