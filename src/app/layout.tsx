@@ -32,6 +32,9 @@ export const metadata: Metadata = {
   title: "Steven Godin",
   description: "Portfolio of Steven Godin, Front-End Developer.",
   manifest: "/manifest.webmanifest",
+  verification: {
+    google: "3wdU-Nv33C2qKDb7jsL2kz1svVUZRnJqFAywBTV9HHE",
+  },
 };
 
 const RobotoMono = Roboto_Mono({
