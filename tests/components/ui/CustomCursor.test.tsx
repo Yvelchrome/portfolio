@@ -3,6 +3,8 @@ import { describe, expect, it, vi } from "vitest";
 
 import { type ReactElement } from "react";
 
+import { usePathname } from "next/navigation";
+
 import {
   BASE_CURSOR_SIZE,
   CustomCursor,
@@ -16,9 +18,13 @@ vi.mock("hooks/useMounted", () => ({ useMounted: vi.fn(() => true) }));
 vi.mock("hooks/useMediaQuery", () => ({
   useMediaQuery: vi.fn(() => true),
 }));
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(),
+}));
 
 const useMountedMock = vi.mocked(useMounted);
 const useMediaQueryMock = vi.mocked(useMediaQuery);
+const usePathnameMock = vi.mocked(usePathname);
 
 describe("CustomCursor", () => {
   it("renders cursor when mounted and fine pointer available", () => {
@@ -106,6 +112,38 @@ describe("CustomCursor", () => {
       await waitFor(() => {
         expect(cursor.style.left).toBe(`${String(expectedCursorPosition)}px`);
         expect(cursor.style.top).toBe(`${String(expectedCursorPosition)}px`);
+      });
+    });
+
+    it("resets cursor size to BASE_CURSOR_SIZE after route change", async () => {
+      usePathnameMock.mockReturnValue("/page-a");
+      const { rerender } = render(
+        <div>
+          <CustomCursor />
+          <button data-testid="button">Clickable</button>
+        </div>,
+      );
+
+      const cursor = screen.getByTestId("custom-cursor");
+      const button = screen.getByTestId("button");
+
+      fireEvent.mouseOver(button);
+      await waitFor(() => {
+        expect(cursor.style.width).toBe(`${String(MAX_CURSOR_SIZE)}px`);
+        expect(cursor.style.height).toBe(`${String(MAX_CURSOR_SIZE)}px`);
+      });
+
+      usePathnameMock.mockReturnValue("/page-b");
+      rerender(
+        <div>
+          <CustomCursor />
+          <button data-testid="button">Clickable</button>
+        </div>,
+      );
+
+      await waitFor(() => {
+        expect(cursor.style.width).toBe(`${String(BASE_CURSOR_SIZE)}px`);
+        expect(cursor.style.height).toBe(`${String(BASE_CURSOR_SIZE)}px`);
       });
     });
   });

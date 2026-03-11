@@ -86,7 +86,7 @@ export const CustomCursor = () => {
   const pathname = usePathname();
   useEffect(() => {
     animate(hoveringClickable, 0, smoothOptions);
-  }, [pathname]);
+  }, [pathname, hoveringClickable]);
 
   const isMounted = useMounted();
   const hasFinePointer = useMediaQuery("(pointer: fine)");
