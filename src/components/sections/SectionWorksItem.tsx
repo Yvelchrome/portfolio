@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
-import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { GlowingEffect } from "components";
+
+import { useTranslations } from "next-intl";
 
 interface SectionWorksItemProps {
   title: string;
@@ -32,47 +32,40 @@ export const SectionWorksItem = ({
   return (
     <Link
       href={linkHref}
-      className="bg-light-black group no-locale-animation text-primary-text-dark relative flex w-full cursor-pointer flex-col justify-between rounded-2xl p-8"
+      className="card bg-light-black group/card no-locale-animation relative cursor-pointer rounded-2xl"
     >
-      <GlowingEffect
-        blur={0}
-        borderWidth={3}
-        spread={60}
-        glow={true}
-        disabled={false}
-        proximity={100}
-        inactiveZone={0}
-        variant="blue"
-        className="*:after:duration-500"
-      />
-      <div className="space-y-6">
-        <div>
-          <h3 className="text-fluid-5xl no-locale-animation font-semibold">
-            {title}
-          </h3>
-          <p className="text-fluid-2xl font-medium text-gray-400">{subtitle}</p>
+      <div className="card-content bg-light-black text-primary-text-dark relative flex-col justify-between rounded-2xl p-8">
+        <div className="space-y-6">
+          <div>
+            <h3 className="text-fluid-5xl no-locale-animation font-semibold">
+              {title}
+            </h3>
+            <p className="text-fluid-2xl font-medium text-gray-400">
+              {subtitle}
+            </p>
+          </div>
+          <p className="text-fluid-4xl font-medium text-gray-400">{role}</p>
+          <p className="text-fluid-4xl">{description}</p>
         </div>
-        <p className="text-fluid-4xl font-medium text-gray-400">{role}</p>
-        <p className="text-fluid-4xl">{description}</p>
-      </div>
 
-      <div className="*:text-fluid-base pt-8 *:text-gray-400">
-        <p>
-          {t("client")} : {client}
-        </p>
-        <p>
-          {t("year")} : {year}
-        </p>
-      </div>
+        <div className="*:text-fluid-base pt-8 *:text-gray-400">
+          <p>
+            {t("client")} : {client}
+          </p>
+          <p>
+            {t("year")} : {year}
+          </p>
+        </div>
 
-      <div className="absolute inset-0 hidden overflow-clip rounded-2xl sm:block">
-        <span
-          role="img"
-          aria-label={brandLogoAlt}
-          className="no-locale-animation absolute -top-1/8 -right-1/8 h-auto w-1/3 max-w-50 transition-[top,right]! duration-500 *:h-auto *:w-full group-hover:-top-1/16 group-hover:-right-1/16"
-        >
-          {brandLogo}
-        </span>
+        <div className="absolute inset-0 hidden overflow-clip rounded-2xl sm:block">
+          <span
+            role="img"
+            aria-label={brandLogoAlt}
+            className="no-locale-animation absolute top-4 -right-1/8 aspect-square h-auto w-1/3 max-w-40 transition-[right]! duration-500! *:pointer-events-none *:aspect-square *:h-full *:w-full group-hover/card:right-4"
+          >
+            {brandLogo}
+          </span>
+        </div>
       </div>
     </Link>
   );

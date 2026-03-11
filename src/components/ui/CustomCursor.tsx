@@ -1,19 +1,21 @@
 "use client";
 
-import * as motion from "motion/react-client";
-import {
-  type MotionValue,
-  useMotionValue,
-  useTransform,
-  useSpring,
-  animate,
-  SpringOptions,
-} from "motion/react";
-
 import { useEffect } from "react";
 
-import { useMediaQuery } from "lib/hooks/useMediaQuery";
-import { useMounted } from "lib/hooks/useMounted";
+import { usePathname } from "next/navigation";
+
+import {
+  type MotionValue,
+  SpringOptions,
+  animate,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "motion/react";
+import * as motion from "motion/react-client";
+
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { useMounted } from "hooks/useMounted";
 
 const smoothOptions: SpringOptions = {
   damping: 20,
@@ -81,6 +83,11 @@ export const CustomCursor = () => {
     };
   }, [hoveringClickable, mouse.x, mouse.y]);
 
+  const pathname = usePathname();
+  useEffect(() => {
+    animate(hoveringClickable, 0, smoothOptions);
+  }, [pathname, hoveringClickable]);
+
   const isMounted = useMounted();
   const hasFinePointer = useMediaQuery("(pointer: fine)");
   if (!isMounted || !hasFinePointer) return null;
@@ -100,7 +107,7 @@ export const CustomCursor = () => {
     >
       <motion.span
         style={{ opacity: hoveringClickable, fontSize }}
-        className="text-primary-text-dark absolute top-full left-full mix-blend-difference"
+        className="text-primary-text-dark absolute top-full left-full"
       >
         Click
       </motion.span>

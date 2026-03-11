@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { parseJsonWithZod, CSRFResponseSchema } from "lib/schemas";
+import { useEffect, useState } from "react";
+
+import { CSRFResponseSchema, parseJsonWithZod } from "lib/schemas";
 
 export function useCsrfToken() {
   const [csrfToken, setCsrfToken] = useState<string | null>(null);

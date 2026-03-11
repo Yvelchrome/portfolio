@@ -1,22 +1,30 @@
-import { describe, it, expect, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { useMounted } from "lib/hooks/useMounted";
-import { useMediaQuery } from "lib/hooks/useMediaQuery";
+import { describe, expect, it, vi } from "vitest";
+
+import { type ReactElement } from "react";
+
+import { usePathname } from "next/navigation";
+
 import {
-  CustomCursor,
   BASE_CURSOR_SIZE,
+  CustomCursor,
   MAX_CURSOR_SIZE,
   isHoveringClickable,
 } from "components/ui/CustomCursor";
-import { type ReactElement } from "react";
+import { useMediaQuery } from "hooks/useMediaQuery";
+import { useMounted } from "hooks/useMounted";
 
-vi.mock("lib/hooks/useMounted", () => ({ useMounted: vi.fn(() => true) }));
-vi.mock("lib/hooks/useMediaQuery", () => ({
+vi.mock("hooks/useMounted", () => ({ useMounted: vi.fn(() => true) }));
+vi.mock("hooks/useMediaQuery", () => ({
   useMediaQuery: vi.fn(() => true),
+}));
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(),
 }));
 
 const useMountedMock = vi.mocked(useMounted);
 const useMediaQueryMock = vi.mocked(useMediaQuery);
+const usePathnameMock = vi.mocked(usePathname);
 
 describe("CustomCursor", () => {
   it("renders cursor when mounted and fine pointer available", () => {
@@ -104,6 +112,38 @@ describe("CustomCursor", () => {
       await waitFor(() => {
         expect(cursor.style.left).toBe(`${String(expectedCursorPosition)}px`);
         expect(cursor.style.top).toBe(`${String(expectedCursorPosition)}px`);
+      });
+    });
+
+    it("resets cursor size to BASE_CURSOR_SIZE after route change", async () => {
+      usePathnameMock.mockReturnValue("/page-a");
+      const { rerender } = render(
+        <div>
+          <CustomCursor />
+          <button data-testid="button">Clickable</button>
+        </div>,
+      );
+
+      const cursor = screen.getByTestId("custom-cursor");
+      const button = screen.getByTestId("button");
+
+      fireEvent.mouseOver(button);
+      await waitFor(() => {
+        expect(cursor.style.width).toBe(`${String(MAX_CURSOR_SIZE)}px`);
+        expect(cursor.style.height).toBe(`${String(MAX_CURSOR_SIZE)}px`);
+      });
+
+      usePathnameMock.mockReturnValue("/page-b");
+      rerender(
+        <div>
+          <CustomCursor />
+          <button data-testid="button">Clickable</button>
+        </div>,
+      );
+
+      await waitFor(() => {
+        expect(cursor.style.width).toBe(`${String(BASE_CURSOR_SIZE)}px`);
+        expect(cursor.style.height).toBe(`${String(BASE_CURSOR_SIZE)}px`);
       });
     });
   });

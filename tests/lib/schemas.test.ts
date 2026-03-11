@@ -1,12 +1,30 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
+
+import { z } from "zod";
+
 import {
-  ContactFormSchema,
   ApiResponseSchema,
   CSRFResponseSchema,
-  parseJsonWithZod,
+  ContactFormSchema,
   formatZodErrors,
+  parseJsonWithZod,
 } from "lib/schemas";
-import { z } from "zod";
+import { getContactTranslator } from "utils/GetMessagesJson";
+
+vi.mock("services/locale", () => ({
+  getUserLocale: vi.fn().mockResolvedValue("en"),
+}));
+
+const tContact = await getContactTranslator();
+const errors = {
+  nameMax: tContact("errors.nameMax"),
+  companyMax: tContact("errors.companyMax"),
+  emailMin: tContact("errors.emailMin"),
+  emailMax: tContact("errors.emailMax"),
+  emailInvalid: tContact("errors.emailInvalid"),
+  messageMin: tContact("errors.messageMin"),
+  messageMax: tContact("errors.messageMax"),
+};
 
 const validContact = {
   email: "test@example.com",
@@ -20,7 +38,7 @@ const invalidContact = {
 
 describe("validateWithZod", () => {
   it("lowercases email", () => {
-    const result = ContactFormSchema.parse({
+    const result = ContactFormSchema(tContact).parse({
       email: "TEST@EXAMPLE.COM",
       message: validContact.message,
     });
@@ -29,7 +47,7 @@ describe("validateWithZod", () => {
   });
 
   it("accepts valid data", () => {
-    const result = ContactFormSchema.safeParse(validContact);
+    const result = ContactFormSchema(tContact).safeParse(validContact);
 
     expect(result.success).toBe(true);
     if (result.success) {
@@ -44,7 +62,7 @@ describe("validateWithZod", () => {
       // missing email
     };
 
-    const result = ContactFormSchema.safeParse(invalidData);
+    const result = ContactFormSchema(tContact).safeParse(invalidData);
 
     expect(result.success).toBe(false);
     if (!result.success) {
@@ -58,7 +76,7 @@ describe("validateWithZod", () => {
       // missing message
     };
 
-    const result = ContactFormSchema.safeParse(invalidData);
+    const result = ContactFormSchema(tContact).safeParse(invalidData);
 
     expect(result.success).toBe(false);
     if (!result.success) {
@@ -67,7 +85,7 @@ describe("validateWithZod", () => {
   });
 
   it("validates email format", () => {
-    const result = ContactFormSchema.safeParse({
+    const result = ContactFormSchema(tContact).safeParse({
       ...validContact,
       email: invalidContact.email,
     });
@@ -78,12 +96,44 @@ describe("validateWithZod", () => {
         i.path.includes("email"),
       );
 
-      expect(emailError?.message).toMatch(/valid email/i);
+      expect(emailError?.message).toBe(errors.emailInvalid);
+    }
+  });
+
+  it("validates email length (min)", () => {
+    const result = ContactFormSchema(tContact).safeParse({
+      ...validContact,
+      email: "a",
+    });
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const emailError = result.error.issues.find((i) =>
+        i.path.includes("email"),
+      );
+
+      expect(emailError?.message).toBe(errors.emailMin);
+    }
+  });
+
+  it("validates email length (max)", () => {
+    const result = ContactFormSchema(tContact).safeParse({
+      ...validContact,
+      email: "a".repeat(256),
+    });
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const emailError = result.error.issues.find((i) =>
+        i.path.includes("email"),
+      );
+
+      expect(emailError?.message).toBe(errors.emailMax);
     }
   });
 
   it("validates message length (min)", () => {
-    const result = ContactFormSchema.safeParse({
+    const result = ContactFormSchema(tContact).safeParse({
       ...validContact,
       message: invalidContact.message,
     });
@@ -93,12 +143,12 @@ describe("validateWithZod", () => {
       const messageError = result.error.issues.find((i) =>
         i.path.includes("message"),
       );
-      expect(messageError?.message).toMatch(/at least 10/i);
+      expect(messageError?.message).toBe(errors.messageMin);
     }
   });
 
   it("validates message length (max)", () => {
-    const result = ContactFormSchema.safeParse({
+    const result = ContactFormSchema(tContact).safeParse({
       ...validContact,
       message: "a".repeat(5001),
     });
@@ -108,12 +158,12 @@ describe("validateWithZod", () => {
       const messageError = result.error.issues.find((i) =>
         i.path.includes("message"),
       );
-      expect(messageError?.message).toMatch(/5000/i);
+      expect(messageError?.message).toBe(errors.messageMax);
     }
   });
 
   it("validates name length (max)", () => {
-    const result = ContactFormSchema.safeParse({
+    const result = ContactFormSchema(tContact).safeParse({
       ...validContact,
       name: "a".repeat(101),
     });
@@ -123,12 +173,12 @@ describe("validateWithZod", () => {
       const nameError = result.error.issues.find((i) =>
         i.path.includes("name"),
       );
-      expect(nameError?.message).toMatch(/100/i);
+      expect(nameError?.message).toBe(errors.nameMax);
     }
   });
 
   it("validates company name length (max)", () => {
-    const result = ContactFormSchema.safeParse({
+    const result = ContactFormSchema(tContact).safeParse({
       ...validContact,
       company_name: "a".repeat(101),
     });
@@ -138,12 +188,12 @@ describe("validateWithZod", () => {
       const companyNameError = result.error.issues.find((i) =>
         i.path.includes("company_name"),
       );
-      expect(companyNameError?.message).toMatch(/100/i);
+      expect(companyNameError?.message).toBe(errors.companyMax);
     }
   });
 
   it("allows optional fields to be omitted", () => {
-    const result = ContactFormSchema.safeParse({
+    const result = ContactFormSchema(tContact).safeParse({
       ...validContact,
       // no name, company_name, honeypot
     });
@@ -158,7 +208,7 @@ describe("validateWithZod", () => {
       message: "Bot message",
     };
 
-    const result = ContactFormSchema.safeParse(botData);
+    const result = ContactFormSchema(tContact).safeParse(botData);
 
     expect(result.success).toBe(true);
   });
@@ -283,7 +333,7 @@ describe("parseJsonWithZod", () => {
 
 describe("formatZodErrors", () => {
   it("formats validation errors", () => {
-    const result = ContactFormSchema.safeParse({
+    const result = ContactFormSchema(tContact).safeParse({
       ...invalidContact,
       email: "a",
     });

@@ -1,17 +1,20 @@
-import { SectionWorksItem, SectionHeader } from "components";
-
-import NegatifplusLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
-import BlockfireLogo from "assets/images/works/blockfire/BlockfireLogo.svg";
-import ZefirentLogo from "assets/images/works/zefirent/ZefirentLogo.svg";
-import StentorLogo from "assets/images/works/stentor/StentorLogo.svg";
-
 import * as motion from "motion/react-client";
-import { fadeInFromBottom } from "lib/animationsVariants";
-
 import { useTranslations } from "next-intl";
+
+import { SectionHeader, SectionWorksItem } from "components";
+import { useCardGlow } from "hooks/useCardGlow";
+import { fadeInFromBottom } from "lib/animationsVariants";
+import {
+  Blockfire,
+  Negatifplus,
+  Stentor,
+  Zefirent,
+} from "utils/DynamicImageImport";
 
 export const SectionWorks = () => {
   const t = useTranslations("Section.WorksItem");
+
+  const containerRef = useCardGlow();
 
   const itemData = [
     {
@@ -23,7 +26,7 @@ export const SectionWorks = () => {
       linkHref: "/works/negatifplus",
       client: "Négatif+",
       year: "2024",
-      brandLogo: <NegatifplusLogo />,
+      brandLogo: <Negatifplus />,
       brandLogoAlt: "Négatif+ logo",
     },
     {
@@ -35,7 +38,7 @@ export const SectionWorks = () => {
       linkHref: "/works/zefirent",
       client: "Petit Forestier - Zefirent",
       year: "2024",
-      brandLogo: <ZefirentLogo />,
+      brandLogo: <Zefirent />,
       brandLogoAlt: "Zefirent logo",
     },
     {
@@ -47,7 +50,7 @@ export const SectionWorks = () => {
       linkHref: "/works/blockfire",
       client: "Block'Fire",
       year: "2023",
-      brandLogo: <BlockfireLogo />,
+      brandLogo: <Blockfire />,
       brandLogoAlt: "Block'Fire logo",
     },
     {
@@ -59,7 +62,7 @@ export const SectionWorks = () => {
       linkHref: "/works/stentor",
       client: "Groupe Stentor",
       year: "2022",
-      brandLogo: <StentorLogo />,
+      brandLogo: <Stentor />,
       brandLogoAlt: "Groupe Stentor logo",
     },
   ];
@@ -68,7 +71,10 @@ export const SectionWorks = () => {
     <motion.div variants={fadeInFromBottom} className="bg-background pb-12">
       <SectionHeader number={"02"} intlTitle={"works"} />
 
-      <div className="grid grid-cols-1 gap-4 px-4 xl:grid-cols-2">
+      <div
+        ref={containerRef}
+        className="cards-glow grid grid-cols-1 gap-4 px-4 xl:grid-cols-2"
+      >
         {itemData.length > 0 &&
           itemData.map((item) => <SectionWorksItem key={item.id} {...item} />)}
       </div>

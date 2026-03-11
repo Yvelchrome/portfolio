@@ -1,11 +1,17 @@
-import { describe, it, expect, vi } from "vitest";
-import { POST } from "app/api/send-email/route";
+import { describe, expect, it, vi } from "vitest";
+
 import { NextRequest } from "next/server";
+
+import { POST } from "app/api/send-email/route";
 import { ApiResponseSchema } from "lib/schemas";
 
 process.env["CSRF_SECRET"] = "test-csrf-secret";
 process.env["RESEND_API_KEY"] = "test-resend-key";
 process.env["TARGET_EMAIL"] = "myemail@test.com";
+
+vi.mock("services/locale", () => ({
+  getUserLocale: vi.fn().mockResolvedValue("en"),
+}));
 
 const resendSendMock = vi
   .fn()

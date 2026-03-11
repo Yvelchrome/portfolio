@@ -1,34 +1,17 @@
-"use client";
-
-import {
-  TimeWidget,
-  AddUnorderedList,
-  ResumeViewer,
-  CustomLink,
-} from "components";
-import Github from "assets/images/github.svg";
-import Linkedin from "assets/images/linkedin.svg";
-import Discord from "assets/images/discord.svg";
-
-import { usePathname } from "next/navigation";
-
 import { useTranslations } from "next-intl";
 
-interface FooterProps {
-  email: string | undefined;
-  phone: string | undefined;
-}
+import {
+  AddUnorderedList,
+  CustomLink,
+  ResumeViewer,
+  TimeWidget,
+} from "components";
+import { getContactInfo } from "utils";
+import { Discord, GitHub, LinkedIn } from "utils/DynamicImageImport";
 
-export const Footer = ({ email, phone }: FooterProps) => {
+export const Footer = () => {
   const t = useTranslations("Section");
-
-  const pathname = usePathname();
-  const hiddenFooterRoutes = ["/works", "/contact"];
-  const hideFooter = hiddenFooterRoutes.some((route) =>
-    pathname.startsWith(route),
-  );
-
-  if (hideFooter) return null;
+  const { email, phone } = getContactInfo();
 
   return (
     <footer
@@ -52,13 +35,13 @@ export const Footer = ({ email, phone }: FooterProps) => {
               items={[
                 {
                   text: "Yvelchrome",
-                  icon: <Github />,
+                  icon: <GitHub />,
                   iconAlt: "GitHub : ",
                   href: "https://github.com/Yvelchrome",
                 },
                 {
                   text: "Steven Godin",
-                  icon: <Linkedin />,
+                  icon: <LinkedIn />,
                   iconAlt: "LinkedIn : ",
                   href: "https://www.linkedin.com/in/steven-godin/",
                 },

@@ -11,6 +11,8 @@ import {
   Text,
 } from "@react-email/components";
 
+import { getBaseUrl } from "utils/GetBaseUrl";
+
 interface EmailProps {
   name?: string | undefined;
   company_name?: string | undefined;
@@ -24,9 +26,6 @@ const ContactEmailTemplate = ({
   email,
   message,
 }: EmailProps) => {
-  const vercelUrl = process.env["VERCEL_URL"];
-  const baseUrl = vercelUrl ? `https://${vercelUrl}` : "http://localhost:3000";
-
   return (
     <Html>
       <Head />
@@ -36,10 +35,12 @@ const ContactEmailTemplate = ({
           <Container className="mx-auto my-10 max-w-xl rounded border border-solid border-[#eaeaea] p-5">
             <Section className="mt-8">
               <Img
-                src={`${baseUrl}/logo.svg`}
+                src={`${getBaseUrl()}/logo.png`}
+                alt="Logo"
+                title="Logo"
                 width="40"
                 height="75"
-                className="mx-auto my-0"
+                className="mx-auto my-0 block"
               />
             </Section>
             <Heading className="text-primary-text-light mx-0 my-7.5 p-0 text-center text-[24px] font-normal">

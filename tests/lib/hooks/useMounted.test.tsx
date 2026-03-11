@@ -1,6 +1,7 @@
-import { describe, it, expect } from "vitest";
 import { act, renderHook } from "@testing-library/react";
-import { useMounted } from "lib/hooks/useMounted";
+import { describe, expect, it } from "vitest";
+
+import { useMounted } from "hooks/useMounted";
 
 describe("useMounted", () => {
   it("returns false initially", () => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { hasWindow } from "utils/windowEnv";
 
 export function useMediaQuery(query: string): boolean {

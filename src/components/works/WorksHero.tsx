@@ -1,12 +1,11 @@
 import type { ReactElement } from "react";
 
 import * as motion from "motion/react-client";
-import { fadeInFromTop } from "lib/animationsVariants";
-
 import { useTranslations } from "next-intl";
 
 import { ScrollIndication } from "components";
 import { Badge } from "components/shadcn/badge";
+import { fadeInFromTop } from "lib/animationsVariants";
 
 interface WorksHeroProps {
   WorkLogo: ReactElement;
@@ -57,24 +56,29 @@ export const WorksHero = ({
         intlTitle="scroll"
         positionClassName="bottom-1/12 left-1/2 -translate-x-1/2"
       />
-
       <div>
-        <motion.span
+        <motion.div
           variants={fadeInFromTop}
-          role="img"
-          aria-label="Negatifplus logo"
-          className="no-locale-animation block h-22 *:h-full *:w-auto sm:h-32 lg:absolute lg:top-1/2 lg:left-1/2 lg:h-1/3 lg:-translate-1/2"
+          className="block aspect-square h-22 w-auto sm:h-32 lg:absolute lg:top-1/2 lg:left-1/2 lg:h-1/3 lg:-translate-1/2"
         >
-          {WorkLogo}
-        </motion.span>
+          <span
+            role="img"
+            aria-label={`${String(client)} logo`}
+            className="no-locale-animation h-full w-full *:h-full *:w-full *:drop-shadow-sm"
+          >
+            {WorkLogo}
+          </span>
+        </motion.div>
         <motion.div variants={fadeInFromTop}>
           {isArchivedProject && (
             <Badge variant="default">{t("archived")}</Badge>
           )}
-          <h3 className="text-fluid-8xl no-locale-animation font-semibold">
+          <h3 className="text-fluid-8xl text-primary-text no-locale-animation font-semibold">
             {title}
           </h3>
-          <p className="text-fluid-4xl font-medium">{subtitle}</p>
+          <p className="text-fluid-4xl text-primary-text font-medium">
+            {subtitle}
+          </p>
         </motion.div>
       </div>
       <div>
@@ -85,9 +89,9 @@ export const WorksHero = ({
               {frontStack && (
                 <div>
                   <p className="text-light-grey w-16">Front:</p>
-                  <div className="flex gap-6">
-                    {frontStack.map((technology, index) => (
-                      <p key={index}>{technology}</p>
+                  <div className="text-primary-text flex gap-6">
+                    {frontStack.map((technology) => (
+                      <p key={technology}>{technology}</p>
                     ))}
                   </div>
                 </div>
@@ -95,9 +99,9 @@ export const WorksHero = ({
               {backStack && (
                 <div>
                   <p className="text-light-grey w-16">Back:</p>
-                  <div className="flex gap-6">
-                    {backStack.map((technology, index) => (
-                      <p key={index}>{technology}</p>
+                  <div className="text-primary-text flex gap-6">
+                    {backStack.map((technology) => (
+                      <p key={technology}>{technology}</p>
                     ))}
                   </div>
                 </div>
@@ -111,13 +115,13 @@ export const WorksHero = ({
             {client && (
               <div>
                 <p className="text-light-grey w-16">{t("client")}:</p>
-                <p>{client}</p>
+                <p className="text-primary-text">{client}</p>
               </div>
             )}
             {year && (
               <div>
                 <p className="text-light-grey w-16">{t("year")}:</p>
-                <p>{year}</p>
+                <p className="text-primary-text">{year}</p>
               </div>
             )}
           </motion.div>
@@ -126,10 +130,13 @@ export const WorksHero = ({
             variants={fadeInFromTop}
           >
             <p className="text-light-grey w-16">{t("role")}:</p>
-            <p>{role}</p>
+            <p className="text-primary-text">{role}</p>
           </motion.div>
         </div>
-        <motion.div className="space-x-12 pt-8" variants={fadeInFromTop}>
+        <motion.div
+          className="text-primary-text space-x-12 pt-8"
+          variants={fadeInFromTop}
+        >
           {linkToWebsite && anchorTag(linkToWebsite, "linkToWebsite")}
           {linkToRepository && anchorTag(linkToRepository, "linkToRepository")}
         </motion.div>

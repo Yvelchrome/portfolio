@@ -1,9 +1,7 @@
 "use client";
 
+import { useScroll, useSpring, useTransform } from "motion/react";
 import * as motion from "motion/react-client";
-import { useScroll, useTransform } from "motion/react";
-import { fadeInFromTop } from "lib/animationsVariants";
-
 import { useTranslations } from "next-intl";
 
 interface ScrollIndicationProps {
@@ -35,18 +33,20 @@ export const ScrollIndication = ({
   const { flexDirection, rotate, svgDimensions } = map[arrowPosition];
 
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scrollOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const opacity = useSpring(scrollOpacity);
 
   return (
     <motion.div
       className={`absolute ${flexDirection} ${String(positionClassName)} lg:h-md:flex hidden items-center justify-center`}
-      variants={fadeInFromTop}
       style={{ opacity }}
     >
-      <p className="font-roxboroughcf text-sm uppercase">{t(intlTitle)}</p>
+      <p className="font-roxboroughcf text-primary-text text-sm uppercase">
+        {t(intlTitle)}
+      </p>
 
       <div
-        className={`flex items-center justify-center *:stroke-red-600`}
+        className={`flex items-center justify-center`}
         style={{ width: svgDimensions.width, height: svgDimensions.height }}
       >
         <svg
@@ -59,16 +59,9 @@ export const ScrollIndication = ({
             transform: rotate,
             transformOrigin: "center",
           }}
-          className="*:stroke-black dark:*:stroke-white"
+          className="stroke-primary-text"
         >
-          <line x1="3.5" x2="3.5" y2="30" />
-          <line x1="3.49938" y1="29.7094" x2="6.40557" y2="25.6407" />
-          <line
-            y1="-0.5"
-            x2="5"
-            y2="-0.5"
-            transform="matrix(-0.581238 -0.813733 -0.813733 0.581238 2.90625 30)"
-          />
+          <path d="M3.5 0v30m-.001-.291 2.907-4.068m-3.093 4.068L.407 25.64" />
         </svg>
       </div>
     </motion.div>

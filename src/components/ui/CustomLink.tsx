@@ -1,4 +1,5 @@
 import Link from "next/link";
+
 import * as motion from "motion/react-client";
 
 export const CustomLink = ({
@@ -36,7 +37,7 @@ export const CustomLink = ({
       className="no-locale-animation inline-block min-w-32 cursor-pointer"
     >
       <motion.div
-        className={`flex items-center justify-center gap-2 rounded-full border border-black px-4 py-1 *:text-xs *:font-medium *:md:text-base dark:border-white ${
+        className={`text-primary-text flex items-center justify-center gap-2 rounded-full border border-black px-4 py-1 *:text-xs *:font-medium *:md:text-base dark:border-white ${
           isLeft ? "flex-row-reverse" : ""
         }`}
         whileHover={{ scale: 1.1 }}

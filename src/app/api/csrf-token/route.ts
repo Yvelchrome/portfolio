@@ -1,7 +1,8 @@
 "use server";
 
-import { CSRFResponseSchema } from "lib/schemas";
 import { NextResponse } from "next/server";
+
+import { CSRFResponseSchema } from "lib/schemas";
 
 export async function GET() {
   const token = process.env["CSRF_SECRET"] ?? null;

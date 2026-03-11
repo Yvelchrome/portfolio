@@ -16,7 +16,7 @@
     "utils": "lib/utils/shadcn",
     "ui": "components/shadcn",
     "lib": "lib/shadcn",
-    "hooks": "lib/hooks/shadcn"
+    "hooks": "hooks/shadcn"
   },
   "registries": {
     "@aceternity": "https://ui.aceternity.com/registry/{name}.json"

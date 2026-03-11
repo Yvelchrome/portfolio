@@ -2,25 +2,23 @@
 
 import { useRef } from "react";
 
-import * as motion from "motion/react-client";
 import { useScroll, useTransform } from "motion/react";
-
-import { fadeInFromTop } from "lib/animationsVariants";
-import { useMounted } from "lib/hooks/useMounted";
-import { getHeaderHeight, useBreakpoint } from "utils";
-
+import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
 
 import {
-  Socials,
-  Hero,
   CustomLink,
+  Hero,
   ResumeViewer,
+  ScrollIndication,
   SectionAbout,
   SectionSkills,
   SectionWorks,
-  ScrollIndication,
+  Socials,
 } from "components";
+import { useMounted } from "hooks/useMounted";
+import { fadeInFromTop } from "lib/animationsVariants";
+import { getHeaderHeight, useBreakpoint } from "utils";
 
 const StickySectionAnimation = ({
   children,
@@ -45,24 +43,12 @@ const StickySectionAnimation = ({
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
+  const style = shouldAnimate
+    ? { opacity, scale, y, willChange: "opacity, transform" }
+    : { opacity: 1, scale: 1, y: 0 };
+
   return (
-    <motion.section
-      ref={ref}
-      style={
-        shouldAnimate
-          ? {
-              opacity,
-              scale,
-              y,
-              willChange: "opacity, transform",
-            }
-          : {
-              opacity: 1,
-              scale: 1,
-              y: 0,
-            }
-      }
-    >
+    <motion.section ref={ref} style={style}>
       {children}
     </motion.section>
   );
@@ -72,15 +58,17 @@ const LandingPage = () => {
   const t = useTranslations("Homepage");
 
   return (
-    <motion.div
-      initial="hidden"
-      animate="visible"
-      transition={{
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      }}
-    >
-      <section className="relative flex min-h-dvh flex-col items-center justify-center gap-4 py-24 sm:gap-6 md:gap-8">
+    <>
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{
+          staggerChildren: 0.1,
+          delayChildren: 0.2,
+        }}
+        className="relative flex min-h-dvh flex-col items-center justify-center gap-4 py-24 sm:gap-6 md:gap-8"
+      >
         <Hero />
         <motion.div className="flex gap-4" variants={fadeInFromTop}>
           <ResumeViewer />
@@ -92,18 +80,28 @@ const LandingPage = () => {
           intlTitle="discover"
           positionClassName="bottom-1/16 left-1/2 -translate-x-1/2"
         />
-      </section>
+      </motion.section>
 
-      <StickySectionAnimation>
-        <SectionAbout />
-      </StickySectionAnimation>
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        transition={{
+          staggerChildren: 0.2,
+          delayChildren: 0.3,
+        }}
+      >
+        <StickySectionAnimation>
+          <SectionAbout />
+        </StickySectionAnimation>
 
-      <StickySectionAnimation>
-        <SectionWorks />
-      </StickySectionAnimation>
+        <StickySectionAnimation>
+          <SectionWorks />
+        </StickySectionAnimation>
 
-      <SectionSkills />
-    </motion.div>
+        <SectionSkills />
+      </motion.section>
+    </>
   );
 };
 

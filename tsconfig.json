@@ -11,7 +11,7 @@
     "allowJs": true,
     "checkJs": false,
 
-    /* Strict Mode - TOUS activés */
+    /* Strict Mode */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitReturns": true,
@@ -45,7 +45,7 @@
     "plugins": [{ "name": "next" }],
 
     /* Vitest */
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
   },
   "include": [
     "src/types/**/*.d.ts",
@@ -56,7 +56,7 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
   ],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
 }

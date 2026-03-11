@@ -2,8 +2,9 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
  */
-import "./src/env.js";
 import createNextIntlPlugin from "next-intl/plugin";
+
+import "./src/env.js";
 
 const withNextIntl = createNextIntlPlugin();
 const securityHeaders = [
@@ -36,7 +37,23 @@ const config = {
     rules: {
       "*.svg": {
         condition: { not: { query: "?url" } },
-        loaders: [{ loader: "@svgr/webpack", options: { icon: true } }],
+        loaders: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              icon: false,
+              svgo: true,
+              svgoConfig: {
+                multipass: true,
+                plugins: [
+                  "preset-default",
+                  { name: "removeTitle" },
+                  { name: "removeDimensions" },
+                ],
+              },
+            },
+          },
+        ],
         as: "*.js",
       },
     },

@@ -1,29 +1,18 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
-import { ReactLenis, type LenisRef } from "lenis/react";
-import { cancelFrame, frame } from "motion";
+import { useEffect, useRef } from "react";
+
 import { usePathname } from "next/navigation";
 
-let globalLenis: LenisRef["lenis"] | null = null;
-export function getLenis() {
-  return globalLenis;
-}
+import { type LenisRef, ReactLenis } from "lenis/react";
+import { cancelFrame, frame } from "motion";
 
-export const SmoothScrolling = ({ children }: { children: ReactNode }) => {
+export const SmoothScrolling = () => {
   const lenisRef = useRef<LenisRef>(null);
   const pathname = usePathname();
 
+  // RAF loop for lenis
   useEffect(() => {
-    const assignLenis = () => {
-      if (lenisRef.current?.lenis) {
-        globalLenis = lenisRef.current.lenis;
-      } else {
-        requestAnimationFrame(assignLenis);
-      }
-    };
-    assignLenis();
-
     function update(data: { timestamp: number }) {
       lenisRef.current?.lenis?.raf(data.timestamp);
     }
@@ -32,18 +21,15 @@ export const SmoothScrolling = ({ children }: { children: ReactNode }) => {
 
     return () => {
       cancelFrame(update);
-      globalLenis = null;
     };
   }, []);
 
   return (
     <ReactLenis
       root
-      options={{ autoRaf: false, lerp: 0.1, duration: 1.5 }}
+      options={{ autoRaf: false, lerp: 0.1, autoToggle: true }}
       ref={lenisRef}
       key={pathname}
-    >
-      {children}
-    </ReactLenis>
+    />
   );
 };

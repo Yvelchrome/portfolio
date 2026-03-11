@@ -1,24 +1,13 @@
 "use client";
 
-import { useMounted } from "lib/hooks/useMounted";
-import { useCsrfToken } from "lib/hooks/useCsrfToken";
+import { useEffect, useMemo } from "react";
 
-import { useTranslations } from "next-intl";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-
-import {
-  ContactFormSchema,
-  type ContactFormData,
-  parseJsonWithZod,
-  ApiResponseSchema,
-  type ApiResponse,
-} from "lib/schemas";
-
 import { toast } from "sonner";
+
 import { Button } from "components/shadcn/button";
-import { Input } from "components/shadcn/input";
-import { Textarea } from "components/shadcn/textarea";
 import {
   Form,
   FormControl,
@@ -27,6 +16,17 @@ import {
   FormLabel,
   FormMessage,
 } from "components/shadcn/form";
+import { Input } from "components/shadcn/input";
+import { Textarea } from "components/shadcn/textarea";
+import { useCsrfToken } from "hooks/useCsrfToken";
+import { useMounted } from "hooks/useMounted";
+import {
+  type ApiResponse,
+  ApiResponseSchema,
+  type ContactFormData,
+  ContactFormSchema,
+  parseJsonWithZod,
+} from "lib/schemas";
 
 export const ContactForm = () => {
   const t = useTranslations("Contact");
@@ -34,8 +34,9 @@ export const ContactForm = () => {
   const isMounted = useMounted();
   const { csrfToken } = useCsrfToken();
 
+  const zodSchema = useMemo(() => ContactFormSchema(t), [t]);
   const form = useForm<ContactFormData>({
-    resolver: zodResolver(ContactFormSchema),
+    resolver: zodResolver(zodSchema),
     mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {
@@ -47,7 +48,17 @@ export const ContactForm = () => {
     },
   });
 
-  const isSubmitting = form.formState.isSubmitting;
+  const {
+    trigger,
+    formState: { errors, isSubmitting },
+  } = form;
+
+  useEffect(() => {
+    const errorFields = Object.keys(errors);
+    if (errorFields.length > 0) {
+      void trigger(errorFields as (keyof ContactFormData)[]);
+    }
+  }, [zodSchema, trigger, errors]);
 
   async function onSubmit(data: ContactFormData) {
     if (data.honeypot) {

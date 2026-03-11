@@ -1,6 +1,7 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { renderHook, act } from "@testing-library/react";
-import { useMediaQuery } from "lib/hooks/useMediaQuery";
+import { act, renderHook } from "@testing-library/react";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { useMediaQuery } from "hooks/useMediaQuery";
 import * as WindowEnv from "utils/windowEnv";
 
 describe("useMediaQuery", () => {

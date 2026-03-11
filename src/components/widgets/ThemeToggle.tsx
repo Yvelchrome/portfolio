@@ -1,10 +1,9 @@
 "use client";
 
-import "./ThemeToggle.scss";
-
 import * as motion from "motion/react-client";
 import { useTheme } from "next-themes";
-import { useMounted } from "lib/hooks/useMounted";
+
+import { useMounted } from "hooks/useMounted";
 
 export const ThemeToggle = () => {
   const isMounted = useMounted();
@@ -25,24 +24,23 @@ export const ThemeToggle = () => {
       }
     >
       <svg
-        className="sun-and-moon pointer-events-none"
+        className="sun-and-moon text-primary-text pointer-events-none"
         width="26"
         height="26"
         viewBox="0 0 24 24"
       >
-        <mask className="moon" id="moon-mask">
+        <mask className="moon origin-center" id="moon-mask">
           <rect x="0" y="0" width="100%" height="100%" fill="white" />
           <circle cx="24" cy="10" r="6" fill="black" />
         </mask>
         <circle
-          className="sun"
+          className="sun origin-center fill-current"
           cx="12"
           cy="12"
           r="6"
           mask="url(#moon-mask)"
-          fill="currentColor"
         />
-        <g className="sun-beams" stroke="currentColor">
+        <g className="sun-beams origin-center stroke-current stroke-2 dark:opacity-0">
           <line x1="12" y1="1" x2="12" y2="3" />
           <line x1="12" y1="21" x2="12" y2="23" />
           <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />

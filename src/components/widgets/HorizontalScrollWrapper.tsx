@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useLayoutEffect, useState, type ReactNode } from "react";
-import * as motion from "motion/react-client";
+import { type ReactNode, useLayoutEffect, useRef, useState } from "react";
+
 import { useScroll, useTransform } from "motion/react";
+import * as motion from "motion/react-client";
 
 export const HorizontalScrollWrapper = ({
   children,

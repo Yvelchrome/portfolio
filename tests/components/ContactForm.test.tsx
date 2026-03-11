@@ -1,20 +1,50 @@
-import { describe, it, expect, vi, Mock } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { toast } from "sonner";
-import { ContactForm } from "components/ContactForm";
-import * as mountedHook from "lib/hooks/useMounted";
-import * as csrfHook from "lib/hooks/useCsrfToken";
+import { Mock, describe, expect, it, vi } from "vitest";
 
-vi.mock("next-intl", () => ({
-  useTranslations: () => (key: string) => key,
+import type * as nextIntl from "next-intl";
+import { toast } from "sonner";
+
+import { ContactForm } from "components/ContactForm";
+import * as csrfHook from "hooks/useCsrfToken";
+import * as mountedHook from "hooks/useMounted";
+import { getContactTranslator } from "utils/GetMessagesJson";
+
+const tContact = await getContactTranslator();
+const translations = {
+  name: tContact("name"),
+  company: tContact("company_name"),
+  email: new RegExp(`^${tContact("email")}`, "i"),
+  message: new RegExp(`^${tContact("message")}`, "i"),
+  send: tContact("send"),
+  honeypot: tContact("honeypot"),
+  errors: {
+    emailInvalid: tContact("errors.emailInvalid"),
+    messageMin: tContact("errors.messageMin"),
+  },
+};
+
+vi.mock("services/locale", () => ({
+  getUserLocale: vi.fn().mockResolvedValue("en"),
 }));
 
-vi.mock("lib/hooks/useMounted", () => ({
+let mockTContact = tContact;
+vi.mock("next-intl", async (importOriginal) => {
+  const actual: typeof nextIntl = await importOriginal();
+  return {
+    ...actual,
+    useTranslations: (namespace?: string) => {
+      if (namespace === "Contact") return mockTContact;
+      return (key: string) => key;
+    },
+  };
+});
+
+vi.mock("hooks/useMounted", () => ({
   useMounted: () => true,
 }));
 
-vi.mock("lib/hooks/useCsrfToken", () => ({
+vi.mock("hooks/useCsrfToken", () => ({
   useCsrfToken: () => ({ csrfToken: "test-csrf-token" }),
 }));
 
@@ -23,37 +53,48 @@ vi.mock("sonner", () => ({
 }));
 
 const fillValidForm = async (user: ReturnType<typeof userEvent.setup>) => {
-  await user.type(screen.getByLabelText(/email/i), "test@example.com");
   await user.type(
-    screen.getByLabelText(/message/i),
+    screen.getByLabelText(translations.email),
+    "test@example.com",
+  );
+  await user.type(
+    screen.getByLabelText(translations.message),
     "This is a test message with enough characters",
   );
 };
 
 describe("ContactForm", () => {
-  it("renders all form fields", () => {
+  it("renders all form fields", async () => {
     render(<ContactForm />);
 
-    expect(screen.getByLabelText(/^name$/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/company/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/message/i)).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /send/i })).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByLabelText(translations.name)).toBeInTheDocument();
+      expect(screen.getByLabelText(translations.company)).toBeInTheDocument();
+      expect(screen.getByLabelText(translations.email)).toBeInTheDocument();
+      expect(screen.getByLabelText(translations.message)).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: translations.send }),
+      ).toBeInTheDocument();
+    });
   });
 
   it("validates email format", async () => {
     const user = userEvent.setup();
     render(<ContactForm />);
 
-    const emailInput = screen.getByLabelText(/email/i);
-    const submitButton = screen.getByRole("button", { name: /send/i });
+    const emailInput = screen.getByLabelText(translations.email);
+    const submitButton = screen.getByRole("button", {
+      name: translations.send,
+    });
 
     await user.type(emailInput, "invalid-email");
     await user.click(submitButton);
 
     await waitFor(() => {
       expect(emailInput).toHaveAttribute("aria-invalid", "true");
-      expect(screen.getByText(/valid email/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(translations.errors.emailInvalid),
+      ).toBeInTheDocument();
     });
   });
 
@@ -61,15 +102,47 @@ describe("ContactForm", () => {
     const user = userEvent.setup();
     render(<ContactForm />);
 
-    const messageInput = screen.getByLabelText(/message/i);
-    const submitButton = screen.getByRole("button", { name: /send/i });
+    const messageInput = screen.getByLabelText(translations.message);
+    const submitButton = screen.getByRole("button", {
+      name: translations.send,
+    });
 
     await user.type(messageInput, "Short");
     await user.click(submitButton);
 
     await waitFor(() => {
       expect(messageInput).toHaveAttribute("aria-invalid", "true");
-      expect(screen.getByText(/at least 10 characters/i)).toBeInTheDocument();
+      expect(
+        screen.getByText(translations.errors.messageMin),
+      ).toBeInTheDocument();
+    });
+  });
+
+  it("calls trigger with error fields when zodSchema reference changes", async () => {
+    const user = userEvent.setup();
+    render(<ContactForm />);
+
+    const emailInput = screen.getByLabelText(translations.email);
+    const messageInput = screen.getByLabelText(translations.message);
+    const submitButton = screen.getByRole("button", {
+      name: translations.send,
+    });
+
+    await user.type(emailInput, "invalid-email");
+    await user.type(messageInput, "Short");
+    await user.click(submitButton);
+
+    // New function reference → useMemo recomputes → new zodSchema → effect re-runs → trigger() called
+    mockTContact = ((key: string) =>
+      tContact(key as Parameters<typeof tContact>[0])) as typeof tContact;
+
+    await waitFor(() => {
+      expect(
+        screen.getByText(translations.errors.emailInvalid),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(translations.errors.messageMin),
+      ).toBeInTheDocument();
     });
   });
 
@@ -85,7 +158,9 @@ describe("ContactForm", () => {
 
     await fillValidForm(user);
 
-    const submitButton = screen.getByRole("button", { name: /send/i });
+    const submitButton = screen.getByRole("button", {
+      name: translations.send,
+    });
     await user.click(submitButton);
 
     await waitFor(() => {
@@ -107,8 +182,8 @@ describe("ContactForm", () => {
         }),
       );
 
-      expect(screen.getByLabelText(/email/i)).toHaveValue("");
-      expect(screen.getByLabelText(/message/i)).toHaveValue("");
+      expect(screen.getByLabelText(translations.email)).toHaveValue("");
+      expect(screen.getByLabelText(translations.message)).toHaveValue("");
     });
   });
 
@@ -131,7 +206,9 @@ describe("ContactForm", () => {
 
     await fillValidForm(user);
 
-    const submitButton = screen.getByRole("button", { name: /send/i });
+    const submitButton = screen.getByRole("button", {
+      name: translations.send,
+    });
     await user.click(submitButton);
 
     expect(submitButton).toBeDisabled();
@@ -151,13 +228,16 @@ describe("ContactForm", () => {
 
     render(<ContactForm />);
 
-    const honeypot = screen.getByLabelText(/honeypot/i);
+    const honeypot = screen.getByLabelText(translations.honeypot);
     await user.type(honeypot, "I am a bot");
 
-    await user.type(screen.getByLabelText(/email/i), "bot@example.com");
-    await user.type(screen.getByLabelText(/message/i), "Bot message");
+    await user.type(
+      screen.getByLabelText(translations.email),
+      "bot@example.com",
+    );
+    await user.type(screen.getByLabelText(translations.message), "Bot message");
 
-    await user.click(screen.getByRole("button", { name: /send/i }));
+    await user.click(screen.getByRole("button", { name: translations.send }));
 
     await waitFor(() => {
       expect(global.fetch).not.toHaveBeenCalled();
@@ -175,7 +255,7 @@ describe("ContactForm failures", () => {
 
     await fillValidForm(user);
 
-    await user.click(screen.getByRole("button", { name: /send/i }));
+    await user.click(screen.getByRole("button", { name: translations.send }));
 
     await waitFor(() => {
       expect(toast).toHaveBeenCalledWith(
@@ -199,7 +279,7 @@ describe("ContactForm failures", () => {
 
     await fillValidForm(user);
 
-    await user.click(screen.getByRole("button", { name: /send/i }));
+    await user.click(screen.getByRole("button", { name: translations.send }));
 
     await waitFor(() => {
       expect(toast).toHaveBeenCalledWith(
@@ -224,7 +304,7 @@ describe("ContactForm failures", () => {
 
     await fillValidForm(user);
 
-    await user.click(screen.getByRole("button", { name: /send/i }));
+    await user.click(screen.getByRole("button", { name: translations.send }));
 
     await waitFor(() => {
       expect(toast).toHaveBeenCalledWith(
@@ -248,7 +328,7 @@ describe("ContactForm failures", () => {
 
     await fillValidForm(user);
 
-    await user.click(screen.getByRole("button", { name: /send/i }));
+    await user.click(screen.getByRole("button", { name: translations.send }));
 
     await waitFor(() => {
       expect(toast).toHaveBeenCalledWith(
@@ -287,7 +367,7 @@ describe("ContactForm failures", () => {
 
     await fillValidForm(user);
 
-    await user.click(screen.getByRole("button", { name: /send/i }));
+    await user.click(screen.getByRole("button", { name: translations.send }));
 
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith(

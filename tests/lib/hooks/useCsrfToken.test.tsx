@@ -1,6 +1,7 @@
-import { describe, it, expect, Mock } from "vitest";
 import { renderHook, waitFor } from "@testing-library/react";
-import { useCsrfToken } from "lib/hooks/useCsrfToken";
+import { Mock, describe, expect, it } from "vitest";
+
+import { useCsrfToken } from "hooks/useCsrfToken";
 
 describe("useCsrfToken", () => {
   it("fetches CSRF token on mount", async () => {

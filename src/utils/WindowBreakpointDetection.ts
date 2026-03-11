@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { hasWindow } from "./windowEnv";
 
 export const BREAKPOINTS = {

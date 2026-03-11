@@ -1,8 +1,8 @@
 import * as motion from "motion/react-client";
-import { fadeInFromBottom } from "lib/animationsVariants";
+import { useTranslations } from "next-intl";
 
 import { SectionHeader } from "components";
-import { useTranslations } from "next-intl";
+import { fadeInFromBottom } from "lib/animationsVariants";
 
 export const SectionAbout = () => {
   const t = useTranslations("Section");
@@ -10,7 +10,7 @@ export const SectionAbout = () => {
   return (
     <motion.div variants={fadeInFromBottom} className="bg-background pb-12">
       <SectionHeader number={"01"} intlTitle={"about"} />
-      <div className="font-satoshi text-fluid-4xl space-y-6 px-4 sm:px-8 md:w-3/5">
+      <div className="font-satoshi text-primary-text text-fluid-4xl space-y-6 px-4 sm:px-8 md:w-10/12 xl:w-8/12">
         <p>{t("about_paragraph_1")}</p>
         <p>{t("about_paragraph_2")}</p>
       </div>

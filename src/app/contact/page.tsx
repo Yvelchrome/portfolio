@@ -1,9 +1,9 @@
+import { Mail, Phone } from "lucide-react";
 import * as motion from "motion/react-client";
-import { fadeInFromTop } from "lib/animationsVariants";
 import { useTranslations } from "next-intl";
 
 import { ContactForm, CustomLink } from "components";
-import { Mail, Phone } from "lucide-react";
+import { fadeInFromTop } from "lib/animationsVariants";
 import { getContactInfo } from "utils";
 
 const LandingPage = () => {

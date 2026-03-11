@@ -1,5 +1,20 @@
 /** @type {import('prettier').Config & import('prettier-plugin-tailwindcss').PluginOptions} */
 const config = {
-  plugins: ["prettier-plugin-tailwindcss"],
+  importOrder: [
+    "<BUILTIN_MODULES>",
+    "(testing-library|vitest)(?:/.*)?$",
+    "^react$",
+    "^next(?:/.*)?$",
+    "<THIRD_PARTY_MODULES>",
+    "^(emails|lib|hooks|services|utils|i18n|types|app|components)(?:/.*)?$",
+    "^assets(?:/.*)?$",
+    "^[./]",
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+  plugins: [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss",
+  ],
 };
 export default config;

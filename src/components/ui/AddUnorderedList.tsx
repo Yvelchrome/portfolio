@@ -1,6 +1,9 @@
-import { useTranslations } from "next-intl";
-import Image, { type StaticImageData } from "next/image";
 import type { ReactNode } from "react";
+
+import Image, { type StaticImageData } from "next/image";
+
+import { useTranslations } from "next-intl";
+
 import { ConditionalWrapper } from "utils";
 
 interface ListItem {
@@ -28,7 +31,7 @@ export const AddUnorderedList = ({
     if (!item.icon) return null;
 
     const defaultIconAlt = "";
-    const defaultIconSize = 36;
+    const defaultIconSize = 40;
 
     const icon = item.icon;
     const iconAlt = item.iconAlt ?? defaultIconAlt;
@@ -41,13 +44,23 @@ export const AddUnorderedList = ({
       (typeof icon === "object" && "src" in icon)
     ) {
       return (
-        <Image src={icon} alt={iconAlt} width={iconSize} height={iconSize} />
+        <Image
+          src={icon}
+          alt={iconAlt}
+          className="h-[1em] w-[1em]"
+          width={iconSize}
+          height={iconSize}
+        />
       );
     }
 
     // If icon is a React component
     return (
-      <span role="img" aria-label={iconAlt}>
+      <span
+        className="h-[1em] w-[1em] *:h-full *:w-full *:drop-shadow-sm"
+        role="img"
+        aria-label={iconAlt}
+      >
         {icon}
       </span>
     );
@@ -60,11 +73,13 @@ export const AddUnorderedList = ({
 
   return (
     <div key={intlTitle} className="space-y-2 lg:space-y-6">
-      <h3 className="text-base font-medium">{t(intlTitle)}</h3>
+      <h3 className="text-primary-text text-base font-medium">
+        {t(intlTitle)}
+      </h3>
       <ul className={listClassName}>
         {normalizedItems.map((item, index) => (
           <li
-            className="no-locale-animation **:no-locale-animation flex items-center lg:gap-4"
+            className="no-locale-animation **:no-locale-animation text-primary-text flex items-center lg:gap-4"
             key={`${intlTitle}-${String(index)}-${item.text}`}
           >
             <ConditionalWrapper

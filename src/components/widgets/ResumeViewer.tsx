@@ -1,5 +1,8 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+
+import { CustomButton } from "components";
 import {
   Dialog,
   DialogContent,
@@ -8,10 +11,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "components/shadcn/dialog";
-import { CustomButton } from "components";
-
-import { LenisControl } from "utils";
-import { useLocale, useTranslations } from "next-intl";
 
 export const ResumeViewer = () => {
   const locale = useLocale();
@@ -22,9 +21,8 @@ export const ResumeViewer = () => {
 
   return (
     <Dialog
-      onOpenChange={(val) => {
-        if (val) LenisControl.stop();
-        else LenisControl.start();
+      onOpenChange={(open) => {
+        document.documentElement.classList.toggle("overflow-clip", open);
       }}
     >
       <DialogTrigger>
@@ -41,7 +39,7 @@ export const ResumeViewer = () => {
             Find my resume here : <a href={resumePath}>View Resume</a>
           </DialogDescription>
         </DialogHeader>
-        <iframe className="h-full w-auto" src={resumePath} />
+        <iframe title="CV" className="h-full w-auto" src={resumePath} />
       </DialogContent>
     </Dialog>
   );

@@ -1,22 +1,32 @@
-import { WorksHero, CloseButton, About } from "components";
-
-import WorkLogo from "assets/images/works/negatifplus/NegatifplusLogo.svg";
-import img1 from "assets/images/works/negatifplus/configurator_2.png";
-import img2 from "assets/images/works/negatifplus/configurator_1.png";
-import img3 from "assets/images/works/negatifplus/account.png";
-import img4 from "assets/images/works/negatifplus/hero.png";
-import img5 from "assets/images/works/negatifplus/images.png";
-import img6 from "assets/images/works/negatifplus/block_1.png";
-import img7 from "assets/images/works/negatifplus/block_2.png";
-
 import * as motion from "motion/react-client";
 import { useTranslations } from "next-intl";
+
+import { About, CloseButton, WorksHero } from "components";
+import { Negatifplus } from "utils/DynamicImageImport";
+
+import Account from "assets/images/works/negatifplus/account.png";
+import Block1 from "assets/images/works/negatifplus/block_1.png";
+import Block2 from "assets/images/works/negatifplus/block_2.png";
+import Configurator_1 from "assets/images/works/negatifplus/configurator_1.png";
+import Configurator_2 from "assets/images/works/negatifplus/configurator_2.png";
+import Hero from "assets/images/works/negatifplus/hero.png";
+import Images from "assets/images/works/negatifplus/images.png";
+
+const worksAboutImagesOrdered = [
+  { src: Configurator_1, id: "configurator-1" },
+  { src: Configurator_2, id: "configurator-2" },
+  { src: Account, id: "account" },
+  { src: Hero, id: "hero" },
+  { src: Images, id: "images" },
+  { src: Block1, id: "block1" },
+  { src: Block2, id: "block2" },
+];
 
 const LandingPage = () => {
   const t = useTranslations("Works.negatifplus");
 
   const WorksHeroProps = {
-    WorkLogo: <WorkLogo />,
+    WorkLogo: <Negatifplus />,
     title: t("title"),
     subtitle: t("subtitle"),
     role: t("role"),
@@ -29,7 +39,7 @@ const LandingPage = () => {
   const WorksAboutProps = {
     paragraph: t("about_paragraph"),
     mainColor: "#7C2900",
-    images: [img1, img2, img3, img4, img5, img6, img7],
+    images: worksAboutImagesOrdered,
   };
 
   return (

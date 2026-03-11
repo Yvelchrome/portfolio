@@ -1,19 +1,25 @@
-import "./globals.css";
-
 import type { ReactNode } from "react";
-import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
-import { Roboto_Mono } from "next/font/google";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import * as motion from "motion/react-client";
-import { ThemeProvider } from "next-themes";
+import type { Metadata, Viewport } from "next";
+import dynamic from "next/dynamic";
+import { Roboto_Mono } from "next/font/google";
+import localFont from "next/font/local";
+
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import { ThemeProvider } from "next-themes";
 
-import { CustomCursor, Footer, Header, SmoothScrolling } from "components";
-import { Toaster } from "components/shadcn/sonner";
-import { getContactInfo } from "utils";
+import { LayoutClientImports } from "components";
+
+import "./globals.css";
+
+const Header = dynamic(() =>
+  import("components/layout/Header").then((m) => m.Header),
+);
+
+const Footer = dynamic(() =>
+  import("components/layout/Footer").then((m) => m.Footer),
+);
 
 export const viewport: Viewport = {
   themeColor: [
@@ -25,11 +31,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Steven Godin",
   description: "Portfolio of Steven Godin, Front-End Developer.",
-  manifest: "./manifest.ts",
+  manifest: "/manifest.webmanifest",
+  verification: {
+    google: "3wdU-Nv33C2qKDb7jsL2kz1svVUZRnJqFAywBTV9HHE",
+  },
 };
 
 const RobotoMono = Roboto_Mono({
   subsets: ["latin"],
+  weight: ["300"],
   variable: "--font-roboto-mono",
 });
 const Satoshi = localFont({
@@ -60,26 +70,19 @@ export default async function LocaleLayout({
   const locale = await getLocale();
   const messages = await getMessages();
 
-  const contactInfo = getContactInfo();
-
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <motion.body
-        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi bg-background transition-colors-300 **:transition-colors-300 text-fluid-base text-primary-text relative font-normal`}
+    <html lang={locale} suppressHydrationWarning className="relative">
+      <body
+        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi text-fluid-base text-primary-text bg-background relative font-normal`}
       >
-        <SmoothScrolling>
-          <NextIntlClientProvider messages={messages}>
-            <ThemeProvider>
-              <Header />
-              <main className="relative container mx-auto">{children}</main>
-              <Footer {...contactInfo} />
-              <CustomCursor />
-              <Toaster position="bottom-center" />
-              <SpeedInsights />
-            </ThemeProvider>
-          </NextIntlClientProvider>
-        </SmoothScrolling>
-      </motion.body>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider>
+            <Header />
+            <main className="relative container mx-auto">{children}</main>
+            <LayoutClientImports footer={<Footer />} />
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      </body>
     </html>
   );
 }

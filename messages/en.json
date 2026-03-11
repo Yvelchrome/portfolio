@@ -18,7 +18,16 @@
     "message": "Message",
     "form_field_message": "How can I help you ?",
     "send": "Send Message",
-    "send_pending": "Sending..."
+    "send_pending": "Sending...",
+    "errors": {
+      "nameMax": "Name must be 100 characters or less.",
+      "companyMax": "Company name must be 100 characters or less.",
+      "emailMin": "Email must be at least 5 characters.",
+      "emailMax": "Email must be 254 characters or less.",
+      "emailInvalid": "Please enter a valid email address.",
+      "messageMin": "Message must be at least 10 characters.",
+      "messageMax": "Message must be 5000 characters or less."
+    }
   },
   "Toast": {
     "contact_form_success_title": "Message sent successfully!",
@@ -28,11 +37,12 @@
   },
   "Section": {
     "about": "About me",
-    "about_paragraph_1": "As a front-end developer, I design interfaces that are both attractive and high-performing.",
-    "about_paragraph_2": "What motivates me is bringing projects with a tangible impact to life. Combining technical rigor with a sense of design.",
+    "about_paragraph_1": "As a Front-End Engineer specializing in React, Next.js, and TypeScript, I design high-performance, well-crafted web interfaces.",
+    "about_paragraph_2": "I turn concepts and designs into fluid, cohesive experiences, combining technical rigor, solid architecture, and a keen attention to detail.",
     "skills": "Skills",
     "skills_category_1": "Technologies",
-    "skills_category_2": "Tools",
+    "skills_category_2": "Quality",
+    "skills_category_3": "Tools",
     "works": "Works",
     "WorksItem": {
       "client": "Client",
