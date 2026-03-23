@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(ADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  messages  Message[]
+}
+
+enum Role {
+  ADMIN
+}
+
+model Message {
+  id           String        @id @default(cuid())
+  name         String
+  email        String
+  subject      String
+  content      String
+  status       MessageStatus @default(NEW)
+  readAt       DateTime?
+  repliedAt    DateTime?
+  replyContent String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  repliedBy    User?         @relation(fields: [repliedById], references: [id])
+  repliedById  String?
+  @@index([status])
+  @@index([createdAt])
+  @@index([repliedById])
+}
+
+enum MessageStatus {
+  NEW
+  READ
+  REPLIED
+  ARCHIVED
+}
