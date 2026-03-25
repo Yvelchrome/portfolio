@@ -1,4 +1,71 @@
 {
+  "Common": {
+    "status": {
+      "new": "Nouveau",
+      "read": "Lu",
+      "replied": "Répondu",
+      "archived": "Archivé"
+    },
+    "actions": {
+      "go_back": "Retour"
+    },
+    "labels": {
+      "client": "Client",
+      "year": "Année"
+    }
+  },
+  "Admin": {
+    "dashboard": "Tableau de bord",
+    "welcome_back": "Bienvenue, {name}",
+    "total_messages": "Total des messages",
+    "unread": "Non lus",
+    "replied": "Répondus",
+    "recent_messages": "Messages récents",
+    "view_all": "Voir tout",
+    "no_messages": "Aucun message",
+    "logout": "Déconnexion",
+    "messages": {
+      "title": "Messages",
+      "all_status": "Tous les statuts",
+      "name": "Nom",
+      "subject": "Sujet",
+      "status": "Statut",
+      "date": "Date",
+      "actions": "Actions",
+      "view": "Voir",
+      "delete": "Supprimer",
+      "loading": "Chargement...",
+      "loading_more": "Chargement en cours...",
+      "no_messages_found": "Aucun message trouvé",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "page_number": "Page {page}"
+    },
+    "message_detail": {
+      "reply_sent": "Réponse envoyée",
+      "change_status": "Changer le statut",
+      "select_status": "Sélectionner un statut...",
+      "update_status": "Mettre à jour",
+      "replied_on": "Répondu le : {date}",
+      "from": "De"
+    },
+    "statistics": {
+      "title": "Statistiques",
+      "last_7_days": "7 derniers jours",
+      "last_30_days": "30 derniers jours",
+      "last_90_days": "90 derniers jours",
+      "total_sent": "Total envoyé",
+      "sent": "Envoyés",
+      "delivered": "Délivrés",
+      "bounced": "Rejetés",
+      "failed": "Échecs",
+      "issues": "Problèmes",
+      "delivery_breakdown": "Répartition des livraisons",
+      "delivery_rate": "Taux de livraison",
+      "email_performance": "Performance Email",
+      "detailed_metrics": "Métriques détaillées"
+    }
+  },
   "Homepage": {
     "job_title": "Développeur Front-End",
     "resume": "CV",
@@ -6,7 +73,6 @@
     "contact": "Contact"
   },
   "Contact": {
-    "go_back": "Retour",
     "title": "Contactez-moi",
     "honeypot": "Laissez ce champ vide",
     "name": "Nom",
@@ -45,8 +111,6 @@
     "skills_category_3": "Outils",
     "works": "Projets",
     "WorksItem": {
-      "client": "Client",
-      "year": "Année",
       "role": {
         "frontend_developer": "Développeur Front-End",
         "ui_designer": "Designer UI"
@@ -70,8 +134,6 @@
     "contact_send_email": "Envoyez-moi un"
   },
   "Works": {
-    "client": "Client",
-    "year": "Année",
     "role": "Rôle",
     "linkToWebsite": "Visiter le site",
     "linkToRepository": "GitHub",
