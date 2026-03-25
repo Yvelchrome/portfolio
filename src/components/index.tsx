@@ -1,5 +1,6 @@
-export { ContactForm } from "./ContactForm";
-export { LayoutClientImports } from "./LayoutClientImports";
+export * from "./ContactForm";
+export * from "./LayoutClientImports";
+export * from "./ClientProviders";
 export * from "./layout";
 export * from "./sections";
 export * from "./ui";
