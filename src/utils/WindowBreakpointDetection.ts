@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { hasWindow } from "./windowEnv";
+import { hasWindow } from "utils/HasWindow";
 
 export const BREAKPOINTS = {
   // Width breakpoints (standard Tailwind)
@@ -21,13 +21,17 @@ export const BREAKPOINTS = {
 } as const;
 export type BreakpointKey = keyof typeof BREAKPOINTS;
 
-const SORTED_WIDTH_BREAKPOINTS = Object.entries(BREAKPOINTS)
-  .filter(([key]) => !key.startsWith("h-"))
-  .sort(([, a], [, b]) => b - a) as [BreakpointKey, number][];
+const widthEntries = Object.entries(BREAKPOINTS).filter(
+  ([key]) => !key.startsWith("h-"),
+) as [BreakpointKey, number][];
+const SORTED_WIDTH_BREAKPOINTS = [...widthEntries].sort((a, b) => b[1] - a[1]);
 
-const SORTED_HEIGHT_BREAKPOINTS = Object.entries(BREAKPOINTS)
-  .filter(([key]) => key.startsWith("h-"))
-  .sort(([, a], [, b]) => b - a) as [BreakpointKey, number][];
+const heightEntries = Object.entries(BREAKPOINTS).filter(([key]) =>
+  key.startsWith("h-"),
+) as [BreakpointKey, number][];
+const SORTED_HEIGHT_BREAKPOINTS = [...heightEntries].sort(
+  (a, b) => b[1] - a[1],
+);
 
 /**
  * Check if current viewport matches a width breakpoint
@@ -57,7 +61,8 @@ export function getCurrentWidthBreakpoint(): BreakpointKey | null {
 
   const width = window.innerWidth;
 
-  for (const [key, value] of SORTED_WIDTH_BREAKPOINTS) {
+  for (const entry of SORTED_WIDTH_BREAKPOINTS) {
+    const [key, value] = entry;
     if (width >= value) return key;
   }
 
@@ -72,7 +77,8 @@ export function getCurrentHeightBreakpoint(): BreakpointKey | null {
 
   const height = window.innerHeight;
 
-  for (const [key, value] of SORTED_HEIGHT_BREAKPOINTS) {
+  for (const entry of SORTED_HEIGHT_BREAKPOINTS) {
+    const [key, value] = entry;
     if (height >= value) return key;
   }
 
@@ -124,27 +130,3 @@ export function useBreakpoint() {
     matchesHeight,
   };
 }
-
-// Usage Examples:
-
-// 1. Simple check
-// if (matchesWidth('md')) { ... }
-// if (matchesHeight('h-lg')) { ... }
-
-// 2. Get current breakpoint
-// const currentWidth = getCurrentWidthBreakpoint(); // 'lg'
-// const currentHeight = getCurrentHeightBreakpoint(); // 'h-md'
-
-// 3. React Hook
-// function MyComponent() {
-//   const { width, height, matchesWidth, matchesHeight } = useBreakpoint();
-//
-//   return (
-//     <div>
-//       <p>Width: {width}</p>
-//       <p>Height: {height}</p>
-//       {matchesWidth('lg') && <p>Large screen!</p>}
-//       {matchesHeight('h-lg') && <p>Tall screen!</p>}
-//     </div>
-//   );
-// }
