@@ -1,6 +1,11 @@
 import type { MetadataRoute } from "next";
 
-import { projects } from "lib/projects";
+const WORKS_SLUGS = [
+  "negatifplus",
+  "zefirent",
+  "blockfire",
+  "stentor",
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -12,8 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const worksRoutes = projects.map((p) => ({
-    url: `https://svgd.vercel.app/works/${p.slug}`,
+  const worksRoutes = WORKS_SLUGS.map((slug) => ({
+    url: `https://svgd.vercel.app/works/${slug}`,
     lastModified: new Date(),
     priority: 0.8,
   }));
