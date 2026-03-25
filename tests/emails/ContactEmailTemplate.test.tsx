@@ -2,8 +2,14 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
 import ContactEmailTemplate from "emails/ContactEmailTemplate";
+import { resetBaseUrlCache } from "utils/GetBaseUrl";
 
 describe("ContactEmailTemplate renders logo correctly", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    resetBaseUrlCache();
+  });
+
   it("renders the template with all the properties", () => {
     render(
       <ContactEmailTemplate
@@ -26,8 +32,6 @@ describe("ContactEmailTemplate renders logo correctly", () => {
       const img = screen.getByRole("img");
       expect(img).toHaveAttribute("src", "https://svgd.vercel.app/logo.png");
     });
-
-    vi.unstubAllEnvs();
   });
 
   it("renders the logo with localhost URL in development", async () => {
@@ -41,7 +45,5 @@ describe("ContactEmailTemplate renders logo correctly", () => {
       const img = screen.getByRole("img");
       expect(img).toHaveAttribute("src", "http://localhost:3000/logo.png");
     });
-
-    vi.unstubAllEnvs();
   });
 });
