@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { hasWindow } from "utils/windowEnv";
+import { hasWindow } from "utils/HasWindow";
 
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(() => {
