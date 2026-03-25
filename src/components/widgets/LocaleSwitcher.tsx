@@ -30,7 +30,6 @@ export const LocaleSwitcher = () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      setChangingLocale(false);
     };
   }, []);
 

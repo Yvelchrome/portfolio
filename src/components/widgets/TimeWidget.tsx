@@ -23,13 +23,13 @@ export const TimeWidget = () => {
 
   if (!isMounted) return null;
 
-  const Day: Intl.DateTimeFormatOptions = {
+  const dayOptions: Intl.DateTimeFormatOptions = {
     timeZone: "Europe/Paris",
     month: "numeric",
     day: "numeric",
   };
 
-  const Hour: Intl.DateTimeFormatOptions = {
+  const hourOptions: Intl.DateTimeFormatOptions = {
     timeZone: "Europe/Paris",
     hour: "numeric",
     minute: "numeric",
@@ -39,8 +39,8 @@ export const TimeWidget = () => {
   return (
     <div className="flex items-center gap-2">
       <p>🇫🇷</p>
-      <p>{currentTime.toLocaleString(locale, Day)}</p>
-      <p>{currentTime.toLocaleString(locale, Hour)}</p>
+      <p>{currentTime.toLocaleString(locale, dayOptions)}</p>
+      <p>{currentTime.toLocaleString(locale, hourOptions)}</p>
     </div>
   );
 };

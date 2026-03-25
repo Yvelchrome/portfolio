@@ -7,6 +7,25 @@ import { ScrollIndication } from "components";
 import { Badge } from "components/shadcn/badge";
 import { fadeInFromTop } from "lib/animationsVariants";
 
+interface AnchorTagProps {
+  href: string;
+  intlTitle: string;
+  t: ReturnType<typeof useTranslations>;
+}
+
+const AnchorTag = ({ href, intlTitle, t }: AnchorTagProps) => {
+  return (
+    <a
+      href={href}
+      className="text-fluid-2xl underline"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      {t(intlTitle)}
+    </a>
+  );
+};
+
 interface WorksHeroProps {
   WorkLogo: ReactElement;
   title: string;
@@ -35,19 +54,7 @@ export const WorksHero = ({
   isArchivedProject,
 }: WorksHeroProps) => {
   const t = useTranslations("Works");
-
-  function anchorTag(href: string, intlTitle: string) {
-    return (
-      <a
-        href={href}
-        className="text-fluid-2xl underline"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {t(intlTitle)}
-      </a>
-    );
-  }
+  const tCommon = useTranslations("Common.labels");
 
   return (
     <section className="relative flex min-w-full flex-col justify-between space-y-10 pt-24 pb-24 sm:space-y-20 sm:pt-36 sm:pb-32 lg:min-h-dvh lg:pt-48">
@@ -114,13 +121,13 @@ export const WorksHero = ({
           >
             {client && (
               <div>
-                <p className="text-light-grey w-16">{t("client")}:</p>
+                <p className="text-light-grey w-16">{tCommon("client")}:</p>
                 <p className="text-primary-text">{client}</p>
               </div>
             )}
             {year && (
               <div>
-                <p className="text-light-grey w-16">{t("year")}:</p>
+                <p className="text-light-grey w-16">{tCommon("year")}:</p>
                 <p className="text-primary-text">{year}</p>
               </div>
             )}
@@ -137,8 +144,16 @@ export const WorksHero = ({
           className="text-primary-text space-x-12 pt-8"
           variants={fadeInFromTop}
         >
-          {linkToWebsite && anchorTag(linkToWebsite, "linkToWebsite")}
-          {linkToRepository && anchorTag(linkToRepository, "linkToRepository")}
+          {linkToWebsite && (
+            <AnchorTag href={linkToWebsite} intlTitle="linkToWebsite" t={t} />
+          )}
+          {linkToRepository && (
+            <AnchorTag
+              href={linkToRepository}
+              intlTitle="linkToRepository"
+              t={t}
+            />
+          )}
         </motion.div>
       </div>
     </section>
