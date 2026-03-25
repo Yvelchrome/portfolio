@@ -1,6 +1,7 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import * as WindowEnv from "utils/HasWindow";
 import {
   BREAKPOINTS,
   getCurrentHeightBreakpoint,
@@ -9,7 +10,6 @@ import {
   matchesWidth,
   useBreakpoint,
 } from "utils/WindowBreakpointDetection";
-import * as WindowEnv from "utils/windowEnv";
 
 describe("WindowBreakpointDetection", () => {
   let originalInnerWidth: number;

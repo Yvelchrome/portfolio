@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { getBaseUrl } from "utils/GetBaseUrl";
+import { getBaseUrl, resetBaseUrlCache } from "utils/GetBaseUrl";
 
 describe("getBaseUrl", () => {
+  afterEach(() => {
+    resetBaseUrlCache();
+  });
+
   it("returns localhost in development", () => {
     expect(getBaseUrl("development")).toBe("http://localhost:3000");
   });

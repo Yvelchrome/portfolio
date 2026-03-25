@@ -86,7 +86,11 @@ describe("CustomCursor", () => {
       },
       {
         name: "anchor",
-        element: <a data-testid="a">Click</a>,
+        element: (
+          <a href="http://localhost" data-testid="a">
+            Click
+          </a>
+        ),
         shouldBeClickable: true,
       },
       {
