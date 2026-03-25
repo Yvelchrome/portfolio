@@ -11,6 +11,7 @@ const CustomCursor = dynamic(
   () => import("components/ui/CustomCursor").then((m) => m.CustomCursor),
   { ssr: false },
 );
+
 const SmoothScrolling = dynamic(
   () =>
     import("components/widgets/SmoothScrolling").then((m) => m.SmoothScrolling),
@@ -28,7 +29,7 @@ const Toaster = dynamic(
 );
 
 export const LayoutClientImports = ({ footer }: { footer: ReactNode }) => {
-  const shouldHideComponent = useHideOnRoute(["/works", "/contact"]);
+  const shouldHideComponent = useHideOnRoute(["/works", "/contact", "/admin"]);
 
   const pathname = usePathname();
   useEffect(() => {
