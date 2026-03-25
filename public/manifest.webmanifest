@@ -1,7 +1,7 @@
 {
   "short_name": "Portfolio",
   "name": "Steven Godin | Portfolio",
-  "description": "Steven Godin's Portfolio",
+  "description": "Portfolio of Steven Godin, Front-End Developer specializing in React, TypeScript, Next.js. Designs high-performance, well-crafted web interfaces.",
   "icons": [
     {
       "src": "/maskable_icon_x192.png",
