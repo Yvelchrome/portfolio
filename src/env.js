@@ -8,6 +8,18 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    // Required secrets with minimum length validation
+    JWT_SECRET: z.string().min(32, "JWT_SECRET must be at least 32 characters"),
+    JWT_REFRESH_SECRET: z
+      .string()
+      .min(32, "JWT_REFRESH_SECRET must be at least 32 characters"),
+    // Required API keys
+    RESEND_API_KEY: z.string().min(1, "RESEND_API_KEY is required"),
+    TARGET_EMAIL: z.email("TARGET_EMAIL must be a valid email"),
+    // Optional phone number
+    TARGET_PHONE: z.string().optional(),
+    // Optional database URL
+    DATABASE_URL: z.string().optional(),
   },
 
   /**
@@ -25,6 +37,12 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    JWT_SECRET: process.env.JWT_SECRET,
+    JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    TARGET_EMAIL: process.env.TARGET_EMAIL,
+    TARGET_PHONE: process.env.TARGET_PHONE,
+    DATABASE_URL: process.env.DATABASE_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
