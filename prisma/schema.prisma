@@ -4,22 +4,18 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
+  id        String    @id @default(cuid())
+  email     String    @unique
   password  String
   name      String?
-  role      Role     @default(ADMIN)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      Role      @default(ADMIN)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   messages  Message[]
-}
-
-enum Role {
-  ADMIN
 }
 
 model Message {
@@ -34,11 +30,16 @@ model Message {
   replyContent String?
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
-  repliedBy    User?         @relation(fields: [repliedById], references: [id])
   repliedById  String?
+  repliedBy    User?         @relation(fields: [repliedById], references: [id])
+
   @@index([status])
   @@index([createdAt])
   @@index([repliedById])
+}
+
+enum Role {
+  ADMIN
 }
 
 enum MessageStatus {
