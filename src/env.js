@@ -18,8 +18,10 @@ export const env = createEnv({
     TARGET_EMAIL: z.email("TARGET_EMAIL must be a valid email"),
     // Optional phone number
     TARGET_PHONE: z.string().optional(),
-    // Optional database URL
-    DATABASE_URL: z.string().optional(),
+    // Required database (PostgreSQL via Prisma Accelerate)
+    DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
+    // Optional: Direct PostgreSQL connection fallback
+    DIRECT_DATABASE_URL: z.string().optional(),
   },
 
   /**
@@ -43,6 +45,7 @@ export const env = createEnv({
     TARGET_EMAIL: process.env.TARGET_EMAIL,
     TARGET_PHONE: process.env.TARGET_PHONE,
     DATABASE_URL: process.env.DATABASE_URL,
+    DIRECT_DATABASE_URL: process.env.DIRECT_DATABASE_URL,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**
