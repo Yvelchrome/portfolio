@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@prisma/adapter-better-sqlite3": "^7.5.0",
     "@prisma/client": "^7.5.0",
+    "@prisma/extension-accelerate": "^3.0.1",
     "@radix-ui/react-checkbox": "^1.3.3",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-label": "^2.1.8",
@@ -75,8 +75,6 @@
     "@testing-library/user-event": "^14.6.1",
     "@total-typescript/ts-reset": "^0.6.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
-    "@types/bcryptjs": "^3.0.0",
-    "@types/better-sqlite3": "^7.6.13",
     "@types/eslint": "^9.6.1",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.0",
@@ -112,28 +110,19 @@
   "ct3aMetadata": {
     "initVersion": "7.38.1"
   },
-  "packageManager": "pnpm@10.32.1",
   "pnpm": {
     "overrides": {
-      "@types/react": "19.2.14",
-      "@types/react-dom": "19.2.3",
-      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
-      "hono@<4.11.7": ">=4.11.7",
-      "hono@<4.11.10": ">=4.11.10",
-      "hono@<4.12.4": ">=4.12.4",
-      "svgo@>=3.0.0 <3.3.3": ">=3.3.3",
-      "immutable@>=5.0.0 <5.1.5": ">=5.1.5",
       "@hono/node-server@<1.19.10": ">=1.19.10",
-      "hono@<4.12.7": ">=4.12.7",
+      "effect@<3.20.0": ">=3.20.0",
       "flatted@<=3.4.1": ">=3.4.2",
-      "effect@<3.20.0": ">=3.20.0"
-    },
-    "onlyBuiltDependencies": [
-      "sharp",
-      "prisma",
-      "@prisma/engines",
-      "@prisma/client",
-      "better-sqlite3"
-    ]
-  }
+      "hono@<4.11.10": ">=4.11.10",
+      "hono@<4.11.7": ">=4.11.7",
+      "hono@<4.12.4": ">=4.12.4",
+      "hono@<4.12.7": ">=4.12.7",
+      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
+      "picomatch@<2.3.2": ">=2.3.2",
+      "picomatch@>=4.0.0 <4.0.4": ">=4.0.4"
+    }
+  },
+  "packageManager": "pnpm@10.33.0"
 }
