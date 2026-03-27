@@ -92,6 +92,7 @@ const RobotoMono = Roboto_Mono({
   subsets: ["latin"],
   weight: ["300"],
   variable: "--font-roboto-mono",
+  preload: true,
 });
 const Satoshi = localFont({
   src: [
@@ -100,6 +101,7 @@ const Satoshi = localFont({
   ],
   display: "swap",
   variable: "--font-satoshi",
+  preload: true,
 });
 const RoxboroughCF = localFont({
   src: [
@@ -111,6 +113,7 @@ const RoxboroughCF = localFont({
   ],
   display: "swap",
   variable: "--font-roxboroughcf",
+  preload: true,
 });
 
 export default async function LocaleLayout({
