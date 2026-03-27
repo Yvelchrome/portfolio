@@ -18,8 +18,8 @@ export const env = createEnv({
     TARGET_EMAIL: z.email("TARGET_EMAIL must be a valid email"),
     // Optional phone number
     TARGET_PHONE: z.string().optional(),
-    // Required database (PostgreSQL via Prisma Accelerate)
-    DATABASE_URL: z.string().min(1, "DATABASE_URL is required"),
+    // Optional database, required for admin (PostgreSQL via Prisma Accelerate)
+    DATABASE_URL: z.string().optional(),
     // Optional: Direct PostgreSQL connection fallback
     DIRECT_DATABASE_URL: z.string().optional(),
   },

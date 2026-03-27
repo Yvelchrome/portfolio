@@ -3,7 +3,6 @@
 import { Resend } from "resend";
 
 import ContactEmailTemplate from "emails/ContactEmailTemplate";
-import { prisma } from "lib/prisma/prisma";
 import { ContactFormSchema, formatZodErrors } from "lib/schemas";
 import { getContactTranslator } from "utils/GetMessagesJson";
 
@@ -49,6 +48,9 @@ export async function sendEmail(
 
   const rawFormData = Object.fromEntries(formData);
   const tContact = await getContactTranslator();
+  const prisma = process.env["DATABASE_URL"]
+    ? (await import("lib/prisma/prisma")).prisma
+    : undefined;
 
   const validation = ContactFormSchema(tContact).safeParse(rawFormData);
 
@@ -66,17 +68,19 @@ export async function sendEmail(
   }
 
   try {
-    await prisma.message.create({
-      data: {
-        name: name || company_name || "Anonymous",
-        email,
-        subject: `New message from: ${email}`,
-        content: company_name
-          ? `Company: ${company_name}\n\n${message}`
-          : message,
-        status: "NEW",
-      },
-    });
+    if (prisma) {
+      await prisma.message.create({
+        data: {
+          name: name || company_name || "Anonymous",
+          email,
+          subject: `New message from: ${email}`,
+          content: company_name
+            ? `Company: ${company_name}\n\n${message}`
+            : message,
+          status: "NEW",
+        },
+      });
+    }
 
     const resendInstance = await getResendInstance();
     const targetEmail = await getTargetEmail();

@@ -248,6 +248,21 @@ describe("sendEmail Server Action", () => {
       mockCreate.mockRejectedValueOnce(new Error("Database connection failed"));
       assertError(await sendEmail({} as SendEmailState, validFormData));
     });
+
+    it("succeeds without database when DATABASE_URL is not set", async () => {
+      vi.stubEnv("DATABASE_URL", "");
+
+      const result = await sendEmail({}, validFormData);
+
+      expect(result.success).toBe(true);
+
+      const mockCreate = vi.mocked(prisma.message["create"]);
+
+      expect(mockCreate).not.toHaveBeenCalled();
+      expect(resendSendMock).toHaveBeenCalled();
+
+      vi.unstubAllEnvs();
+    });
   });
 
   describe("Resend email errors", () => {
