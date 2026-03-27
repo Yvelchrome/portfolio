@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String
+  name      String?
+  role      Role      @default(ADMIN)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+}
+
+model Message {
+  id           String        @id @default(cuid())
+  name         String
+  email        String
+  subject      String
+  content      String
+  status       MessageStatus @default(NEW)
+  readAt       DateTime?
+  repliedAt    DateTime?
+  replyContent String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  repliedById  String?
+  repliedBy    User?         @relation(fields: [repliedById], references: [id])
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([repliedById])
+}
+
+enum Role {
+  ADMIN
+}
+
+enum MessageStatus {
+  NEW
+  READ
+  REPLIED
+  ARCHIVED
+}

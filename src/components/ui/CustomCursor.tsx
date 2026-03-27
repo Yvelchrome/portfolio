@@ -26,7 +26,10 @@ export const BASE_CURSOR_SIZE = 16;
 export const MAX_CURSOR_SIZE = 40;
 
 export const isHoveringClickable = (target: EventTarget | null): boolean => {
-  return target instanceof HTMLElement && !!target.closest("button, a");
+  return (
+    target instanceof HTMLElement &&
+    !!target.closest("button, a, select, label:has(button)")
+  );
 };
 
 const handleHoveringClickable = (

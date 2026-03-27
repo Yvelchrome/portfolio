@@ -6,8 +6,10 @@ import { Toaster as Sonner, type ToasterProps } from "sonner";
 const VALID_THEMES = ["light", "dark", "system"] as const;
 type ValidTheme = (typeof VALID_THEMES)[number];
 
+const VALID_THEMES_SET = new Set(VALID_THEMES);
+
 function isValidTheme(theme: string | undefined): theme is ValidTheme {
-  return VALID_THEMES.includes(theme as ValidTheme);
+  return theme !== undefined && VALID_THEMES_SET.has(theme);
 }
 
 const Toaster = ({ ...props }: ToasterProps) => {

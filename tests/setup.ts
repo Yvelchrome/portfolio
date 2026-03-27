@@ -6,7 +6,6 @@ beforeEach(() => {
   cleanup();
   vi.restoreAllMocks();
   vi.clearAllMocks();
-  global.fetch = vi.fn();
 });
 
 Object.defineProperty(window, "matchMedia", {

@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { useActionState, useEffect, useMemo, useRef } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
+import { type SendEmailState, sendEmail } from "app/actions/send-email";
 import { Button } from "components/shadcn/button";
 import {
   Form,
@@ -18,23 +19,25 @@ import {
 } from "components/shadcn/form";
 import { Input } from "components/shadcn/input";
 import { Textarea } from "components/shadcn/textarea";
-import { useCsrfToken } from "hooks/useCsrfToken";
 import { useMounted } from "hooks/useMounted";
-import {
-  type ApiResponse,
-  ApiResponseSchema,
-  type ContactFormData,
-  ContactFormSchema,
-  parseJsonWithZod,
-} from "lib/schemas";
+import { type ContactFormData, ContactFormSchema } from "lib/schemas";
+
+const initialState: SendEmailState = {
+  success: false,
+  error: undefined,
+  errors: undefined,
+};
 
 export const ContactForm = () => {
   const t = useTranslations("Contact");
   const tT = useTranslations("Toast");
   const isMounted = useMounted();
-  const { csrfToken } = useCsrfToken();
+
+  const [state, formAction, pending] = useActionState(sendEmail, initialState);
+  const prevStateRef = useRef(state);
 
   const zodSchema = useMemo(() => ContactFormSchema(t), [t]);
+  const prevZodSchemaRef = useRef(zodSchema);
   const form = useForm<ContactFormData>({
     resolver: zodResolver(zodSchema),
     mode: "onBlur",
@@ -50,67 +53,58 @@ export const ContactForm = () => {
 
   const {
     trigger,
-    formState: { errors, isSubmitting },
+    formState: { errors },
+    reset,
   } = form;
 
+  // Re-validate fields when schema changes (e.g., language switch)
   useEffect(() => {
-    const errorFields = Object.keys(errors);
-    if (errorFields.length > 0) {
-      void trigger(errorFields as (keyof ContactFormData)[]);
+    const errorFields = Object.keys(errors) as (keyof ContactFormData)[];
+    const schemaChanged = prevZodSchemaRef.current !== zodSchema;
+
+    if (schemaChanged && errorFields.length > 0) {
+      void trigger(errorFields);
     }
+
+    prevZodSchemaRef.current = zodSchema;
   }, [zodSchema, trigger, errors]);
 
-  async function onSubmit(data: ContactFormData) {
-    if (data.honeypot) {
-      form.reset();
+  const handleSubmit = (formData: FormData) => {
+    if (formData.get("honeypot")) {
+      reset();
       return;
     }
 
-    try {
-      const response = await fetch("api/send-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken ?? "",
-        },
-        body: JSON.stringify(data),
-      });
+    formAction(formData);
+  };
 
-      let result: ApiResponse;
-      try {
-        result = await parseJsonWithZod(response, ApiResponseSchema);
-      } catch (parseError) {
-        console.error("Failed to parse API response:", parseError);
-        throw new Error("Invalid response from server");
-      }
+  useEffect(() => {
+    if (prevStateRef.current === state) return;
+    prevStateRef.current = state;
 
-      if (!result.success) {
-        throw new Error(result.error ?? "Unknown error");
-      }
-
-      toast(tT("contact_form_success_title"), {
-        description: tT("contact_form_success_description"),
-      });
-
-      form.reset();
-    } catch (error) {
+    if (!state.success) {
       toast(tT("contact_form_error_title"), {
         description: tT("contact_form_error_description"),
       });
 
-      console.error("Form submission error:", error);
+      return;
     }
-  }
+
+    toast(tT("contact_form_success_title"), {
+      description: tT("contact_form_success_description"),
+    });
+
+    reset();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
 
   if (!isMounted) return null;
 
   return (
     <Form {...form}>
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          void form.handleSubmit(onSubmit)();
-        }}
+        action={handleSubmit}
         className="max-w-2xl space-y-6"
         aria-label="Contact form"
         noValidate
@@ -227,10 +221,10 @@ export const ContactForm = () => {
         <Button
           type="submit"
           className="w-full cursor-pointer md:w-auto"
-          disabled={isSubmitting}
-          aria-busy={isSubmitting}
+          disabled={pending}
+          aria-busy={pending}
         >
-          {isSubmitting ? t("send_pending") : t("send")}
+          {pending ? t("send_pending") : t("send")}
         </Button>
       </form>
     </Form>

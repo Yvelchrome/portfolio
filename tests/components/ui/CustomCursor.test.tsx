@@ -78,20 +78,34 @@ describe("CustomCursor", () => {
       });
     };
 
-    it("does animate when target IS a button", async () => {
-      await cursorHoverTest(
-        <button data-testid="button">Clickable</button>,
-        true,
-      );
-    });
+    const hoverTestCases = [
+      {
+        name: "button",
+        element: <button data-testid="button">Click</button>,
+        shouldBeClickable: true,
+      },
+      {
+        name: "anchor",
+        element: (
+          <a href="http://localhost" data-testid="a">
+            Click
+          </a>
+        ),
+        shouldBeClickable: true,
+      },
+      {
+        name: "div",
+        element: <div data-testid="div">Not clickable</div>,
+        shouldBeClickable: false,
+      },
+    ];
 
-    it("does animate when target IS a anchor", async () => {
-      await cursorHoverTest(<a data-testid="a">Clickable</a>, true);
-    });
-
-    it("does not animate when target IS instanceof HTMLElement AND IS NOT button or a", async () => {
-      await cursorHoverTest(<div data-testid="div">Not clickable</div>, false);
-    });
+    it.each(hoverTestCases)(
+      "handles hover correctly for %s element",
+      async ({ element, shouldBeClickable }) => {
+        await cursorHoverTest(element, shouldBeClickable);
+      },
+    );
 
     it("updates cursor position on mouse move", async () => {
       const targetedClientPosition = 100;

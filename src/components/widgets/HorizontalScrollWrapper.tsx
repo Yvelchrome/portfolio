@@ -73,9 +73,13 @@ export const HorizontalScrollWrapper = ({
 
   return (
     <div ref={targetRef} style={{ height: sizes.height }}>
+      {/*
+        motion.div accepts a ref as its first argument (React element pattern).
+        Using the implicit ref pattern instead of ref={} prop to avoid double ref.
+      */}
       <motion.div
-        className="sticky top-0 flex h-dvh px-4 will-change-transform sm:px-8"
         ref={contentRef}
+        className="sticky top-0 flex h-dvh px-4 will-change-transform sm:px-8"
         style={{ x }}
       >
         {children}

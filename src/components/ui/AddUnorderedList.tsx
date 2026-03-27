@@ -20,6 +20,42 @@ interface AddUnorderedListProps {
   listClassName?: string;
 }
 
+interface ListItemIconProps {
+  icon?: string | StaticImageData | ReactNode | undefined;
+  iconAlt?: string | undefined;
+  iconSize?: number | undefined;
+}
+
+const ListItemIcon = ({
+  icon,
+  iconAlt = "",
+  iconSize = 40,
+}: ListItemIconProps) => {
+  if (!icon) return null;
+
+  if (typeof icon === "string" || (typeof icon === "object" && "src" in icon)) {
+    return (
+      <Image
+        src={icon}
+        alt={iconAlt}
+        className="h-[1em] w-[1em]"
+        width={iconSize}
+        height={iconSize}
+      />
+    );
+  }
+
+  return (
+    <span
+      className="h-[1em] w-[1em] *:h-full *:w-full *:drop-shadow-sm"
+      role="img"
+      aria-label={iconAlt}
+    >
+      {icon}
+    </span>
+  );
+};
+
 export const AddUnorderedList = ({
   intlTitle,
   items,
@@ -27,46 +63,6 @@ export const AddUnorderedList = ({
 }: AddUnorderedListProps) => {
   const t = useTranslations("Section");
 
-  const renderIcon = (item: ListItem) => {
-    if (!item.icon) return null;
-
-    const defaultIconAlt = "";
-    const defaultIconSize = 40;
-
-    const icon = item.icon;
-    const iconAlt = item.iconAlt ?? defaultIconAlt;
-    const iconSize = item.iconSize ?? defaultIconSize;
-
-    // If icon is a string (image path)
-    // If icon is StaticImageData
-    if (
-      typeof icon === "string" ||
-      (typeof icon === "object" && "src" in icon)
-    ) {
-      return (
-        <Image
-          src={icon}
-          alt={iconAlt}
-          className="h-[1em] w-[1em]"
-          width={iconSize}
-          height={iconSize}
-        />
-      );
-    }
-
-    // If icon is a React component
-    return (
-      <span
-        className="h-[1em] w-[1em] *:h-full *:w-full *:drop-shadow-sm"
-        role="img"
-        aria-label={iconAlt}
-      >
-        {icon}
-      </span>
-    );
-  };
-
-  // Normalize items to ListItem objects
   const normalizedItems: ListItem[] = items.map((item) =>
     typeof item === "string" ? { text: item } : item,
   );
@@ -95,7 +91,11 @@ export const AddUnorderedList = ({
                 </a>
               )}
             >
-              {renderIcon(item)}
+              <ListItemIcon
+                icon={item.icon}
+                iconAlt={item.iconAlt}
+                iconSize={item.iconSize}
+              />
               <span
                 className={
                   item.href &&

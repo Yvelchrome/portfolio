@@ -15,7 +15,7 @@
 
 - **Runtime Validation** — all external data validated with Zod
 
-- **Security-First API Design** - CSRF protection, honeypot, input validation
+- **Security-First API Design** - JWT + refresh tokens, honeypot, input validation
 
 - **Performance Optimized** - Lighthouse 95+ with optimized rendering and assets
 
@@ -49,9 +49,13 @@ This repository is structured as a maintainable production application rather th
 
 ![Motion](https://img.shields.io/badge/Motion-323330?style=for-the-badge&logo=framer) ![shadcn/ui](https://img.shields.io/badge/shadcn/ui-323330?style=for-the-badge&logo=shadcn/ui) ![Radix UI](https://img.shields.io/badge/Radix_UI-323330?style=for-the-badge&logo=RadixUI)
 
-### Infrastructure
+### Data
 
-![Resend](https://img.shields.io/badge/Resend-323330?style=for-the-badge&logo=Resend) ![React Email](https://img.shields.io/badge/React_Email-323330?style=for-the-badge&logo=react-email) ![next-intl](https://img.shields.io/badge/next_intl-323330?style=for-the-badge&logo=next-intl) ![Vercel](https://img.shields.io/badge/Vercel-323330?style=for-the-badge&logo=Vercel)
+![Prisma](https://img.shields.io/badge/Prisma-323330?style=for-the-badge&logo=Prisma) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-323330?style=for-the-badge&logo=PostgreSQL)
+
+### Integrations
+
+![Resend](https://img.shields.io/badge/Resend-323330?style=for-the-badge&logo=Resend) ![React Email](https://img.shields.io/badge/React_Email-323330?style=for-the-badge&logo=react-email) ![next-intl](https://img.shields.io/badge/next_intl-323330?style=for-the-badge&logo=next-intl) ![Zustand](https://img.shields.io/badge/Zustand-323330?style=for-the-badge&logo=Zustand) ![React Query](https://img.shields.io/badge/React_Query-323330?style=for-the-badge&logo=React-Query) ![Vercel](https://img.shields.io/badge/Vercel-323330?style=for-the-badge&logo=Vercel)
 
 ## Quick Start
 
@@ -66,8 +70,13 @@ cd portfolio
 pnpm install
 
 # Set up environment variables
-cp .env.example .env.local
-# Edit .env.local with your values
+cp .env.example .env
+# Edit .env with your values
+
+# Database setup (required for admin)
+pnpm db:migrate
+pnpm db:generate # Database generate currently required to pass CI
+pnpm db:seed
 
 # Run development server
 pnpm run dev
@@ -80,6 +89,8 @@ pnpm run dev
 - Strict TypeScript
 - All tests must pass before merge
 - Lint + type-check in pipeline
+
+> **Warning:** Database is required only for the admin dashboard. The public portfolio works without it. However, CI will fail if Prisma client is not generating.
 
 ## What This Project Demonstrates
 

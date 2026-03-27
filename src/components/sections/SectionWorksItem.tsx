@@ -27,7 +27,7 @@ export const SectionWorksItem = ({
   brandLogo,
   brandLogoAlt,
 }: SectionWorksItemProps) => {
-  const t = useTranslations("Section.WorksItem");
+  const tCommon = useTranslations("Common.labels");
 
   return (
     <Link
@@ -50,10 +50,10 @@ export const SectionWorksItem = ({
 
         <div className="*:text-fluid-base pt-8 *:text-gray-400">
           <p>
-            {t("client")} : {client}
+            {tCommon("client")} : {client}
           </p>
           <p>
-            {t("year")} : {year}
+            {tCommon("year")} : {year}
           </p>
         </div>
 
