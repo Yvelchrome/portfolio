@@ -1,24 +1,67 @@
 import { getTranslations } from "next-intl/server";
-import type { Person, WebApplication, WebSite, WithContext } from "schema-dts";
+import type {
+  BreadcrumbList,
+  ContactPage,
+  Person,
+  Service,
+  WebApplication,
+  WebSite,
+  WithContext,
+} from "schema-dts";
 
 import { getBaseUrl } from "utils/GetBaseUrl";
 
 const BASE_URL = getBaseUrl();
+const email = process.env["TARGET_EMAIL"] ?? "";
+const phone = process.env["TARGET_PHONE"] ?? "";
 
 type JsonLdSchemaName =
   | "personJsonLd"
   | "websiteJsonLd"
+  | "portfolioJsonLd"
+  | "serviceJsonLd"
+  | "contactPageJsonLd"
   | "negatifplusJsonLd"
   | "blockfireJsonLd"
   | "stentorJsonLd"
   | "zefirentJsonLd";
 
+type BreadcrumbItem = {
+  name: string;
+  url: string;
+};
+
+export type BreadcrumbConfig = {
+  items: BreadcrumbItem[];
+};
+
+const createBreadcrumbList = (
+  config: BreadcrumbConfig,
+): WithContext<BreadcrumbList> => ({
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: config.items.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.name,
+    item: item.url,
+  })),
+});
+
 type JsonLdScriptProps = {
   schemas: JsonLdSchemaName[];
+  breadcrumb?: BreadcrumbConfig;
 };
 
 const webAppSchemasConfig: Record<
-  Exclude<JsonLdSchemaName, "personJsonLd" | "websiteJsonLd">,
+  Exclude<
+    JsonLdSchemaName,
+    | "personJsonLd"
+    | "websiteJsonLd"
+    | "portfolioJsonLd"
+    | "serviceJsonLd"
+    | "contactPageJsonLd"
+  >,
   {
     namespace: string;
     url: string;
@@ -70,7 +113,7 @@ const createWebAppSchema = (
   browserRequirements:
     "Requires modern web browser (Chrome, Firefox, Safari, Edge)",
   datePublished: config.datePublished,
-  producer: {
+  creator: {
     "@type": "Organization",
     name: "Subskill",
     url: "https://www.subskill.com/",
@@ -92,9 +135,12 @@ const personJsonLd: WithContext<Person> = {
   "@type": "Person",
   name: "Steven Godin",
   image: "https://steven-godin-resume.netlify.app/photo.png",
+  url: BASE_URL,
+  jobTitle: "Front-End Developer",
   worksFor: {
     "@type": "Organization",
     name: "Freelance",
+    url: BASE_URL,
   },
   alumniOf: [
     {
@@ -102,8 +148,6 @@ const personJsonLd: WithContext<Person> = {
       name: "HETIC",
     },
   ],
-  url: BASE_URL,
-  jobTitle: "Front-End Developer",
   sameAs: [
     "https://github.com/Yvelchrome",
     "https://www.linkedin.com/in/steven-godin/",
@@ -116,26 +160,122 @@ const personJsonLd: WithContext<Person> = {
     "JavaScript",
     "Frontend Development",
   ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "professional",
+    email: email,
+    telephone: phone,
+    url: BASE_URL,
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": BASE_URL,
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "FR",
+  },
+  birthDate: "2003-11-18",
 };
 
 const websiteJsonLd: WithContext<WebSite> = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Steven Godin",
-  producer: {
-    "@type": "Person",
-    name: "Steven Godin",
-    url: "https://svgd.vercel.app",
-  },
+  name: "Steven Godin Portfolio",
+  url: BASE_URL,
   description:
     "Portfolio of Steven Godin, Front-End Developer specializing in React, TypeScript, Next.js. Designs high-performance, well-crafted web interfaces.",
   inLanguage: "en",
+  creator: {
+    "@type": "Person",
+    name: "Steven Godin",
+    url: BASE_URL,
+  },
+};
+
+const portfolioJsonLd: WithContext<WebApplication> = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Steven Godin Portfolio",
+  description:
+    "Portfolio of Steven Godin, Front-End Developer specializing in React, TypeScript, Next.js. Designs high-performance, well-crafted web interfaces.",
   url: BASE_URL,
+  applicationCategory: "WebApplication",
+  operatingSystem: "Web Browser",
+  browserRequirements:
+    "Requires modern web browser (Chrome, Firefox, Safari, Edge)",
+  datePublished: "2025-02-01",
+  creator: {
+    "@type": "Person",
+    name: "Steven Godin",
+    url: BASE_URL,
+  },
+  maintainer: {
+    "@type": "Person",
+    name: "Steven Godin",
+    url: BASE_URL,
+  },
+  featureList: [
+    "React",
+    "TypeScript",
+    "Next.js",
+    "Tailwind CSS",
+    "Framer Motion",
+    "Zod",
+    "Vitest",
+    "Zustand",
+  ],
+  screenshot: {
+    "@type": "ImageObject",
+    url: `${BASE_URL}/opengraph-image.png`,
+  },
+};
+
+const serviceJsonLd: WithContext<Service> = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Front-End Development Services",
+  description:
+    "Professional front-end development services specializing in React, TypeScript, and Next.js.",
+  url: BASE_URL,
+  serviceType: [
+    "Front-End Development",
+    "Web Development",
+    "UI/UX Implementation",
+  ],
+  provider: {
+    "@type": "Person",
+    name: "Steven Godin",
+    url: BASE_URL,
+  },
+  areaServed: "Worldwide",
+  sameAs: [
+    "https://github.com/Yvelchrome",
+    "https://www.linkedin.com/in/steven-godin/",
+    "https://www.youtube.com/@yvelchrome",
+  ],
+};
+
+const contactPageJsonLd: WithContext<ContactPage> = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  name: "Contact Steven Godin",
+  description:
+    "Get in touch for front-end development inquiries and collaborations.",
+  url: `${BASE_URL}/contact`,
+  mainEntity: {
+    "@type": "Person",
+    name: "Steven Godin",
+    url: BASE_URL,
+  },
 };
 
 const staticSchemas = {
   personJsonLd,
   websiteJsonLd,
+  portfolioJsonLd,
+  serviceJsonLd,
+  contactPageJsonLd,
 };
 
 const getSchemaData = async (schemaName: JsonLdSchemaName) => {
@@ -150,8 +290,10 @@ const getSchemaData = async (schemaName: JsonLdSchemaName) => {
   return createWebAppSchema(t, config);
 };
 
-export async function JsonLdScript({ schemas }: JsonLdScriptProps) {
+export async function JsonLdScript({ schemas, breadcrumb }: JsonLdScriptProps) {
   const schemaDataArray = await Promise.all(schemas.map(getSchemaData));
+
+  const breadcrumbSchema = breadcrumb ? createBreadcrumbList(breadcrumb) : null;
 
   return (
     <>
@@ -164,6 +306,15 @@ export async function JsonLdScript({ schemas }: JsonLdScriptProps) {
           }}
         />
       ))}
+      {breadcrumbSchema && (
+        <script
+          key="breadcrumb"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbSchema).replace(/</g, "\\u003c"),
+          }}
+        />
+      )}
     </>
   );
 }

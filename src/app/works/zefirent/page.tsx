@@ -20,6 +20,10 @@ import Map2 from "assets/images/works/zefirent/map_2.png";
 import Tabs from "assets/images/works/zefirent/tabs.png";
 import Video from "assets/images/works/zefirent/video.png";
 
+const BASE_URL = getBaseUrl();
+const WORKS_URL = `${BASE_URL}/works`;
+const PROJECT_URL = `${WORKS_URL}/zefirent`;
+
 const worksAboutImagesOrdered = [
   { src: Cards, id: "cards" },
   { src: Group, id: "group" },
@@ -36,9 +40,6 @@ const worksAboutImagesOrdered = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Works.zefirent");
-
-  const BASE_URL = getBaseUrl();
-  const PROJECT_URL = `${BASE_URL}/works/zefirent`;
 
   return {
     title: t("title"),
@@ -75,7 +76,16 @@ const LandingPage = () => {
 
   return (
     <>
-      <JsonLdScript schemas={["zefirentJsonLd"]} />
+      <JsonLdScript
+        schemas={["zefirentJsonLd"]}
+        breadcrumb={{
+          items: [
+            { name: "Home", url: BASE_URL },
+            { name: "Works", url: WORKS_URL },
+            { name: "Zefirent", url: PROJECT_URL },
+          ],
+        }}
+      />
       <motion.div
         initial="hidden"
         animate="visible"

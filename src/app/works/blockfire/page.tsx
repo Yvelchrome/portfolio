@@ -18,6 +18,10 @@ import Product from "assets/images/works/blockfire/product.png";
 import Tabs from "assets/images/works/blockfire/tabs.png";
 import Testimonial from "assets/images/works/blockfire/testimonial.png";
 
+const BASE_URL = getBaseUrl();
+const WORKS_URL = `${BASE_URL}/works`;
+const PROJECT_URL = `${WORKS_URL}/blockfire`;
+
 const worksAboutImagesOrdered = [
   { src: Hero, id: "hero" },
   { src: Carousel, id: "carousel" },
@@ -32,9 +36,6 @@ const worksAboutImagesOrdered = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Works.blockfire");
-
-  const BASE_URL = getBaseUrl();
-  const PROJECT_URL = `${BASE_URL}/works/zefirent`;
 
   return {
     title: t("title"),
@@ -71,7 +72,16 @@ const LandingPage = () => {
 
   return (
     <>
-      <JsonLdScript schemas={["blockfireJsonLd"]} />
+      <JsonLdScript
+        schemas={["blockfireJsonLd"]}
+        breadcrumb={{
+          items: [
+            { name: "Home", url: BASE_URL },
+            { name: "Works", url: WORKS_URL },
+            { name: "Blockfire", url: PROJECT_URL },
+          ],
+        }}
+      />
       <motion.div
         initial="hidden"
         animate="visible"

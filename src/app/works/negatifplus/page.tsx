@@ -16,6 +16,10 @@ import Configurator_2 from "assets/images/works/negatifplus/configurator_2.png";
 import Hero from "assets/images/works/negatifplus/hero.png";
 import Images from "assets/images/works/negatifplus/images.png";
 
+const BASE_URL = getBaseUrl();
+const WORKS_URL = `${BASE_URL}/works`;
+const PROJECT_URL = `${WORKS_URL}/negatifplus`;
+
 const worksAboutImagesOrdered = [
   { src: Configurator_1, id: "configurator-1" },
   { src: Configurator_2, id: "configurator-2" },
@@ -28,9 +32,6 @@ const worksAboutImagesOrdered = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Works.negatifplus");
-
-  const BASE_URL = getBaseUrl();
-  const PROJECT_URL = `${BASE_URL}/works/negatifplus`;
 
   return {
     title: t("title"),
@@ -67,7 +68,16 @@ const LandingPage = () => {
 
   return (
     <>
-      <JsonLdScript schemas={["negatifplusJsonLd"]} />
+      <JsonLdScript
+        schemas={["negatifplusJsonLd"]}
+        breadcrumb={{
+          items: [
+            { name: "Home", url: BASE_URL },
+            { name: "Works", url: WORKS_URL },
+            { name: "Negatif Plus", url: PROJECT_URL },
+          ],
+        }}
+      />
       <motion.div
         initial="hidden"
         animate="visible"

@@ -127,7 +127,14 @@ export default async function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning className="relative">
       <head>
-        <JsonLdScript schemas={["personJsonLd", "websiteJsonLd"]} />
+        <JsonLdScript
+          schemas={[
+            "personJsonLd",
+            "websiteJsonLd",
+            "portfolioJsonLd",
+            "serviceJsonLd",
+          ]}
+        />
       </head>
       <body
         className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi text-fluid-base text-primary-text bg-background relative font-normal`}

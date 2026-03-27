@@ -17,6 +17,10 @@ import Hero from "assets/images/works/stentor/hero.png";
 import News from "assets/images/works/stentor/news.png";
 import Testimonial from "assets/images/works/stentor/testimonial.png";
 
+const BASE_URL = getBaseUrl();
+const WORKS_URL = `${BASE_URL}/works`;
+const PROJECT_URL = `${WORKS_URL}/stentor`;
+
 const worksAboutImagesOrdered = [
   { src: Hero, id: "hero" },
   { src: Block1, id: "block1" },
@@ -30,9 +34,6 @@ const worksAboutImagesOrdered = [
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("Works.stentor");
-
-  const BASE_URL = getBaseUrl();
-  const PROJECT_URL = `${BASE_URL}/works/stentor`;
 
   return {
     title: t("title"),
@@ -69,7 +70,16 @@ const LandingPage = () => {
 
   return (
     <>
-      <JsonLdScript schemas={["stentorJsonLd"]} />
+      <JsonLdScript
+        schemas={["stentorJsonLd"]}
+        breadcrumb={{
+          items: [
+            { name: "Home", url: BASE_URL },
+            { name: "Works", url: WORKS_URL },
+            { name: "Stentor", url: PROJECT_URL },
+          ],
+        }}
+      />
       <motion.div
         initial="hidden"
         animate="visible"
