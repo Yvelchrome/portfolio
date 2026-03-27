@@ -153,14 +153,17 @@ const getSchemaData = async (schemaName: JsonLdSchemaName) => {
 export async function JsonLdScript({ schemas }: JsonLdScriptProps) {
   const schemaDataArray = await Promise.all(schemas.map(getSchemaData));
 
-  const jsonString = JSON.stringify(schemaDataArray).replace(/</g, "\\u003c");
-
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: jsonString,
-      }}
-    />
+    <>
+      {schemaDataArray.map((schemaData, index) => (
+        <script
+          key={schemas[index]}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(schemaData).replace(/</g, "\\u003c"),
+          }}
+        />
+      ))}
+    </>
   );
 }
