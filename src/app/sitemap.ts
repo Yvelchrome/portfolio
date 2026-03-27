@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 
+import { getBaseUrl } from "utils";
+
+const BASE_URL = getBaseUrl();
 const WORKS_SLUGS = [
   "negatifplus",
   "zefirent",
@@ -9,16 +12,16 @@ const WORKS_SLUGS = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
-    { url: "https://svgd.vercel.app", lastModified: new Date(), priority: 1 },
+    { url: BASE_URL, lastModified: new Date(), priority: 1 },
     {
-      url: "https://svgd.vercel.app/contact",
+      url: `${BASE_URL}/contact`,
       lastModified: new Date(),
       priority: 0.7,
     },
   ];
 
   const worksRoutes = WORKS_SLUGS.map((slug) => ({
-    url: `https://svgd.vercel.app/works/${slug}`,
+    url: `${BASE_URL}/works/${slug}`,
     lastModified: new Date(),
     priority: 0.8,
   }));

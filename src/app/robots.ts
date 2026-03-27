@@ -1,5 +1,9 @@
 import type { MetadataRoute } from "next";
 
+import { getBaseUrl } from "utils";
+
+const BASE_URL = getBaseUrl();
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
@@ -9,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/admin/", "/admin/login"],
       },
     ],
-    sitemap: "https://svgd.vercel.app/sitemap.xml",
-    host: "https://svgd.vercel.app",
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }
