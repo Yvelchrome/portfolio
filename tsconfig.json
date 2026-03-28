@@ -38,8 +38,8 @@
     /* Paths */
     "baseUrl": "src",
     "paths": {
-      "prisma/generated/client": ["../prisma/generated/client.ts"]
-      // "@/*": ["./src/*"]
+      "prisma/generated/client": ["../prisma/generated/client.ts"],
+      "tests/*": ["../tests/*"]
     },
 
     /* Next.js */
