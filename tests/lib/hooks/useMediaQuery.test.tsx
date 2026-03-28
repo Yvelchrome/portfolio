@@ -1,8 +1,9 @@
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
+import { mockBrowser, mockSSR } from "tests/__mocks__/ssr";
+
 import { useMediaQuery } from "hooks/useMediaQuery";
-import * as WindowEnv from "utils/HasWindow";
 
 describe("useMediaQuery", () => {
   let originalMatchMedia: typeof window.matchMedia;
@@ -15,18 +16,17 @@ describe("useMediaQuery", () => {
     window.matchMedia = originalMatchMedia;
   });
 
-  const mockMatchMedia = (initialMatches: boolean) => {
+  const createMatchMediaMock = (matches: boolean) => {
     let listener: ((ev: MediaQueryListEvent) => void) | null = null;
 
-    window.matchMedia = ((query: string): MediaQueryList => ({
-      matches: initialMatches,
+    window.matchMedia = vi.fn((query: string) => ({
+      matches,
       media: query,
-      addEventListener: (
-        _: string,
-        handler: EventListenerOrEventListenerObject,
-      ) => {
-        listener = handler as (ev: MediaQueryListEvent) => void;
-      },
+      addEventListener: vi.fn(
+        (_: string, handler: EventListenerOrEventListenerObject) => {
+          listener = handler as (ev: MediaQueryListEvent) => void;
+        },
+      ),
       removeEventListener: vi.fn(),
       onchange: null,
       addListener: vi.fn(),
@@ -39,21 +39,21 @@ describe("useMediaQuery", () => {
     };
   };
 
-  const testCases = [
-    { query: "(min-width: 768px)", matches: true },
-    { query: "(min-width: 768px)", matches: false },
-  ];
-
-  testCases.forEach(({ query, matches }) => {
-    it(`returns ${String(matches)} when query ${matches ? "matches" : "does not match"}`, () => {
-      mockMatchMedia(matches);
-      const { result } = renderHook(() => useMediaQuery(query));
+  it.each`
+    matches  | description
+    ${true}  | ${"matches"}
+    ${false} | ${"does not match"}
+  `(
+    "returns $description for (min-width: 768px)",
+    ({ matches }: { matches: boolean }) => {
+      createMatchMediaMock(matches);
+      const { result } = renderHook(() => useMediaQuery("(min-width: 768px)"));
       expect(result.current).toBe(matches);
-    });
-  });
+    },
+  );
 
   it("updates when media query changes", () => {
-    const triggerListener = mockMatchMedia(false);
+    const triggerListener = createMatchMediaMock(false);
 
     const { result } = renderHook(() => useMediaQuery("(min-width: 768px)"));
     expect(result.current).toBe(false);
@@ -71,17 +71,16 @@ describe("useMediaQuery", () => {
   it("removes listener on unmount", () => {
     const removeEventListener = vi.fn();
 
-    window.matchMedia = ((query: string) =>
-      ({
-        matches: false,
-        media: query,
-        addEventListener: vi.fn(),
-        removeEventListener,
-        onchange: null,
-        addListener: vi.fn(),
-        removeListener: vi.fn(),
-        dispatchEvent: vi.fn(),
-      }) as MediaQueryList) as typeof window.matchMedia;
+    window.matchMedia = vi.fn((query: string) => ({
+      matches: false,
+      media: query,
+      addEventListener: vi.fn(),
+      removeEventListener,
+      onchange: null,
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      dispatchEvent: vi.fn(),
+    })) as typeof window.matchMedia;
 
     const { unmount } = renderHook(() => useMediaQuery("(min-width: 768px)"));
     unmount();
@@ -89,12 +88,14 @@ describe("useMediaQuery", () => {
     expect(removeEventListener).toHaveBeenCalled();
   });
 
-  describe("SSR checks | Mock window = undefined", () => {
-    it("useMediaQuery hook returns false", () => {
-      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
+  describe("SSR checks", () => {
+    it("returns false when window is undefined", () => {
+      mockSSR();
 
       const { result } = renderHook(() => useMediaQuery("(min-width: 768px)"));
       expect(result.current).toBe(false);
+
+      mockBrowser();
     });
   });
 });

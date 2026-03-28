@@ -1,7 +1,8 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import * as WindowEnv from "utils/HasWindow";
+import { mockSSR } from "tests/__mocks__/ssr";
+
 import {
   BREAKPOINTS,
   getCurrentHeightBreakpoint,
@@ -118,21 +119,21 @@ describe("WindowBreakpointDetection", () => {
 
   describe("SSR checks | Mock window = undefined", () => {
     it("matchesWidth / matchesHeight returns false", () => {
-      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
+      mockSSR();
 
       expect(matchesWidth("lg")).toBe(false);
       expect(matchesHeight("h-lg")).toBe(false);
     });
 
     it("getCurrentWidthBreakpoint / getCurrentHeightBreakpoint returns false", () => {
-      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
+      mockSSR();
 
       expect(getCurrentWidthBreakpoint()).toBeNull();
       expect(getCurrentHeightBreakpoint()).toBeNull();
     });
 
     it("useBreakpoint hook returns safe defaults", () => {
-      vi.spyOn(WindowEnv, "hasWindow").mockReturnValue(false);
+      mockSSR();
 
       const { result } = renderHook(() => useBreakpoint());
 
