@@ -1,12 +1,11 @@
-import { render, screen, waitFor } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import ContactEmailTemplate from "emails/ContactEmailTemplate";
 import { resetBaseUrlCache } from "utils/GetBaseUrl";
 
 describe("ContactEmailTemplate renders logo correctly", () => {
   afterEach(() => {
-    vi.unstubAllEnvs();
     resetBaseUrlCache();
   });
 
@@ -21,29 +20,18 @@ describe("ContactEmailTemplate renders logo correctly", () => {
     );
   });
 
-  it("renders the logo with the correct production URL", async () => {
-    vi.stubEnv("NODE_ENV", "not-development");
+  it.each`
+    env                  | expected
+    ${"not-development"} | ${"https://svgd.vercel.app"}
+    ${"development"}     | ${"http://localhost:3000"}
+  `("renders correct logo for NODE_ENV=$env", ({ env, expected }) => {
+    vi.stubEnv("NODE_ENV", env as string);
 
     render(
       <ContactEmailTemplate email="test@example.com" message="Test message" />,
     );
 
-    await waitFor(() => {
-      const img = screen.getByRole("img");
-      expect(img).toHaveAttribute("src", "https://svgd.vercel.app/logo.png");
-    });
-  });
-
-  it("renders the logo with localhost URL in development", async () => {
-    vi.stubEnv("NODE_ENV", "development");
-
-    render(
-      <ContactEmailTemplate email="test@example.com" message="Test message" />,
-    );
-
-    await waitFor(() => {
-      const img = screen.getByRole("img");
-      expect(img).toHaveAttribute("src", "http://localhost:3000/logo.png");
-    });
+    const img = screen.getByRole("img");
+    expect(img).toHaveAttribute("src", `${String(expected)}/logo.png`);
   });
 });
