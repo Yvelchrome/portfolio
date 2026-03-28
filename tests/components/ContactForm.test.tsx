@@ -5,7 +5,6 @@ import { describe, expect, it, vi } from "vitest";
 import type * as nextIntl from "next-intl";
 import { toast } from "sonner";
 
-import { sendEmail } from "app/actions/send-email";
 import { ContactForm } from "components/ContactForm";
 import * as mountedHook from "hooks/useMounted";
 import { getContactTranslator } from "utils/GetMessagesJson";
@@ -73,10 +72,12 @@ vi.mock("sonner", () => ({
   toast: vi.fn(),
 }));
 
-vi.mock("app/actions/send-email", () => ({
-  sendEmail: vi.fn(),
+const { mockSendEmail } = vi.hoisted(() => ({
+  mockSendEmail: vi.fn(),
 }));
-const mockSendEmail = vi.mocked(sendEmail);
+vi.mock("app/actions/send-email", () => ({
+  sendEmail: mockSendEmail,
+}));
 
 const fillValidForm = async (user: ReturnType<typeof userEvent.setup>) => {
   const emailInput = screen.getByLabelText(translations.email);

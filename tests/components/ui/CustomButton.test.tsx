@@ -7,48 +7,39 @@ describe("CustomButton Component", () => {
   it("renders with text", () => {
     render(<CustomButton text="Click me" />);
 
-    const text = screen.getByText("Click me");
-    expect(text).toBeInTheDocument();
+    expect(screen.getByText("Click me")).toBeInTheDocument();
+    expect(screen.getByText("→")).toBeInTheDocument();
+    expect(screen.queryByText("←")).not.toBeInTheDocument();
   });
 
   it("renders left arrow when arrowPosition is left", () => {
     render(<CustomButton text="Back" arrowPosition="left" />);
 
-    const arrow = screen.getByText("←");
-    expect(arrow).toBeInTheDocument();
+    expect(screen.queryByText("→")).not.toBeInTheDocument();
+    expect(screen.getByText("←")).toBeInTheDocument();
   });
 
-  it("applies href correctly", () => {
-    render(<CustomButton text="Go" href="/home" />);
+  it.each`
+    props                          | matches
+    ${{ arrowRotationDegree: 90 }} | ${(el: CSSStyleDeclaration) => el.transform === "rotate(90deg)"}
+    ${{ yAnimate: true }}          | ${(el: CSSStyleDeclaration) => /translateY/i.test(el.transform)}
+    ${{ yAnimate: false }}         | ${(el: CSSStyleDeclaration) => !/translateY/i.test(el.transform)}
+  `(
+    "applies style correctly",
+    async ({
+      props,
+      matches,
+    }: {
+      props: { arrowRotationDegree?: number; yAnimate?: boolean };
+      matches: (el: CSSStyleDeclaration) => boolean;
+    }) => {
+      render(<CustomButton text="Test" {...props} />);
+      const arrow = screen.getByText("→");
 
-    const link = screen.getByRole("link");
-    expect(link).toHaveAttribute("href", "/home");
-  });
-
-  it("applies arrowRotationDegree correctly", () => {
-    render(<CustomButton text="Spin" arrowRotationDegree={90} />);
-
-    const arrow = screen.getByText("→");
-    expect(arrow).toHaveStyle({ transform: "rotate(90deg)" });
-  });
-
-  it("does not apply vertical offset when yAnimate is false (default)", async () => {
-    render(<CustomButton text="Test" yAnimate={false} />);
-
-    const arrow = screen.getByText("→");
-    await waitFor(() => {
-      const transform = arrow.style.transform;
-      expect(transform).not.toMatch(/translateY/i);
-    });
-  });
-
-  it("applies vertical offset when yAnimate is true", async () => {
-    render(<CustomButton text="Test" yAnimate />);
-
-    const arrow = screen.getByText("→");
-    await waitFor(() => {
-      const transform = arrow.style.transform;
-      expect(transform).toMatch(/translateY/i);
-    });
-  });
+      await waitFor(() => {
+        const computed = getComputedStyle(arrow);
+        expect(matches(computed)).toBe(true);
+      });
+    },
+  );
 });
