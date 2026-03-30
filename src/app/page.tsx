@@ -41,11 +41,16 @@ const StickySectionAnimation = ({
 
   const opacity = useTransform(scrollYProgress, [0, 0.9, 0.91], [1, 0.6, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const translateY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const style = shouldAnimate
-    ? { opacity, scale, y, willChange: "opacity, transform" }
-    : { opacity: 1, scale: 1, y: 0 };
+    ? { opacity, scale, translateY, willChange: "opacity, transform" }
+    : {
+        opacity: 1,
+        scale: 1,
+        translateY: "0%",
+        willChange: "opacity, transform",
+      };
 
   return (
     <motion.section ref={ref} style={style}>

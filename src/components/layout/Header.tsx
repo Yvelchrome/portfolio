@@ -5,9 +5,9 @@ import { LocaleSwitcher, Logo, ThemeToggle } from "components";
 export const Header = () => {
   return (
     <motion.header
-      initial={{ y: "-100%" }}
+      initial={{ translateY: "-100%" }}
       animate={{
-        y: 0,
+        translateY: 0,
         transition: {
           duration: 0.6,
           ease: "easeOut",
