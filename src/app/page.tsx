@@ -39,7 +39,7 @@ const StickySectionAnimation = ({
     offset: [`start ${headerHeight}px`, "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.9, 0.91], [1, 0.6, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.9, 0.91], [1, 0.6, 0.01]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
   const translateY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
