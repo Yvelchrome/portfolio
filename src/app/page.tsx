@@ -9,12 +9,14 @@ import { useTranslations } from "next-intl";
 import {
   CustomLink,
   Hero,
+  Preloader,
   ResumeViewer,
   ScrollIndication,
   SectionAbout,
   SectionSkills,
   SectionWorks,
   Socials,
+  usePreloader,
 } from "components";
 import { useMounted } from "hooks/useMounted";
 import { fadeInFromTop } from "lib/animationsVariants";
@@ -59,7 +61,7 @@ const StickySectionAnimation = ({
   );
 };
 
-const LandingPage = () => {
+const PageContent = () => {
   const t = useTranslations("Homepage");
 
   return (
@@ -70,7 +72,7 @@ const LandingPage = () => {
         viewport={{ once: true }}
         transition={{
           staggerChildren: 0.1,
-          delayChildren: 0.2,
+          delayChildren: 1.6,
         }}
         className="relative flex min-h-dvh flex-col items-center justify-center gap-4 py-24 sm:gap-6 md:gap-8"
       >
@@ -93,7 +95,7 @@ const LandingPage = () => {
         viewport={{ once: true }}
         transition={{
           staggerChildren: 0.2,
-          delayChildren: 0.3,
+          delayChildren: 1.6,
         }}
       >
         <StickySectionAnimation>
@@ -106,6 +108,18 @@ const LandingPage = () => {
 
         <SectionSkills />
       </motion.section>
+    </>
+  );
+};
+
+const LandingPage = () => {
+  const { isLoading, handleComplete } = usePreloader();
+
+  return (
+    <>
+      {isLoading && <Preloader onComplete={handleComplete} />}
+
+      <PageContent />
     </>
   );
 };

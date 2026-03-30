@@ -11,6 +11,7 @@ export const Header = () => {
         transition: {
           duration: 0.6,
           ease: "easeOut",
+          delay: 1.4,
         },
       }}
       className="bg-background fixed top-0 right-0 left-0 z-50 border-b py-4"
