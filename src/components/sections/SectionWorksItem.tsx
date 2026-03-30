@@ -34,7 +34,7 @@ export const SectionWorksItem = ({
       href={linkHref}
       className="card bg-light-black group/card no-locale-animation relative cursor-pointer rounded-2xl"
     >
-      <div className="card-content bg-light-black text-primary-text-dark relative flex-col justify-between rounded-2xl p-8">
+      <div className="card-content bg-light-black text-primary-text-dark relative flex flex-col justify-between rounded-2xl p-8">
         <div className="space-y-6">
           <div>
             <h3 className="text-fluid-5xl no-locale-animation font-semibold">

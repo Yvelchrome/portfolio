@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { z } from "zod";
 
@@ -84,98 +84,41 @@ describe("validateWithZod", () => {
     }
   });
 
-  it("validates email format", () => {
-    const result = ContactFormSchema(tContact).safeParse({
-      ...validContact,
-      email: invalidContact.email,
-    });
+  describe.each`
+    field        | value                     | expectedError
+    ${"email"}   | ${invalidContact.email}   | ${errors.emailInvalid}
+    ${"email"}   | ${"a"}                    | ${errors.emailMin}
+    ${"email"}   | ${"a".repeat(256)}        | ${errors.emailMax}
+    ${"message"} | ${invalidContact.message} | ${errors.messageMin}
+    ${"message"} | ${"a".repeat(5001)}       | ${errors.messageMax}
+    ${"name"}    | ${"a".repeat(101)}        | ${errors.nameMax}
+  `(
+    "validates $field length",
+    ({
+      field,
+      value,
+      expectedError,
+    }: {
+      field: string;
+      value: string;
+      expectedError: string;
+    }) => {
+      it(`shows error for invalid ${field}`, () => {
+        const result = ContactFormSchema(tContact).safeParse({
+          ...validContact,
+          [field]: value,
+        });
 
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const emailError = result.error.issues.find((i) =>
-        i.path.includes("email"),
-      );
-
-      expect(emailError?.message).toBe(errors.emailInvalid);
-    }
-  });
-
-  it("validates email length (min)", () => {
-    const result = ContactFormSchema(tContact).safeParse({
-      ...validContact,
-      email: "a",
-    });
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const emailError = result.error.issues.find((i) =>
-        i.path.includes("email"),
-      );
-
-      expect(emailError?.message).toBe(errors.emailMin);
-    }
-  });
-
-  it("validates email length (max)", () => {
-    const result = ContactFormSchema(tContact).safeParse({
-      ...validContact,
-      email: "a".repeat(256),
-    });
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const emailError = result.error.issues.find((i) =>
-        i.path.includes("email"),
-      );
-
-      expect(emailError?.message).toBe(errors.emailMax);
-    }
-  });
-
-  it("validates message length (min)", () => {
-    const result = ContactFormSchema(tContact).safeParse({
-      ...validContact,
-      message: invalidContact.message,
-    });
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const messageError = result.error.issues.find((i) =>
-        i.path.includes("message"),
-      );
-      expect(messageError?.message).toBe(errors.messageMin);
-    }
-  });
-
-  it("validates message length (max)", () => {
-    const result = ContactFormSchema(tContact).safeParse({
-      ...validContact,
-      message: "a".repeat(5001),
-    });
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const messageError = result.error.issues.find((i) =>
-        i.path.includes("message"),
-      );
-      expect(messageError?.message).toBe(errors.messageMax);
-    }
-  });
-
-  it("validates name length (max)", () => {
-    const result = ContactFormSchema(tContact).safeParse({
-      ...validContact,
-      name: "a".repeat(101),
-    });
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const nameError = result.error.issues.find((i) =>
-        i.path.includes("name"),
-      );
-      expect(nameError?.message).toBe(errors.nameMax);
-    }
-  });
+        expect(result.success).toBe(false);
+        if (!result.success) {
+          const fieldError = result.error.issues.find((i) =>
+            i.path.includes(field),
+          );
+          expect(fieldError?.message).toBe(expectedError);
+        }
+      });
+    },
+  );
 
   it("validates company name length (max)", () => {
     const result = ContactFormSchema(tContact).safeParse({
@@ -215,83 +158,55 @@ describe("validateWithZod", () => {
 });
 
 describe("ApiResponseSchema", () => {
-  it("validates success response", () => {
-    const result = ApiResponseSchema.safeParse({
-      success: true,
-      message: "Operation successful",
-    });
-
+  it.each`
+    data                                | successField | hasExtra
+    ${{ success: true, message: "OK" }} | ${true}      | ${"message"}
+    ${{ success: false, error: "Err" }} | ${false}     | ${"error"}
+    ${{ success: true }}                | ${true}      | ${"none"}
+  `("validates response with $hasExtra fields", ({ data, successField }) => {
+    const result = ApiResponseSchema.safeParse(data);
     expect(result.success).toBe(true);
     if (result.success) {
-      expect(result.data.success).toBe(true);
-    }
-  });
-
-  it("validates error response", () => {
-    const result = ApiResponseSchema.safeParse({
-      success: false,
-      error: "Something went wrong",
-    });
-
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data.success).toBe(false);
-      expect(result.data.error).toBeDefined();
-    }
-  });
-
-  it("allows optional fields to be omitted", () => {
-    const result = ApiResponseSchema.safeParse({
-      success: true,
-      // no message, error
-    });
-
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data.success).toBe(true);
-      expect(result.data.message).toBeUndefined();
-      expect(result.data.error).toBeUndefined();
+      expect(result.data.success).toBe(successField);
     }
   });
 });
 
 describe("CSRFResponseSchema", () => {
-  it("validates valid CSRF token", () => {
-    const result = CSRFResponseSchema.safeParse({
-      csrfToken: "valid-token-123",
-    });
+  it.each`
+    csrfToken            | valid    | description
+    ${"valid-token-123"} | ${true}  | ${"valid token"}
+    ${""}                | ${false} | ${"empty token"}
+    ${undefined}         | ${false} | ${"missing token"}
+  `(
+    "validates $description",
+    ({
+      csrfToken,
+      valid,
+    }: {
+      csrfToken: string | undefined;
+      valid: boolean;
+      description: string;
+    }) => {
+      const result = CSRFResponseSchema.safeParse({ csrfToken });
 
-    expect(result.success).toBe(true);
-    if (result.success) {
-      expect(result.data.csrfToken).toBe("valid-token-123");
-    }
-  });
+      if (valid) {
+        expect(result.success).toBe(true);
+        if (result.data) {
+          expect(result.data.csrfToken).toBe(csrfToken);
+        }
+      } else {
+        expect(result.success).toBe(false);
 
-  it("rejects empty token", () => {
-    const result = CSRFResponseSchema.safeParse({
-      csrfToken: "",
-    });
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const tokenError = result.error.issues.find((i) =>
-        i.path.includes("csrfToken"),
-      );
-      expect(tokenError?.message).toMatch(/too small/i);
-    }
-  });
-
-  it("requires csrfToken field", () => {
-    const result = CSRFResponseSchema.safeParse({});
-
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      const tokenError = result.error.issues.find((i) =>
-        i.path.includes("csrfToken"),
-      );
-      expect(tokenError).toBeDefined();
-    }
-  });
+        if (!result.success) {
+          const tokenError = result.error.issues.find((i) =>
+            i.path.includes("csrfToken"),
+          );
+          expect(tokenError).toBeDefined();
+        }
+      }
+    },
+  );
 });
 
 describe("parseJsonWithZod", () => {

@@ -36,19 +36,25 @@ export async function GET(request: NextRequest) {
 
     const resend = new Resend(resendApiKey);
 
-    // Demo mode for demonstration
     const isDemo = searchParams.get("demo") === "1";
 
-    let counts: Record<string, number>;
+    const COUNT_KEYS = ["sent", "delivered", "bounced", "failed"] as const;
+    type CountKey = (typeof COUNT_KEYS)[number];
 
-    if (isDemo) {
-      counts = {
-        sent: 3,
-        delivered: 8,
-        bounced: 1,
-        failed: 1,
-      };
-    } else {
+    const counts: Partial<Record<CountKey, number | undefined>> = {
+      sent: undefined,
+      delivered: undefined,
+      bounced: undefined,
+      failed: undefined,
+    };
+    const demoCounts: Record<CountKey, number> = {
+      sent: 3,
+      delivered: 8,
+      bounced: 1,
+      failed: 1,
+    };
+
+    if (!isDemo) {
       const { data, error } = await resend.emails.list({ limit });
 
       if (error) {
@@ -58,30 +64,30 @@ export async function GET(request: NextRequest) {
         );
       }
 
-      counts = {
-        sent: 0,
-        delivered: 0,
-        bounced: 0,
-        failed: 0,
-      };
-
       const emailsData = data.data;
       const emails = emailsData as ResendEmail[];
       emails.forEach((email) => {
         const emailDate = new Date(email.created_at);
         if (emailDate >= startDate) {
           const event = email.last_event;
-          if (event in counts) {
+
+          const isCountKey = (key: string): key is CountKey =>
+            COUNT_KEYS.includes(key);
+
+          if (isCountKey(event)) {
             counts[event] = (counts[event] ?? 0) + 1;
           }
         }
       });
     }
 
-    const sent = counts["sent"] ?? 0;
-    const delivered = counts["delivered"] ?? 0;
-    const bounced = counts["bounced"] ?? 0;
-    const failed = counts["failed"] ?? 0;
+    const getCount = (key: CountKey) =>
+      counts[key] ?? (isDemo ? demoCounts[key] : 0);
+
+    const sent = getCount("sent");
+    const delivered = getCount("delivered");
+    const bounced = getCount("bounced");
+    const failed = getCount("failed");
 
     const totalSent = sent + delivered + bounced + failed;
 

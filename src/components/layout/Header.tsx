@@ -5,15 +5,16 @@ import { LocaleSwitcher, Logo, ThemeToggle } from "components";
 export const Header = () => {
   return (
     <motion.header
-      initial={{ y: "-100%" }}
+      initial={{ translateY: "-100%" }}
       animate={{
-        y: 0,
+        translateY: 0,
         transition: {
           duration: 0.6,
           ease: "easeOut",
+          delay: 1.4,
         },
       }}
-      className="bg-background fixed top-0 right-0 left-0 z-50 mr-(--removed-body-scroll-bar-size) border-b py-4"
+      className="bg-background fixed top-0 right-0 left-0 z-50 border-b py-4"
     >
       <div className="container mx-auto flex items-center justify-between px-4 sm:px-8">
         <Logo />

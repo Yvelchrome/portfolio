@@ -9,12 +9,14 @@ import { useTranslations } from "next-intl";
 import {
   CustomLink,
   Hero,
+  Preloader,
   ResumeViewer,
   ScrollIndication,
   SectionAbout,
   SectionSkills,
   SectionWorks,
   Socials,
+  usePreloader,
 } from "components";
 import { useMounted } from "hooks/useMounted";
 import { fadeInFromTop } from "lib/animationsVariants";
@@ -39,13 +41,18 @@ const StickySectionAnimation = ({
     offset: [`start ${headerHeight}px`, "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.9, 0.91], [1, 0.6, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.9, 0.91], [1, 0.6, 0.01]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const translateY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   const style = shouldAnimate
-    ? { opacity, scale, y, willChange: "opacity, transform" }
-    : { opacity: 1, scale: 1, y: 0 };
+    ? { opacity, scale, translateY, willChange: "opacity, transform" }
+    : {
+        opacity: 1,
+        scale: 1,
+        translateY: "0%",
+        willChange: "opacity, transform",
+      };
 
   return (
     <motion.section ref={ref} style={style}>
@@ -54,7 +61,7 @@ const StickySectionAnimation = ({
   );
 };
 
-const LandingPage = () => {
+const PageContent = () => {
   const t = useTranslations("Homepage");
 
   return (
@@ -65,7 +72,7 @@ const LandingPage = () => {
         viewport={{ once: true }}
         transition={{
           staggerChildren: 0.1,
-          delayChildren: 0.2,
+          delayChildren: 1.6,
         }}
         className="relative flex min-h-dvh flex-col items-center justify-center gap-4 py-24 sm:gap-6 md:gap-8"
       >
@@ -88,7 +95,7 @@ const LandingPage = () => {
         viewport={{ once: true }}
         transition={{
           staggerChildren: 0.2,
-          delayChildren: 0.3,
+          delayChildren: 1.6,
         }}
       >
         <StickySectionAnimation>
@@ -101,6 +108,18 @@ const LandingPage = () => {
 
         <SectionSkills />
       </motion.section>
+    </>
+  );
+};
+
+const LandingPage = () => {
+  const { isLoading, handleComplete } = usePreloader();
+
+  return (
+    <>
+      {isLoading && <Preloader onComplete={handleComplete} />}
+
+      <PageContent />
     </>
   );
 };

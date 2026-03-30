@@ -125,7 +125,11 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning className="relative">
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className="scrollbar-gutter relative"
+    >
       <head>
         <JsonLdScript
           schemas={[
@@ -137,7 +141,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi text-fluid-base text-primary-text bg-background relative font-normal`}
+        className={`${Satoshi.variable} ${RobotoMono.variable} ${RoxboroughCF.variable} font-satoshi text-fluid-base text-primary-text bg-background relative font-normal data-scroll-locked:mr-0!`}
       >
         <NextIntlClientProvider messages={messages}>
           <ClientProviders>

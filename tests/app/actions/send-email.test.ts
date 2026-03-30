@@ -3,10 +3,6 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { type SendEmailState, sendEmail } from "app/actions/send-email";
 import { prisma } from "lib/prisma/prisma";
 
-process.env["RESEND_API_KEY"] = "test-resend-key";
-process.env["TARGET_EMAIL"] = "myemail@test.com";
-process.env["DATABASE_URL"] = "file:./test.db";
-
 vi.mock("services/locale", () => ({
   getUserLocale: vi.fn().mockResolvedValue("en"),
 }));
@@ -19,23 +15,22 @@ vi.mock("lib/prisma/prisma", () => ({
   },
 }));
 
-const resendSendMock = vi
-  .fn()
-  .mockResolvedValue({ data: { id: "mock-email-id" }, error: null });
-vi.mock("resend", () => {
-  return {
-    Resend: class {
-      emails = { send: resendSendMock };
-      constructor(apiKey: string) {
-        if (apiKey !== process.env["RESEND_API_KEY"]) {
-          throw new Error("Invalid API key");
-        }
-
-        this.emails = { send: resendSendMock };
+const { resendSendMock } = vi.hoisted(() => ({
+  resendSendMock: vi
+    .fn()
+    .mockResolvedValue({ data: { id: "mock-email-id" }, error: null }),
+}));
+vi.mock("resend", () => ({
+  Resend: class {
+    emails = { send: resendSendMock };
+    constructor(apiKey: string) {
+      if (apiKey !== process.env["RESEND_API_KEY"]) {
+        throw new Error("Invalid API key");
       }
-    },
-  };
-});
+      this.emails = { send: resendSendMock };
+    }
+  },
+}));
 
 vi.mock("utils/GetMessagesJson", () => ({
   getContactTranslator: vi.fn().mockResolvedValue((key: string) => key),
@@ -75,6 +70,8 @@ const createFormData = (overrides: Record<string, string> = {}) => {
   });
   return formData;
 };
+
+const createInitialState = (): SendEmailState => ({});
 
 const validFormData = createFormData({
   name: "John Doe",
@@ -118,14 +115,14 @@ describe("sendEmail Server Action", () => {
 
   describe("Successful submissions", () => {
     it("valid submission returns success", async () => {
-      assertSuccess(await sendEmail({} as SendEmailState, validFormData));
+      assertSuccess(await sendEmail(createInitialState(), validFormData));
     });
     it("minimal fields return success", async () => {
-      assertSuccess(await sendEmail({} as SendEmailState, minimalFormData));
+      assertSuccess(await sendEmail(createInitialState(), minimalFormData));
     });
     it("honeypot filled returns success without sending", async () => {
       const result = await sendEmail(
-        {} as SendEmailState,
+        createInitialState(),
         createFormData({
           honeypot: "I am a bot",
           name: "Bot",
@@ -138,7 +135,7 @@ describe("sendEmail Server Action", () => {
     });
 
     it("saves message to database", async () => {
-      await sendEmail({} as SendEmailState, validFormData);
+      await sendEmail(createInitialState(), validFormData);
       const mockCreate = vi.mocked(prisma.message["create"]);
       expect(mockCreate).toHaveBeenCalledWith({
         data: {
@@ -153,19 +150,19 @@ describe("sendEmail Server Action", () => {
     });
 
     it("saves minimal message as Anonymous", async () => {
-      await sendEmail({} as SendEmailState, minimalFormData);
+      await sendEmail(createInitialState(), minimalFormData);
       const mockCreate = vi.mocked(prisma.message["create"]);
-      expect(mockCreate).toHaveBeenCalledWith({
-        data: expect.objectContaining({
-          name: "Anonymous",
-          email: "test@example.com",
-        }) as unknown as Parameters<typeof prisma.message.create>[0]["data"],
-      });
+      expect(mockCreate).toHaveBeenCalled();
+      const callArgs = mockCreate.mock.calls[0]?.[0] as
+        | { data?: { name: string; email: string } }
+        | undefined;
+      expect(callArgs?.data?.name).toBe("Anonymous");
+      expect(callArgs?.data?.email).toBe("test@example.com");
     });
 
     it("uses company_name when name is empty (name || company_name priority)", async () => {
       await sendEmail(
-        {} as SendEmailState,
+        createInitialState(),
         createFormData({
           name: "",
           company_name: "Acme Corp",
@@ -174,19 +171,19 @@ describe("sendEmail Server Action", () => {
         }),
       );
       const mockCreate = vi.mocked(prisma.message["create"]);
-      expect(mockCreate).toHaveBeenCalledWith({
-        data: expect.objectContaining({
-          name: "Acme Corp",
-          email: "test@example.com",
-        }) as unknown as Parameters<typeof prisma.message.create>[0]["data"],
-      });
+      expect(mockCreate).toHaveBeenCalled();
+      const callArgs = mockCreate.mock.calls[0]?.[0] as
+        | { data?: { name: string; email: string } }
+        | undefined;
+      expect(callArgs?.data?.name).toBe("Acme Corp");
+      expect(callArgs?.data?.email).toBe("test@example.com");
     });
 
     it("sends email via Resend with correct template props", async () => {
-      await sendEmail({} as SendEmailState, validFormData);
+      await sendEmail(createInitialState(), validFormData);
       expect(resendSendMock).toHaveBeenCalledWith({
         from: "Portfolio Contact Form <onboarding@resend.dev>",
-        to: "myemail@test.com",
+        to: "test@example.com",
         subject: "New message from: test@example.com",
         react: {
           type: "div",
@@ -211,25 +208,25 @@ describe("sendEmail Server Action", () => {
     `(
       "returns error for $field",
       async ({ formData, field }: { formData: FormData; field: string }) => {
-        const result = await sendEmail({} as SendEmailState, formData);
+        const result = await sendEmail(createInitialState(), formData);
         assertFieldError(result, field);
       },
     );
 
     it("returns multiple field errors", async () => {
-      const result = await sendEmail({} as SendEmailState, invalidFormData);
+      const result = await sendEmail(createInitialState(), invalidFormData);
       expect(result.errors?.["email"]).toBeDefined();
       expect(result.errors?.["message"]).toBeDefined();
     });
 
     it.each`
       scenario        | mockSetup
-      ${"validation"} | ${{ callFn: () => sendEmail({} as SendEmailState, invalidFormData), expectCall: false }}
+      ${"validation"} | ${{ callFn: () => sendEmail(createInitialState(), invalidFormData), expectCall: false }}
       ${"database error"} | ${{
   callFn: async () => {
     const mockCreate = vi.mocked(prisma.message["create"]);
     mockCreate.mockRejectedValueOnce(new Error("DB fail"));
-    return sendEmail({} as SendEmailState, validFormData);
+    return sendEmail(createInitialState(), validFormData);
   },
   expectCall: false,
 }}
@@ -246,13 +243,13 @@ describe("sendEmail Server Action", () => {
     it("returns error when Prisma fails", async () => {
       const mockCreate = vi.mocked(prisma.message["create"]);
       mockCreate.mockRejectedValueOnce(new Error("Database connection failed"));
-      assertError(await sendEmail({} as SendEmailState, validFormData));
+      assertError(await sendEmail(createInitialState(), validFormData));
     });
 
     it("succeeds without database when DATABASE_URL is not set", async () => {
       vi.stubEnv("DATABASE_URL", "");
 
-      const result = await sendEmail({}, validFormData);
+      const result = await sendEmail(createInitialState(), validFormData);
 
       expect(result.success).toBe(true);
 
@@ -260,8 +257,6 @@ describe("sendEmail Server Action", () => {
 
       expect(mockCreate).not.toHaveBeenCalled();
       expect(resendSendMock).toHaveBeenCalled();
-
-      vi.unstubAllEnvs();
     });
   });
 
@@ -282,7 +277,7 @@ describe("sendEmail Server Action", () => {
         if (mockValue.throw)
           vi.mocked(resendSendMock).mockRejectedValueOnce(mockValue.throw);
         else vi.mocked(resendSendMock).mockResolvedValueOnce(mockValue);
-        assertError(await sendEmail({} as SendEmailState, validFormData));
+        assertError(await sendEmail(createInitialState(), validFormData));
       },
     );
   });
@@ -299,8 +294,7 @@ describe("sendEmail Server Action", () => {
         stubFn();
         const { sendEmail: reimported } =
           await import("app/actions/send-email");
-        assertError(await reimported({} as SendEmailState, validFormData));
-        vi.unstubAllEnvs();
+        assertError(await reimported(createInitialState(), validFormData));
       },
     );
   });
