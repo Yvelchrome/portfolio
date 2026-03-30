@@ -18,7 +18,7 @@ export const Footer = () => {
       className="md:h-sm:h-175 bg-deep-blue **:text-primary-text-dark relative **:border-white"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
-      <div className="md:h-sm:h-175 md:h-sm:fixed right-0 bottom-0 left-0 mr-(--removed-body-scroll-bar-size)">
+      <div className="md:h-sm:h-175 md:h-sm:fixed right-0 bottom-0 left-0">
         <div className="md:h-sm:pt-0 container mx-auto flex h-full flex-col justify-end space-y-6 px-4 py-8 sm:px-8 lg:space-y-12">
           <a
             href={email ? `mailto:${email}` : "/contact"}
