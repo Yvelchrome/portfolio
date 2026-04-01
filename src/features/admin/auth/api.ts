@@ -3,8 +3,6 @@ import {
   type LoginCredentials,
   type LoginResponse,
   LoginResponseSchema,
-  type UserResponse,
-  UserResponseSchema,
   parseJsonWithZod,
 } from "lib/schemas";
 
@@ -33,27 +31,4 @@ export async function logout(): Promise<void> {
     method: "POST",
     credentials: "include",
   });
-}
-
-export async function refreshToken(): Promise<void> {
-  const response = await fetch(`${API_BASE}/refresh`, {
-    method: "POST",
-    credentials: "include",
-  });
-
-  if (!response.ok) {
-    throw new Error("Token refresh failed");
-  }
-}
-
-export async function getCurrentUser(): Promise<UserResponse> {
-  const response = await fetch(`${API_BASE}/me`, {
-    credentials: "include",
-  });
-
-  if (!response.ok) {
-    throw new Error("Not authenticated");
-  }
-
-  return parseJsonWithZod(response, UserResponseSchema);
 }
