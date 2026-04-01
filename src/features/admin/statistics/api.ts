@@ -7,12 +7,13 @@ import {
 const API_BASE = "/api/admin/statistics";
 
 export async function getStatistics(
-  days: number = 30,
-  demo: boolean = false,
+  days: string = "30",
+  isDemo: boolean = false,
 ): Promise<EmailStats> {
   const searchParams = new URLSearchParams();
-  searchParams.set("days", days.toString());
-  if (demo) {
+  searchParams.set("days", days);
+
+  if (isDemo) {
     searchParams.set("demo", "1");
   }
 

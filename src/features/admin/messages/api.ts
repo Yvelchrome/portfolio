@@ -10,9 +10,9 @@ import {
 
 const API_BASE = "/api/admin/messages";
 
-export async function getMessageStats(demo = false): Promise<MessageStats> {
+export async function getMessageStats(isDemo = false): Promise<MessageStats> {
   const searchParams = new URLSearchParams();
-  if (demo) searchParams.set("demo", "1");
+  if (isDemo) searchParams.set("demo", "1");
 
   const response = await fetch(`${API_BASE}/stats?${searchParams}`, {
     credentials: "include",
@@ -25,17 +25,17 @@ export async function getMessageStats(demo = false): Promise<MessageStats> {
   return parseJsonWithZod(response, MessageStatsSchema);
 }
 
-export async function getMessages(params?: {
-  cursor?: string;
+export async function getMessages(params: {
+  cursor?: string | undefined;
   limit?: number;
-  status?: string;
-  demo?: boolean;
+  status?: string | undefined;
+  isDemo?: boolean;
 }): Promise<MessagesResponse> {
   const searchParams = new URLSearchParams();
-  if (params?.cursor) searchParams.set("cursor", params.cursor);
-  if (params?.limit) searchParams.set("limit", params.limit.toString());
-  if (params?.status) searchParams.set("status", params.status);
-  if (params?.demo) searchParams.set("demo", "1");
+  if (params.cursor) searchParams.set("cursor", params.cursor);
+  if (params.limit) searchParams.set("limit", params.limit.toString());
+  if (params.status) searchParams.set("status", params.status);
+  if (params.isDemo) searchParams.set("demo", "1");
 
   const response = await fetch(`${API_BASE}?${searchParams}`, {
     credentials: "include",
@@ -50,12 +50,12 @@ export async function getMessages(params?: {
 
 export async function getMessage(
   id: string,
-  demo = false,
+  isDemo = false,
   markAsRead = true,
 ): Promise<MessageDetail> {
   const searchParams = new URLSearchParams();
   searchParams.set("markAsRead", String(markAsRead));
-  if (demo) searchParams.set("demo", "1");
+  if (isDemo) searchParams.set("demo", "1");
 
   const response = await fetch(`${API_BASE}/${id}?${searchParams}`, {
     credentials: "include",
