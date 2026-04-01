@@ -6,7 +6,7 @@ const config = {
     "^react$",
     "^next(?:/.*)?$",
     "<THIRD_PARTY_MODULES>",
-    "^(emails|lib|hooks|services|utils|i18n|types|app|components)(?:/.*)?$",
+    "^(emails|lib|hooks|services|utils|i18n|types|app|components|features)(?:/.*)?$",
     "^assets(?:/.*)?$",
     "^[./]",
   ],
