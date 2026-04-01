@@ -63,9 +63,9 @@ describe("GET /api/admin/messages/stats", () => {
     };
 
     expect(response.status).toBe(200);
-    expect(data.total).toBe(127);
-    expect(data.unread).toBe(23);
-    expect(data.replied).toBe(84);
+    expect(data.total).toBe(67);
+    expect(data.unread).toBe(25);
+    expect(data.replied).toBe(42);
   });
 
   it("should handle server error", async () => {

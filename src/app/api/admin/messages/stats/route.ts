@@ -9,9 +9,9 @@ function generateDemoStats(): {
   replied: number;
 } {
   return {
-    total: 127,
-    unread: 23,
-    replied: 84,
+    total: 67,
+    unread: 25,
+    replied: 42,
   };
 }
 
