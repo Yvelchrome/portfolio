@@ -21,16 +21,20 @@ ChartJS.register(
   Legend,
 );
 
+export const ChartLoading = () => {
+  return (
+    <div className="flex h-full items-center justify-center">
+      <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
+    </div>
+  );
+};
+
 export const Bar = dynamic(
   () => import("react-chartjs-2").then((mod) => mod.Bar),
   {
     ssr: false,
     loading: () => {
-      return (
-        <div className="flex h-full items-center justify-center">
-          <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
-        </div>
-      );
+      return <ChartLoading />;
     },
   },
 );
@@ -40,11 +44,7 @@ export const Doughnut = dynamic(
   {
     ssr: false,
     loading: () => {
-      return (
-        <div className="flex h-full items-center justify-center">
-          <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
-        </div>
-      );
+      return <ChartLoading />;
     },
   },
 );
