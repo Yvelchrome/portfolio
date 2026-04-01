@@ -2,42 +2,14 @@
 
 import { useState } from "react";
 
-import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
 import { getStatistics } from "features/admin/statistics/api";
 import { useTranslations } from "next-intl";
 
+import { Bar, Doughnut } from "components/widgets/Charts";
 import { EmailStats } from "lib/schemas";
-
-const BarChart = dynamic(
-  () => import("components/widgets/Charts").then((mod) => mod.Bar),
-  {
-    ssr: false,
-    loading: () => {
-      return (
-        <div className="flex h-full items-center justify-center">
-          <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
-        </div>
-      );
-    },
-  },
-);
-
-const DoughnutChart = dynamic(
-  () => import("components/widgets/Charts").then((mod) => mod.Doughnut),
-  {
-    ssr: false,
-    loading: () => {
-      return (
-        <div className="flex h-full items-center justify-center">
-          <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
-        </div>
-      );
-    },
-  },
-);
 
 export function StatsClient() {
   const t = useTranslations("Admin");
@@ -51,7 +23,7 @@ export function StatsClient() {
     queryFn: () => getStatistics(days, demoMode),
   });
 
-  const barChartData = {
+  const barData = {
     labels: [
       t("statistics.sent"),
       t("statistics.delivered"),
@@ -84,7 +56,7 @@ export function StatsClient() {
     ],
   };
 
-  const barChartOptions = {
+  const barOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -96,7 +68,7 @@ export function StatsClient() {
   const issuesCount =
     (stats?.summary.bounced || 0) + (stats?.summary.failed || 0);
 
-  const doughnutChartData = {
+  const doughnutData = {
     labels: [t("statistics.delivered"), t("statistics.issues")],
     datasets: [
       {
@@ -107,7 +79,7 @@ export function StatsClient() {
     ],
   };
 
-  const doughnutChartOptions = {
+  const doughnutOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -175,7 +147,7 @@ export function StatsClient() {
             minHeight: "clamp(250px, 40vw, 400px)",
           }}
         >
-          <BarChart data={barChartData} options={barChartOptions} />
+          <Bar data={barData} options={barOptions} />
         </div>
         <div
           className="bg-card overflow-hidden rounded-lg p-4 shadow sm:p-6"
@@ -183,10 +155,7 @@ export function StatsClient() {
             minHeight: "clamp(250px, 40vw, 400px)",
           }}
         >
-          <DoughnutChart
-            data={doughnutChartData}
-            options={doughnutChartOptions}
-          />
+          <Doughnut data={doughnutData} options={doughnutOptions} />
         </div>
       </div>
       <div className="bg-card mt-6 overflow-hidden rounded-lg p-4 shadow sm:mt-8 sm:p-6">

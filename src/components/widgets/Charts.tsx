@@ -1,3 +1,5 @@
+import dynamic from "next/dynamic";
+
 import {
   ArcElement,
   BarElement,
@@ -8,16 +10,41 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import { Bar, Doughnut } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend,
-  ArcElement,
 );
 
-export { Bar, Doughnut };
+export const Bar = dynamic(
+  () => import("react-chartjs-2").then((mod) => mod.Bar),
+  {
+    ssr: false,
+    loading: () => {
+      return (
+        <div className="flex h-full items-center justify-center">
+          <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
+        </div>
+      );
+    },
+  },
+);
+
+export const Doughnut = dynamic(
+  () => import("react-chartjs-2").then((mod) => mod.Doughnut),
+  {
+    ssr: false,
+    loading: () => {
+      return (
+        <div className="flex h-full items-center justify-center">
+          <div className="border-primary h-8 w-8 animate-spin rounded-full border-2 border-t-transparent" />
+        </div>
+      );
+    },
+  },
+);
