@@ -1,19 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { useTranslations } from "next-intl";
 
 import { Checkbox } from "components/shadcn/checkbox";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
 
-export function AdminNavClient() {
+export function AdminNav() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const router = useRouter();
   const t = useTranslations("Admin");
 
-  const isDemo = searchParams.get("demo") === "1";
+  const { demo } = useSearchParamsSafe(["demo"], { demo: "0" });
+  const isDemo = demo === "1";
 
   const navLinks = [
     { href: "/admin", label: t("dashboard") },
@@ -22,35 +23,41 @@ export function AdminNavClient() {
   ];
 
   const getLinkWithDemo = (href: string) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams();
 
-    if (href !== "/admin/messages") {
-      params.delete("page");
+    if (href === "/admin/messages") {
+      params.set("page", "1");
+    }
+
+    if (href === "/admin/statistics") {
+      params.set("days", "30");
     }
 
     if (isDemo) {
       params.set("demo", "1");
     }
 
-    return `${href}?${params}`;
+    const paramString = params.toString();
+    return paramString ? `${href}?${paramString}` : href;
   };
 
   const toggleDemo = (checked: boolean) => {
-    const params = new URLSearchParams(searchParams);
+    const params = new URLSearchParams();
 
     if (pathname === "/admin/messages") {
       params.set("page", "1");
-    } else {
-      params.delete("page");
+    }
+
+    if (pathname === "/admin/statistics") {
+      params.set("days", "30");
     }
 
     if (checked) {
       params.set("demo", "1");
-    } else {
-      params.delete("demo");
     }
 
-    router.push(`${pathname}?${params}`);
+    const paramString = params.toString();
+    router.push(paramString ? `${pathname}?${paramString}` : pathname);
   };
 
   return (

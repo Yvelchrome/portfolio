@@ -1,47 +1,170 @@
-import { Suspense } from "react";
+"use client";
 
-import { DashboardClient } from "features/admin/components";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-function DashboardFallback() {
+import { useQuery } from "@tanstack/react-query";
+import { useLocale, useTranslations } from "next-intl";
+
+import { logout } from "features/admin/auth/api";
+import { useAuthStore } from "features/admin/auth/store";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
+import { getMessageStats, getMessages } from "features/admin/messages/api";
+import { type MessageStats } from "lib/schemas";
+
+const Stat = ({
+  label,
+  value,
+  color = "text-primary-text",
+}: {
+  label: string;
+  value: number;
+  color?: string;
+}) => {
+  return (
+    <div className="bg-card overflow-hidden rounded-lg p-4 shadow sm:p-6">
+      <dt className="text-muted-foreground text-fluid-sm truncate font-medium uppercase">
+        <span>{label}</span>
+      </dt>
+      <dd className={`text-fluid-2xl mt-1 font-semibold ${color}`}>
+        <span className="no-locale-animation tabular-nums">{value}</span>
+      </dd>
+    </div>
+  );
+};
+
+export default function AdminDashboard() {
+  const router = useRouter();
+  const t = useTranslations("Admin");
+  const tCommon = useTranslations("Common");
+  const locale = useLocale();
+  const { user, logout: clearAuth } = useAuthStore();
+
+  const { demo } = useSearchParamsSafe(["demo"], { demo: "0" });
+  const isDemo = demo === "1";
+
+  const { data: stats } = useQuery<MessageStats>({
+    queryKey: ["messageStats", isDemo],
+    queryFn: () => getMessageStats(isDemo),
+  });
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["messages", { limit: 5, isDemo }],
+    queryFn: () => getMessages({ limit: 5, isDemo }),
+  });
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch {
+      // Continue with local logout even if API fails - intentional behavior
+    }
+    clearAuth();
+    router.push("/admin/login");
+  };
+
+  const onLogoutClick = () => {
+    void handleLogout();
+  };
+
+  const recentMessages = data?.messages || [];
+
+  const statusColors: Record<string, string> = {
+    NEW: "bg-yellow-500/10 text-yellow-500",
+    READ: "bg-blue-500/10 text-blue-500",
+    REPLIED: "bg-green-500/10 text-green-500",
+    ARCHIVED: "bg-muted text-muted-foreground",
+  };
+
   return (
     <div className="px-4 py-6 sm:px-8 sm:py-8">
       <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <div className="bg-muted h-8 w-40 animate-pulse rounded" />
-          <div className="bg-muted mt-2 h-4 w-60 animate-pulse rounded" />
+          <h2 className="text-primary-text text-fluid-2xl font-bold">
+            {t("dashboard")}
+          </h2>
+          <p className="text-muted-foreground text-fluid-base mt-1">
+            {t("welcome_back", { name: user?.name || user?.email || "" })}
+          </p>
         </div>
-        <div className="bg-muted h-10 w-24 animate-pulse rounded" />
+        <button
+          onClick={onLogoutClick}
+          className="text-destructive hover:bg-destructive/10 no-locale-animation w-full cursor-pointer rounded-md px-4 py-2 text-sm sm:w-auto"
+        >
+          <span>{t("logout")}</span>
+        </button>
       </div>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:mb-8 sm:grid-cols-3">
-        {["stat-1", "stat-2", "stat-3"].map((id) => (
-          <div
-            key={id}
-            className="bg-card overflow-hidden rounded-lg p-4 shadow sm:p-6"
-          >
-            <div className="bg-muted h-4 w-24 animate-pulse rounded" />
-            <div className="bg-muted mt-2 h-8 w-16 animate-pulse rounded" />
-          </div>
-        ))}
+        <Stat label={t("total_messages")} value={stats?.total ?? 0} />
+        <Stat
+          label={t("unread")}
+          value={stats?.unread ?? 0}
+          color="text-yellow-500"
+        />
+        <Stat
+          label={t("replied")}
+          value={stats?.replied ?? 0}
+          color="text-green-500"
+        />
       </div>
 
       <div className="bg-card overflow-hidden rounded-lg shadow">
         <div className="border-border flex items-center justify-between border-b p-4 sm:p-6">
-          <div className="bg-muted h-5 w-32 animate-pulse rounded" />
-          <div className="bg-muted h-4 w-20 animate-pulse rounded" />
+          <h3 className="text-card-foreground text-fluid-base font-semibold">
+            {t("recent_messages")}
+          </h3>
+          <Link
+            href={`/admin/messages${isDemo ? "?demo=1" : ""}`}
+            className="text-blue-500 hover:text-blue-400"
+          >
+            {t("view_all")} →
+          </Link>
         </div>
-        <div className="p-6">
-          <div className="bg-muted h-20 w-full animate-pulse rounded" />
-        </div>
+
+        {isLoading ? (
+          <div className="text-muted-foreground p-6 text-center">
+            {t("messages.loading")}
+          </div>
+        ) : recentMessages.length === 0 ? (
+          <div className="text-muted-foreground p-6 text-center">
+            <span>{t("no_messages")}</span>
+          </div>
+        ) : (
+          <div className="divide-border divide-y">
+            {recentMessages.map((message) => (
+              <div key={message.id} className="hover:bg-muted/50 p-4">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0 flex-1">
+                    <p className="text-card-foreground no-locale-animation truncate font-medium">
+                      {message.name}
+                    </p>
+                    <p className="text-muted-foreground no-locale-animation text-fluid-sm">
+                      {message.email}
+                    </p>
+                  </div>
+                  <div
+                    className={`w-fit rounded-full px-2 py-1 text-xs ${
+                      statusColors[message.status] ??
+                      "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    <span>
+                      {tCommon(`status.${message.status.toLowerCase()}`)}
+                    </span>
+                  </div>
+                </div>
+                <p className="text-foreground no-locale-animation mt-2 truncate">
+                  {message.subject}
+                </p>
+                <p className="text-muted-foreground no-locale-animation text-fluid-sm mt-1">
+                  {new Date(message.createdAt).toLocaleDateString(locale)}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
-  );
-}
-
-export default function AdminDashboard() {
-  return (
-    <Suspense fallback={<DashboardFallback />}>
-      <DashboardClient />
-    </Suspense>
   );
 }

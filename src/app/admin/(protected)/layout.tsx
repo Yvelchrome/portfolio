@@ -3,9 +3,8 @@ import type { ReactNode } from "react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { AdminNav } from "features/admin/components/AdminNav";
 import { verifyAccessToken } from "lib/auth/jwt";
-
-import { AdminNav } from "./AdminNav";
 
 export default async function ProtectedLayout({
   children,
