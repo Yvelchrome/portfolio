@@ -76,6 +76,10 @@ export async function GET(request: NextRequest) {
     if (isDemo) {
       messages = generateDemoMessages(67);
 
+      if (where.status) {
+        messages = messages.filter((msg) => msg.status === where.status);
+      }
+
       if (cursor) {
         const cursorIndex = messages.findIndex((m) => m.id === cursor);
         if (cursorIndex !== -1) {
