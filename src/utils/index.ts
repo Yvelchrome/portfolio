@@ -1,5 +1,5 @@
 export { ConditionalWrapper } from "./ConditionalWrapper";
-export { getBaseUrl, resetBaseUrlCache } from "./GetBaseUrl";
+export { getBaseUrl } from "./GetBaseUrl";
 export { getContactInfo } from "./GetContactInfo";
 export { getHeaderHeight } from "./GetHeaderHeight";
 export { JsonLdScript } from "./JsonLdScript";
