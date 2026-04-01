@@ -176,8 +176,6 @@ export const LoginCredentialsSchema = z.object({
   password: z.string().min(1),
 });
 
-export const LoginRequestSchema = LoginCredentialsSchema;
-
 export const LoginResponseSchema = z.object({
   user: UserSchema,
   message: z.string().optional(),
@@ -193,7 +191,6 @@ export const ErrorResponseSchema = z.object({
 
 export type User = z.infer<typeof UserSchema>;
 export type LoginCredentials = z.infer<typeof LoginCredentialsSchema>;
-export type LoginRequest = z.infer<typeof LoginRequestSchema>;
 export type LoginResponse = z.infer<typeof LoginResponseSchema>;
 export type UserResponse = z.infer<typeof UserResponseSchema>;
 export type ErrorResponse = z.infer<typeof ErrorResponseSchema>;

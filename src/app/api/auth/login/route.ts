@@ -4,12 +4,12 @@ import { compare } from "bcryptjs";
 
 import { signAccessToken, signRefreshToken } from "lib/auth/jwt";
 import { prisma } from "lib/prisma/prisma";
-import { LoginRequestSchema } from "lib/schemas";
+import { LoginCredentialsSchema } from "lib/schemas";
 
 export async function POST(request: NextRequest) {
   try {
     const body: unknown = await request.json();
-    const { email, password } = LoginRequestSchema.parse(body);
+    const { email, password } = LoginCredentialsSchema.parse(body);
 
     const user = await prisma.user.findUnique({
       where: { email },
