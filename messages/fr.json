@@ -1,6 +1,7 @@
 {
   "Common": {
     "status": {
+      "all": "Tous les statuts",
       "new": "Nouveau",
       "read": "Lu",
       "replied": "Répondu",
@@ -26,7 +27,6 @@
     "logout": "Déconnexion",
     "messages": {
       "title": "Messages",
-      "all_status": "Tous les statuts",
       "name": "Nom",
       "subject": "Sujet",
       "status": "Statut",

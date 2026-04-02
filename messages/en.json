@@ -1,6 +1,7 @@
 {
   "Common": {
     "status": {
+      "all": "All Status",
       "new": "New",
       "read": "Read",
       "replied": "Replied",
@@ -26,7 +27,6 @@
     "logout": "Logout",
     "messages": {
       "title": "Messages",
-      "all_status": "All Status",
       "name": "Name",
       "subject": "Subject",
       "status": "Status",
