@@ -28,7 +28,7 @@ export default function MessagesPage() {
 
   const { demo, page, status } = useSearchParamsSafe(
     ["demo", "page", "status"],
-    { demo: "0", page: "1", status: "" },
+    { demo: "0", page: "1", status: "ALL" },
   );
   const isDemo = demo === "1";
   const currentPage = parseInt(page);
@@ -127,7 +127,7 @@ export default function MessagesPage() {
           value={status}
           onChange={handleStatusChange}
           options={[
-            { value: "", label: tCommon("status.all") },
+            { value: "ALL", label: tCommon("status.all") },
             { value: "NEW", label: tCommon("status.new") },
             { value: "READ", label: tCommon("status.read") },
             { value: "REPLIED", label: tCommon("status.replied") },
