@@ -3,20 +3,17 @@
 import { type ChangeEvent, useMemo } from "react";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useLocale, useTranslations } from "next-intl";
-
+import { useReplaceUrl } from "features/admin/hooks/useReplaceUrl";
 import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
 import { deleteMessage, getMessages } from "features/admin/messages/api";
+import { useLocale, useTranslations } from "next-intl";
 
 const PAGE_SIZE = 10;
 const CURSOR_STORAGE_KEY = "messages_cursors";
 
 export default function MessagesPage() {
-  const pathname = usePathname();
-  const router = useRouter();
   const queryClient = useQueryClient();
   const t = useTranslations("Admin");
   const tCommon = useTranslations("Common");
@@ -29,6 +26,8 @@ export default function MessagesPage() {
   const isDemo = demo === "1";
   const currentPage = parseInt(page);
 
+  const replaceUrl = useReplaceUrl(isDemo);
+
   const cursor = useMemo(() => {
     if (currentPage <= 1) return undefined;
 
@@ -37,27 +36,6 @@ export default function MessagesPage() {
       undefined
     );
   }, [currentPage]);
-
-  function replaceUrl(page: number, overrideStatus?: string) {
-    const params = new URLSearchParams();
-
-    params.set("page", String(page));
-
-    if (overrideStatus) {
-      params.set("status", overrideStatus);
-    } else if (overrideStatus === "") {
-      params.delete("status");
-    } else if (status) {
-      params.set("status", status);
-    }
-
-    if (isDemo) {
-      params.set("demo", "1");
-    }
-
-    const paramString = params.toString();
-    router.replace(paramString ? `${pathname}?${paramString}` : pathname);
-  }
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ["messages", status, cursor, isDemo],
@@ -89,7 +67,7 @@ export default function MessagesPage() {
       sessionStorage.removeItem(`${CURSOR_STORAGE_KEY}_${String(i)}`);
     }
 
-    replaceUrl(1, newStatus);
+    replaceUrl({ page: 1, status: newStatus });
   };
 
   const handleDeleteClick = (id: string) => {
@@ -101,7 +79,7 @@ export default function MessagesPage() {
 
     const prevPage = currentPage - 1;
 
-    replaceUrl(prevPage);
+    replaceUrl({ page: prevPage, status });
   };
 
   const handleNextPage = () => {
@@ -117,7 +95,7 @@ export default function MessagesPage() {
         data.pagination.cursor,
       );
 
-      replaceUrl(nextPage);
+      replaceUrl({ page: nextPage, status });
     }
   };
 

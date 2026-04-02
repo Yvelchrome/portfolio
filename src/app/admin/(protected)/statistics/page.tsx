@@ -1,18 +1,17 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { type ChangeEvent } from "react";
 
 import { useQuery } from "@tanstack/react-query";
+import { useReplaceUrl } from "features/admin/hooks/useReplaceUrl";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
+import { getStatistics } from "features/admin/statistics/api";
 import { useTranslations } from "next-intl";
 
 import { Bar, ChartLoading, Doughnut } from "components/widgets/Charts";
-import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
-import { getStatistics } from "features/admin/statistics/api";
 import { EmailStats } from "lib/schemas";
 
 export default function EmailStatsPage() {
-  const router = useRouter();
-  const pathname = usePathname();
   const t = useTranslations("Admin");
 
   const { demo, days } = useSearchParamsSafe(["demo", "days"], {
@@ -21,23 +20,18 @@ export default function EmailStatsPage() {
   });
   const isDemo = demo === "1";
 
-  function replaceUrl(days: string) {
-    const params = new URLSearchParams();
-
-    params.set("days", days);
-
-    if (isDemo) {
-      params.set("demo", "1");
-    }
-
-    const paramString = params.toString();
-    router.replace(paramString ? `${pathname}?${paramString}` : pathname);
-  }
+  const replaceUrl = useReplaceUrl(isDemo);
 
   const { data: stats, isFetching } = useQuery<EmailStats>({
     queryKey: ["statistics", days, isDemo],
     queryFn: () => getStatistics(days, isDemo),
   });
+
+  const handleDaysChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newDays = e.target.value;
+
+    replaceUrl({ days: newDays });
+  };
 
   const barData = {
     labels: [
@@ -119,7 +113,7 @@ export default function EmailStatsPage() {
         <select
           value={days}
           onChange={(e) => {
-            replaceUrl(e.target.value);
+            handleDaysChange(e);
           }}
           className="border-border bg-card text-foreground text-fluid-base w-full cursor-pointer rounded-md border px-3 py-2 sm:w-auto sm:px-4"
         >
