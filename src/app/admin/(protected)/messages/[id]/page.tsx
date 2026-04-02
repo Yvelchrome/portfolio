@@ -1,13 +1,17 @@
 "use client";
 
-import { type ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 import { useParams, useRouter } from "next/navigation";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 
-import { StateMessage, StatusBadge } from "features/admin/components";
+import {
+  SelectFilter,
+  StateMessage,
+  StatusBadge,
+} from "features/admin/components";
 import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { getMessage, updateMessage } from "features/admin/messages/api";
 
@@ -18,7 +22,7 @@ export default function MessageDetailPage() {
   const t = useTranslations("Admin");
   const tCommon = useTranslations("Common");
   const locale = useLocale();
-  const [newStatus, setNewStatus] = useState("");
+  const [newStatus, setNewStatus] = useState("NOTHING");
 
   const { demo } = useSearchParamsSafe(["demo"], { demo: "0" });
   const isDemo = demo === "1";
@@ -81,17 +85,13 @@ export default function MessageDetailPage() {
   });
 
   const handleStatusChange = () => {
-    if (newStatus) {
+    if (newStatus && newStatus !== "NOTHING") {
       updateMutation.mutate({ status: newStatus });
     }
   };
 
   const handleGoBack = () => {
     router.back();
-  };
-
-  const handleStatusSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setNewStatus(e.target.value);
   };
 
   if (isLoading) {
@@ -157,20 +157,24 @@ export default function MessageDetailPage() {
             {t("message_detail.change_status")}
           </h3>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <select
+            <SelectFilter
               value={newStatus}
-              onChange={handleStatusSelectChange}
-              className="border-input bg-card text-foreground w-full cursor-pointer rounded-md border px-3 py-2 sm:w-auto sm:px-4"
-            >
-              <option value="">{t("message_detail.select_status")}</option>
-              <option value="NEW">{tCommon("status.new")}</option>
-              <option value="READ">{tCommon("status.read")}</option>
-              <option value="REPLIED">{tCommon("status.replied")}</option>
-              <option value="ARCHIVED">{tCommon("status.archived")}</option>
-            </select>
+              onChange={setNewStatus}
+              options={[
+                { value: "NOTHING", label: tCommon("filter_select_one") },
+                { value: "NEW", label: tCommon("status.new") },
+                { value: "READ", label: tCommon("status.read") },
+                { value: "REPLIED", label: tCommon("status.replied") },
+                { value: "ARCHIVED", label: tCommon("status.archived") },
+              ]}
+            />
             <button
               onClick={handleStatusChange}
-              disabled={!newStatus || updateMutation.isPending}
+              disabled={
+                !newStatus ||
+                newStatus === "NOTHING" ||
+                updateMutation.isPending
+              }
               className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-4 py-2 enabled:cursor-pointer disabled:pointer-events-none disabled:opacity-50 sm:w-auto sm:px-6"
             >
               <span>{t("message_detail.update_status")}</span>
