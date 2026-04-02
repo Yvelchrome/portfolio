@@ -4,7 +4,7 @@ import { type ChangeEvent } from "react";
 
 import { useQuery } from "@tanstack/react-query";
 import { useReplaceUrl } from "features/admin/hooks/useReplaceUrl";
-import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { getStatistics } from "features/admin/statistics/api";
 import { useTranslations } from "next-intl";
 

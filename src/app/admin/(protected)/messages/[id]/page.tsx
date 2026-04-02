@@ -5,10 +5,9 @@ import { type ChangeEvent, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useLocale, useTranslations } from "next-intl";
-
-import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { getMessage, updateMessage } from "features/admin/messages/api";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function MessageDetailPage() {
   const params = useParams();

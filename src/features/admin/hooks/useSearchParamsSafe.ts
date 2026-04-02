@@ -8,6 +8,11 @@ function isString(value: unknown): value is string {
 /**
  * Safe hook to read multiple search params with defaults.
  * Always returns a string for each key.
+ *
+ * Usage:
+ * ```ts
+ * const { someParam } = useSearchParamsSafe(["someParam"], { someParam: "someValue" });
+ * ```
  */
 export function useSearchParamsSafe<T extends string>(
   keys: readonly T[],

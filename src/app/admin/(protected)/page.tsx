@@ -4,12 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
-import { useLocale, useTranslations } from "next-intl";
-
 import { logout } from "features/admin/auth/api";
 import { useAuthStore } from "features/admin/auth/store";
-import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { getMessageStats, getMessages } from "features/admin/messages/api";
+import { useLocale, useTranslations } from "next-intl";
+
 import { type MessageStats } from "lib/schemas";
 
 const Stat = ({

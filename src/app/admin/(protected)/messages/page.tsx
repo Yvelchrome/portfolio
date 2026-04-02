@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useReplaceUrl } from "features/admin/hooks/useReplaceUrl";
-import { useSearchParamsSafe } from "features/admin/hooks/useSearchParams";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { deleteMessage, getMessages } from "features/admin/messages/api";
 import { useLocale, useTranslations } from "next-intl";
 
