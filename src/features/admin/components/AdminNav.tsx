@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { useTranslations } from "next-intl";
 
 import { Checkbox } from "components/shadcn/checkbox";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 
-export function AdminNav() {
+export const AdminNav = () => {
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations("Admin");
@@ -95,4 +95,4 @@ export function AdminNav() {
       </div>
     </nav>
   );
-}
+};
