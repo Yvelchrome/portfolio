@@ -1,5 +1,16 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "components/shadcn/select";
+
 interface SelectOption {
   value: string;
   label: string;
@@ -9,28 +20,34 @@ interface SelectFilterProps {
   value: string;
   onChange: (value: string) => void;
   options: SelectOption[];
-  className?: string;
 }
 
 export const SelectFilter = ({
   value,
   onChange,
   options,
-  className = "",
 }: SelectFilterProps) => {
+  const tCommon = useTranslations("Common");
+
   return (
-    <select
-      value={value}
-      onChange={(e) => {
-        onChange(e.target.value);
-      }}
-      className={`border-border bg-card text-foreground text-fluid-base w-full cursor-pointer rounded-md border px-3 py-2 sm:w-auto sm:px-4 ${className}`}
-    >
-      {options.map((option) => (
-        <option key={option.value} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger className="w-full max-w-40 cursor-pointer px-3 py-2 *:pointer-events-none sm:px-4">
+        <SelectValue placeholder={tCommon("filter_select_one")} />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {options.map((option) => (
+            <SelectItem
+              key={option.value}
+              value={option.value}
+              disabled={option.value === value}
+              className="cursor-pointer"
+            >
+              {option.label}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
   );
 };
