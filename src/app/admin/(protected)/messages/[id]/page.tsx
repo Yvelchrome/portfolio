@@ -5,9 +5,11 @@ import { type ChangeEvent, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useLocale, useTranslations } from "next-intl";
+
+import { StateMessage, StatusBadge } from "features/admin/components";
 import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { getMessage, updateMessage } from "features/admin/messages/api";
-import { useLocale, useTranslations } from "next-intl";
 
 export default function MessageDetailPage() {
   const params = useParams();
@@ -93,27 +95,12 @@ export default function MessageDetailPage() {
   };
 
   if (isLoading) {
-    return (
-      <div className="text-muted-foreground py-12 text-center">
-        {t("messages.loading")}
-      </div>
-    );
+    return <StateMessage message={t("messages.loading")} />;
   }
 
   if (!message) {
-    return (
-      <div className="text-muted-foreground py-12 text-center">
-        {t("messages.no_messages_found")}
-      </div>
-    );
+    return <StateMessage message={t("messages.no_messages_found")} />;
   }
-
-  const statusColors: Record<string, string> = {
-    NEW: "bg-yellow-500/10 text-yellow-500",
-    READ: "bg-blue-500/10 text-blue-500",
-    REPLIED: "bg-green-500/10 text-green-500",
-    ARCHIVED: "bg-muted text-muted-foreground",
-  };
 
   return (
     <div className="px-4 py-6 sm:px-8 sm:py-8">
@@ -140,13 +127,7 @@ export default function MessageDetailPage() {
               {new Date(message.createdAt).toLocaleString(locale)}
             </p>
           </div>
-          <span
-            className={`w-fit rounded-full px-3 py-1 text-sm ${
-              statusColors[message.status] ?? "bg-muted text-muted-foreground"
-            }`}
-          >
-            {tCommon(`status.${message.status.toLowerCase()}`)}
-          </span>
+          <StatusBadge status={message.status} size="lg" />
         </div>
 
         <div className="prose text-foreground mb-8 max-w-none whitespace-pre-wrap">

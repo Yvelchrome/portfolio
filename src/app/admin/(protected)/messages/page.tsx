@@ -1,14 +1,21 @@
 "use client";
 
-import { type ChangeEvent, useMemo } from "react";
+import { useMemo } from "react";
 
 import Link from "next/link";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useLocale, useTranslations } from "next-intl";
+
+import {
+  PaginationControls,
+  SelectFilter,
+  StateMessage,
+  StatusBadge,
+} from "features/admin/components";
 import { useReplaceUrl } from "features/admin/hooks/useReplaceUrl";
 import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
 import { deleteMessage, getMessages } from "features/admin/messages/api";
-import { useLocale, useTranslations } from "next-intl";
 
 const PAGE_SIZE = 10;
 const CURSOR_STORAGE_KEY = "messages_cursors";
@@ -60,9 +67,7 @@ export default function MessagesPage() {
     },
   });
 
-  const handleStatusChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newStatus = e.target.value;
-
+  const handleStatusChange = (newStatus: string) => {
     for (let i = 2; i <= currentPage + 10; i++) {
       sessionStorage.removeItem(`${CURSOR_STORAGE_KEY}_${String(i)}`);
     }
@@ -102,13 +107,6 @@ export default function MessagesPage() {
   const messages = data?.messages || [];
   const pagination = data?.pagination;
 
-  const statusColors: Record<string, string> = {
-    NEW: "bg-yellow-500/10 text-yellow-500",
-    READ: "bg-blue-500/10 text-blue-500",
-    REPLIED: "bg-green-500/10 text-green-500",
-    ARCHIVED: "bg-muted text-muted-foreground",
-  };
-
   return (
     <div className="px-4 py-6 sm:px-8 sm:py-8">
       <div className="mb-4 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
@@ -117,52 +115,31 @@ export default function MessagesPage() {
         </h1>
 
         {pagination && (
-          <div className="flex flex-col items-center justify-center gap-2 sm:flex-row">
-            <button
-              onClick={handlePreviousPage}
-              disabled={currentPage <= 1}
-              className="border-border bg-card text-foreground w-full rounded-md border px-4 py-2 enabled:cursor-pointer disabled:pointer-events-none disabled:opacity-50 sm:w-auto"
-            >
-              <span>{t("messages.previous")}</span>
-            </button>
-            <span className="no-locale-animation text-muted-foreground text-fluid-sm px-2 py-2">
-              {t("messages.page_number", { page: currentPage })}
-            </span>
-            <button
-              onClick={handleNextPage}
-              disabled={!pagination.hasNextPage}
-              className="border-border bg-card text-foreground w-full rounded-md border px-4 py-2 enabled:cursor-pointer disabled:pointer-events-none disabled:opacity-50 sm:w-auto"
-            >
-              <span>{t("messages.next")}</span>
-            </button>
-          </div>
+          <PaginationControls
+            currentPage={currentPage}
+            hasNextPage={pagination.hasNextPage}
+            onPrevious={handlePreviousPage}
+            onNext={handleNextPage}
+          />
         )}
 
-        <select
+        <SelectFilter
           value={status}
           onChange={handleStatusChange}
-          className="border-border bg-card text-foreground text-fluid-base w-full cursor-pointer rounded-md border px-3 py-2 sm:w-auto sm:px-4"
-        >
-          <option value="">{t("messages.all_status")}</option>
-          <option value="NEW">{tCommon("status.new")}</option>
-          <option value="READ">{tCommon("status.read")}</option>
-          <option value="REPLIED">{tCommon("status.replied")}</option>
-          <option value="ARCHIVED">{tCommon("status.archived")}</option>
-        </select>
+          options={[
+            { value: "", label: tCommon("status.all") },
+            { value: "NEW", label: tCommon("status.new") },
+            { value: "READ", label: tCommon("status.read") },
+            { value: "REPLIED", label: tCommon("status.replied") },
+            { value: "ARCHIVED", label: tCommon("status.archived") },
+          ]}
+        />
       </div>
 
-      {isLoading ? (
-        <div className="text-muted-foreground py-12 text-center">
-          {t("messages.loading")}
-        </div>
-      ) : isFetching ? (
-        <div className="text-muted-foreground py-12 text-center">
-          {t("messages.loading_more")}
-        </div>
+      {isLoading || isFetching ? (
+        <StateMessage message={t("messages.loading")} />
       ) : messages.length === 0 ? (
-        <div className="text-muted-foreground py-12 text-center">
-          {t("messages.no_messages_found")}
-        </div>
+        <StateMessage message={t("messages.no_messages_found")} />
       ) : (
         <>
           <div className="bg-card overflow-hidden rounded-lg shadow">
@@ -203,16 +180,7 @@ export default function MessagesPage() {
                         <p className="no-locale-animation">{message.subject}</p>
                       </td>
                       <td className="px-4 py-4 lg:px-6">
-                        <div
-                          className={`w-fit rounded-full px-2 py-1 text-xs ${
-                            statusColors[message.status] ??
-                            "bg-muted text-muted-foreground"
-                          }`}
-                        >
-                          <span>
-                            {tCommon(`status.${message.status.toLowerCase()}`)}
-                          </span>
-                        </div>
+                        <StatusBadge status={message.status} />
                       </td>
                       <td className="text-muted-foreground text-fluid-sm px-4 py-4 lg:px-6">
                         <p className="no-locale-animation">
@@ -256,22 +224,13 @@ export default function MessagesPage() {
                         {message.email}
                       </p>
                     </div>
-                    <div
-                      className={`w-fit rounded-full px-2 py-1 text-xs ${
-                        statusColors[message.status] ??
-                        "bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      <span className="no-locale-animation">
-                        {tCommon(`status.${message.status.toLowerCase()}`)}
-                      </span>
-                    </div>
+                    <StatusBadge status={message.status} />
                   </div>
                   <p className="text-foreground mt-2 truncate">
                     {message.subject}
                   </p>
                   <p className="text-muted-foreground text-fluid-sm mt-1">
-                    {new Date(message.createdAt).toLocaleDateString()}
+                    {new Date(message.createdAt).toLocaleDateString(locale)}
                   </p>
                   <div className="mt-3 flex gap-4">
                     <Link
@@ -286,7 +245,7 @@ export default function MessagesPage() {
                       }}
                       className="text-destructive hover:text-destructive/80"
                     >
-                      {t("messages.delete")}
+                      <span>{t("messages.delete")}</span>
                     </button>
                   </div>
                 </div>

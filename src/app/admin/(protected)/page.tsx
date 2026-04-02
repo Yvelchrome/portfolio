@@ -4,39 +4,18 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useQuery } from "@tanstack/react-query";
-import { logout } from "features/admin/auth/api";
-import { useAuthStore } from "features/admin/auth/store";
-import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
-import { getMessageStats, getMessages } from "features/admin/messages/api";
 import { useLocale, useTranslations } from "next-intl";
 
+import { logout } from "features/admin/auth/api";
+import { useAuthStore } from "features/admin/auth/store";
+import { StatCard, StateMessage, StatusBadge } from "features/admin/components";
+import { useSearchParamsSafe } from "features/admin/hooks/useSearchParamsSafe";
+import { getMessageStats, getMessages } from "features/admin/messages/api";
 import { type MessageStats } from "lib/schemas";
-
-const Stat = ({
-  label,
-  value,
-  color = "text-primary-text",
-}: {
-  label: string;
-  value: number;
-  color?: string;
-}) => {
-  return (
-    <div className="bg-card overflow-hidden rounded-lg p-4 shadow sm:p-6">
-      <dt className="text-muted-foreground text-fluid-sm truncate font-medium uppercase">
-        <span>{label}</span>
-      </dt>
-      <dd className={`text-fluid-2xl mt-1 font-semibold ${color}`}>
-        <span className="no-locale-animation tabular-nums">{value}</span>
-      </dd>
-    </div>
-  );
-};
 
 export default function AdminDashboard() {
   const router = useRouter();
   const t = useTranslations("Admin");
-  const tCommon = useTranslations("Common");
   const locale = useLocale();
   const { user, logout: clearAuth } = useAuthStore();
 
@@ -69,13 +48,6 @@ export default function AdminDashboard() {
 
   const recentMessages = data?.messages || [];
 
-  const statusColors: Record<string, string> = {
-    NEW: "bg-yellow-500/10 text-yellow-500",
-    READ: "bg-blue-500/10 text-blue-500",
-    REPLIED: "bg-green-500/10 text-green-500",
-    ARCHIVED: "bg-muted text-muted-foreground",
-  };
-
   return (
     <div className="px-4 py-6 sm:px-8 sm:py-8">
       <div className="mb-6 flex flex-col gap-4 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
@@ -96,13 +68,13 @@ export default function AdminDashboard() {
       </div>
 
       <div className="mb-6 grid grid-cols-1 gap-4 sm:mb-8 sm:grid-cols-3">
-        <Stat label={t("total_messages")} value={stats?.total ?? 0} />
-        <Stat
+        <StatCard label={t("total_messages")} value={stats?.total ?? 0} />
+        <StatCard
           label={t("unread")}
           value={stats?.unread ?? 0}
           color="text-yellow-500"
         />
-        <Stat
+        <StatCard
           label={t("replied")}
           value={stats?.replied ?? 0}
           color="text-green-500"
@@ -123,13 +95,9 @@ export default function AdminDashboard() {
         </div>
 
         {isLoading ? (
-          <div className="text-muted-foreground p-6 text-center">
-            {t("messages.loading")}
-          </div>
+          <StateMessage message={t("messages.loading")} />
         ) : recentMessages.length === 0 ? (
-          <div className="text-muted-foreground p-6 text-center">
-            <span>{t("no_messages")}</span>
-          </div>
+          <StateMessage message={t("no_messages")} />
         ) : (
           <div className="divide-border divide-y">
             {recentMessages.map((message) => (
@@ -143,16 +111,7 @@ export default function AdminDashboard() {
                       {message.email}
                     </p>
                   </div>
-                  <div
-                    className={`w-fit rounded-full px-2 py-1 text-xs ${
-                      statusColors[message.status] ??
-                      "bg-muted text-muted-foreground"
-                    }`}
-                  >
-                    <span>
-                      {tCommon(`status.${message.status.toLowerCase()}`)}
-                    </span>
-                  </div>
+                  <StatusBadge status={message.status} />
                 </div>
                 <p className="text-foreground no-locale-animation mt-2 truncate">
                   {message.subject}
