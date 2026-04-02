@@ -13,7 +13,8 @@
     "labels": {
       "client": "Client",
       "year": "Year"
-    }
+    },
+    "filter_select_one": "Select one..."
   },
   "Admin": {
     "dashboard": "Dashboard",
@@ -44,7 +45,6 @@
     "message_detail": {
       "reply_sent": "Reply Sent",
       "change_status": "Change Status",
-      "select_status": "Select status...",
       "update_status": "Update Status",
       "replied_on": "Replied on: {date}",
       "from": "From"

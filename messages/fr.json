@@ -13,7 +13,8 @@
     "labels": {
       "client": "Client",
       "year": "Année"
-    }
+    },
+    "filter_select_one": "Sélectionner..."
   },
   "Admin": {
     "dashboard": "Tableau de bord",
@@ -44,7 +45,6 @@
     "message_detail": {
       "reply_sent": "Réponse envoyée",
       "change_status": "Changer le statut",
-      "select_status": "Sélectionner un statut...",
       "update_status": "Mettre à jour",
       "replied_on": "Répondu le : {date}",
       "from": "De"
